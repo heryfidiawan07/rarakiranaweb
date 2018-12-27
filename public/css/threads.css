@@ -1,0 +1,89 @@
+/*Threads Content Index*/
+.threads {
+	border-left: 5px solid grey;
+	padding-left: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.threads-title a {
+	color: black;
+	font-weight: bold;
+}
+.threads-title a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.threads-author a {
+	color: black;
+}
+.threads-author a:hover {
+	color: grey;
+	text-decoration: none;
+}
+.threads-desc {
+
+}
+/*End Threads Content Index*/
+
+/*Thread Show*/
+.thread-show {
+
+}
+.title-thread-show {
+	font-weight: bold;
+}
+.img-thread-show img {
+	height: 30vh;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+.tag-thread-show {
+	margin-top: 10px; margin-bottom: 10px;
+}
+.tag-thread-show a {
+	color: black;
+}
+.tag-thread-show a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.desc-thread-show {
+
+}
+.tag-thread-show .btn-primary {
+	color: white;
+}
+.tag-thread-show .btn-primary:hover {
+	color: white;
+}
+/*End Thread Show*/
+
+/*Tags*/
+.thread-tag-childs a {
+	font-weight: bold;
+	color: black;
+}
+.thread-tag-childs a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.thread-tags {
+	color: black;
+	display: block;
+}
+.thread-tags:hover {
+	color: grey;
+	text-decoration: none;
+	margin-left: 10px;
+}
+.thread-sub-tags {
+	color: black;
+	display: block;
+	margin-left: 20px;
+}
+.thread-sub-tags:hover {
+	color: grey;
+	text-decoration: none;
+	margin-left: 30px;
+}
+/*End Tags

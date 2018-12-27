@@ -1,0 +1,19 @@
+.td-dashboard span {
+	float: left;
+	margin-right: 10px;
+}
+.dashboard-menu {
+	color: black;
+	display: block;
+}
+.dashboard-menu:hover {
+	color: grey;
+	text-decoration: none;
+	margin-left: 30px;
+}
+.glyphicon-ok {
+	color: green;
+}
+.glyphicon-remove {
+	color: red;
+}

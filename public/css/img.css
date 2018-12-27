@@ -1,0 +1,62 @@
+#carousel-img-generic {
+    /*border: 2px solid grey;*/
+    padding-left: 0;
+    /*background-color: red;*/
+    height: 50vh;
+}
+.carousel-img-inner {
+    height: 40vh;
+    border-bottom: 1px solid grey;
+    /*background-color: yellow;*/
+}
+.frame-product-img {
+    background-color: none;
+    text-align: center;
+}
+.frame-product-img-helper {
+    display: inline-block;
+    vertical-align: middle;
+}
+.product-img {
+    vertical-align: middle;
+    max-height: 40vh;
+    max-width: 100%;
+}
+.carousel-img-control.left, .carousel-img-control.right {
+    background-image: none;
+}
+.carousel-img-indicators {
+    /*background-color: pink;*/
+    width: 100%;
+    left: 30%;
+    height: 8vh;
+    top: 41vh;
+}
+.carousel-img-indicators .active {
+    width: auto;
+    height: 8vh;
+    border-radius: 0;
+    width: 20%;
+}
+.carousel-img-indicators li {
+    width: auto;
+    height: 8vh;
+    width: 20%;
+    border-radius: 0;
+    margin: 0 auto;
+}
+#carousel-img-generic .carousel-indicators li.active img {
+    opacity: 1;
+    max-width: 100%;
+    height: 100%;
+    display: block;
+}
+#carousel-img-generic .carousel-indicators li img {
+    opacity: 0.5;
+    max-width: 100%;
+    height: 100%;
+    display: block;
+}
+#carousel-img-generic .carousel-indicators li:hover img {
+    opacity: 0.75;
+}

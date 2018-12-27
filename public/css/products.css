@@ -1,0 +1,94 @@
+/*Products Index Content*/
+.products {
+	border: 1px solid grey;
+	padding: 5px 5px 5px 5px;
+	background-color: white;
+	margin-bottom: 10px;
+}
+.product-title a {
+	font-weight: bold;
+	color: black;
+}
+.product-title a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.product-content a {
+	color: black;
+}
+.product-content a:hover {
+	color: grey;
+	text-decoration: none;
+}
+.price {
+	color: red;
+	font-weight: bold;
+}
+.discount {
+	font-weight: bold;
+}
+.buy {
+	
+}
+/*End Products Index Content*/
+
+/*Product Show*/
+.product-content-show {
+	margin-top: 30px;
+}
+.product-content-show a {
+	color: black;
+}
+.product-content-show a:hover {
+	color: grey;
+}
+/*End Product SHow*/
+
+/*Category*/
+.product-tag-childs a {
+	color: black;
+}
+.product-tag-childs a:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*End Category*/
+
+/*Products All Category*/
+.product-tags {
+	color: black;
+	display: block;
+}
+.product-tags:hover {
+	color: grey;
+	text-decoration: none;
+	margin-left: 10px;
+}
+.product-sub-tags {
+	color: black;
+	display: block;
+	margin-left: 20px;
+}
+.product-sub-tags:hover {
+	color: grey;
+	text-decoration: none;
+	margin-left: 30px;
+}
+/*End Products All Category*/
+
+/*Products Scroll*/
+.products-scroll-frame {
+	background-color: lightgrey;
+	padding: 10px 10px 10px 10px;
+	overflow-x: scroll;
+	white-space: nowrap;
+	margin-bottom: 20px;
+}
+.products-scroll {
+	display: inline-block;
+	border: 1px solid grey;
+	padding: 5px 5px 5px 5px;
+	background-color: white;
+	width: 250px;
+}
+/*End Products Scroll

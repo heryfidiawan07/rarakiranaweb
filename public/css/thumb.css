@@ -1,0 +1,15 @@
+.frame-product-thumb {
+	background-color: none;
+	height: 150px;
+	white-space: nowrap;
+	text-align: center;
+}
+.frame-product-thumb-helper {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.product-thumb {
+	vertical-align: middle;
+	height: 100%;
+}

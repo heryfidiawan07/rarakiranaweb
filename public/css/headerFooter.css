@@ -1,0 +1,68 @@
+#app {
+	background-color: #ffffff;
+}
+#body {
+	min-height: 70vh;
+}
+/*Header*/
+.navbar {
+	position: sticky;
+	background-color: grey;
+}
+.navbar  a {
+	color: white;
+	font-weight: bold;
+}
+.navbar  a:hover {
+	color: black;
+}
+.appName {
+	font-family: "Tangerine";
+	font-weight: bold;
+	font-size: 3em;
+	font-style: italic;
+}
+.appName a {
+	color: unset;
+}
+.appName a:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*Footer*/
+.footer {
+	background-color: grey;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+}
+.footer p {
+	color: white;
+}
+.footer a {
+	color: white;
+}
+.footer a:hover {
+	text-decoration: none;
+	color: lightgrey;
+}
+.footerFollow {
+	border-bottom: 1px solid white;
+}
+/*End Footer*/
+/*Navigation*/
+.icon-bar {
+	background-color: white !important;
+}
+#btnSearch {
+	border:none;
+	background-color: unset;
+}
+/*End Navigation*/
+/*Global*/
+.glyphicon-ok {
+	color: green;
+}
+.glyphicon-remove {
+	color: red;
+}

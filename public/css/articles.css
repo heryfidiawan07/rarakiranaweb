@@ -1,0 +1,83 @@
+/*Articles thumb*/
+.frame-new-articles {
+	height: 25vh;
+	white-space: nowrap;
+	text-align: center;
+	z-index: 2;
+}
+.frame-new-articles:hover > .articles-thumb {
+	transform: scale(1.1);
+}
+.frame-new-articles-helper {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.articles-thumb {
+	vertical-align: middle;
+	transition: transform 1s;
+}
+/*End Articles thumb*/
+
+/*Articles Index Content*/
+.articles div {
+	height: 25vh;
+	margin-bottom: 20px;
+	border-bottom: 1px solid grey;
+}
+.articles-title a {
+	font-weight: bold;
+	color: black;
+}
+.articles-title a:hover {
+	color: grey;
+	text-decoration: none;
+}
+.articles-author a {
+	color: black;
+}
+.articles-author a:hover {
+	color: grey;
+	text-decoration: none;	
+}
+/*End Articles Index Content*/
+
+/*Article Show*/
+.article-show {
+
+}
+.title-art-show {
+	font-weight: bold;
+}
+.img-art-show img {
+	height: 30vh;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+.tag-art-show {
+	margin-top: 10px; margin-bottom: 10px;
+}
+.tag-art-show a {
+	color: black;
+}
+.tag-art-show a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.desc-art-show {
+
+}
+/*End Article Show*/
+
+/*Article Tags*/
+.article-tags {
+	font-weight: bold;
+}
+.article-tags a {
+	color: black;
+}
+.article-tags a:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*EndArticle Tags*/

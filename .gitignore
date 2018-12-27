@@ -1,0 +1,14 @@
+/node_modules
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/public/articles
+/public/products
+/public/users
+/public/emoji
+/public/promo
+/public/logo
+Homestead.json
+Homestead.yaml
+.env
