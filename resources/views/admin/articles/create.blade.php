@@ -23,10 +23,6 @@
                         @foreach($menus as $menu)
                             @if($menu->parent()->count())
                                 @continue
-                            @elseif($menu->setting == 11)
-                                @continue
-                            @elseif($menu->setting == 22)
-                                @continue
                             @endif
                             <option value="{{$menu->id}}">{{$menu->menu}}</option>
                         @endforeach

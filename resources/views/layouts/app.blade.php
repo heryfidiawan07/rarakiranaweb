@@ -22,6 +22,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/img.css">
     <link rel="stylesheet" type="text/css" href="/css/thumb.css">
+    <link rel="stylesheet" type="text/css" href="/css/social.css">
     <link rel="stylesheet" type="text/css" href="/css/threads.css">
     <link rel="stylesheet" type="text/css" href="/css/products.css">
     <link rel="stylesheet" type="text/css" href="/css/articles.css">
@@ -31,6 +32,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

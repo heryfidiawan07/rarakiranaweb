@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Hapus kategori {{$category->menu}} ?</b><hr>
+            <b>Delete category {{$category->menu}} ?</b><hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">CLOSE</button>
             <a href="/category/delete/{{$category->id}}" class="btn btn-danger btn-sm">DELETE !</a>
         </div>

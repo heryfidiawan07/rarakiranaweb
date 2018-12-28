@@ -8,12 +8,12 @@
         
         <div class="col-md-4">@include('admin.dashboard-menu')</div>
         <div class="col-md-8">
-            <h4 class="text-center">TAMBAH PRODUK KATEGORI</h4><hr>
+            <h4 class="text-center">ADD PRODUCT CATEGORY</h4><hr>
             <form class="form-horizontal" role="form" method="POST" action="/product/category/store">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                    <label for="category" class="col-md-4 control-label">Nama Kategori</label>
+                    <label for="category" class="col-md-4 control-label">Name</label>
 
                     <div class="col-md-6">
                         <input id="category" type="text" class="form-control" name="category" value="{{ old('category') }}" required autofocus>
@@ -54,14 +54,14 @@
 
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>
                 </div>
             </form>
             
             <hr>
 
-            <h4 class="text-center"><b>DAFTAR PRODUK KATEGORI</b></h4>
+            <h4 class="text-center"><b>CATEGORY LIST</b></h4>
             @if(session('warningEdit'))
                 <div class="alert alert-warning">
                     {{session('warningEdit')}}
@@ -107,8 +107,8 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="/product/create" class="btn btn-primary btn-sm pull-left">TULIS PRODUK</a>
-                    <h4 class="text-center"><b>DAFTAR PRODUK</b></h4>
+                    <a href="/product/create" class="btn btn-primary btn-sm pull-left">CREATE PRODUCT</a>
+                    <h4 class="text-center"><b>PRODUK LIST</b></h4>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -121,7 +121,7 @@
                             <tr>
                                 <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs">EDIT</a></td>
                                 <td>@include('admin.products.delete')</td>
-                                <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs">SHOW</a></td>
+                                <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif>SHOW</a></td>
                                 <td>
                                     <a href="/products/category/{{$product->menu->slug}}" class="btn btn-default btn-xs">
                                     <span class="glyphicon glyphicon-tag"></span>{{$product->menu->menu}}</a>

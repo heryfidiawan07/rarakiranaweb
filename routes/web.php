@@ -2,6 +2,15 @@
 
 //Register verification
 Route::get('/verify/{token}/{id}', 'Auth\RegisterController@verify_register');
+//Social login google
+Route::get('/auth/google', 'Auth\GoogleController@redirectToProvider');
+Route::get('/auth/google/callback', 'Auth\GoogleController@handleProviderCallback');
+//Social login facebook
+Route::get('/auth/facebook', 'Auth\FacebookController@redirectToProvider');
+Route::get('/auth/facebook/callback', 'Auth\FacebookController@handleProviderCallback');
+//Social login twitter
+Route::get('/auth/twitter', 'Auth\TwitterController@redirectToProvider');
+Route::get('/auth/twitter/callback', 'Auth\TwitterController@handleProviderCallback');
 
 Route::get('/', 'HomeController@index');
 

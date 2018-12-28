@@ -114,8 +114,10 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        @if(Auth::user()->id == $thread->user->id)
-                                            <a href="/thread/{{$thread->id}}/edit" class="btn btn-primary btn-xs">Edit</a>
+                                        @if(Auth::user()->id != $thread->user->id)
+                                            <a href="/thread/edit/{{$thread->slug}}" class="btn btn-primary btn-xs disabled">Edit</a>
+                                        @else
+                                            <a href="/thread/edit/{{$thread->slug}}" class="btn btn-primary btn-xs">Edit</a>
                                         @endif
                                     </td>
                                     <td>@include('admin.forum.delete')</td>

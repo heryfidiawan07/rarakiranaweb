@@ -13,13 +13,13 @@ class GlobalController extends Controller
 	public function menu($slugMenu){
 		$menu = Menu::where('slug',$slugMenu)->first();
 		if ($menu) {
-				if ($menu->setting == 11) {
+				if ($menu->setting == 10) {
 						$newthreads = Forum::where('status',1)->latest()->paginate(10);
-						$categories = Menu::where([['setting',20],['status',1]])->get();
+						$categories = Menu::where([['setting',11],['status',1]])->get();
 						return view('forum.index',compact('newthreads','categories'));
-				}elseif ($menu->setting == 22) {
+				}elseif ($menu->setting == 20) {
 						$newproducts = Product::where('status',1)->latest()->paginate(9);
-						$categories = Menu::where([['setting',15],['status',1]])->get();
+						$categories = Menu::where([['setting',21],['status',1]])->get();
 						return view('products.index',compact('newproducts','categories'));
 				}else{
 						if ($menu->parent()->count()) {

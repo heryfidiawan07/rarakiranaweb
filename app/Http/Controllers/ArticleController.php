@@ -24,7 +24,7 @@ class ArticleController extends Controller
 
     public function create()
     {   
-        $menus = Menu::all();
+        $menus = Menu::where('setting','<',10)->get();
         return view('admin.articles.create', compact('menus'));
     }
 
@@ -92,7 +92,7 @@ class ArticleController extends Controller
     
     public function edit($id)
     {   
-        $menus = Menu::all();
+        $menus = Menu::where('setting','<',10)->get();
         $article = Article::whereId($id)->first();
         return view('admin.articles.edit',compact('article','menus'));
     }

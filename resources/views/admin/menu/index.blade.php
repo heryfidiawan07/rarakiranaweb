@@ -32,14 +32,11 @@
                     <div class="col-md-6">
                         <select name="parent_id" class="form-control">
                             <option value="0">Select parent</option>
-                            <option value="11">Parent for forum</option>
-                            <option value="22">Parent for product</option>
-                            <option value="33">Parent for Contact</option>
+                            <option value="5">Parent for Contact</option>
+                            <option value="10">Parent for forum</option>
+                            <option value="20">Parent for product</option>
                             @if($menus->count())
                                 @foreach($menus->where('parent_id',0) as $menu)
-                                    @if($menu->setting == 11 || $menu->setting == 22)
-                                        @continue
-                                    @endif
                                     <option value="{{$menu->id}}">{{$menu->menu}}</option>
                                 @endforeach
                             @endif
@@ -87,11 +84,11 @@
                         <tr>
                             <td>
                                 {{$menu->menu}}
-                                @if($menu->setting == 11)
+                                @if($menu->setting == 10)
                                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                @elseif($menu->setting == 33)
+                                @elseif($menu->setting == 5)
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                @elseif($menu->setting == 22)
+                                @elseif($menu->setting == 20)
                                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                                 @endif
                             </td>
@@ -107,7 +104,7 @@
                         @continue
                     @endif
                     <tr>
-                    @foreach($menu->parent->where('parent_id','!=',$menuProd->id)->where('parent_id','!=',$menuForum->id) as $child)
+                    @foreach($menu->parent->where('setting','<',9) as $child)
                     <tr>
                         <td> -> {{$child->menu}}</td>
                         <td>@include('admin.menu.editChild')</td>

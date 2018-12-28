@@ -17,7 +17,7 @@ class ForumController extends Controller
     public function index()
     {
         $threads = Forum::all();
-        $tags = Menu::where('setting',20)->get();
+        $tags = Menu::where('setting',11)->get();
         return view('admin.forum.index', compact('threads','tags'));
     }
 
@@ -25,12 +25,12 @@ class ForumController extends Controller
         $this->validate($request, [
                 'tag' => 'required',
             ]);
-        $tag = Menu::where('setting',11)->first();
+        $tag = Menu::where('setting',10)->first();
         if ($request->parent_tag == 0) {
-            $setting = 20;
+            $setting = 11;
             $parent_tag = $tag->id;
         }else{
-            $setting = 21;
+            $setting = 12;
             $parent_tag = $request->parent_tag;
         }
         Menu::create([
@@ -47,13 +47,12 @@ class ForumController extends Controller
         $this->validate($request, [
                 'tagEdit' => 'required',
             ]);
-        $menuForum = Menu::where('setting',11)->first();
         $tag = Menu::whereId($id)->first();
         if ($request->parent_edit == 0) {
-            $setting = 20;
-            $parent_id = $menuForum->id;
+            $setting = 11;
+            $parent_id = $tag->id;
         }else{
-            $setting = 21;
+            $setting = 12;
             $parent_id = $request->parent_edit;
         }
         $tag->update([
@@ -86,7 +85,7 @@ class ForumController extends Controller
 // User Auth
     public function create()
     {   
-        $tags = Menu::where([['setting','>',19],['status',1]])->get();
+        $tags = Menu::where([['setting','>',10],['status',1]])->where('setting','<',20)->get();
         return view('forum.create', compact('tags'));
     }
 
@@ -116,7 +115,7 @@ class ForumController extends Controller
 
     public function edit($slug){
         $thread = Forum::whereSlug($slug)->first();
-        $tags = Menu::where([['setting','>',19],['status',1]])->get();
+        $tags = Menu::where([['setting','>',10],['status',1]])->where('setting','<',20)->get();
         if ($thread->user->id == Auth::user()->id) {
             return view('forum.edit', compact('thread','tags'));
         }else{
@@ -154,7 +153,7 @@ class ForumController extends Controller
     public function show($slug){
         $thread = Forum::whereSlug($slug)->first();
         if ($thread->status == 1 && $thread->menu->status == 1) {
-            $categories = Menu::where('setting',20)->get();
+            $categories = Menu::where('setting',11)->get();
             return view('forum.show',compact('thread','categories'));
         }else{
             return view('errors.503');
@@ -169,7 +168,7 @@ class ForumController extends Controller
             }else{
                 $tagthreads = $tags->forums()->latest()->get();
             }
-            $categories = Menu::where('setting',20)->get();
+            $categories = Menu::where('setting',11)->get();
             return view('forum.tags', compact('tagthreads','tags','categories'));
         }else{
             return view('errors.503');

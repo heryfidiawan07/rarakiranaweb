@@ -22,6 +22,9 @@
                     <select name="menu_id" class="form-control" required>
                         <option value="{{$article->menu_id}}">{{$article->menu->menu}}</option>
                         @foreach($menus as $menu)
+                            @if($menu->parent()->count())
+                                @continue
+                            @endif
                             <option value="{{$menu->id}}">{{$menu->menu}}</option>
                         @endforeach
                     </select>

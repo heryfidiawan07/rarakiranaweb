@@ -64,6 +64,11 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            @include('layouts.social-login')
+                        </div>
+
                     </form>
                 </div>
             </div>

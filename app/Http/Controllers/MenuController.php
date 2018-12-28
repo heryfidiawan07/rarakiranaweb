@@ -15,10 +15,8 @@ class MenuController extends Controller
 
     public function index()
     {   
-        $menuForum = Menu::where('setting',11)->first();
-        $menuProd = Menu::where('setting',22)->first();
         $menus = Menu::all();
-        return view('admin.menu.index', compact('menus','menuProd','menuForum'));
+        return view('admin.menu.index', compact('menus'));
     }
 
     public function store(Request $request)
@@ -26,18 +24,18 @@ class MenuController extends Controller
         $this->validate($request, [
                 'menu' => 'required|unique:menus|max:20',
             ]);
-        if($request->parent_id == 11 || $request->parent_id == 22 || $request->parent_id == 33){
+        if($request->parent_id == 5 || $request->parent_id == 10 || $request->parent_id == 20){
             $setting = $request->parent_id;
             $parent_id = 0;
         }else{
             $setting = 0;
             $parent_id = $request->parent_id;
         }
-        $menuForum = Menu::where('setting',11)->first();
-        $menuProd  = Menu::where('setting',22)->first();
-        if ($menuForum && $request->parent_id == 11) {
+        $menuForum = Menu::where('setting',10)->first();
+        $menuProd  = Menu::where('setting',20)->first();
+        if ($menuForum && $request->parent_id == 10) {
             return back()->with('warning', 'Parent forum already exists.');
-        }elseif ($menuProd && $request->parent_id == 22) {
+        }elseif ($menuProd && $request->parent_id == 20) {
             return back()->with('warning', 'Parent product already exists.');
         }
         Menu::create([
@@ -55,21 +53,21 @@ class MenuController extends Controller
         $this->validate($request, [
                 'menuEdit' => 'required',
             ]);
-        $menu = Menu::whereId($id)->first();
-        $mForum = Menu::where('setting',11)->first();
-        $mProd  = Menu::where('setting',22)->first();
-        if ($mForum && $request->parent_edit == 11) {
+        $mForum = Menu::where('setting',10)->first();
+        $mProd  = Menu::where('setting',20)->first();
+        if ($mProd && $request->parent_edit == 10) {
             return back()->with('warningEdit', 'Parent forum already exists.');
-        }elseif ($mProd && $request->parent_edit == 22) {
+        }elseif ($mProd && $request->parent_edit == 20) {
             return back()->with('warningEdit', 'Parent product already exists.');
         }
-        if($request->parent_edit == 11 || $request->parent_edit == 22 || $request->parent_edit == 33){
+        if($request->parent_edit == 5 || $request->parent_edit == 10 || $request->parent_edit == 20){
             $setting = $request->parent_edit;
             $parent_edit = 0;
         }else{
             $setting = 0;
             $parent_edit = $request->parent_edit;
         }
+        $menu = Menu::whereId($id)->first();
         $menu->update([
                 'menu' => $request->menuEdit,
                 'slug' => str_slug($request->menuEdit),

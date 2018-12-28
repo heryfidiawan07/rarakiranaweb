@@ -17,7 +17,7 @@
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                 <button type="submit" name="acomment" value="1" class="btn btn-success btn-sm">Allow</button>
-                <button type="submit" name="acomment" value="0" class="btn btn-danger btn-sm">Not Allow</button>
+                <button type="submit" name="acomment" value="0" class="btn btn-danger btn-sm">Not Allowed</button>
             </form>
         </div>
       </div>

@@ -12,7 +12,7 @@
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
                 <option value="{{$child->parent_id}}">{{$child->childs->menu}}</option>
-                <option value="0">--NO PARENT--</option>
+                <option value="0">NO PARENT</option>
                 @if($menus->count())
                     @foreach($menus->where('parent_id',0) as $menu)
                         @if($menu->setting != 0)

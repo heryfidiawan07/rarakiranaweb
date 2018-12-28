@@ -11,19 +11,21 @@
             <input type="text" name="menuEdit" value="{{$menu->menu}}" class="form-control">
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
-                @if($menu->setting == 11)
-                  <option value="11">Parent Forum</option>
+                @if($menu->setting == 5)
+                  <option value="5">Parent Contact</option>
                 @elseif($menu->setting == 22)
-                  <option value="22">Parent Product</option>
+                  <option value="10">Parent Forum</option>
                 @elseif($menu->setting == 33)
-                  <option value="33">Parent Contact</option>
+                  <option value="20">Parent Product</option>
                 @endif
-                <option value="0">--Select--</option>
-                <option value="11">Parent Forum</option>
-                <option value="22">Parent Product</option>
-                <option value="33">Parent for Contact</option>
+                <option value="0">NO PARENT</option>
+                @if($menu->childs)
+                  <option value="10">Parent Forum</option>
+                  <option value="20">Parent Product</option>
+                  <option value="5">Parent for Contact</option>
+                @endif
                 @foreach($menus->where('parent_id',0) as $menuEdit)
-                  @if($menuEdit->setting == 11 || $menuEdit->setting == 22)
+                  @if($menuEdit->setting == 10 || $menuEdit->setting == 20)
                     @continue
                   @elseif($menu->id == $menuEdit->id)
                     @continue

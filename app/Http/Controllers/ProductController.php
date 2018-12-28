@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        $categories = Menu::where('setting',15)->get();
+        $categories = Menu::where('setting',21)->get();
         return view('admin.products.index', compact('products','categories'));
     }
 
@@ -28,12 +28,12 @@ class ProductController extends Controller
         $this->validate($request, [
                 'category' => 'required',
             ]);
-        $category = Menu::where('setting',22)->first();
+        $category = Menu::where('setting',20)->first();
         if ($request->parent_id == 0) {
-            $setting = 15;
+            $setting = 21;
             $parent_id = $category->id;
         }else{
-            $setting = 16;
+            $setting = 22;
             $parent_id = $request->parent_id;
         }
         Menu::create([
@@ -50,13 +50,13 @@ class ProductController extends Controller
         $this->validate($request, [
                 'categoryEdit' => 'required',
             ]);
-        $menuProd = Menu::where('setting',22)->first();
+        $menuProd = Menu::where('setting',20)->first();
         $category = Menu::whereId($id)->first();
         if ($request->parent_edit == 0) {
-            $setting = 15;
+            $setting = 21;
             $parent_id = $menuProd->id;
         }else{
-            $setting = 16;
+            $setting = 22;
             $parent_id = $request->parent_edit;
         }
         $category->update([
@@ -79,7 +79,7 @@ class ProductController extends Controller
     
     public function create()
     {   
-        $categories = Menu::where('setting','>',14)->get();
+        $categories = Menu::where([['setting','>',20],['status',1]])->get();
         return view('admin.products.create', compact('categories'));
     }
 
@@ -145,7 +145,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $categories = Menu::where('setting','>',14)->where('setting','<',20)->get();
+        $categories = Menu::where([['setting','>',20],['status',1]])->get();
         $product = Product::whereId($id)->first();
         return view('admin.products.edit',compact('product','categories'));
     }
@@ -240,7 +240,7 @@ class ProductController extends Controller
     public function show($prodslug)
     {
         $product = Product::where([['slug',$prodslug],['status',1]])->first();
-        if ($product) {
+        if ($product && $product->menu->status==1) {
             return view('products.show', compact('product'));
         }else{
             return view('errors.503');
@@ -255,7 +255,7 @@ class ProductController extends Controller
             }else{
                 $tagproducts = $category->products()->latest()->get();
             }
-            $categories = Menu::where([['setting',15],['status',1]])->get();
+            $categories = Menu::where([['setting',21],['status',1]])->get();
             return view('products.category', compact('tagproducts','category','categories'));
         }else{
             return view('errors.503');

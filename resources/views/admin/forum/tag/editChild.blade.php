@@ -12,9 +12,9 @@
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
                 <option value="{{$child->parent_id}}">{{$child->childs->menu}}</option>
-                <option value="0">--NO PARENT--</option>
+                <option value="0">NO PARENT</option>
                 @if($tags->count())
-                    @foreach($tags->where('setting',20) as $tag)
+                    @foreach($tags->where('setting',11) as $tag)
                         <option value="{{$tag->id}}">{{$tag->menu}}</option>
                     @endforeach
                 @endif

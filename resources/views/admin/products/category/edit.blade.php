@@ -11,7 +11,7 @@
             <input type="text" name="categoryEdit" value="{{$category->menu}}" class="form-control" required>
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
-                <option value="0">--PILIH--</option>
+                <option value="0">SELECT</option>
                 @foreach($categories as $menuEdit)
                     @if($category->id == $menuEdit->id)
                       @continue
