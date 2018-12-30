@@ -11,7 +11,7 @@
             <input type="text" name="tagEdit" value="{{$tag->menu}}" class="form-control" required>
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
-                <option value="0">--Select--</option>
+                <option value="0">NO PARENT</option>
                 @foreach($tags as $menuEdit)
                     @if($tag->id == $menuEdit->id)
                       @continue

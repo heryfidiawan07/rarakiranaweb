@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-2">@include('admin.dashboard-menu')</div>
-        <div class="col-md-10">
+        <div class="col-md-12">
+            @include('admin.dashboard-menu')
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="/article/create" class="btn btn-primary btn-sm pull-left">TULIS POST</a>
@@ -24,7 +24,7 @@
                             <tr>
                                 <td><a href="/article/{{$article->id}}/edit" class="btn btn-primary btn-xs">Edit</a></td>
                                 <td><a href="/article/{{$article->id}}/destroy" class="btn btn-danger btn-xs">Delete</a></td>
-                                <td><a href="/read/{{$article->slug}}" class="btn btn-success btn-xs">Show</a></td>
+                                <td><a href="/read/article/{{$article->slug}}" class="btn btn-success btn-xs">Show</a></td>
                                 <td><a href="/{{$article->menu->slug}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-tag">{{$article->menu->menu}}</a></td>
                                 <td>@include('admin.articles.status')</td>
                                 <td>@include('admin.articles.acomment')</td>

@@ -20,9 +20,6 @@
 	color: grey;
 	text-decoration: none;
 }
-.threads-desc {
-
-}
 /*End Threads Content Index*/
 
 /*Thread Show*/
@@ -56,6 +53,20 @@
 .tag-thread-show .btn-primary:hover {
 	color: white;
 }
+.desc-thread-show img {
+	max-width: 100%;
+	height: auto;
+}
+.desc-thread-show iframe {
+	max-width: 100%;
+}
+.desc-thread-show code {
+	white-space: nowrap;
+}
+.desc-thread-show pre {
+	background-color: black;
+	color: white;
+}
 /*End Thread Show*/
 
 /*Tags*/
@@ -87,3 +98,44 @@
 	margin-left: 30px;
 }
 /*End Tags
+
+/*Thread Comment*/
+.thread-comment-show {
+	border-left: 5px solid grey;
+	padding-left: 10px;
+}
+.thread-comment-user .author {
+	color: black;
+}
+.thread-comment-user .author:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*End Thread Comment*/
+
+/*Recent Comment*/
+.recent-threads {
+	border-left: 5px solid grey;
+	padding-left: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.recent-threads-title a {
+	color: black;
+	font-weight: bold;
+}
+.recent-threads-title a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.recent-threads-author {
+	font-size: 0.9em;
+}
+.recent-threads-author a {
+	color: black;
+}
+.recent-threads-author a:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*End Recent Comment*/

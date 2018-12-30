@@ -17,6 +17,11 @@
             @foreach($articles as $article)
                 @include('articles.content-index')
             @endforeach
+
+            <div class="text-center">
+                <ul class="pagination pagination-sm">{{$articles->links()}}</ul>
+            </div>
+
         </div>
         <div class="col-md-4">
             <h5 class="text-center"><b>KOMENTAR BARU</b></h5><hr>

@@ -22,7 +22,7 @@
                 @if($menu->childs)
                   <option value="10">Parent Forum</option>
                   <option value="20">Parent Product</option>
-                  <option value="5">Parent for Contact</option>
+                  <option value="5">Parent Contact</option>
                 @endif
                 @foreach($menus->where('parent_id',0) as $menuEdit)
                   @if($menuEdit->setting == 10 || $menuEdit->setting == 20)

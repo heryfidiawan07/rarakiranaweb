@@ -23,15 +23,15 @@ class GlobalController extends Controller
 						return view('products.index',compact('newproducts','categories'));
 				}else{
 						if ($menu->parent()->count()) {
-								$articles = $menu->childArticles()->paginate(20);
+								$articles = $menu->childArticles()->paginate(10);
 								return view('articles.menu', compact('menu','articles'));
 						}else{
 								$articles = $menu->articles()->latest()->paginate(10);
-								if ($articles->count() > 1) {
-									return view('articles.menu', compact('menu','articles'));
-								}else{
+								if ($articles->count() == 1) {
 									$article = Article::where('menu_id',$menu->id)->first();
 									return redirect("/read/article/{$article->slug}");
+								}else{
+									return view('articles.menu', compact('menu','articles'));
 								}
 						}
 				}

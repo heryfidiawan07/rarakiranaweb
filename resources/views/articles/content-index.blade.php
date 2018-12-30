@@ -20,6 +20,5 @@
             - <small><i>{{ date('d F, Y', strtotime($article->created_at))}}</i></small>
             , <span class="glyphicon glyphicon-comment" aria-hidden="true"></span><i> {{$article->artcomments->count()}}</i>
         </p>
-        <p class="articles-desc">{{ str_limit($article->description, $limit = 120, $end = '...') }}</p>
     </div>
 </div>

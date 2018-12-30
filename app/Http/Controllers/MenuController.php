@@ -68,12 +68,17 @@ class MenuController extends Controller
             $parent_edit = $request->parent_edit;
         }
         $menu = Menu::whereId($id)->first();
-        $menu->update([
+        $cekMenu = Menu::where('slug', '=', str_slug($request->menuEdit))->first();
+        if ($cekMenu === null) {
+            $menu->update([
                 'menu' => $request->menuEdit,
                 'slug' => str_slug($request->menuEdit),
                 'parent_id' => $parent_edit,
                 'setting' => $setting,
             ]);
+        }else{
+            return back()->with('warningEdit', 'Nama menu sudah ada, ganti yang lain !');
+        }
         return back();
     }
 

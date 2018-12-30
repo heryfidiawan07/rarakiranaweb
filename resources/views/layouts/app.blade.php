@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="/css/threads.css">
     <link rel="stylesheet" type="text/css" href="/css/products.css">
     <link rel="stylesheet" type="text/css" href="/css/articles.css">
+    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
     <link rel="stylesheet" type="text/css" href="/css/headerFooter.css">
     @yield('css')
     <!-- Lib -->

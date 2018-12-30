@@ -26,7 +26,7 @@ class ProductController extends Controller
 
     public function categoryStore(Request $request){
         $this->validate($request, [
-                'category' => 'required',
+                'category' => 'required|max:20',
             ]);
         $category = Menu::where('setting',20)->first();
         if ($request->parent_id == 0) {
@@ -36,13 +36,18 @@ class ProductController extends Controller
             $setting = 22;
             $parent_id = $request->parent_id;
         }
-        Menu::create([
-                'user_id' => Auth::user()->id,
-                'menu' => $request->category,
-                'slug' => str_slug($request->category),
-                'parent_id' => $parent_id,
-                'setting' => $setting,
-            ]);
+        $cekMenu = Menu::where('slug', '=', str_slug($request->category))->first();
+        if ($cekMenu === null) {
+            Menu::create([
+                    'user_id' => Auth::user()->id,
+                    'menu' => $request->category,
+                    'slug' => str_slug($request->category),
+                    'parent_id' => $parent_id,
+                    'setting' => $setting,
+                ]);
+        }else{
+            return back()->with('warningEdit', 'Nama kategori sudah ada, ganti yang lain !');
+        }
         return back();
     }
     
@@ -59,13 +64,18 @@ class ProductController extends Controller
             $setting = 22;
             $parent_id = $request->parent_edit;
         }
-        $category->update([
-                'user_id' => Auth::user()->id,
-                'menu' => $request->categoryEdit,
-                'slug' => str_slug($request->categoryEdit),
-                'parent_id' => $parent_id,
-                'setting' => $setting,
-            ]);
+        $cekMenu = Menu::where('slug', '=', str_slug($request->categoryEdit))->first();
+        if ($cekMenu === null) {
+            $category->update([
+                    'user_id' => Auth::user()->id,
+                    'menu' => $request->categoryEdit,
+                    'slug' => str_slug($request->categoryEdit),
+                    'parent_id' => $parent_id,
+                    'setting' => $setting,
+                ]);
+        }else{
+            return back()->with('warningEdit', 'Nama kategori sudah ada, ganti yang lain !');
+        }
         return back();
     }
 
@@ -86,7 +96,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'title' => 'required|unique:products|max:50',
+                'title' => 'required|unique:products|max:200',
                 'menu_id' => 'required',
                 'price' => 'required',
                 'img' => 'required',
@@ -153,7 +163,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-                'title' => 'required',
+                'title' => 'required|max:200',
                 'menu_id' => 'required',
                 'description' => 'required',
                 'status' => 'required',
@@ -240,8 +250,9 @@ class ProductController extends Controller
     public function show($prodslug)
     {
         $product = Product::where([['slug',$prodslug],['status',1]])->first();
+        $discusions = $product->prodcomments()->paginate(10);
         if ($product && $product->menu->status==1) {
-            return view('products.show', compact('product'));
+            return view('products.show', compact('product','discusions'));
         }else{
             return view('errors.503');
         }

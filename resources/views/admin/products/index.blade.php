@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
         
-        <div class="col-md-4">@include('admin.dashboard-menu')</div>
-        <div class="col-md-8">
+        <div class="col-md-4">
+            @include('admin.dashboard-menu')
             <h4 class="text-center">ADD PRODUCT CATEGORY</h4><hr>
             <form class="form-horizontal" role="form" method="POST" action="/product/category/store">
                 {{ csrf_field() }}
@@ -58,9 +58,9 @@
                     </div>
                 </div>
             </form>
+        </div>   
             
-            <hr>
-
+        <div class="col-md-8">
             <h4 class="text-center"><b>CATEGORY LIST</b></h4>
             @if(session('warningEdit'))
                 <div class="alert alert-warning">
@@ -78,7 +78,7 @@
                 </tr>
                 @foreach($categories as $category)
                     <tr>
-                        <td>{{$category->menu}}</td>
+                        <td>{{$category->menu}} - <small>{{$category->products->count()}} products</small></td>
                         <td>@include('admin.products.category.edit')</td>
                         <td>@include('admin.products.category.delete')</td>
                         <td>@include('admin.products.category.status')</td>
@@ -90,7 +90,7 @@
                     <tr>
                     @foreach($category->parent as $child)
                     <tr>
-                        <td> -> {{$child->menu}}</td>
+                        <td> -> {{$child->menu}} - <small>{{$child->products->count()}} products</small></td>
                         <td>@include('admin.products.category.editChild')</td>
                         <td>@include('admin.products.category.deleteChild')</td>
                         <td>@include('admin.products.category.statusChild')</td>
@@ -103,8 +103,8 @@
                 </table>
             </div>
         </div>
-
-        <div class="col-md-12">
+        
+        <div class="col-md-12"><hr>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="/product/create" class="btn btn-primary btn-sm pull-left">CREATE PRODUCT</a>

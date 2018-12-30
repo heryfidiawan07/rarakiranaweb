@@ -9,6 +9,9 @@
             @foreach($newproducts->where('menu.status',1) as $product)
                 @include('products.content-index')
             @endforeach
+            <div class="col-md-12 text-center">
+		            <ul class="pagination pagination-sm">{{$newproducts->links()}}</ul>
+		        </div>
         </div>
 
     </div>

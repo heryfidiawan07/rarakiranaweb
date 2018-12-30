@@ -12,6 +12,5 @@
         , <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
         <i> {{$thread->forcomments->count()}}</i>
     </p>
-    <p class="threads-desc">{{ str_limit($thread->description, $limit = 100, $end = '...') }}</p>
 </div>
 <hr>

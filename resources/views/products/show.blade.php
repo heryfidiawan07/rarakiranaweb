@@ -27,8 +27,12 @@
 
                   <!-- Tab panes -->
                   <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="deskripsi">{{$product->description}}</div>
-                    <div role="tabpanel" class="tab-pane" id="diskusi">...</div>
+                    <div role="tabpanel" class="tab-pane active" id="deskripsi">
+                        {!! $product->description !!}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="diskusi">
+                        @include('products.discusion')
+                    </div>
                     <div role="tabpanel" class="tab-pane" id="ulasan">...</div>
                     <div role="tabpanel" class="tab-pane" id="pesan">
                         @if(Auth::check())

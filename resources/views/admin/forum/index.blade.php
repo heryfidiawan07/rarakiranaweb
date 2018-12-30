@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-4">@include('admin.dashboard-menu')</div>
-        <div class="col-md-8">
+        <div class="col-md-4">
+            @include('admin.dashboard-menu')
             <h4 class="text-center"><b>ADD TAG</b></h4><hr>
             <form class="form-horizontal" role="form" method="POST" action="/forum/tag/store">
                 {{ csrf_field() }}
@@ -58,10 +58,15 @@
                     </div>
                 </div>
             </form>
-            
-            <hr>
+        </div>
 
+        <div class="col-md-8">
             <h4 class="text-center"><b>FORUM TAG LIST</b></h4>
+            @if(session('warningEdit'))
+                <div class="alert alert-warning">
+                    {{session('warningEdit')}}
+                </div>
+            @endif
             <div class="table-responsive">
                 <table class="table table-hovered">
                 <tr>
@@ -73,7 +78,7 @@
                 </tr>
                 @foreach($tags as $tag)
                     <tr>
-                        <td>{{$tag->menu}}</td>
+                        <td>{{$tag->menu}} - <small>{{$tag->forums->count()}} threads</small></td>
                         <td>@include('admin.forum.tag.edit')</td>
                         <td>@include('admin.forum.tag.delete')</td>
                         <td>@include('admin.forum.tag.status')</td>
@@ -85,7 +90,7 @@
                     <tr>
                     @foreach($tag->parent as $child)
                     <tr>
-                        <td> -> {{$child->menu}}</td>
+                        <td> -> {{$child->menu}} - <small>{{$child->forums->count()}} threads</small></td>
                         <td>@include('admin.forum.tag.editChild')</td>
                         <td>@include('admin.forum.tag.deleteChild')</td>
                         <td>@include('admin.forum.tag.statusChild')</td>
@@ -99,7 +104,7 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12"><hr>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="/thread/create" class="btn btn-primary btn-sm pull-left">Create Threads</a>

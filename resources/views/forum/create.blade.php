@@ -55,5 +55,5 @@
 @endsection
 @section('js')
   <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-  <script src="/js/mce-post.js"></script>
+  <script src="/js/litle-mce.js"></script>
 @endsection

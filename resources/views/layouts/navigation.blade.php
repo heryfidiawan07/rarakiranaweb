@@ -1,12 +1,13 @@
 <div class="header">
     <div class="container">
         <p class="appName"><a href="/">Rarakirana</a></p>
-        <p><i>The title a website</i></p>
-        <form class="form-inline" action="" method="">
+        <p><i>The title of website</i></p>
+        <form class="form-inline" action="/search" method="POST">
+            {{csrf_field()}}
             <div class="form-group">
                 <div class="input-group">
-                      <input type="text" class="form-control" name="search" required>
-                      <div class="input-group-addon"><button id="btnSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
+                      <input type="text" class="form-control" name="val" required>
+                      <div class="input-group-addon"><button class="fa fa-search" id="btnSearch"></button></div>
                 </div>
             </div>
         </form>

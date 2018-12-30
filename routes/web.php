@@ -63,7 +63,14 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/forum/tag/store', 'ForumController@tagStore');
 		Route::post('/forum/tag/{id}/update', 'ForumController@tagUpdate');
 		Route::post('/forum/tag/{id}/status', 'ForumController@tagStatus');
-
+		//Logo
+		Route::get('/dashboard/logo', 'LogoController@index');
+		Route::post('/logo/store', 'LogoController@store');
+		Route::post('/logo/update/{id}', 'LogoController@update');
+		Route::get('/logo/delete/{id}', 'LogoController@destroy');
+		//File Manager
+    Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
+    Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
 });
 //Global
 Route::get('/{slugMenu}', 'GlobalController@menu');
@@ -74,11 +81,23 @@ Route::get('/show/product/{prodslug}', 'ProductController@show');
 Route::get('/products/category/{categorySlug}', 'ProductController@category');
 //Forum User Auth
 Route::group(['middleware' => 'auth'], function () {
+	//Forum
 	Route::get('/thread/create', 'ForumController@create');
 	Route::post('/thread/store', 'ForumController@store');
 	Route::get('/thread/edit/{slug}', 'ForumController@edit');
 	Route::post('/thread/update/{slug}', 'ForumController@update');
+	//Article Comment
+	Route::post('/article/comment/{slug}/store', 'ArtcommentController@store');
+	Route::post('/article/comment/{id}/update', 'ArtcommentController@update');
+	//Product Discusion
+	Route::post('/product/discus/{slug}/store', 'ProdcommentController@store');
+	Route::post('/product/discus/{id}/update', 'ProdcommentController@update');
+	//Forum Commment
+	Route::post('/thread/comment/{slug}/store', 'ForcommentController@store');
+	Route::post('/thread/comment/{id}/update', 'ForcommentController@update');
 });
 //Forum
 Route::get('/thread/{threadslug}', 'ForumController@show');
 Route::get('/threads/tag/{tagSlug}', 'ForumController@tag');
+//Search
+Route::post('/search', 'SearchController@search');

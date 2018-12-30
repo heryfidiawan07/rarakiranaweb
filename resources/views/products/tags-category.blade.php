@@ -1,6 +1,6 @@
 <div class="table-responsive">
     <table class="table table-hover">
-        <th class="warning">KATEGORI</th>
+        <th class="warning">CATEGORY</th>
         @foreach($categories->where('status',1) as $category)
             <tr>
                 <td><a class="product-tags" href="/products/category/{{$category->slug}}">{{$category->menu}}</a></td>

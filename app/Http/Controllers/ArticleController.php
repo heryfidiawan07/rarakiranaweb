@@ -31,7 +31,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'title' => 'required|unique:articles|max:50',
+                'title' => 'required|unique:articles|max:200',
                 'menu_id' => 'required',
                 'img' => 'required',
                 'description' => 'required',
@@ -59,23 +59,11 @@ class ArticleController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("articles/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 200, function ($constraint) {
+                $thumb    = Image::make($path)->resize(200, 250, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
                 $thumb->save(public_path("articles/thumb/". $imgName));
         return redirect('/dashboard/articles');
-    }
-
-    public function show($slug)
-    {   
-        $article = Article::whereSlug($slug)->first();
-        return view('articles.show', compact('article'));
-    }
-
-    public function menu($slugMenu){
-        $menu = Menu::whereSlug($slugMenu)->first();
-        $articles = $menu->articles()->get(10);
-        return view('articles.menu', compact('articles'));
     }
 
     public function status(Request $request, $id){
@@ -100,7 +88,7 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-                'title' => 'required',
+                'title' => 'required|max:200',
                 'menu_id' => 'required',
                 'description' => 'required',
                 'status' => 'required',
@@ -133,7 +121,7 @@ class ArticleController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("articles/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 200, function ($constraint) {
+                $thumb    = Image::make($path)->resize(200, 250, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
                 $thumb->save(public_path("articles/thumb/". $imgName));
@@ -170,6 +158,23 @@ class ArticleController extends Controller
             return view('errors.503');
         }
         return back();
+    }
+
+//Article User Show
+    public function show($slug)
+    {   
+        $article = Article::whereSlug($slug)->first();
+        $comments = $article->artcomments()->paginate(10);
+        $artrecents = Article::join('artcomments', 'articles.id', '=', 'artcomments.article_id')
+                  ->orderBy('artcomments.updated_at','DESC')->groupBy('artcomments.article_id')
+                  ->take(5)->get();
+        return view('articles.show', compact('article','comments','artrecents'));
+    }
+
+    public function menu($slugMenu){
+        $menu = Menu::whereSlug($slugMenu)->first();
+        $articles = $menu->articles()->get(10);
+        return view('articles.menu', compact('articles'));
     }
     
 }

@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
         
-        <div class="col-md-3">@include('admin.dashboard-menu')</div>
-        <div class="col-md-9">
+        <div class="col-md-4">
+            @include('admin.dashboard-menu')
             <h4 class="text-center">ADD MENU</h4><hr>
             <form class="form-horizontal" role="form" method="POST" action="/menu/store">
                 {{ csrf_field() }}
@@ -31,10 +31,10 @@
 
                     <div class="col-md-6">
                         <select name="parent_id" class="form-control">
-                            <option value="0">Select parent</option>
-                            <option value="5">Parent for Contact</option>
-                            <option value="10">Parent for forum</option>
-                            <option value="20">Parent for product</option>
+                            <option value="0">Select Parent</option>
+                            <option value="5">Parent Contact</option>
+                            <option value="10">Parent Forum</option>
+                            <option value="20">Parent Product</option>
                             @if($menus->count())
                                 @foreach($menus->where('parent_id',0) as $menu)
                                     <option value="{{$menu->id}}">{{$menu->menu}}</option>
@@ -63,7 +63,7 @@
             </form>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-8">
             <h4 class="text-center"><b>MENU LIST</b></h4>
             @if(session('warningEdit'))
                 <div class="alert alert-warning">
@@ -83,7 +83,7 @@
                     @if($menu->parent_id < 1)
                         <tr>
                             <td>
-                                {{$menu->menu}}
+                                {{$menu->menu}} - @if($menu->setting != 10 && $menu->setting != 20 && $menu->setting != 5)<small>{{$menu->articles->count()}} post</small>@endif
                                 @if($menu->setting == 10)
                                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                 @elseif($menu->setting == 5)
@@ -106,7 +106,7 @@
                     <tr>
                     @foreach($menu->parent->where('setting','<',9) as $child)
                     <tr>
-                        <td> -> {{$child->menu}}</td>
+                        <td> -> {{$child->menu}} - <small>{{$child->articles->count()}} post</small></td>
                         <td>@include('admin.menu.editChild')</td>
                         <td>@include('admin.menu.deleteChild')</td>
                         <td>@include('admin.menu.statusChild')</td>

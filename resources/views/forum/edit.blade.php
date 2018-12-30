@@ -6,7 +6,7 @@
         <div class="col-md-12">
                 
             <h4 class="text-center"><b>EDIT THREADS</b></h4>
-            <form method="POST" action="/thread/store">
+            <form method="POST" action="/thread/update/{{$thread->slug}}">
                 {{csrf_field()}}
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                     <label for="title" class="control-label">Judul</label>
@@ -46,7 +46,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </div>
             </form>
 
@@ -56,5 +56,5 @@
 @endsection
 @section('js')
   <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-  <script src="/js/mce-post.js"></script>
+  <script src="/js/litle-mce.js"></script>
 @endsection
