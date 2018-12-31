@@ -40,27 +40,21 @@
                     </div>
                 </div>
 
-                <div class="form-group{{ $errors->has('menu_id') ? ' has-error' : '' }}">
-                    <label for="menu_id" class="col-md-4 control-label">Menu</label>
+                <div class="form-group{{ $errors->has('setting') ? ' has-error' : '' }}">
+                    <label for="setting" class="col-md-4 control-label">Setting</label>
 
                     <div class="col-md-6">
-                        <select name="menu_id" class="form-control" required autofocus>
-                            @if($menus->count())
-                                @foreach($menus as $menu)
-                                    <option value="{{$menu->id}}">{{$menu->menu}}</option>
-                                @endforeach
-                            @endif
+                        <select name="setting" class="form-control" required autofocus>
+                            <option value="1">Home/Main Logo</option>
+                            <option value="2">Produk Parent Logo</option>
+                            <option value="3">Forum Parent Logo</option>
+                            <option value="4">Article Parent Logo</option>
                         </select>
 
-                        @if ($errors->has('menu_id'))
+                        @if ($errors->has('setting'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('menu_id') }}</strong>
+                                <strong>{{ $errors->first('setting') }}</strong>
                             </span>
-                        @endif
-                        @if(session('warning'))
-                            <div class="alert alert-warning">
-                                {{session('warning')}}
-                            </div>
                         @endif
                     </div>
                 </div>
@@ -89,11 +83,6 @@
 
         <div class="col-md-7">
             <h4 class="text-center"><b>LOGO LIST</b></h4>
-            @if(session('warningEdit'))
-                <div class="alert alert-warning">
-                    {{session('warningEdit')}}
-                </div>
-            @endif
             <div class="table-responsive">
                 <table class="table table-bordered">
                     @foreach($logos as $logo)
@@ -108,10 +97,14 @@
                     </tr>
                     <tr>
                         <td class="td-logo-tag">
-                            <a href="/{{$logo->menu->slug}}">
-                                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-                                {{$logo->menu->menu}}
-                            </a>
+                            <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                            @if($logo->setting == 1)
+                                Home Logo
+                            @elseif($logo->setting == 2)
+                                Produk Logo
+                            @elseif($logo->setting == 3)
+                                Forum Logo
+                            @endif
                         </td>
                         <td>
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>

@@ -2,83 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Follower;
 use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function __construct(){
+        $this->middleware('admin');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function index(){
+        $follows = Follower::all();
+        return view('admin.follow.index',compact('follows'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+             'urlFollow' => 'required|max:500',
+             'followClass' => 'required',
+        ]);
+        $getName = explode('-', $request->followClass);
+        if ($getName[1] == 'weixin') {
+             $getName = 'wechat';
+        }elseif ($getName[1] == 'envelope') {
+            $getName = 'mail';
+        }else{
+            $getName = $getName[1];
+        }
+        $cekFollow = Follower::where('class','=',$request->followClass)->first();
+        if ($cekFollow === null) {
+            Follower::create([
+                    'name' => $getName,
+                    'url' => $request->urlFollow,
+                    'class' => $request->followClass,
+                    'user_id' => Auth::user()->id,
+                ]);
+        }else{
+            return back()->with('warningEdit', 'Sosial media follow yang anda pilih sudah terisi, silahkan edit atau pilih sosial media yang lain !');
+        }
+        return back();
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $this->validate($request, [
+             'urlFollowEdit' => 'required|max:500',
+        ]);
+        $follow = Follower::whereId($id)->first();
+        $follow->update([
+                'url' => $request->urlFollowEdit,
+            ]);
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $follow = Follower::find($id);
+        $follow->delete();
+        return back();
     }
+    
 }

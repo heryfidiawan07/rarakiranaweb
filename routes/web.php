@@ -68,6 +68,15 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/logo/store', 'LogoController@store');
 		Route::post('/logo/update/{id}', 'LogoController@update');
 		Route::get('/logo/delete/{id}', 'LogoController@destroy');
+		//Follow
+		Route::get('/dashboard/follow', 'FollowerController@index');
+		Route::post('/follow/store', 'FollowerController@store');
+		Route::post('/follow/update/{id}', 'FollowerController@update');
+		Route::get('/follow/delete/{id}', 'FollowerController@destroy');
+		//Share
+		Route::get('/dashboard/share', 'ShareController@index');
+		Route::post('/share/store', 'ShareController@store');
+		Route::get('/share/delete/{id}', 'ShareController@destroy');
 		//File Manager
     Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');

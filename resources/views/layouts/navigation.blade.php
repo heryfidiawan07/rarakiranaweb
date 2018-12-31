@@ -1,17 +1,26 @@
 <div class="header">
     <div class="container">
         <p class="appName"><a href="/">Rarakirana</a></p>
-        <p><i>The title of website</i></p>
+        @if($mainLogo)
+            <p><i>{{$mainLogo->title}}</i></p>
+        @endif
         <form class="form-inline" action="/search" method="POST">
             {{csrf_field()}}
             <div class="form-group">
                 <div class="input-group">
                       <input type="text" class="form-control" name="val" required>
-                      <div class="input-group-addon"><button class="fa fa-search" id="btnSearch"></button></div>
+                      <div class="input-group-addon"><button class="glyphicon glyphicon-search" id="btnSearch"></button></div>
                 </div>
             </div>
         </form>
-        <p class="pull-right"><i>Follow us :</i></p>
+        <p class="pull-right">
+            <i>Follow us :</i>
+            @if($mainFollows)
+                @foreach($mainFollows as $follow)
+                    <i class="{{$follow->class}} img-circle"></i>
+                @endforeach
+            @endif
+        </p>
     </div>
 </div>
 <nav class="navbar navbar navbar-fixed-top">

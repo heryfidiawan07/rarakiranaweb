@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-sm-4">
     <div class="products">
         @include('products.thumb')
         <div class="text-center">

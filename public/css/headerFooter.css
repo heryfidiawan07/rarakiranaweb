@@ -46,8 +46,8 @@
 	text-decoration: none;
 	color: lightgrey;
 }
-.footerFollow {
-	border-bottom: 1px solid white;
+.footerFollow i {
+	margin-bottom: 5px;
 }
 /*End Footer*/
 /*Navigation*/

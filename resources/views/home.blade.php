@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('url') {{Request::url()}} @endsection
+@if($homeLogo)
+    @section('image') {{$homeLogo->img}} @endsection
+    @section('title') {{$homeLogo->title}} @endsection
+    @section('description') {{$homeLogo->description}} @endsection
+@endif
+
 @section('content')
 
 @if($newarticles->count())

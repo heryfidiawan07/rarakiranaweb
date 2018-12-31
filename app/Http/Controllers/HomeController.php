@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Logo;
 use App\Forum;
 use App\Article;
 use App\Product;
@@ -11,10 +12,11 @@ class HomeController extends Controller
 {
     public function index()
     {	
+    $homeLogo    = Logo::where('setting',1)->first();
 		$newarticles = Article::where('status',1)->latest()->paginate(3);
 		$newproducts = Product::where('status',1)->latest()->paginate(5);
-		$newthreads = Forum::where('status',1)->latest()->paginate(4);
-    $artrecents = Article::join('artcomments', 'articles.id', '=', 'artcomments.article_id')
+		$newthreads  = Forum::where('status',1)->latest()->paginate(4);
+    $artrecents  = Article::join('artcomments', 'articles.id', '=', 'artcomments.article_id')
                   ->orderBy('artcomments.updated_at','DESC')->groupBy('artcomments.article_id')
                   ->take(5)->get();
     //$artrecents = Article::where('status',1)->withCount('artcomments')->orderBy('artcomments_count', 'desc')->take(5)->get();
@@ -22,7 +24,7 @@ class HomeController extends Controller
                   ->orderBy('forcomments.updated_at','DESC')->groupBy('forcomments.forum_id')
                   ->take(5)->get();
 
-        return view('home',compact('newarticles','artrecents','newproducts','newthreads','threadrecents'));
+        return view('home',compact('newarticles','artrecents','newproducts','newthreads','threadrecents','homeLogo'));
     }
     
 }

@@ -19,10 +19,9 @@ class CreateLogosTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('img');
-            $table->integer('menu_id')->unsigned();
+            $table->tinyInteger('setting');
             $table->timestamps();
 
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

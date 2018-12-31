@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Purifier;
 use App\Menu;
+use App\Logo;
 use App\Forum;
 use Illuminate\Http\Request;
 
@@ -159,6 +160,7 @@ class ForumController extends Controller
 
 // User Guest
     public function show($slug){
+        $forumLogo = Logo::where('setting',3)->first();
         $thread = Forum::whereSlug($slug)->first();
         $comments = $thread->forcomments()->paginate(10);
         $threadrecents = Forum::join('forcomments', 'forums.id', '=', 'forcomments.forum_id')
@@ -166,13 +168,14 @@ class ForumController extends Controller
                   ->take(5)->get();
         if ($thread->status == 1 && $thread->menu->status == 1) {
             $categories = Menu::where('setting',11)->get();
-            return view('forum.show',compact('thread','categories','comments','threadrecents'));
+            return view('forum.show',compact('thread','categories','comments','threadrecents','forumLogo'));
         }else{
             return view('errors.503');
         }
     }
 
     public function tag($tagSlug){
+        $forumLogo  = Logo::where('setting',3)->first();
         $tags = Menu::whereSlug($tagSlug)->first();
         if ($tags->status == 1) {
             if ($tags->parent()->count()) {
@@ -181,7 +184,7 @@ class ForumController extends Controller
                 $tagthreads = $tags->forums()->latest()->get();
             }
             $categories = Menu::where('setting',11)->get();
-            return view('forum.tags', compact('tagthreads','tags','categories'));
+            return view('forum.tags', compact('tagthreads','tags','categories','forumLogo'));
         }else{
             return view('errors.503');
         }

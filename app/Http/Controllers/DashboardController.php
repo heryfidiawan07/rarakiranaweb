@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Follower;
+use App\Share;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller

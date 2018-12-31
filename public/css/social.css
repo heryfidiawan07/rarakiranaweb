@@ -1,24 +1,75 @@
-.auth .fa-facebook {
-	background-color: #3b5999;
+/*Login adn Register Blade*/
+.social-login .fab {
 	padding: 10px 10px;
-	color: white;
 }
-.auth .fa-facebook:hover {
-	background-color: #34465d;
+/*End Login adn Register Blade*/
+/*Global Share*/
+
+/*End Global Share*/
+/*Admin Share*/
+.share input {
+  width: 10%;
 }
-.auth .fa-twitter {
-	background-color: #55acee;
+.share .fab .fas {
+  width: 80%;
+  padding: 10px 10px;
+}
+/*End Admin Share*/
+/*Admin Follow*/
+.followClass input {
+	width: 10%;
+}
+.followClass .fab .fas {
+	width: 80%;
 	padding: 10px 10px;
-	color: white;
 }
-.auth .fa-twitter:hover {
-	background-color: #34465d;
-}
-.auth .fa-google {
-	background-color: #dd4b39;
+td, .fab, .fas {
 	padding: 10px 10px;
-	color: white;
 }
-.auth .fa-google:hover {
-	background-color: #34465d;
+p .fas,.fab {
+	font-size: 1em;
+}
+/*End Admin Follow*/
+/*Global Social Media*/
+.fa-facebook {
+  background: #3B5998; color: white;
+}
+.fa-twitter {
+  background: #55ACEE; color: white;
+}
+.fa-google {
+  background: #dd4b39; color: white;
+}
+.fa-pinterest {
+  background: #bd081c; color: white;
+}
+.fa-linkedin {
+  background: #0077B5; color: white;
+}
+.fa-whatsapp {
+  background: #25D366; color: white;
+}
+.fa-whatsapp {
+  background: #25D366; color: white;
+}
+.fa-instagram {
+  background: #e4405f; color: white;
+}
+.fa-envelope {
+  background: lightgrey; color: black;
+}
+.fa-youtube {
+  background: #cd201f; color: white;
+}
+.fa-weixin {
+  background: #09b83e; color: white;
+}
+.fa-line {
+  background: #00c300; color: white;
+}
+.fa-linkedIn {
+  background: #0077B5; color: white;
+}
+.fa-blackberry {
+	background: black; color: white;
 }

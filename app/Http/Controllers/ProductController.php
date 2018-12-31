@@ -7,6 +7,7 @@ use File;
 use Image;
 use Purifier;
 use App\Menu;
+use App\Logo;
 use App\Product;
 use App\Gallery;
 use Illuminate\Http\Request;
@@ -259,6 +260,7 @@ class ProductController extends Controller
     }
 
     public function category($categorySlug){
+        $productLogo = Logo::where('setting',3)->first();
         $category = Menu::whereSlug($categorySlug)->first();
         if ($category->status == 1) {
             if ($category->parent()->count()) {
@@ -267,7 +269,7 @@ class ProductController extends Controller
                 $tagproducts = $category->products()->latest()->get();
             }
             $categories = Menu::where([['setting',21],['status',1]])->get();
-            return view('products.category', compact('tagproducts','category','categories'));
+            return view('products.category', compact('tagproducts','category','categories','productLogo'));
         }else{
             return view('errors.503');
         }

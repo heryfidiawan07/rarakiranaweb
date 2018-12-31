@@ -63,7 +63,19 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href=""><b> EMOTICON</b></a>
+                                <a class="dashboard-menu" href="/dashboard/emoticon"><b> EMOTICON</b></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-dashboard">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                                <a class="dashboard-menu" href="/dashboard/follow"><b> FOLLOW</b></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-dashboard">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                                <a class="dashboard-menu" href="/dashboard/share"><b> SHARE</b></a>
                             </td>
                         </tr>
                         <tr>

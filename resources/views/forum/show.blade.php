@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('url') {{Request::url()}} @endsection
+@if($forumLogo)
+    @section('image') http://rarakirana.com/logo/img/{{$forumLogo->img}} @endsection
+@endif
+@section('title') {{$thread->title}} @endsection
+@section('description') 
+    {{str_limit(strip_tags($thread->description), $limit = 145, $end = '...')}} 
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">

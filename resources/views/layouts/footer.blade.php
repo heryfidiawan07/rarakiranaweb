@@ -1,7 +1,14 @@
 <div class="footer">
 	<div class="container">
-		<div class="col-md-4">
-			<p class="footerFollow"><i>Follow us: </i></p>
+		<div class="col-md-6">
+			<p class="share">
+				<i>Share: </i>
+				@if($mainShares)
+            @foreach($mainShares as $share)
+                <a href="{{$share->url}}{{Request::url()}}"><i class="{{$share->class}} img-circle"></i></a>
+            @endforeach
+        @endif
+			</p>
 		</div>
 		<div class="col-md-12">
 			<div class="pull-right">

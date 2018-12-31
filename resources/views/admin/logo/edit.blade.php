@@ -10,15 +10,9 @@
             <label>Title</label>
             <input type="text" name="titleEdit" value="{{$logo->title}}" class="form-control" required>
             <label>Description</label>
-            <input type="text" name="descriptionEdit" value="{{$logo->description}}" class="form-control" required>
-            <label>Parent</label>
-            <select name="menu_edit" class="form-control">
-                @if($menus->count())
-                    @foreach($menus as $menuEdit)
-                        <option value="{{$menuEdit->id}}">{{$menuEdit->menu}}</option>
-                    @endforeach
-                @endif
-            </select>
+            <textarea id="descriptionEdit" cols="5" class="form-control" name="descriptionEdit" required autofocus>
+                {{$logo->description}}
+            </textarea>
             <label>Image</label><br>
             <img src="/logo/thumb/{{$logo->img}}" width="100"><br>
             <a data-toggle="collapse" href="#changeArtImg" role="button" aria-expanded="false" aria-controls="changeArtImg">Ganti</a>

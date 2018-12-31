@@ -11,13 +11,13 @@
     <title>@yield('title')</title>
     <!-- Extends -->
     <meta name="url"           content="@yield('url')" />
+    <meta name="image"         content="@yield('image')" />
     <meta name="title"         content="@yield('title')" />
     <meta name="description"   content="@yield('description')" />
-    <meta name="image"         content="@yield('image')" />
 
     <meta name="google-signin-client_id" content="524555026329-duc32e6en3f62mhdak03hi5scguviu9f.apps.googleusercontent.com">
     <!-- Icon -->
-    <link href='<?php  ?>' rel='shortcut icon'>
+    <link href="<?php if($mainLogo) echo 'http://rarakirana.com/logo/thumb/'.$mainLogo->img ?>" rel='shortcut icon'>
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/img.css">
@@ -33,7 +33,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -57,7 +57,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="/js/share.js"></script>
     @yield('js')
 </body>
 </html>

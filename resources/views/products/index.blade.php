@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('url') {{Request::url()}} @endsection
+@if($productLogo)
+    @section('image') http://rarakirana.com/logo/img/{{$productLogo->img}} @endsection
+    @section('title') {{$productLogo->title}} @endsection
+    @section('description') {{$productLogo->description}} @endsection
+@endif
+
 @section('content')
 <div class="container">
     <div class="row">

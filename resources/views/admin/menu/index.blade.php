@@ -36,7 +36,7 @@
                             <option value="10">Parent Forum</option>
                             <option value="20">Parent Product</option>
                             @if($menus->count())
-                                @foreach($menus->where('parent_id',0) as $menu)
+                                @foreach($menus->where('parent_id',0)->where('setting','<',6) as $menu)
                                     <option value="{{$menu->id}}">{{$menu->menu}}</option>
                                 @endforeach
                             @endif

@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('url') {{Request::url()}} @endsection
+@section('image') http://rarakirana.com/articles/img/{{$article->img}} @endsection
+@section('title') {{$article->title}} @endsection
+@section('description') 
+    {{strip_tags(str_limit($article->description, $limit = 145, $end = '...'))}} 
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">

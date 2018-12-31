@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('url') {{Request::url()}} @endsection
+@section('image') http://rarakirana.com/products/img/{{$product->galleries[0]->img}} @endsection
+@section('title') {{$product->title}} @endsection
+@section('description') 
+    {{strip_tags(str_limit($product->description, $limit = 145, $end = '...'))}} 
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -16,13 +23,13 @@
         <div class="col-md-12">
             <div class="col-md-5 product-content-show">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#deskripsi" aria-controls="deskripsi" role="tab" data-toggle="tab">Deskripsi</a></li>
+                    <li role="presentation" class="active"><a href="#deskripsi" aria-controls="deskripsi" role="tab" data-toggle="tab">DESKRIPSI</a></li>
                     <li role="presentation">
                         <a href="#diskusi" aria-controls="diskusi" role="tab" data-toggle="tab">
-                        {{$product->prodcomments->count()}} Diskusi</a>
+                        {{$product->prodcomments->count()}} DISKUSI</a>
                     </li>
-                    <li role="presentation"><a href="#ulasan" aria-controls="ulasan" role="tab" data-toggle="tab">Ulasan</a></li>
-                    <li role="presentation"><a href="#pesan" aria-controls="pesan" role="tab" data-toggle="tab">Pesan</a></li>
+                    <li role="presentation"><a href="#ulasan" aria-controls="ulasan" role="tab" data-toggle="tab">ULASAN</a></li>
+                    <li role="presentation"><a href="#pesan" aria-controls="pesan" role="tab" data-toggle="tab">PESAN</a></li>
                   </ul>
 
                   <!-- Tab panes -->
