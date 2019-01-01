@@ -104,7 +104,7 @@ class ForumController extends Controller
         $this->validate($request, [
                 'title' => 'required|max:200',
                 'menu_id' => 'required',
-                'description' => 'required|max:5000',
+                'description' => 'required|max:10000',
             ]);
         if (Auth::user()) {
             $time = date("YmdHis");
@@ -138,7 +138,7 @@ class ForumController extends Controller
         $this->validate($request, [
                 'title' => 'required|max:200',
                 'menu_id' => 'required',
-                'description' => 'required|max:5000',
+                'description' => 'required|max:10000',
             ]);
         $thread = Forum::whereSlug($slug)->first();
         if ($thread->user->id == Auth::user()->id) {
@@ -179,9 +179,9 @@ class ForumController extends Controller
         $tags = Menu::whereSlug($tagSlug)->first();
         if ($tags->status == 1) {
             if ($tags->parent()->count()) {
-                $tagthreads = $tags->childForums()->latest()->get();
+                $tagthreads = $tags->childForums()->latest()->paginate(10);
             }else{
-                $tagthreads = $tags->forums()->latest()->get();
+                $tagthreads = $tags->forums()->latest()->paginate(10);
             }
             $categories = Menu::where('setting',11)->get();
             return view('forum.tags', compact('tagthreads','tags','categories','forumLogo'));

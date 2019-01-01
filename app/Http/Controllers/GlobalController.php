@@ -14,6 +14,9 @@ class GlobalController extends Controller
 	public function menu($slugMenu){
 		$menu = Menu::where('slug',$slugMenu)->first();
 		$articleLogo = Logo::where('setting',4)->first();
+		$artrecents = Article::join('artcomments', 'articles.id', '=', 'artcomments.article_id')
+                  ->orderBy('artcomments.updated_at','DESC')->groupBy('artcomments.article_id')
+                  ->take(5)->get();
 		if ($menu) {
 				if ($menu->setting == 10) {
 						$newthreads = Forum::where('status',1)->latest()->paginate(10);
@@ -28,14 +31,14 @@ class GlobalController extends Controller
 				}else{
 						if ($menu->parent()->count()) {
 								$articles = $menu->childArticles()->paginate(10);
-								return view('articles.menu', compact('menu','articles','articleLogo'));
+								return view('articles.menu', compact('menu','articles','articleLogo','artrecents'));
 						}else{
 								$articles = $menu->articles()->latest()->paginate(10);
 								if ($articles->count() == 1) {
 									$article = Article::where('menu_id',$menu->id)->first();
 									return redirect("/read/article/{$article->slug}");
 								}else{
-									return view('articles.menu', compact('menu','articles','articleLogo'));
+									return view('articles.menu', compact('menu','articles','articleLogo','artrecents'));
 								}
 						}
 				}

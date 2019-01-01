@@ -104,9 +104,15 @@ Route::group(['middleware' => 'auth'], function () {
 	//Forum Commment
 	Route::post('/thread/comment/{slug}/store', 'ForcommentController@store');
 	Route::post('/thread/comment/{id}/update', 'ForcommentController@update');
+	//User
+	Route::post('/user/image/upload/{id}', 'UserController@image');
+	Route::post('/user/change/name/{id}', 'UserController@name');
+	Route::post('/user/update/bio/{id}', 'UserController@bio');
 });
 //Forum
 Route::get('/thread/{threadslug}', 'ForumController@show');
 Route::get('/threads/tag/{tagSlug}', 'ForumController@tag');
 //Search
 Route::post('/search', 'SearchController@search');
+//User Page
+Route::get('/user/{slug}', 'UserController@show');

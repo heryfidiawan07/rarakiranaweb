@@ -107,6 +107,14 @@
 .thread-comment-user .author {
 	color: black;
 }
+.thread-comment-body .title {
+	color: black;
+	font-weight: bold;
+}
+.thread-comment-body .title:hover {
+	color: grey;
+	text-decoration: none;
+}
 .thread-comment-user .author:hover {
 	color: grey;
 	text-decoration: none;

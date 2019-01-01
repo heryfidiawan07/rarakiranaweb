@@ -3,9 +3,11 @@
 	padding: 10px 10px;
 }
 /*End Login adn Register Blade*/
-/*Global Share*/
-
-/*End Global Share*/
+/*Global CSS*/
+.pagination-sm {
+  margin-top: -10px;
+}
+/*End Global CSS*/
 /*Admin Share*/
 .share input {
   width: 10%;

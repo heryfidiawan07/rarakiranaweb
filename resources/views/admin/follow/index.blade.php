@@ -30,13 +30,13 @@
                         <p><input type="radio" name="followClass" value="fab fa-blackberry"> <i class="fab fa-blackberry"> bbm</i></p>
                     </div>
                 </div>
-                <div class="pull-left">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <div class="col-md-12">
+                    <button type="submit" class="form-control btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8"><hr>
             <h4 class="text-center"><b>FOLLOW LIST</b></h4>
             @if(session('warningEdit'))
                 <div class="alert alert-warning">

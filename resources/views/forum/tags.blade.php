@@ -24,6 +24,11 @@
             @foreach($tagthreads->where('menu.status',1)->where('status',1) as $thread)
                 @include('forum.content-index')
             @endforeach
+            
+            <div class="text-center">
+                <ul class="pagination pagination-sm">{{$tagthreads->links()}}</ul>
+            </div>
+            
         </div>
     </div>
 </div>

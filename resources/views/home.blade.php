@@ -2,7 +2,7 @@
 
 @section('url') {{Request::url()}} @endsection
 @if($homeLogo)
-    @section('image') {{$homeLogo->img}} @endsection
+    @section('image') http://rarakirana.com/logo/img/{{$homeLogo->img}} @endsection
     @section('title') {{$homeLogo->title}} @endsection
     @section('description') {{$homeLogo->description}} @endsection
 @endif

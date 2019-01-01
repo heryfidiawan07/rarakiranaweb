@@ -128,4 +128,12 @@
 	color: grey;
 	text-decoration: none;
 }
+.product-discus-body .title {
+	color: black;
+	font-weight: bold;
+}
+.product-discus-body .title:hover {
+	color: grey;
+	text-decoration: none;
+}
 /*End Product Discusions*/

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Forum;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -9,20 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'slug', 'email', 'password', 'admin', 'social', 'img', 'graph', 'status','token',
+        'name', 'slug','bio','email','password','admin','social','img','graph','status','token',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -54,12 +45,16 @@ class User extends Authenticatable
         return $this->hasMany(Forum::class);
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class);
+    public function artcomments(){
+        return $this->hasMany(Artcomment::class);
+    }
+
+    public function forcomments(){
+        return $this->hasMany(Forcomment::class);
     }
 
     public function discusions(){
-        return $this->hasMany(Discusion::class);
+        return $this->hasMany(Prodcomment::class);
     }
 
 }

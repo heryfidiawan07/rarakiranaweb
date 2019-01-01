@@ -11,7 +11,7 @@
             <h4 class="text-center">ADD SHARE</h4><hr>
             <form method="POST" action="/share/store">
                 {{ csrf_field() }}
-                <div class="form-group">
+                <div class="col-md-12">
                     <label for="share" class="control-label">Pilih Sosial Media Share</label>
                     <div class="form-check share">
                         <div class="col-xs-6">
@@ -28,13 +28,12 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <hr>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="form-control btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8"><hr>
             <h4 class="text-center"><b>SHARE LIST</b></h4>
             @if(session('warningEdit'))
                 <div class="alert alert-warning">

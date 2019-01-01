@@ -31,7 +31,12 @@
 
         </div>
         <div class="col-md-4">
-            <h5 class="text-center"><b>KOMENTAR BARU</b></h5><hr>
+            @if($artrecents->count())
+                <h5 class="text-center"><b>KOMENTAR BARU</b></h5><hr>
+                @foreach($artrecents as $article)
+                    @include('articles.recent-comment')
+                @endforeach
+            @endif
         </div>
     </div>
 </div>

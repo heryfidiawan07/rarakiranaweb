@@ -264,9 +264,9 @@ class ProductController extends Controller
         $category = Menu::whereSlug($categorySlug)->first();
         if ($category->status == 1) {
             if ($category->parent()->count()) {
-                $tagproducts = $category->childProducts()->latest()->get();
+                $tagproducts = $category->childProducts()->latest()->paginate(9);
             }else{
-                $tagproducts = $category->products()->latest()->get();
+                $tagproducts = $category->products()->latest()->paginate(9);
             }
             $categories = Menu::where([['setting',21],['status',1]])->get();
             return view('products.category', compact('tagproducts','category','categories','productLogo'));

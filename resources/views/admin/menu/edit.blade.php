@@ -13,9 +13,9 @@
             <select name="parent_edit" class="form-control">
                 @if($menu->setting == 5)
                   <option value="5">Parent Contact</option>
-                @elseif($menu->setting == 22)
+                @elseif($menu->setting == 10)
                   <option value="10">Parent Forum</option>
-                @elseif($menu->setting == 33)
+                @elseif($menu->setting == 20)
                   <option value="20">Parent Product</option>
                 @endif
                 <option value="0">NO PARENT</option>

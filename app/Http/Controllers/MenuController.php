@@ -40,7 +40,7 @@ class MenuController extends Controller
         }
         Menu::create([
                 'user_id' => Auth::user()->id,
-                'menu' => $request->menu,
+                'menu' => strtoupper($request->menu),
                 'slug' => str_slug($request->menu),
                 'parent_id' => $parent_id,
                 'setting' => $setting,
@@ -71,7 +71,7 @@ class MenuController extends Controller
         $cekMenu = Menu::where('slug', '=', str_slug($request->menuEdit))->first();
         if ($cekMenu === null) {
             $menu->update([
-                'menu' => $request->menuEdit,
+                'menu' => strtoupper($request->menuEdit),
                 'slug' => str_slug($request->menuEdit),
                 'parent_id' => $parent_edit,
                 'setting' => $setting,

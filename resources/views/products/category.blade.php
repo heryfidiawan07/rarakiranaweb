@@ -25,6 +25,11 @@
             @foreach($tagproducts->where('status',1)->where('menu.status',1) as $product)
                 @include('products.content-index')
             @endforeach
+            
+            <div class="text-center">
+                <ul class="pagination pagination-sm">{{$tagproducts->links()}}</ul>
+            </div>
+
         </div>
 
     </div>
