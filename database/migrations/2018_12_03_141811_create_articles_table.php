@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('slug');
             $table->string('img');
             $table->text('description');
+            $table->tinyInteger('sticky')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('allowed_comment')->default(1);
             $table->timestamps();

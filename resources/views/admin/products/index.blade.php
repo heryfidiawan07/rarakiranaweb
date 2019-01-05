@@ -116,21 +116,34 @@
                             @foreach($products as $product)
                             <tr>
                                 <td rowspan="3">@include('products.thumb')</td>
-                                <td colspan="7">{{$product->title}}</td>
+                                <td colspan="7"><p class="@if($product->sticky == 1) sticky @endif">{{$product->title}} @if($product->sticky == 1)@endif - <small style="color: black;">This Post Sticky</small></p></td>
                             </tr>
                             <tr>
-                                <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs">EDIT</a></td>
+                                <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs">Edit</a></td>
                                 <td>@include('admin.products.delete')</td>
-                                <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif>SHOW</a></td>
+                                <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif>Show</a></td>
+                                <td>@include('admin.products.status')</td>
+                                <td><span class="glyphicon glyphicon-comment"> {{$product->prodcomments->count()}}</span></td>
+                                <td>@include('admin.products.acomment')</td>
+                                <td>
+                                    <form class="form-inline" method="POST" action="/product/sticky/{{$product->id}}">
+                                        {{csrf_field()}}
+                                        <select class="form-control input-sm" name="sticky" required>
+                                            @if($product->sticky == 1)
+                                                <option value="{{$product->sticky}}">Sticky Post</option>
+                                            @endif
+                                            <option value="0">Default</option>
+                                            <option value="1">Set to sticky</option>
+                                        </select>
+                                        <input type="submit" class="btn btn-warning btn-sm" value="set">
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <a href="/products/category/{{$product->menu->slug}}" class="btn btn-default btn-xs">
                                     <span class="glyphicon glyphicon-tag"></span>{{$product->menu->menu}}</a>
                                 </td>
-                                <td>@include('admin.products.status')</td>
-                                <td><span class="glyphicon glyphicon-comment"> {{$product->prodcomments->count()}}</span></td>
-                                <td>@include('admin.products.acomment')</td>
-                            </tr>
-                            <tr>
                                 <td colspan="3"><span class="glyphicon glyphicon-user"></span> <small><i>{{$product->user->name}}</i></small></td>
                                 <td colspan="2"><small><i>
                                     <span class="glyphicon glyphicon-time"></span>

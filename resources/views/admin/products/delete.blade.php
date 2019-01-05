@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete_{{$product->id}}">DELETE</button>
+<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete_{{$product->id}}">Delete</button>
 <!-- Modal -->
 <div class="modal fade" id="delete_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="delete_{{$product->id}}_label" aria-hidden="true">
   <div class="modal-dialog" role="document">

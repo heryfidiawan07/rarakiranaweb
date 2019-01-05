@@ -39,6 +39,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/article/{id}/update', 'ArticleController@update');
 		Route::get('/article/{id}/destroy', 'ArticleController@destroy');
 		Route::post('/article/status/{id}', 'ArticleController@status');
+		Route::post('/article/sticky/{id}', 'ArticleController@sticky');
 		Route::post('/article/acomment/{id}', 'ArticleController@acomment');
 		//Product
 		Route::get('/dashboard/products', 'ProductController@index');
@@ -49,6 +50,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/product/{id}/destroy', 'ProductController@destroy');
 		Route::post('/product/status/{id}', 'ProductController@status');
 		Route::post('/product/acomment/{id}', 'ProductController@acomment');
+		Route::post('/product/sticky/{id}', 'ProductController@sticky');
 		//Gallery Destory
 		Route::get('/product/gallery/{id}/destroy', 'GalleryController@destroy');
 		//Category
@@ -59,6 +61,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/dashboard/forums', 'ForumController@index');
 		Route::get('/forum/destroy/{id}', 'ForumController@destroy');
 		Route::post('/forum/status/{id}', 'ForumController@status');
+		Route::post('/forum/sticky/{id}', 'ForumController@sticky');
 		//Tag
 		Route::post('/forum/tag/store', 'ForumController@tagStore');
 		Route::post('/forum/tag/{id}/update', 'ForumController@tagUpdate');
@@ -77,6 +80,12 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/dashboard/share', 'ShareController@index');
 		Route::post('/share/store', 'ShareController@store');
 		Route::get('/share/delete/{id}', 'ShareController@destroy');
+		//Promo
+		Route::get('/dashboard/promo', 'PromoController@index');
+		Route::post('/promo/store', 'PromoController@store');
+		Route::post('/promo/update/{id}', 'PromoController@update');
+		//Promo Picture
+		Route::get('/promo/picture/delete/{id}', 'PromoController@deletePicture');
 		//File Manager
     Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
@@ -116,3 +125,5 @@ Route::get('/threads/tag/{tagSlug}', 'ForumController@tag');
 Route::post('/search', 'SearchController@search');
 //User Page
 Route::get('/user/{slug}', 'UserController@show');
+//Send Form Contact
+Route::post('/send/message/contact', 'InboxController@contact');

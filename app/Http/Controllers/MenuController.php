@@ -24,7 +24,7 @@ class MenuController extends Controller
         $this->validate($request, [
                 'menu' => 'required|unique:menus|max:20',
             ]);
-        if($request->parent_id == 5 || $request->parent_id == 10 || $request->parent_id == 20){
+        if($request->parent_id == 10 || $request->parent_id == 20){
             $setting = $request->parent_id;
             $parent_id = 0;
         }else{
@@ -60,25 +60,23 @@ class MenuController extends Controller
         }elseif ($mProd && $request->parent_edit == 20) {
             return back()->with('warningEdit', 'Parent product already exists.');
         }
-        if($request->parent_edit == 5 || $request->parent_edit == 10 || $request->parent_edit == 20){
+        if($request->parent_edit == 10 || $request->parent_edit == 20){
             $setting = $request->parent_edit;
             $parent_edit = 0;
+        }elseif($request->contact){
+            $setting = 5;
+            $parent_edit = $request->parent_edit;
         }else{
             $setting = 0;
             $parent_edit = $request->parent_edit;
         }
         $menu = Menu::whereId($id)->first();
-        $cekMenu = Menu::where('slug', '=', str_slug($request->menuEdit))->first();
-        if ($cekMenu === null) {
-            $menu->update([
-                'menu' => strtoupper($request->menuEdit),
-                'slug' => str_slug($request->menuEdit),
-                'parent_id' => $parent_edit,
-                'setting' => $setting,
-            ]);
-        }else{
-            return back()->with('warningEdit', 'Nama menu sudah ada, ganti yang lain !');
-        }
+        $menu->update([
+            'menu' => strtoupper($request->menuEdit),
+            'slug' => str_slug($request->menuEdit),
+            'parent_id' => $parent_edit,
+            'setting' => $setting,
+        ]);
         return back();
     }
 
@@ -89,7 +87,6 @@ class MenuController extends Controller
             ]);
         return back();
     }
-    
 
     public function destroy($id)
     {

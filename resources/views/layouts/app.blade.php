@@ -21,6 +21,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/img.css">
+    <link rel="stylesheet" type="text/css" href="/css/promo.css">
     <link rel="stylesheet" type="text/css" href="/css/thumb.css">
     <link rel="stylesheet" type="text/css" href="/css/social.css">
     <link rel="stylesheet" type="text/css" href="/css/threads.css">

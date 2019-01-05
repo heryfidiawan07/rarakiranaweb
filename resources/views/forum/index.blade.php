@@ -12,6 +12,9 @@
     <div class="row">
         <div class="col-md-3">@include('forum.tags-category')</div>
         <div class="col-md-9">
+            @if($promo)
+                @include('promo.index')
+            @endif
             @foreach($newthreads->where('menu.status',1) as $thread)
                 @include('forum.content-index')
             @endforeach

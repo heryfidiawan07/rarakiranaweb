@@ -51,7 +51,7 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href=""><b> PROMO</b></a>
+                                <a class="dashboard-menu" href="/dashboard/promo"><b> PROMO</b></a>
                             </td>
                         </tr>
                         <tr>

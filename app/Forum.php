@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forum extends Model
 {
-    protected $fillable = ['user_id','title','slug','menu_id','description','status',];
+    protected $fillable = ['user_id','title','slug','menu_id','description','sticky','status',];
 
     public function user(){
     	return $this->belongsTo(User::class);

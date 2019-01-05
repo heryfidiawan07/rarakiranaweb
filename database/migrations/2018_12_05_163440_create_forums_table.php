@@ -20,6 +20,7 @@ class CreateForumsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
+            $table->tinyInteger('sticky')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

@@ -2,7 +2,7 @@
     <div class="products">
         @include('products.thumb')
         <div class="text-center">
-            <h5 class="product-title">
+            <h5 class="product-title @if($product->sticky == 1) sticky @endif">
                 <a href="/show/product/{{$product->slug}}">{{$product->title}}</a>
             </h5>
         </div>

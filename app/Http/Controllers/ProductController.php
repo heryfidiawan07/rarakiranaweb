@@ -8,6 +8,7 @@ use Image;
 use Purifier;
 use App\Menu;
 use App\Logo;
+use App\Promo;
 use App\Product;
 use App\Gallery;
 use Illuminate\Http\Request;
@@ -129,9 +130,7 @@ class ProductController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("products/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 200, function ($constraint) {
-                                $constraint->aspectRatio();
-                            });
+                $thumb    = Image::make($path)->resize(300, 300);
                 $thumb->save(public_path("products/thumb/". $imgName));
             $key++;
                 $gallery = new Gallery;
@@ -152,6 +151,14 @@ class ProductController extends Controller
         $product = Product::whereId($id)->first();
         $product->update(['allowed_comment' => $request->acomment,]);
         return back();  
+    }
+
+    public function sticky(Request $request, $id){
+        $product = Product::whereId($id)->first();
+        $product->update([
+                'sticky' => $request->sticky,
+            ]);
+        return back();
     }
 
     public function edit($id)
@@ -199,9 +206,7 @@ class ProductController extends Controller
                                     $constraint->aspectRatio();
                                 });
                     $img->save(public_path("products/img/". $imgName));
-                    $thumb    = Image::make($path)->resize(200, 200, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                });
+                    $thumb    = Image::make($path)->resize(300, 300);
                     $thumb->save(public_path("products/thumb/". $imgName));
                 $key++;
                     $gallery = new Gallery;
@@ -261,15 +266,16 @@ class ProductController extends Controller
 
     public function category($categorySlug){
         $productLogo = Logo::where('setting',3)->first();
-        $category = Menu::whereSlug($categorySlug)->first();
+        $category    = Menu::whereSlug($categorySlug)->first();
+        $promo       = Promo::where('setting',2)->first();
         if ($category->status == 1) {
             if ($category->parent()->count()) {
-                $tagproducts = $category->childProducts()->latest()->paginate(9);
+                $tagproducts = $category->childProducts()->latest('sticky')->paginate(9);
             }else{
-                $tagproducts = $category->products()->latest()->paginate(9);
+                $tagproducts = $category->products()->latest('sticky')->paginate(9);
             }
             $categories = Menu::where([['setting',21],['status',1]])->get();
-            return view('products.category', compact('tagproducts','category','categories','productLogo'));
+            return view('products.category', compact('tagproducts','category','categories','productLogo','promo'));
         }else{
             return view('errors.503');
         }

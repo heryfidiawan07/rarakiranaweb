@@ -11,19 +11,12 @@
             <input type="text" name="menuEdit" value="{{$menu->menu}}" class="form-control">
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
-                @if($menu->setting == 5)
-                  <option value="5">Parent Contact</option>
-                @elseif($menu->setting == 10)
-                  <option value="10">Parent Forum</option>
+                @if($menu->setting == 10)
+                  <option value="10">PARENT FORUM</option>
                 @elseif($menu->setting == 20)
-                  <option value="20">Parent Product</option>
+                  <option value="20">PARENT PRODUCT</option>
                 @endif
                 <option value="0">NO PARENT</option>
-                @if($menu->childs)
-                  <option value="10">Parent Forum</option>
-                  <option value="20">Parent Product</option>
-                  <option value="5">Parent Contact</option>
-                @endif
                 @foreach($menus->where('parent_id',0) as $menuEdit)
                   @if($menuEdit->setting == 10 || $menuEdit->setting == 20)
                     @continue
@@ -36,6 +29,11 @@
                     <option value="{{$menuEdit->id}}">{{$menuEdit->menu}}</option>
                   @endif
                 @endforeach
+            </select>
+            <label>Set Contact</label>
+            <select name="contact" class="form-control">
+              <option value="0">DEFAULT</option>
+              <option value="5">PARENT CONTACT</option>
             </select>
             <hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

@@ -31,10 +31,9 @@
 
                     <div class="col-md-6">
                         <select name="parent_id" class="form-control">
-                            <option value="0">Select Parent</option>
-                            <option value="5">Parent Contact</option>
-                            <option value="10">Parent Forum</option>
-                            <option value="20">Parent Product</option>
+                            <option value="0">SELECT PARENT</option>
+                            <option value="10">PARENT FORUM</option>
+                            <option value="20">PARENT PRODUCT</option>
                             @if($menus->count())
                                 @foreach($menus->where('parent_id',0)->where('setting','<',6) as $menu)
                                     <option value="{{$menu->id}}">{{$menu->menu}}</option>
@@ -83,11 +82,11 @@
                     @if($menu->parent_id < 1)
                         <tr>
                             <td>
-                                {{$menu->menu}} - @if($menu->setting != 10 && $menu->setting != 20 && $menu->setting != 5)<small>{{$menu->articles->count()}} post</small>@endif
-                                @if($menu->setting == 10)
-                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                @elseif($menu->setting == 5)
+                                {{$menu->menu}} - @if($menu->setting != 10 && $menu->setting != 20)<small>{{$menu->articles->count()}} post</small>@endif
+                                @if($menu->setting == 5)
                                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                @elseif($menu->setting == 10)
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                 @elseif($menu->setting == 20)
                                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                                 @endif
@@ -106,7 +105,11 @@
                     <tr>
                     @foreach($menu->parent->where('setting','<',9) as $child)
                     <tr>
-                        <td> -> {{$child->menu}} - <small>{{$child->articles->count()}} post</small></td>
+                        <td> -> {{$child->menu}} - <small>{{$child->articles->count()}} post</small>
+                            @if($child->setting == 5)
+                                - <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                            @endif
+                        </td>
                         <td>@include('admin.menu.editChild')</td>
                         <td>@include('admin.menu.deleteChild')</td>
                         <td>@include('admin.menu.statusChild')</td>

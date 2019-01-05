@@ -1,3 +1,17 @@
+/*Global Sticky*/
+.sticky {
+	color: green;
+}
+.sticky a {
+	color: green;
+	font-weight: bold;
+}
+.sticky a:hover {
+	text-decoration: none;
+	color: lightgreen;
+}
+/*End Global Sticky*/
+
 /*Articles thumb*/
 .frame-new-articles {
 	height: 25vh;

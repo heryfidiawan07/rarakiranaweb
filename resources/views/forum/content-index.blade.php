@@ -1,5 +1,5 @@
 <div class="threads">
-    <h4 class="threads-title">
+    <h4 class="threads-title @if($thread->sticky == 1) sticky @endif">
         <a href="/thread/{{$thread->slug}}">{{$thread->title}}</a>
     </h4>
     <p class="threads-author">

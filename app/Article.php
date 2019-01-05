@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $fillable = [
-    	'user_id','title','slug','menu_id','img','description','status','allowed_comment',
+    	'user_id','title','slug','menu_id','img','description','sticky','status','allowed_comment',
     ];
 
     public function user(){

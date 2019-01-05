@@ -11,6 +11,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            @if($promo)
+                @include('promo.index')
+            @endif
             <h4 class="article-tags">
                 @if($menu->parent->count())
                     @foreach($menu->parent as $sub)
@@ -28,6 +31,10 @@
             <div class="text-center">
                 <ul class="pagination pagination-sm">{{$articles->links()}}</ul>
             </div>
+
+            @if($menu->setting ==5)
+                @include('layouts.contact-form')
+            @endif
 
         </div>
         <div class="col-md-4">

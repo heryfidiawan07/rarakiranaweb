@@ -22,6 +22,11 @@
                     @endforeach
                 @endif
             </select>
+            <label>Set Contact</label>
+            <select name="contact" class="form-control">
+              <option value="0">DEFAULT</option>
+              <option value="5">PARENT CONTACT</option>
+            </select>
             <hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-warning btn-sm">Update</button>

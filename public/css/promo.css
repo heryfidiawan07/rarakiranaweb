@@ -1,0 +1,18 @@
+div.item .acive {
+    background-color: none;
+}
+.frame-promo-img {
+    text-align: center;
+}
+.frame-promo-img-helper {
+    display: inline-block;
+    vertical-align: middle;
+}
+.promo-img {
+    vertical-align: middle;
+    max-width: 100%;
+    width: 100%;
+}
+.carousel-promo-control.left, .carousel-promo-control.right {
+    background-image: none;
+}

@@ -7,13 +7,14 @@ use File;
 use Image;
 use Purifier;
 use App\Menu;
+use App\Promo;
 use App\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin', ['except'=>['show','menu']]);
+        $this->middleware('admin', ['except'=>['show','menu','contact']]);
     }
 
     public function index()
@@ -59,9 +60,7 @@ class ArticleController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("articles/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 250, function ($constraint) {
-                                $constraint->aspectRatio();
-                            });
+                $thumb    = Image::make($path)->resize(200, 200);
                 $thumb->save(public_path("articles/thumb/". $imgName));
         return redirect('/dashboard/articles');
     }
@@ -76,6 +75,14 @@ class ArticleController extends Controller
         $article = Article::whereId($id)->first();
         $article->update(['allowed_comment' => $request->acomment,]);
         return back();  
+    }
+    
+    public function sticky(Request $request, $id){
+        $article = Article::whereId($id)->first();
+        $article->update([
+                'sticky' => $request->sticky,
+            ]);
+        return back();
     }
     
     public function edit($id)
@@ -121,9 +128,7 @@ class ArticleController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("articles/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 250, function ($constraint) {
-                                $constraint->aspectRatio();
-                            });
+                $thumb    = Image::make($path)->resize(200, 200);
                 $thumb->save(public_path("articles/thumb/". $imgName));
             }
             $article->update([
@@ -172,9 +177,10 @@ class ArticleController extends Controller
     }
 
     public function menu($slugMenu){
-        $menu = Menu::whereSlug($slugMenu)->first();
-        $articles = $menu->articles()->get(10);
-        return view('articles.menu', compact('articles'));
+        $menu     = Menu::whereSlug($slugMenu)->first();
+        $articles = $menu->articles()->latest('sticky')->get(10);
+        $promo    = Promo::where('setting',4)->first();
+        return view('articles.menu', compact('articles','promo'));
     }
     
 }

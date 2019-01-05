@@ -8,7 +8,7 @@
         </a>
     </div>
     <div class="col-md-8">
-        <h4 class="articles-title">
+        <h4 class="@if($article->sticky == 1) sticky @else articles-title @endif">
             <a href="/read/article/{{$article->slug}}">{{$article->title}}</a>
         </h4>
         <p class="articles-author">

@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('discount')->nullable();
             $table->text('description');
+            $table->tinyInteger('sticky')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('allowed_comment')->default(1);
             $table->timestamps();

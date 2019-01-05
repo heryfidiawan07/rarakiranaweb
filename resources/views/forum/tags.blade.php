@@ -12,6 +12,9 @@
     <div class="row">
         <div class="col-md-3">@include('forum.tags-category')</div>
         <div class="col-md-9">
+            @if($promo)
+                @include('promo.index')
+            @endif
         	<h4 class="thread-tag-childs">
 		        @if($tags->parent->count())
                     @foreach($tags->parent->where('status',1) as $subtag)

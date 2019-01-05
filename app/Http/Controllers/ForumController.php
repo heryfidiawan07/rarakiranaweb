@@ -7,6 +7,7 @@ use Purifier;
 use App\Menu;
 use App\Logo;
 use App\Forum;
+use App\Promo;
 use Illuminate\Http\Request;
 
 class ForumController extends Controller
@@ -80,6 +81,14 @@ class ForumController extends Controller
         $tag = Menu::whereId($id)->first();
         $tag->update([
                 'status' => $request->status,
+            ]);
+        return back();
+    }
+
+    public function sticky(Request $request, $id){
+        $thread = Forum::whereId($id)->first();
+        $thread->update([
+                'sticky' => $request->sticky,
             ]);
         return back();
     }
@@ -176,15 +185,16 @@ class ForumController extends Controller
 
     public function tag($tagSlug){
         $forumLogo  = Logo::where('setting',3)->first();
-        $tags = Menu::whereSlug($tagSlug)->first();
+        $tags       = Menu::whereSlug($tagSlug)->first();
+        $promo      = Promo::where('setting',3)->first();
         if ($tags->status == 1) {
             if ($tags->parent()->count()) {
-                $tagthreads = $tags->childForums()->latest()->paginate(10);
+                $tagthreads = $tags->childForums()->latest('sticky')->paginate(10);
             }else{
-                $tagthreads = $tags->forums()->latest()->paginate(10);
+                $tagthreads = $tags->forums()->latest('sticky')->paginate(10);
             }
             $categories = Menu::where('setting',11)->get();
-            return view('forum.tags', compact('tagthreads','tags','categories','forumLogo'));
+            return view('forum.tags', compact('tagthreads','tags','categories','forumLogo','promo'));
         }else{
             return view('errors.503');
         }

@@ -13,6 +13,10 @@
         
         <div class="col-md-3">@include('products.tags-category')</div>
         <div class="col-md-9">
+            @if($promo)
+                @include('promo.index')
+            @endif
+            <hr>
             @foreach($newproducts->where('menu.status',1) as $product)
                 @include('products.content-index')
             @endforeach

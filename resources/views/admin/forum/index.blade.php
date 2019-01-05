@@ -115,7 +115,7 @@
                         <table class="table table-bordered">
                             @foreach($threads as $thread)
                                 <tr>
-                                    <td colspan="6" class="success">{{$thread->title}}</td>
+                                    <td colspan="6"><p class="@if($thread->sticky == 1) sticky @endif">{{$thread->title}} @if($thread->sticky == 1) - <small style="color: black;">Sticky</small> @endif</p></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -127,14 +127,27 @@
                                     </td>
                                     <td>@include('admin.forum.delete')</td>
                                     <td><a href="/thread/{{$thread->slug}}" class="btn btn-success btn-xs">Show</a></td>
+                                    <td><span class="glyphicon glyphicon-comment"> {{$thread->forcomments->count()}}</span></td>
+                                    <td>@include('admin.forum.status')</td>
+                                    <td>
+                                        <form class="form-inline" method="POST" action="/forum/sticky/{{$thread->id}}">
+                                            {{csrf_field()}}
+                                            <select class="form-control input-sm" name="sticky" required>
+                                                @if($thread->sticky == 1)
+                                                    <option value="{{$thread->sticky}}">Sticky Post</option>
+                                                @endif
+                                                <option value="0">Default</option>
+                                                <option value="1">Set to sticky</option>
+                                            </select>
+                                            <input type="submit" class="btn btn-warning btn-sm" value="set">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>
                                         <a href="/threads/tag/{{$thread->menu->slug}}" class="btn btn-default btn-xs">
                                         <span class="glyphicon glyphicon-tag"></span> {{$thread->menu->menu}}</a>
                                     </td>
-                                    <td><span class="glyphicon glyphicon-comment"> {{$thread->forcomments->count()}}</span></td>
-                                    <td>@include('admin.forum.status')</td>
-                                </tr>
-                                <tr>
                                     <td colspan="2"><span class="glyphicon glyphicon-user"></span> <small><i>{{$thread->user->name}}</i></small></td>
                                     <td colspan="2"><small><i>
                                         <span class="glyphicon glyphicon-time"></span>

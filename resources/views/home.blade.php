@@ -13,7 +13,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h4><b>News</b></h4><hr>
+                @if($promo)
+                    @include('promo.index')
+                @endif
+                <hr><h4><b>News</b></h4><hr>
                 @foreach($newarticles as $article)
                     @include('articles.content-index')
                 @endforeach
