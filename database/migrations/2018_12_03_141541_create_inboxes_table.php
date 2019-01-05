@@ -16,6 +16,7 @@ class CreateInboxesTable extends Migration
         Schema::create('inboxes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
+            $table->string('subject');
             $table->string('email');
             $table->text('description');
             $table->timestamps();

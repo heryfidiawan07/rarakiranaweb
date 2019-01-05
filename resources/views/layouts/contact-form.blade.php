@@ -5,6 +5,8 @@
           {{session('success')}}
       </div>
   @endif
+  <label>Subject</label>
+  <input type="text" name="subject" class="form-control" value="{{old('subject')}}" required>
 	<label>Email</label>
 	<input type="email" name="email" class="form-control" value="{{old('email')}}" required>
 	<label>Isi Pesan</label>

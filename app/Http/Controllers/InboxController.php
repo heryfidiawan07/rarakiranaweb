@@ -12,9 +12,10 @@ class InboxController extends Controller
 
     public function contact(Request $request){
         $this->validate($request, [
+                'subject' => 'required|max:500',
                 'email' => 'required|max:200',
                 'description' => 'required|max:1000',
-                //'g-recaptcha-response' => 'required|captcha',
+                'g-recaptcha-response' => 'required|captcha',
             ]);
         if(Auth::check()){
             if (Auth::user()) {
@@ -25,6 +26,7 @@ class InboxController extends Controller
         }
         Inbox::create([
                 'user_id' => $user_id,
+                'subject' => $request->subject,
                 'email' => $request->email,
                 'description' => purifier::clean($request->description),
             ]);
