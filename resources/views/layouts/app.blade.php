@@ -44,6 +44,13 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120528530-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-120528530-1');
+    </script>
     <!-- Recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>

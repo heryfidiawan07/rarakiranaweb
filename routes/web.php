@@ -86,6 +86,11 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/promo/update/{id}', 'PromoController@update');
 		//Promo Picture
 		Route::get('/promo/picture/delete/{id}', 'PromoController@deletePicture');
+		//User
+		Route::get('/dashboard/users', 'DashboardController@users');
+		Route::post('/user/status/{id}', 'DashboardController@statusUsers');
+		//Inbox
+		Route::get('/dashboard/inbox', 'DashboardController@inbox');
 		//File Manager
     Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rarakirana-204114",
+  "private_key_id": "7db9d3d1d8bcb69d22c1679dffc0fe8862a796be",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQClKz1HN1UUu1ZR\njf/ZMoB/lQ5HrrzDbWs0ozUqef9IKBVfYA8yH+VpcI1p7SCronaEGtRjpZp0Gqaj\nRKvZprtqT82sc0ll4jRx61WJ4uVd+vHZ8JNj9v8i5c8U8DeKYtv4GfchPFPmEA9I\n2JlbJ3IijAqeKDUV2XQLY3brJYWqnvdbIx2ooi72uJgm+uhYaGaoWdtguAv++R6T\nfOl6Sa+cHBFyQzSAXOetjSOiiu/UmZEDBBeXhAcyyLwlCq2ez2mqPlpewkX9ud+C\nDsUlRU8VFfrR6NHxM9xuvRkc5qLqogua7/hGfgCy7o+oBkyd9E0wleUMuwhtGlmt\nhn6ZaQdFAgMBAAECggEAHQgA3RXndT2pYivWotda2TH6oNRgluwSWh3uwCDR412y\nRgGVIi8TjIktPgdhRPHJKZaqqromsA4oKI3vM9I34muU/+ECr28HX1epQRN5099C\nJ9e+nGVDep+QmsJPTNpsBguQUc3wBEHh4eC6cdh42gQp8JsqG4VNfZv1wManXDIM\n98qX0hgA0Phz5+ztDRhacdHI3lRm4ui495pMdoxNnVJ9m8e4LsEvGlO1cyDj1+96\nhLx8tWBxsa3+P+EGD44nH7Up/yxpjLhmZeQ65l4gVnd2XRvCVWRl0E7rb1p/xjMN\nwK2hI9CuFSmTyeSv6UMSBd3WI+9VngClPwihebhlUQKBgQDWg34zmNO8ylb8/hei\nvDvMRKhv4S0Xdf4jM3j4U8vyc1ykd8sBSpcdx87aE4Y+VoHrOrFCg1B2QeS1wCeW\n/dOgM68WWGfRuVnfc590Up4M8pAMuxCh4EPAHCBhiNbCAL57iNDqZQeX7EW+m0Qr\npuydctMJixP/V3euK5LcNoTHNQKBgQDFHLPwySq3ETwRR/5YrtxkNEvFLeXsSesW\n1hbi3pd4ZXdOTcBBbDOLHYX6PvpQxJWRYzSrpVoYSp7EOGwrvsDBxXJ/ibESTsm0\nWFCHinnRRoNmepTieXNhmyDdX/AYi9HoOhfbmGf+c0t+tMwtn1o9t/PqgcfkW6PD\ntfUzbURx0QKBgDb4NyzNquSkDSqDilb/WWt85JTW5REwAVHP7N3ly0tz2Hek4vaP\nwK22+ADWI/5xeJVo0ueycrn7JLqWZQ7COKrC08ksGl6Z2rfyDxhl226B8fvxK8/v\ngi0GiB22TSIlwqoxYyfNf+akezLe4tc0zUmDlSTK6PLz3Q1aySV5KwlJAoGAITp9\nexHuiX32SlOApSKVNK88NrlOEU9EukzM/uHXVwyD2EdzKZQ7/C+17kG/oO4C6Md4\nkZcGYSHzMdDxK0603/WRH77ugs+VYTmiGbdWYdkpPZVck/E1ajbki20o5HptoGBq\ntTI0FckJ6QpBgU9jvxPLorTOJcjtCokaFNlOuIECgYBffb3cY0+Qxxaw9vPaUBoY\nN81Y83UwfJv4XZqksGyfb9AQS0yNPWWqDWPMJv1MOoZeQmIspcUGriXlJUNxnU8A\nW9zu/NhNhOxk5XVaPfI3aobUC99czMLQ9Ux1xpqXq6rteAoc7cSRutFYWfl+X4bA\nllZUcWraNh+jlGLx2J01tw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "rarakirana-analytics@rarakirana-204114.iam.gserviceaccount.com",
+  "client_id": "116043865260461997424",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rarakirana-analytics%40rarakirana-204114.iam.gserviceaccount.com"
+}

@@ -7,6 +7,8 @@ use Purifier;
 use App\Inbox;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Mail;
+
 class InboxController extends Controller
 {   
 
@@ -24,14 +26,14 @@ class InboxController extends Controller
                 $user_id = null;
             }
         }
-        Inbox::create([
+        $pesan = Inbox::create([
                 'user_id' => $user_id,
                 'subject' => $request->subject,
                 'email' => $request->email,
                 'description' => purifier::clean($request->description),
             ]);
         // mengirim email
-        //Mail::to($user->email)->send(new RarakiranaRegister($user));
+        Mail::to('rarakirana07@gmail.com')->send(new Inbox($pesan));
         return back()->with('success', 'Pesan anda berhasil dikirim.');
     }
     

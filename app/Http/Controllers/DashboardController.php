@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Follower;
+use App\User;
 use App\Share;
+use App\Inbox;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,18 +16,24 @@ class DashboardController extends Controller
     public function dashboard(){
     	return view('admin.dashboard');
     }
+
+    public function users(){
+        $users = User::all();
+        return view('admin.users.index',compact('users'));
+    }
     
-    public function inbox(){
-    	
+    public function statusUsers(Request $request, $id){
+        $user = User::whereId($id)->first();
+        $user->update([
+                'status' => $request->status,
+            ]);
+        return back();
     }
 
-    public function inboxStore(Request $request){
-    		return Validator::make($data, [
-            'user_id' => 'required|max:50',
-            'email' => 'required|max:100',
-            'description' => 'required|max:1000',
-            //'g-recaptcha-response' => 'required|captcha',
-        ]);
+    public function inbox(){
+        $inboxs = Inbox::all();
+        return view('admin.inboxs.index',compact('inboxs'));
     }
+    
     
 }

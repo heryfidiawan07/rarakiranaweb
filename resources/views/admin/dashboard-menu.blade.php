@@ -45,6 +45,12 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                                <a class="dashboard-menu" href="/dashboard/users"><b> MEMBER</b></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-dashboard">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                                 <a class="dashboard-menu" href="/dashboard/logo"><b> LOGO</b></a>
                             </td>
                         </tr>
@@ -57,7 +63,7 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href=""><b> NOTIFICATION</b></a>
+                                <a class="dashboard-menu" href="/dashboard/inbox"><b> INBOX</b></a>
                             </td>
                         </tr>
                         <tr>
