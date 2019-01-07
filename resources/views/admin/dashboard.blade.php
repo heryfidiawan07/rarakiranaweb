@@ -9,6 +9,7 @@
         <div class="col-md-3">
             <div class="well">
             	<h5 class="text-center">MEMBER</h5>
+                <p>Online : {{$online}}</p>
             </div>
         </div>
         <div class="col-md-3">

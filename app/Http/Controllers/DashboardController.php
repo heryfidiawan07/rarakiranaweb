@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+//Analytics
+use Analytics;
+use Spatie\Analytics\Period;
+
 use App\User;
 use App\Share;
 use App\Inbox;
@@ -14,7 +18,13 @@ class DashboardController extends Controller
     }
 
     public function dashboard(){
-    	return view('admin.dashboard');
+        $optParams = array('dimensions' => 'rt:medium');
+        // $online = Analytics::getAnalyticsService()->data_realtime->get('ga:176799134','rt:activeUsers',$optParams);
+        // $online = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'),'rt:activeUsers',$optParams);
+        $online = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')
+                  ->totalsForAllResults['rt:activeVisitors'];
+        // dd($online);
+    	return view('admin.dashboard',compact('online'));
     }
 
     public function users(){

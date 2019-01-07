@@ -18,7 +18,7 @@
                     @foreach($articles as $article)
                         <table class="table table-bordered">
                             <tr>
-                                <td rowspan="3"><img src="/articles/thumb/{{$article->img}}" width="100"></td>
+                                <td rowspan="3" class="frame-admin-art"><img src="/articles/thumb/{{$article->img}}"></td>
                                 <td colspan="6"><p class="@if($article->sticky == 1) sticky @endif">{{$article->title}} @if($article->sticky == 1)@endif - <small style="color: black;">This Post Sticky</small></p></td>
                             </tr>
                             <tr>

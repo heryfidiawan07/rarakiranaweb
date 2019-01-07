@@ -130,7 +130,9 @@ class ProductController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("products/img/". $imgName));
-                $thumb    = Image::make($path)->resize(300, 300);
+                $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
                 $thumb->save(public_path("products/thumb/". $imgName));
             $key++;
                 $gallery = new Gallery;
@@ -168,6 +170,35 @@ class ProductController extends Controller
         return view('admin.products.edit',compact('product','categories'));
     }
 
+    public function updateImg(Request $request, $id){
+        $product = Product::whereId($id)->first();
+        $time    = date("YmdHis");
+        $files   = $request->file('img');
+        if (isset($files)) {
+            $key   = 0;
+            $batas = $product->galleries->count();
+            while ($key < 5-$batas) {
+                $extends = $files[$key]->getClientOriginalExtension();
+                $imgName = $product->id.'-'.$key.'-'.$product->slug.'-'.$time.'.'.$extends;
+                $path    = $files[$key]->getRealPath();
+                $img     = Image::make($path)->resize(null, 630, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                $img->save(public_path("products/img/". $imgName));
+                $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                $thumb->save(public_path("products/thumb/". $imgName));
+            $key++;
+                $gallery = new Gallery;
+                $gallery->img        = $imgName;
+                $gallery->product_id = $product->id;
+                $gallery->save();
+            }
+        }
+        return back();
+    }
+    
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -186,34 +217,6 @@ class ProductController extends Controller
             }else{
                 $title = $request->title;
                 $slug  = str_slug($request->title).'-'.$time;
-            }
-            $files = $request->file('img');
-            if (isset($files)) {
-                for ($i=0; $i < count($product->galleries); $i++) { 
-                    $oldImg   = public_path("products/img/".$product->galleries[$i]->img);
-                    $oldThumb = public_path("products/thumb/".$product->galleries[$i]->img);
-                    if (file_exists($oldImg)) {
-                        File::delete($oldImg);
-                        File::delete($oldImg);
-                    }
-                }
-                $key   = 0;
-                while ($key < count($files)) {
-                    $extends = $files[$key]->getClientOriginalExtension();
-                    $imgName = $product->id.'-'.$key.'-'.$slug.'.'.$extends;
-                    $path    = $files[$key]->getRealPath();
-                    $img     = Image::make($path)->resize(null, 630, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                });
-                    $img->save(public_path("products/img/". $imgName));
-                    $thumb    = Image::make($path)->resize(300, 300);
-                    $thumb->save(public_path("products/thumb/". $imgName));
-                $key++;
-                    $gallery = new Gallery;
-                    $gallery->img        = $imgName;
-                    $gallery->product_id = $product->id;
-                    $gallery->save();
-                }
             }
             $product->update([
                     'user_id' => Auth::user()->id,

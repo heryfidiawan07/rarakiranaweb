@@ -32,8 +32,12 @@
                     <div class="col-md-6">
                         <select name="parent_id" class="form-control">
                             <option value="0">SELECT PARENT</option>
-                            <option value="10">PARENT FORUM</option>
-                            <option value="20">PARENT PRODUCT</option>
+                            @if($menus->where('setting',10)->count() == null)
+                                <option value="10">PARENT FORUM</option>
+                            @endif
+                            @if($menus->where('setting',20)->count() == null)
+                                <option value="20">PARENT PRODUCT</option>
+                            @endif
                             @if($menus->count())
                                 @foreach($menus->where('parent_id',0)->where('setting','<',6) as $menu)
                                     <option value="{{$menu->id}}">{{$menu->menu}}</option>
@@ -73,7 +77,8 @@
                 <table class="table table-hover">
                 <tr>
                     <th>MENU</th>
-                    <th>EDIT</th>
+                    <th>EDIT NAME</th>
+                    <th>EDIT PARENT</th>
                     <th>DELETE</th>
                     <th>STATUS</th>
                     <th>POSTED BY</th>
@@ -91,6 +96,7 @@
                                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                                 @endif
                             </td>
+                            <td>@include('admin.menu.edit-name')</td>
                             <td>@include('admin.menu.edit')</td>
                             <td>@include('admin.menu.delete')</td>
                             <td>@include('admin.menu.status')</td>
@@ -110,6 +116,7 @@
                                 - <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                             @endif
                         </td>
+                        <td>@include('admin.menu.edit-child-name')</td>
                         <td>@include('admin.menu.editChild')</td>
                         <td>@include('admin.menu.deleteChild')</td>
                         <td>@include('admin.menu.statusChild')</td>

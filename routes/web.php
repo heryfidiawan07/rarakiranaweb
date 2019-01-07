@@ -24,7 +24,8 @@ Route::group(['middleware' => 'admin'], function () {
 		//Menu
 		Route::get('/dashboard/menus', 'MenuController@index');
 		Route::post('/menu/store', 'MenuController@store');
-		Route::post('/menu/update/{id}', 'MenuController@update');
+		Route::post('/menu/update/setting/{id}', 'MenuController@updateSetting');
+		Route::post('/menu/update/name/{id}', 'MenuController@updateName');
 		Route::post('/menu/status/{id}', 'MenuController@status');
 		Route::get('/menu/delete/{id}', 'MenuController@destroy');
 		//Product Menu
@@ -47,6 +48,7 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/product/store', 'ProductController@store');
 		Route::get('/product/{id}/edit', 'ProductController@edit');
 		Route::post('/product/{id}/update', 'ProductController@update');
+		Route::post('/product/img/{id}/update', 'ProductController@updateImg');
 		Route::get('/product/{id}/destroy', 'ProductController@destroy');
 		Route::post('/product/status/{id}', 'ProductController@status');
 		Route::post('/product/acomment/{id}', 'ProductController@acomment');

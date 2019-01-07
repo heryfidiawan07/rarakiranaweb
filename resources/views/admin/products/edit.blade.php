@@ -6,7 +6,33 @@
         <div class="col-md-12">
 
             <h4 class="text-center"><b>EDIT PRODUK</b></h4>
-            <form method="POST" action="/product/{{$product->id}}/update" enctype="multipart/form-data">
+            
+            <form method="POST" action="/product/img/{{$product->id}}/update" enctype="multipart/form-data">   
+                {{csrf_field()}}
+                <div class="form-group"> 
+                    @foreach($product->galleries as $gallery)
+                    <div style="text-align: center; display: inline-block;">
+                        <img src="/products/thumb/{{$gallery->img}}" style="height: 70px;">
+                        <br>
+                        <a href="/product/gallery/{{$gallery->id}}/destroy" class="text-center"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
+                    <label for="img" class="control-label">Gambar <i><u>max 5 image</u></i></label>
+                    <input type="file" name="img[]" class="form-control" multiple="multiple">
+                    @if ($errors->has('img'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('img') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Update Image">
+                </div>
+            </form>
+            <hr>
+            <form method="POST" action="/product/{{$product->id}}/update">
                 {{csrf_field()}}
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                     <label for="title" class="control-label">Judul</label>
@@ -53,29 +79,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
-                    <label for="img" class="control-label">Gambar</label><br>
-                    @foreach($product->galleries as $gallery)
-                    <div class="pull-left">
-                        <img src="/products/thumb/{{$gallery->img}}" width="100">
-                        <br>
-                        <a href="/product/gallery/{{$gallery->id}}/destroy" class="text-center"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                    </div>
-                    @endforeach
-                    <br>
-                    <hr>
-                    <a data-toggle="collapse" href="#changeArtImg" role="button" aria-expanded="false" aria-controls="changeArtImg">Ganti</a>
-                    <div class="collapse" id="changeArtImg">
-                      <div class="card card-body">
-                        <input type="file" name="img" class="form-control">
-                      </div>
-                    </div>
-                    @if ($errors->has('img'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('img') }}</strong>
-                        </span>
-                    @endif
-                </div>
+                
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label">Deskripsi</label>
                     <textarea name="description" class="form-control" rows="20">{{$product->description}}</textarea>

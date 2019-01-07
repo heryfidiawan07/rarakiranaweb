@@ -20,7 +20,11 @@
                             <td>
                                 Status :
                                 @if($user->status==1)
-                                    <a type="button" data-toggle="modal" data-target="#status_{{$user->id}}" href="#" class="btn btn-success btn-xs"><span class="caret"></span> Active</a>
+                                    @if($user->admin==1)
+                                        <a class="btn btn-default btn-xs" disabled><span class="caret"></span> Admin</a>
+                                    @else
+                                        <a type="button" data-toggle="modal" data-target="#status_{{$user->id}}" href="#" class="btn btn-success btn-xs"><span class="caret"></span> Active</a>
+                                    @endif
                                 @elseif($user->status==2)
                                     <a type="button" data-toggle="modal" data-target="#status_{{$user->id}}" href="#" class="btn btn-danger btn-xs"><span class="caret"></span> Banned</a>
                                 @else

@@ -10,14 +10,12 @@
         @endif
         </p>
         <p>
-        @if(Auth::check())
-            @if(Auth::guest())
-                <a href="/login">LOGIN</a> |
-                <a href="/Register">REGISTER</a> |
-            @endif
+        @if(Auth::guest())
+            <a href="/login">LOGIN</a> |
+            <a href="/register">REGISTER</a> |
         @endif
         @foreach($navMenus->where('parent_id',0) as $menu)
-        	<a href="{{$menu->slug}}">{{$menu->menu}}</a> |
+        	<a href="/{{$menu->slug}}">{{$menu->menu}}</a> |
         @endforeach
 				</p>
 		</div>

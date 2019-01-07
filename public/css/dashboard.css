@@ -17,3 +17,12 @@
 	float: left;
 	margin-right: 10px;
 }
+.frame-admin-art {
+	width: 150px;
+	height: 150px;
+}
+.frame-admin-art img {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+}

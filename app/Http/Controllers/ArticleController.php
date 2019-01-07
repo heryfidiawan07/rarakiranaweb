@@ -60,7 +60,9 @@ class ArticleController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("articles/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 200);
+                $thumb    = Image::make($path)->resize(null, 250, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
                 $thumb->save(public_path("articles/thumb/". $imgName));
         return redirect('/dashboard/articles');
     }
@@ -128,7 +130,9 @@ class ArticleController extends Controller
                                 $constraint->aspectRatio();
                             });
                 $img->save(public_path("articles/img/". $imgName));
-                $thumb    = Image::make($path)->resize(200, 200);
+                $thumb    = Image::make($path)->resize(null, 250, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
                 $thumb->save(public_path("articles/thumb/". $imgName));
             }
             $article->update([

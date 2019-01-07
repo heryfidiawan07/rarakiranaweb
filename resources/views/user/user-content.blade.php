@@ -1,5 +1,5 @@
 @if($threads)
-    <h5 class="text-center"><b>THREADS SAYA</b></h5>
+    <h5 class="text-center"><b>THREADS</b></h5>
     @foreach($threads as $thread)
         @include('forum.content-index')
     @endforeach

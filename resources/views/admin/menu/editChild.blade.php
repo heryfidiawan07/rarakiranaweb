@@ -5,10 +5,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <form method="POST" action="/menu/update/{{$child->id}}">
+        <h4 class="text-center">EDIT PARENT {{$child->menu}}</h4>
+        <form method="POST" action="/menu/update/setting/{{$child->id}}">
         {{ csrf_field() }}
-            <label>Menu</label>
-            <input type="text" name="menuEdit" value="{{$child->menu}}" class="form-control">
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
                 <option value="{{$child->parent_id}}">{{$child->childs->menu}}</option>

@@ -48,22 +48,29 @@ class MenuController extends Controller
         return back();
     }
 
-    public function update(Request $request, $id)
-    {   
+    public function updateName(Request $request, $id){
         $this->validate($request, [
                 'menuEdit' => 'required',
             ]);
-        $mForum = Menu::where('setting',10)->first();
-        $mProd  = Menu::where('setting',20)->first();
-        if ($mProd && $request->parent_edit == 10) {
-            return back()->with('warningEdit', 'Parent forum already exists.');
-        }elseif ($mProd && $request->parent_edit == 20) {
-            return back()->with('warningEdit', 'Parent product already exists.');
+        $menu = Menu::whereId($id)->first();
+        $cekMenu = Menu::where('slug',str_slug($request->menuEdit))->first();
+        if ($cekMenu === null) {
+            $menu->update([
+                'menu' => strtoupper($request->menuEdit),
+                'slug' => str_slug($request->menuEdit),
+            ]);
+        }else{
+            return back()->with('warningEdit', 'Nama menu sudah ada, silahkan ganti nama yang lain !');
         }
+        return back();
+    }
+    
+    public function updateSetting(Request $request, $id)
+    {   
         if($request->parent_edit == 10 || $request->parent_edit == 20){
             $setting = $request->parent_edit;
             $parent_edit = 0;
-        }elseif($request->contact){
+        }elseif($request->contact == 5){
             $setting = 5;
             $parent_edit = $request->parent_edit;
         }else{
@@ -72,8 +79,6 @@ class MenuController extends Controller
         }
         $menu = Menu::whereId($id)->first();
         $menu->update([
-            'menu' => strtoupper($request->menuEdit),
-            'slug' => str_slug($request->menuEdit),
             'parent_id' => $parent_edit,
             'setting' => $setting,
         ]);
