@@ -45,10 +45,10 @@
 
                     <div class="col-md-6">
                         <select name="setting" class="form-control" required autofocus>
-                            <option value="1">Home/Main Logo</option>
-                            <option value="2">Produk Parent Logo</option>
-                            <option value="3">Forum Parent Logo</option>
-                            <option value="4">Article Parent Logo</option>
+                            <option value="main">Home/Main Title & Logo</option>
+                            <option value="post">Post Title & Logo</option>
+                            <option value="thread">Forum Title & Logo</option>
+                            <option value="product">Produk Title & Logo</option>
                         </select>
 
                         @if ($errors->has('setting'))
@@ -98,12 +98,14 @@
                     <tr>
                         <td class="td-logo-tag">
                             <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-                            @if($logo->setting == 1)
-                                Home Logo
-                            @elseif($logo->setting == 2)
-                                Produk Logo
-                            @elseif($logo->setting == 3)
-                                Forum Logo
+                            @if($logo->setting = 'main')
+                                Home/Main Title & Logo
+                            @elseif($logo->setting = 'post')
+                                Post Title & Logo
+                            @elseif($logo->setting = 'thread')
+                                Forum Title & Logo
+                            @elseif($logo->setting = 'product')
+                                Produk Title & Logo
                             @endif
                         </td>
                         <td>

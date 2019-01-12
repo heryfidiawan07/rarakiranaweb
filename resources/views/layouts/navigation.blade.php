@@ -8,13 +8,13 @@
             {{csrf_field()}}
             <div class="form-group">
                 <div class="input-group">
-                      <input type="text" class="form-control" name="val" required>
+                      <input type="text" class="form-control" name="val" placeholder="search" required>
                       <div class="input-group-addon"><button class="glyphicon glyphicon-search" id="btnSearch"></button></div>
                 </div>
             </div>
         </form>
         <p class="pull-right">
-            <i>Follow us :</i>
+            <i>Follow : </i>
             @if($mainFollows)
                 @foreach($mainFollows as $follow)
                     <i class="{{$follow->class}} img-circle"></i>
@@ -46,10 +46,16 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 <li><a href="/"><b>HOME</b></a></li>
-                @if($navMenus->count())
-                    @foreach($navMenus->where('parent_id',0) as $menu)
-                        <li><a href="/{{$menu->slug}}" class="text-capitalize"><b>{{$menu->menu}}</b></a></li>
+                @if($mainMenus->count())
+                    @foreach($mainMenus->where('parent_id',0) as $menu)
+                        <li><a href="/{{$menu->slug}}" class="text-capitalize"><b>{{$menu->name}}</b></a></li>
                     @endforeach
+                @endif
+                @if($mainTag)
+                    <li><a href="/page/{{$mainTag->slug}}" class="text-capitalize"><b>{{$mainTag->name}}</b></a></li>
+                @endif
+                @if($mainStore)
+                    <li><a href="/all/{{$mainStore->slug}}" class="text-capitalize"><b>{{$mainStore->name}}</b></a></li>
                 @endif
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}"><b>LOGIN</b></a></li>

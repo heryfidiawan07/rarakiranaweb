@@ -1,14 +1,14 @@
 <div class="table-responsive">
     <table class="table table-hover">
         <th class="warning">CATEGORY</th>
-        @foreach($categories->where('status',1) as $category)
+        @foreach($fronts->where('parent_id',0)->where('status',1) as $front)
             <tr>
-                <td><a class="product-tags" href="/products/category/{{$category->slug}}">{{$category->menu}}</a></td>
+                <td><a class="product-tags" href="/products/{{$front->slug}}">{{$front->name}}</a></td>
                 <tr>
             <tr>
-            @foreach($category->parent->where('status',1) as $child)
+            @foreach($front->parent->where('status',1) as $child)
             <tr>
-                <td><a class="product-sub-tags" href="/products/category/{{$child->slug}}">{{$child->menu}}</a></td>
+                <td><a class="product-sub-tags" href="/products/{{$child->slug}}">{{$child->name}}</a></td>
             @endforeach
         @endforeach
     </table>

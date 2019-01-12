@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Delete menu {{$child->menu}} ?</b><hr>
+            <b>Delete Menu {{$child->name}} ?</b><hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
             <a href="/menu/delete/{{$child->id}}" class="btn btn-danger btn-sm">Delete !</a>
         </div>

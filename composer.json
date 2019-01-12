@@ -12,7 +12,8 @@
         "laravel/socialite": "^2.0",
         "mews/purifier": "2.*",
         "spatie/laravel-analytics": "^2.3",
-        "unisharp/laravel-filemanager": "~1.8"
+        "unisharp/laravel-filemanager": "~1.8",
+        "agungjk/rajaongkir" : "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -6,7 +6,7 @@ use Auth;
 use File;
 use Image;
 use App\Promo;
-use App\Picture;
+use App\Gallery;
 use Illuminate\Http\Request;
 
 class PromoController extends Controller
@@ -44,7 +44,7 @@ class PromoController extends Controller
                 $img     = Image::make($path)->resize(900, 300);
                 $img->save(public_path("promo/". $imgName));
             $key++;
-                $picture = new Picture;
+                $picture = new Gallery;
                 $picture->img      = $imgName;
                 $picture->promo_id = $promo->id;
                 $picture->save();
@@ -72,7 +72,7 @@ class PromoController extends Controller
             $img     = Image::make($path)->resize(900, 300);
             $img->save(public_path("promo/". $imgName));
         $key++;
-            $picture = new Picture;
+            $picture = new Gallery;
             $picture->img      = $imgName;
             $picture->promo_id = $promo->id;
             $picture->save();
@@ -81,7 +81,7 @@ class PromoController extends Controller
     }
 
     public function deletePicture($id){
-        $pict = Picture::find($id);
+        $pict = Gallery::find($id);
         $img   = public_path("promo/".$pict->img);
         if (file_exists($img)) {
             File::delete($img);

@@ -10,11 +10,11 @@
             <form method="POST" action="/product/img/{{$product->id}}/update" enctype="multipart/form-data">   
                 {{csrf_field()}}
                 <div class="form-group"> 
-                    @foreach($product->galleries as $gallery)
+                    @foreach($product->pictures as $pict)
                     <div style="text-align: center; display: inline-block;">
-                        <img src="/products/thumb/{{$gallery->img}}" style="height: 70px;">
+                        <img src="/products/thumb/{{$pict->img}}" style="height: 70px;">
                         <br>
-                        <a href="/product/gallery/{{$gallery->id}}/destroy" class="text-center"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                        <a href="/product/pictures/{{$pict->id}}/destroy" class="text-center"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                     </div>
                     @endforeach
                 </div>
@@ -43,43 +43,75 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('menu_id') ? ' has-error' : '' }}">
-                    <label for="menu_id" class="control-label">Menu</label>
-                    <select name="menu_id" class="form-control" required>
-                        @foreach($categories as $category)
-                            @if($category->setting == 33)
-                                @continue
-                            @elseif($category->parent()->count())
-                                @continue
-                            @endif
-                            <option value="{{$category->id}}">{{$category->menu}}</option>
+                <div class="form-group{{ $errors->has('storefront_id') ? ' has-error' : '' }}">
+                    <label for="storefront_id" class="control-label">Etalase</label>
+                    <select name="storefront_id" class="form-control" required>
+                        <option value="{{$product->storefront->id}}">{{$product->storefront->name}}</option>
+                        @foreach($fronts as $front)
+                            <option value="{{$front->id}}">{{$front->name}}</option>
                         @endforeach
                     </select>
-                    @if ($errors->has('menu_id'))
+                    @if ($errors->has('storefront_id'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('menu_id') }}</strong>
+                            <strong>{{ $errors->first('storefront_id') }}</strong>
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                    <label for="price" class="control-label">Harga</label>
-                    <input type="text" name="price" class="form-control" value="{{$product->price}}" required autofocus>
-                    @if ($errors->has('price'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('price') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('discount') ? ' has-error' : '' }}">
-                    <label for="discount" class="control-label">Diskon</label>
-                    <input type="text" name="discount" class="form-control" value="{{$product->discount}}" autofocus>
-                    @if ($errors->has('discount'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('discount') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                
+                <table><tr><td>
+                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                        <label for="price" class="control-label">Harga</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">Rp</div>
+                            <input type="integer" name="price" class="form-control" value="{{$product->price}}" required autofocus>
+                        </div>
+                        @if ($errors->has('price'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('price') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td><td>
+                    <div class="form-group{{ $errors->has('discount') ? ' has-error' : '' }}">
+                        <label for="discount" class="control-label">Diskon</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">Rp</div>
+                            <input type="integer" name="discount" class="form-control" value="{{$product->discount}}" autofocus>
+                        </div>
+                        @if ($errors->has('discount'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('discount') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div class="form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
+                        <label for="weight" class="control-label">Berat</label>
+                        <div class="input-group">
+                            <input type="integer" name="weight" class="form-control" value="{{$product->weight}}" required autofocus>
+                            <div class="input-group-addon">Kg</div>
+                        </div>
+                        @if ($errors->has('weight'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('weight') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group{{ $errors->has('dimensi') ? ' has-error' : '' }}">
+                        <label for="dimensi" class="control-label">Dimensi</label>
+                        <div class="input-group">
+                            <input type="integer" name="dimensi" class="form-control" value="{{$product->dimensi}}" required autofocus>
+                            <div class="input-group-addon">Meter</div>
+                        </div>
+                        @if ($errors->has('dimensi'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('dimensi') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td></tr></table>
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label">Deskripsi</label>
                     <textarea name="description" class="form-control" rows="20">{{$product->description}}</textarea>
@@ -92,6 +124,9 @@
                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                     <div class="col-md-6">
                         <label for="status" class="control-label">Status</label>
+                        @if($product->status == 0)
+                            <option value="0">Tidak Aktif</option>
+                        @endif
                         <select class="form-control" name="status">
                             <option value="1">Aktif</option>
                             <option value="0">Tidak Aktif</option>
@@ -106,6 +141,9 @@
                 <div class="form-group{{ $errors->has('acomment') ? ' has-error' : '' }}">
                     <div class="col-md-6">
                         <label for="acomment" class="control-label">Izinkan komentar</label>
+                        @if($product->allowed_comment == 0)
+                            <option value="0">Tidak di Izinkan</option>
+                        @endif
                         <select class="form-control" name="acomment">
                             <option value="1">di Izinkan</option>
                             <option value="0">Tidak di Izinkan</option>

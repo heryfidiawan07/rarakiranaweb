@@ -1,7 +1,7 @@
 <div id="carousel-{{$product->id}}-generic carousel-thumb-generic" class="carousel slide" data-ride="carousel">
   <!-- Wrapper for slides -->
   <div class="carousel-inner inner-thumb">
-    @foreach($product->galleries as $pict)
+    @foreach($product->pictures as $pict)
       <div class="item {{ $loop->first ? ' active' : '' }}" >
         <a href="/show/product/{{$product->slug}}">
         	<div class="frame-product-thumb">

@@ -12,11 +12,11 @@
             <form class="form-horizontal" role="form" method="POST" action="/menu/store">
                 {{ csrf_field() }}
 
-                <div class="form-group{{ $errors->has('menu') ? ' has-error' : '' }}">
-                    <label for="menu" class="col-md-4 control-label">Name</label>
+                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <label for="name" class="col-md-4 control-label">Name</label>
 
                     <div class="col-md-6">
-                        <input id="menu" type="text" class="form-control" name="menu" value="{{ old('menu') }}" required autofocus>
+                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                         @if ($errors->has('menu'))
                             <span class="help-block">
@@ -32,15 +32,10 @@
                     <div class="col-md-6">
                         <select name="parent_id" class="form-control">
                             <option value="0">SELECT PARENT</option>
-                            @if($menus->where('setting',10)->count() == null)
-                                <option value="10">PARENT FORUM</option>
-                            @endif
-                            @if($menus->where('setting',20)->count() == null)
-                                <option value="20">PARENT PRODUCT</option>
-                            @endif
                             @if($menus->count())
-                                @foreach($menus->where('parent_id',0)->where('setting','<',6) as $menu)
-                                    <option value="{{$menu->id}}">{{$menu->menu}}</option>
+                                @foreach($menus->where('parent_id',0)->where('setting',0) as $menu)
+
+                                    <option value="{{$menu->id}}">{{$menu->name}}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -55,6 +50,16 @@
                                 {{session('warning')}}
                             </div>
                         @endif
+                    </div>
+                </div>
+                
+                <div class="form-group{{ $errors->has('contact') ? ' has-error' : '' }}">
+                    <label for="contact" class="col-md-4 control-label">Contact</label>
+                    <div class="col-md-6">
+                        <select name="contact" class="form-control">
+                            <option value="0">SELECT</option>
+                            <option value="5">SET TO CONTACT</option>
+                        </select>
                     </div>
                 </div>
 
@@ -83,18 +88,14 @@
                     <th>STATUS</th>
                     <th>POSTED BY</th>
                 </tr>
-                @foreach($menus as $menu)
-                    @if($menu->parent_id < 1)
+                @foreach($menus->where('parent_id',0) as $menu)
                         <tr>
                             <td>
-                                {{$menu->menu}} - @if($menu->setting != 10 && $menu->setting != 20)<small>{{$menu->articles->count()}} post</small>@endif
+                                {{$menu->name}}
                                 @if($menu->setting == 5)
-                                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                @elseif($menu->setting == 10)
-                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                @elseif($menu->setting == 20)
-                                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                                    - <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                 @endif
+                                - <small><i>{{$menu->posts->count()}} post</i></small>
                             </td>
                             <td>@include('admin.menu.edit-name')</td>
                             <td>@include('admin.menu.edit')</td>
@@ -105,16 +106,15 @@
                                 <small><i>{{$menu->user->name}}</i></small>
                             </td>
                             <tr>
-                    @else
-                        @continue
-                    @endif
+                    
                     <tr>
-                    @foreach($menu->parent->where('setting','<',9) as $child)
+                    @foreach($menu->parent as $child)
                     <tr>
-                        <td> -> {{$child->menu}} - <small>{{$child->articles->count()}} post</small>
+                        <td> -> {{$child->name}}
                             @if($child->setting == 5)
-                                - <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                             @endif
+                             - <small><i>{{$child->posts->count()}} post</i></small>
                         </td>
                         <td>@include('admin.menu.edit-child-name')</td>
                         <td>@include('admin.menu.editChild')</td>

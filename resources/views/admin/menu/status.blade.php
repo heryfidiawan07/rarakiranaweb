@@ -1,4 +1,8 @@
-<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#status_{{$menu->id}}"><span class="caret"></span></button>
+@if($menu->parent()->count() < 1)
+  <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#status_{{$menu->id}}" @if($menu->setting==1) disabled @endif><span class="caret"></span></button>
+@else
+  <button class="btn btn-default btn-xs" disabled><span class="caret"></span></button>
+@endif
 @if($menu->status == 1)
   <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
 @else
@@ -10,7 +14,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Change status menu {{$menu->menu}} ?</b><hr>
+            <b>Change Status Menu {{$menu->name}} ?</b><hr>
             <form method="POST" action="/menu/status/{{$menu->id}}">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

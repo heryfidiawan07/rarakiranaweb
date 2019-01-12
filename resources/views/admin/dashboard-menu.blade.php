@@ -27,7 +27,7 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href="/dashboard/articles"><b> ARTICLE</b></a>
+                                <a class="dashboard-menu" href="/dashboard/posts"><b> POSTS</b></a>
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +39,7 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href="/dashboard/forums"><b> FORUM</b></a>
+                                <a class="dashboard-menu" href="/dashboard/forum"><b> FORUM</b></a>
                             </td>
                         </tr>
                         <tr>
@@ -51,7 +51,7 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href="/dashboard/logo"><b> LOGO</b></a>
+                                <a class="dashboard-menu" href="/dashboard/logo"><b> LOGO / TITLE</b></a>
                             </td>
                         </tr>
                         <tr>
@@ -69,12 +69,6 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href="/dashboard/emoticon"><b> EMOTICON</b></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td-dashboard">
-                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                                 <a class="dashboard-menu" href="/dashboard/follow"><b> FOLLOW</b></a>
                             </td>
                         </tr>
@@ -82,12 +76,6 @@
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                                 <a class="dashboard-menu" href="/dashboard/share"><b> SHARE</b></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td-dashboard">
-                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href=""><b> STATISTICS</b></a>
                             </td>
                         </tr>
                       </table>

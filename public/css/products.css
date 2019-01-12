@@ -33,8 +33,9 @@
 .discount {
 	font-weight: bold;
 }
-.buy {
-	
+.buy-show a {
+	padding-left: 100px;
+	padding-right: 100px;		
 }
 .product-category {
 	border: 1px solid white;
@@ -44,6 +45,10 @@
 .product-category:hover {
 	border: 1px solid grey;
 	padding: 5px 5px;
+	border-color: green;
+}
+.show-product-category {
+
 }
 /*End Products Index Content*/
 
@@ -63,6 +68,10 @@
 }
 .deskripsi iframe {
 	max-width: 100%;
+}
+.discount span small {
+	background-color: yellow; padding: 10px 10px; border-radius: 25px;
+	color: black; font-weight: bold;
 }
 /*End Product SHow*/
 

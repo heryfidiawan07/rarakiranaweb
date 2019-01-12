@@ -10,7 +10,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Change status menu {{$child->menu}} ?</b><hr>
+            <b>Change Status Menu {{$child->name}} ?</b><hr>
             <form method="POST" action="/menu/status/{{$child->id}}">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

@@ -6,160 +6,213 @@
 <div class="container">
     <div class="row">
         
-        <div class="col-md-4">
-            @include('admin.dashboard-menu')
-            <h4 class="text-center">ADD PRODUCT CATEGORY</h4><hr>
-            <form class="form-horizontal" role="form" method="POST" action="/product/category/store">
-                {{ csrf_field() }}
-
-                <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                    <label for="category" class="col-md-4 control-label">Name</label>
-
-                    <div class="col-md-6">
-                        <input id="category" type="text" class="form-control" name="category" value="{{ old('category') }}" required autofocus>
-
-                        @if ($errors->has('category'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('category') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('parent_id') ? ' has-error' : '' }}">
-                    <label for="parent_id" class="col-md-4 control-label">Parent</label>
-
-                    <div class="col-md-6">
-                        <select name="parent_id" class="form-control">
-                            <option value="0">Select parent</option>
-                            @if($categories->count())
-                                @foreach($categories as $parent)
-                                    <option value="{{$parent->id}}">{{$parent->menu}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-
-                        @if ($errors->has('parent_id'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('parent_id') }}</strong>
-                            </span>
-                        @endif
-                        @if(session('warning'))
-                            <div class="alert alert-warning">
-                                {{session('warning')}}
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-8 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">SAVE</button>
-                    </div>
-                </div>
-            </form>
-        </div>   
-            
-        <div class="col-md-8">
-            <h4 class="text-center"><b>CATEGORY LIST</b></h4>
-            @if(session('warningEdit'))
-                <div class="alert alert-warning">
-                    {{session('warningEdit')}}
-                </div>
+        @include('admin.dashboard-menu')
+        <div class="col-md-12">
+            <table>
+            <tr><td>
+            @if($mainStore)
+                <form class="form-inline" method="POST" action="/product/update/{{$mainStore->id}}">
+                    {{csrf_field()}}
+                    <input type="text" name="frontUpdate" class="form-control input-sm" value="{{$mainStore->name}}" required>
+                    <input type="submit" value="save" class="btn btn-success btn-sm">
+                </form>
             @endif
-            <div class="table-responsive">
-                <table class="table table-hovered">
-                <tr>
-                    <th>CATEGORY</th>
-                    <th>EDIT</th>
-                    <th>DELETE</th>
-                    <th>STATUS</th>
-                    <th>POSTED BY</th>
-                </tr>
-                @foreach($categories as $category)
-                    <tr>
-                        <td>{{$category->menu}} - <small>{{$category->products->count()}} products</small></td>
-                        <td>@include('admin.products.category.edit')</td>
-                        <td>@include('admin.products.category.delete')</td>
-                        <td>@include('admin.products.category.status')</td>
-                        <td>
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            <small><i>{{$category->user->name}}</i></small>
-                        </td>
-                        <tr>
-                    <tr>
-                    @foreach($category->parent as $child)
-                    <tr>
-                        <td> -> {{$child->menu}} - <small>{{$child->products->count()}} products</small></td>
-                        <td>@include('admin.products.category.editChild')</td>
-                        <td>@include('admin.products.category.deleteChild')</td>
-                        <td>@include('admin.products.category.statusChild')</td>
-                        <td>
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            <small><i>{{$child->user->name}}</i></small>
-                        </td>
-                    @endforeach
-                @endforeach
-                </table>
-            </div>
+            </td>
+            <td>
+            @if($frontTag)
+                <form class="form-inline" method="POST" action="/product/update/status/{{$frontTag->id}}">
+                    {{csrf_field()}}
+                    <select name="statusFront" class="form-control input-sm">
+                        <option value="1">Active</option>
+                        <option value="0">No Active</option>
+                    </select>
+                    <input type="submit" value="save" class="btn btn-danger btn-sm">
+                </form>
+            @endif
+            </td></tr>
+            </table>
         </div>
-        
-        <div class="col-md-12"><hr>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="/product/create" class="btn btn-primary btn-sm pull-left">CREATE PRODUCT</a>
-                    <h4 class="text-center"><b>PRODUK LIST</b></h4>
+        <div class="col-md-4">
+            @if($fronts->where('setting',10)->where('status',1)->count())
+                <h4 class="text-center">ADD PRODUCT ETALASE</h4><hr>
+                <form class="form-horizontal" role="form" method="POST" action="/etalase/store">
+                    {{ csrf_field() }}
+
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label for="name" class="col-md-4 control-label">Name</label>
+
+                        <div class="col-md-6">
+                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('parent_id') ? ' has-error' : '' }}">
+                        <label for="parent_id" class="col-md-4 control-label">Parent</label>
+
+                        <div class="col-md-6">
+                            <select name="parent_id" class="form-control">
+                                <option value="0">Select Parent</option>
+                                @if($fronts->count())
+                                    @foreach($fronts->where('setting',0)->where('parent_id',0) as $front)
+                                        <option value="{{$front->id}}">{{$front->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+
+                            @if ($errors->has('parent_id'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('parent_id') }}</strong>
+                                </span>
+                            @endif
+                            @if(session('warning'))
+                                <div class="alert alert-warning">
+                                    {{session('warning')}}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </div>
+                </form>
+            </div>   
+                
+            <div class="col-md-8">
+                <h4 class="text-center"><b>ETALASE</b></h4>
+                @if(session('warningEdit'))
+                    <div class="alert alert-warning">
+                        {{session('warningEdit')}}
+                    </div>
+                @endif
+                <div class="table-responsive">
+                    <table class="table table-hovered">
+                    <tr>
+                        <th>ETALASE</th>
+                        <th>EDIT NAME</th>
+                        <th>EDIT PARENT</th>
+                        <th>DELETE</th>
+                        <th>STATUS</th>
+                        <th>POSTED BY</th>
+                    </tr>
+                    @foreach($fronts->where('setting','!=',10)->where('parent_id',0) as $front)
+                        <tr>
+                            <td>{{$front->name}} - <small>{{$front->products->count()}} products</small></td>
+                            <td>@include('admin.products.front.edit-name')</td>
+                            <td>@include('admin.products.front.edit')</td>
+                            <td>@include('admin.products.front.delete')</td>
+                            <td>@include('admin.products.front.status')</td>
+                            <td>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <small><i>{{$front->user->name}}</i></small>
+                            </td>
+                            <tr>
+                        <tr>
+                        @foreach($front->parent as $child)
+                        <tr>
+                            <td> -> {{$child->name}} - <small>{{$child->products->count()}} products</small></td>
+                            <td>@include('admin.products.front.edit-child-name')</td>
+                            <td>@include('admin.products.front.editChild')</td>
+                            <td>@include('admin.products.front.deleteChild')</td>
+                            <td>@include('admin.products.front.statusChild')</td>
+                            <td>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <small><i>{{$child->user->name}}</i></small>
+                            </td>
+                        @endforeach
+                    @endforeach
+                    </table>
                 </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            @foreach($products as $product)
-                            <tr>
-                                <td rowspan="3">@include('products.thumb')</td>
-                                <td colspan="7"><p class="@if($product->sticky == 1) sticky @endif">{{$product->title}} @if($product->sticky == 1)@endif - <small style="color: black;">This Post Sticky</small></p></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs">Edit</a></td>
-                                <td>@include('admin.products.delete')</td>
-                                <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif>Show</a></td>
-                                <td>@include('admin.products.status')</td>
-                                <td><span class="glyphicon glyphicon-comment"> {{$product->prodcomments->count()}}</span></td>
-                                <td>@include('admin.products.acomment')</td>
-                                <td>
-                                    <form class="form-inline" method="POST" action="/product/sticky/{{$product->id}}">
-                                        {{csrf_field()}}
-                                        <select class="form-control input-sm" name="sticky" required>
-                                            @if($product->sticky == 1)
-                                                <option value="{{$product->sticky}}">Sticky Post</option>
-                                            @endif
-                                            <option value="0">Default</option>
-                                            <option value="1">Set to sticky</option>
-                                        </select>
-                                        <input type="submit" class="btn btn-warning btn-sm" value="set">
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="/products/category/{{$product->menu->slug}}" class="btn btn-default btn-xs">
-                                    <span class="glyphicon glyphicon-tag"></span>{{$product->menu->menu}}</a>
-                                </td>
-                                <td colspan="3"><span class="glyphicon glyphicon-user"></span> <small><i>{{$product->user->name}}</i></small></td>
-                                <td colspan="2"><small><i>
-                                    <span class="glyphicon glyphicon-time"></span>
-                                    Create: {{ date('d F, Y', strtotime($product->created_at))}} - {{date('g:ia', strtotime($product->created_at))}}
-                                </i></small></td>
-                                <td colspan="2"><small><i>
-                                    <span class="glyphicon glyphicon-time"></span>
-                                    Updated: {{ date('d F, Y', strtotime($product->udated_at))}} - {{date('g:ia', strtotime($product->updated_at))}}
-                                </i></small></td>
-                            </tr>
-                            @endforeach
-                        </table>
+            </div>
+            
+            <div class="col-md-12"><hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/product/create" class="btn btn-primary btn-sm pull-left">CREATE PRODUCT</a>
+                        <h4 class="text-center"><b>PRODUCT LIST</b></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                @foreach($products as $product)
+                                <tr>
+                                    <td rowspan="3" class="frame-admin-prod">@include('products.thumb')</td>
+                                    <td colspan="8"><p class="@if($product->sticky == 1) sticky @endif">{{$product->title}} @if($product->sticky == 1) - <small style="color: black;">This Product Sticky</small>@endif</p></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs">Edit</a></td>
+                                    <td>@include('admin.products.delete')</td>
+                                    <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif>Show</a></td>
+                                    <td>@include('admin.products.status')</td>
+                                    <td>@include('admin.products.acomment')</td>
+                                    <td>
+                                        <form class="form-inline" method="POST" action="/product/sticky/{{$product->id}}">
+                                            {{csrf_field()}}
+                                            <select class="form-control input-sm" name="sticky" required>
+                                                @if($product->sticky == 1)
+                                                    <option value="{{$product->sticky}}">Sticky Post</option>
+                                                @endif
+                                                <option value="0">Default</option>
+                                                <option value="1">Set to sticky</option>
+                                            </select>
+                                            <input type="submit" class="btn btn-warning btn-sm" value="sticky">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form class="form-inline" method="POST" action="/product/parent/{{$product->id}}">
+                                            {{csrf_field()}}
+                                            <select class="form-control input-sm" name="parent_product" required>
+                                                <option value="{{$product->storefront->id}}">{{$product->storefront->name}}</option>
+                                                @foreach($upfronts as $front)
+                                                    <option value="{{$front->id}}">{{$front->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="submit" class="btn btn-success btn-sm" value="save">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/products/{{$product->storefront->slug}}" class="btn btn-default btn-xs">
+                                        <span class="glyphicon glyphicon-tag"></span>{{$product->storefront->name}}</a>
+                                    </td>
+                                    <td><span class="glyphicon glyphicon-comment"> {{$product->comments->count()}}</span></td>
+                                    <td><span class="glyphicon glyphicon-user"></span> <small><i>{{$product->user->name}}</i></small></td>
+                                    <td colspan="2"><small><i>
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        Create: {{ date('d F, Y', strtotime($product->created_at))}} - {{date('g:ia', strtotime($product->created_at))}}
+                                    </i></small></td>
+                                    <td colspan="2"><small><i>
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        Updated: {{ date('d F, Y', strtotime($product->udated_at))}} - {{date('g:ia', strtotime($product->updated_at))}}
+                                    </i></small></td>
+                                </tr>
+                                @endforeach
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <div class="text-center">
+                    <ul class="pagination pagination-sm">{{$products->links()}}</ul>
+                </div>
             </div>
-        </div>
+        @else
+            @if($mainStore)
+                <form class="form-inline" method="POST" action="/activate/products">
+                    {{csrf_field()}}
+                    <input type="text" name="productName" class="form-control input-sm" placeholder="Create Menu Product" required>
+                    <input type="submit" value="Activate Product" class="btn btn-success btn-sm">
+                </form>
+            @endif
+        @endif
     </div>
 </div>
 @endsection

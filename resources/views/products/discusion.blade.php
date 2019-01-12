@@ -1,5 +1,5 @@
 <br>
-@if($product->prodcomments->count())
+@if($product->comments->count())
     @foreach($discusions as $discus)
         <div class="product-discus-show">
             <div class="product-discus-body">
@@ -35,14 +35,24 @@
     </div>
     
 @endif
-
-<div class="discus-discus-text">
-    <div class="discus-body-discus">
-        <form method="POST" action="/product/discus/{{$product->slug}}/store">
-            {{csrf_field()}}
-            <textarea rows="5" class="form-control" name="description" required>{{old('description')}}</textarea>
-            <br>
-            <button class="btn btn-success">Kirim</button>
-        </form>
-    </div>
-</div>
+@if(Auth::check())
+    @if(Auth::user())
+        @if($product->allowed_comment == 1)
+            <div class="discus-discus-text">
+                <div class="discus-body-discus">
+                    <form method="POST" action="/product/discus/{{$product->slug}}/store">
+                        {{csrf_field()}}
+                        <textarea rows="5" class="form-control" name="description" required>{{old('description')}}</textarea>
+                        <br>
+                        <button class="btn btn-success">Kirim</button>
+                    </form>
+                </div>
+            </div>
+        @endif
+    @endif
+@endif
+@if(Auth::guest())
+    <label class="">Komentar</label>
+    <textarea rows="10" class="form-control" name="description" disabled></textarea><br>
+    <button class="btn btn-success" disabled>Kirim</button>
+@endif

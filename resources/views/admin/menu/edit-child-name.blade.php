@@ -8,7 +8,7 @@
         <form method="POST" action="/menu/update/name/{{$child->id}}">
             {{ csrf_field() }}
             <label>Menu</label>
-            <input type="text" name="menuEdit" value="{{$child->menu}}" class="form-control">
+            <input type="text" name="menuEdit" value="{{$child->name}}" class="form-control">
             <hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-warning btn-sm">Update</button>

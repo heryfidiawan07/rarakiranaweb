@@ -7,8 +7,10 @@ use Analytics;
 use Spatie\Analytics\Period;
 
 use App\User;
-use App\Share;
-use App\Inbox;
+use App\Post;
+use App\Thread;
+use App\Product;
+use App\Question;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,13 +20,13 @@ class DashboardController extends Controller
     }
 
     public function dashboard(){
-        $optParams = array('dimensions' => 'rt:medium');
-        // $online = Analytics::getAnalyticsService()->data_realtime->get('ga:176799134','rt:activeUsers',$optParams);
-        // $online = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'),'rt:activeUsers',$optParams);
-        $online = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')
-                  ->totalsForAllResults['rt:activeVisitors'];
-        // dd($online);
-    	return view('admin.dashboard',compact('online'));
+        $online   = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')
+                    ->totalsForAllResults['rt:activeVisitors'];
+        $users    = User::all();
+        $posts    = Post::all();
+        $threads  = Thread::all();
+        $products = Product::all();
+    	return view('admin.dashboard',compact('online','users','posts','products','threads'));
     }
 
     public function users(){
@@ -41,9 +43,8 @@ class DashboardController extends Controller
     }
 
     public function inbox(){
-        $inboxs = Inbox::all();
-        return view('admin.inboxs.index',compact('inboxs'));
+        $questions = Question::latest()->paginate(10);
+        return view('admin.question.index',compact('questions'));
     }
-    
     
 }

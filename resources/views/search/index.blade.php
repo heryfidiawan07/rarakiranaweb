@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-        @if($articles->count())
+        @if($posts->count())
             <h4><b>News</b></h4><hr>
-            @foreach($articles as $article)
-                @include('articles.content-index')
+            @foreach($posts as $post)
+                @include('posts.content-index')
             @endforeach
         @endif
         </div>
@@ -29,7 +29,7 @@
         @if($threads->count())
             <h4><b>Threads</b></h4><hr>
             @foreach($threads as $thread)
-                @include('forum.content-index')
+                @include('threads.content-index')
             @endforeach
         @endif
         </div>

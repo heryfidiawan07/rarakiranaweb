@@ -30,18 +30,30 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/menu/delete/{id}', 'MenuController@destroy');
 		//Product Menu
 		Route::post('/menu/product-store', 'MenuController@productStore');
-		//Forum Menu
-		Route::post('/menu/forum-store', 'MenuController@forumStore');
-		//Articles
-		Route::get('/dashboard/articles', 'ArticleController@index');
-		Route::get('/article/create', 'ArticleController@create');
-		Route::post('/article/store', 'ArticleController@store');
-		Route::get('/article/{id}/edit', 'ArticleController@edit');
-		Route::post('/article/{id}/update', 'ArticleController@update');
-		Route::get('/article/{id}/destroy', 'ArticleController@destroy');
-		Route::post('/article/status/{id}', 'ArticleController@status');
-		Route::post('/article/sticky/{id}', 'ArticleController@sticky');
-		Route::post('/article/acomment/{id}', 'ArticleController@acomment');
+		//thread Menu
+		Route::post('/menu/thread-store', 'MenuController@threadStore');
+		//posts
+		Route::get('/dashboard/posts', 'PostController@index');
+		Route::get('/post/create', 'PostController@create');
+		Route::post('/post/store', 'PostController@store');
+		Route::get('/post/{id}/edit', 'PostController@edit');
+		Route::post('/post/parent/{id}', 'PostController@parent');
+		Route::post('/post/{id}/update', 'PostController@update');
+		Route::get('/post/{id}/destroy', 'PostController@destroy');
+		Route::post('/post/status/{id}', 'PostController@status');
+		Route::post('/post/sticky/{id}', 'PostController@sticky');
+		Route::post('/post/acomment/{id}', 'PostController@acomment');
+		//etalase
+		Route::post('/etalase/store', 'StorefrontController@store');
+		Route::post('/etalase/update/name/{id}', 'StorefrontController@name');
+		Route::post('/etalase/update/parent/{id}', 'StorefrontController@parent');
+		Route::post('/etalase/{id}/update', 'StorefrontController@update');
+		Route::post('/etalase/{id}/status', 'StorefrontController@status');
+		Route::get('/etalase/delete/{id}', 'StorefrontController@delete');
+		//Product Activate
+		Route::post('/activate/products', 'StorefrontController@activate');
+		Route::post('/product/update/{id}', 'StorefrontController@productUpdate');
+		Route::post('/product/update/status/{id}', 'StorefrontController@productStatus');
 		//Product
 		Route::get('/dashboard/products', 'ProductController@index');
 		Route::get('/product/create', 'ProductController@create');
@@ -53,31 +65,34 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/product/status/{id}', 'ProductController@status');
 		Route::post('/product/acomment/{id}', 'ProductController@acomment');
 		Route::post('/product/sticky/{id}', 'ProductController@sticky');
-		//Gallery Destory
-		Route::get('/product/gallery/{id}/destroy', 'GalleryController@destroy');
-		//Category
-		Route::post('/product/category/store', 'ProductController@categoryStore');
-		Route::post('/product/category/{id}/update', 'ProductController@categoryUpdate');
-		Route::post('/product/category/{id}/status', 'ProductController@categoryStatus');
-		//Forum
-		Route::get('/dashboard/forums', 'ForumController@index');
-		Route::get('/forum/destroy/{id}', 'ForumController@destroy');
-		Route::post('/forum/status/{id}', 'ForumController@status');
-		Route::post('/forum/sticky/{id}', 'ForumController@sticky');
+		Route::post('/product/parent/{id}', 'ProductController@parent');
+		//Picture Destory
+		Route::get('/product/pictures/{id}/destroy', 'PictureController@destroy');
+		//Tag Activate Forum
+		Route::post('/activate/forum', 'TagController@activate');
+		Route::post('/forum/update/{id}', 'TagController@forumUpdate');
+		Route::post('/forum/update/status/{id}', 'TagController@forumStatus');
 		//Tag
-		Route::post('/forum/tag/store', 'ForumController@tagStore');
-		Route::post('/forum/tag/{id}/update', 'ForumController@tagUpdate');
-		Route::post('/forum/tag/{id}/status', 'ForumController@tagStatus');
+		Route::post('/tag/store', 'TagController@store');
+		Route::post('/tag/update/name/{id}', 'TagController@updateName');
+		Route::post('/tag/update/parent/{id}', 'TagController@updateParent');
+		Route::post('/tag/status/{id}', 'TagController@status');
+		Route::get('/tag/delete/{id}', 'TagController@delete');
+		//Thread Admin
+		Route::get('/dashboard/forum', 'ThreadController@index');
+		Route::get('/thread/destroy/{id}', 'ThreadController@destroy');
+		Route::post('/thread/status/{id}', 'ThreadController@status');
+		Route::post('/thread/sticky/{id}', 'ThreadController@sticky');
 		//Logo
 		Route::get('/dashboard/logo', 'LogoController@index');
 		Route::post('/logo/store', 'LogoController@store');
 		Route::post('/logo/update/{id}', 'LogoController@update');
 		Route::get('/logo/delete/{id}', 'LogoController@destroy');
 		//Follow
-		Route::get('/dashboard/follow', 'FollowerController@index');
-		Route::post('/follow/store', 'FollowerController@store');
-		Route::post('/follow/update/{id}', 'FollowerController@update');
-		Route::get('/follow/delete/{id}', 'FollowerController@destroy');
+		Route::get('/dashboard/follow', 'FollowController@index');
+		Route::post('/follow/store', 'FollowController@store');
+		Route::post('/follow/update/{id}', 'FollowController@update');
+		Route::get('/follow/delete/{id}', 'FollowController@destroy');
 		//Share
 		Route::get('/dashboard/share', 'ShareController@index');
 		Route::post('/share/store', 'ShareController@store');
@@ -97,40 +112,48 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
 });
-//Global
-Route::get('/{slugMenu}', 'GlobalController@menu');
-//Article Show
-Route::get('/read/article/{artslug}', 'ArticleController@show');
-//Products
-Route::get('/show/product/{prodslug}', 'ProductController@show');
-Route::get('/products/category/{categorySlug}', 'ProductController@category');
-//Forum User Auth
+//thread User Auth
 Route::group(['middleware' => 'auth'], function () {
-	//Forum
-	Route::get('/thread/create', 'ForumController@create');
-	Route::post('/thread/store', 'ForumController@store');
-	Route::get('/thread/edit/{slug}', 'ForumController@edit');
-	Route::post('/thread/update/{slug}', 'ForumController@update');
-	//Article Comment
-	Route::post('/article/comment/{slug}/store', 'ArtcommentController@store');
-	Route::post('/article/comment/{id}/update', 'ArtcommentController@update');
+	//thread
+	Route::get('/thread/create', 'ThreadController@create');
+	Route::post('/thread/store', 'ThreadController@store');
+	Route::get('/thread/edit/{slug}', 'ThreadController@edit');
+	Route::post('/thread/update/{slug}', 'ThreadController@update');
+	//post Comment
+	Route::post('/post/comment/{slug}/store', 'CommentController@postStore');
+	Route::post('/post/comment/{id}/update', 'CommentController@postUpdate');
 	//Product Discusion
-	Route::post('/product/discus/{slug}/store', 'ProdcommentController@store');
-	Route::post('/product/discus/{id}/update', 'ProdcommentController@update');
-	//Forum Commment
-	Route::post('/thread/comment/{slug}/store', 'ForcommentController@store');
-	Route::post('/thread/comment/{id}/update', 'ForcommentController@update');
+	Route::post('/product/discus/{slug}/store', 'CommentController@productStore');
+	Route::post('/product/discus/{id}/update', 'CommentController@productUpdate');
+	//thread Commment
+	Route::post('/thread/comment/{slug}/store', 'CommentController@threadStore');
+	Route::post('/thread/comment/{id}/update', 'CommentController@threadUpdate');
 	//User
 	Route::post('/user/image/upload/{id}', 'UserController@image');
 	Route::post('/user/change/name/{id}', 'UserController@name');
 	Route::post('/user/update/bio/{id}', 'UserController@bio');
 });
-//Forum
-Route::get('/thread/{threadslug}', 'ForumController@show');
-Route::get('/threads/tag/{tagSlug}', 'ForumController@tag');
+//Post
+Route::get('/{slugMenu}', 'PostController@menu');
+Route::get('/read/post/{slug}', 'PostController@show');
+
+//Products
+Route::get('/all/{slug}', 'ProductController@products');
+Route::get('/show/product/{prodslug}', 'ProductController@show');
+Route::get('/products/{slug}', 'ProductController@storefront');
+//Cek Ongkir
+Route::post('/cek/ongkir/product/{slug}', 'ProductController@ongkir');
+
+//Forum / Thread
+Route::get('/page/{slug}', 'ThreadController@threads');
+Route::get('/threads/{slug}', 'ThreadController@tag');
+Route::get('/thread/{threadslug}', 'ThreadController@show');
+
 //Search
 Route::post('/search', 'SearchController@search');
+
 //User Page
 Route::get('/user/{slug}', 'UserController@show');
+
 //Send Form Contact
-Route::post('/send/message/contact', 'InboxController@contact');
+Route::post('/send/message/contact', 'QuestionController@contact');

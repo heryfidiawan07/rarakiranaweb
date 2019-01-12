@@ -1,0 +1,182 @@
+/*Global Sticky*/
+.sticky {
+	color: green;
+}
+.sticky a {
+	color: green;
+	font-weight: bold;
+}
+.sticky a:hover {
+	text-decoration: none;
+	color: lightgreen;
+}
+/*End Global Sticky*/
+
+/*posts thumb*/
+.frame-new-posts {
+	/*height: 25vh;*/
+	white-space: nowrap;
+	text-align: center;
+	z-index: 2;
+	overflow: hidden;
+}
+.frame-new-posts:hover > .posts-thumb {
+	transform: scale(1.1);
+}
+.frame-new-posts-helper {
+	display: inline-block;
+	/*height: 100%;*/
+	vertical-align: middle;
+}
+.posts-thumb {
+	vertical-align: middle;
+	transition: transform 1s;
+	height: 95%;
+}
+/*End posts thumb*/
+
+/*posts Index Content*/
+.posts div {
+	height: 25vh;
+	margin-bottom: 20px;
+	border-bottom: 1px solid grey;
+}
+.posts-title a {
+	font-weight: bold;
+	color: black;
+}
+.posts-title a:hover {
+	color: grey;
+	text-decoration: none;
+}
+.posts-author a {
+	color: black;
+}
+.posts-author a:hover {
+	color: grey;
+	text-decoration: none;	
+}
+/*End posts Index Content*/
+
+/*post Show*/
+.post-show {
+
+}
+.title-art-show {
+	font-weight: bold;
+}
+.img-art-show img {
+	height: 30vh;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+.tag-art-show {
+	margin-top: 10px; margin-bottom: 10px;
+}
+.tag-art-show a {
+	color: black;
+}
+.tag-art-show a:hover {
+	text-decoration: none;
+	color: grey;
+}
+.desc-art-show img {
+	max-width: 100%;
+	height: auto;
+}
+.desc-art-show iframe {
+	max-width: 100%;
+}
+/*End post Show*/
+
+/*post Tags*/
+.post-tags {
+	font-weight: bold;
+}
+.post-tags a {
+	color: black;
+}
+.post-tags a:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*Endpost Tags*/
+
+/*post Comment*/
+.post-comment-show {
+	border-left: 5px solid grey;
+	padding-left: 10px;
+}
+.post-comment-user .author {
+	color: black;
+}
+.post-comment-user .author:hover {
+	color: grey;
+	text-decoration: none;
+}
+.post-comment-body .title {
+	color: black;
+	font-weight: bold;
+}
+.post-comment-body .title:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*End post Comment*/
+
+/*End posts Recent Comment thumb*/
+.recent-posts div {
+	height: 15vh;
+	border-bottom: 1px solid grey;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.frame-recent-posts {
+	height: 15vh;
+	white-space: nowrap;
+	text-align: center;
+	z-index: 2;
+}
+.frame-recent-posts:hover > .recent-thumb {
+	transform: scale(1.1);
+}
+.frame-recent-posts-helper {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.recent-thumb {
+	vertical-align: middle;
+	transition: transform 1s;
+	height: 85%;
+	max-width: 100%;
+}
+.recent-posts-title {
+	height: 3em;
+	overflow: hidden;
+}
+.recent-posts-title a {
+	height: 1.5em;
+	font-weight: bold;
+	color: black;
+}
+.recent-posts-comment {
+	height: 1.5em;
+	overflow: hidden;
+}
+.recent-posts-title a:hover {
+	color: grey;
+	text-decoration: none;
+}
+.recent-posts-author {
+	height: 1.5em;
+	overflow: hidden;
+}
+.recent-posts-author a {
+	color: black;
+}
+.recent-posts-author a:hover {
+	color: grey;
+	text-decoration: none;	
+}
+/*End posts Recent Comment thumb*/

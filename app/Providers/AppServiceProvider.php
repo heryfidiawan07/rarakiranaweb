@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use View;
 use App\Menu;
+use App\Tag;
 use App\Logo;
 use App\Share;
-use App\Follower;
+use App\Follow;
+use App\Storefront;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,12 +20,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {   /****/
-        $navMenus    = Menu::where('status',1)->get();
-        $mainLogo    = Logo::where('setting',1)->first();
-        $mainFollows = Follower::all();
+        $mainMenus   = Menu::where([['status',1],['setting',0]])->get();
+        $mainTag     = Tag::where([['setting',10],['status',1]])->first();
+        $mainStore   = Storefront::where([['setting',10],['status',1]])->first();
+        $mainLogo    = Logo::where('setting','main')->first();
+        $mainFollows = Follow::all();
         $mainShares  = Share::all();
         View::share([
-            'navMenus'    => $navMenus,
+            'mainMenus'   => $mainMenus,
+            'mainTag'     => $mainTag,
+            'mainStore'   => $mainStore,
             'mainLogo'    => $mainLogo,
             'mainFollows' => $mainFollows,
             'mainShares'  => $mainShares,

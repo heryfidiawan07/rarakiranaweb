@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Menu;
+use App\Post;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -15,34 +16,34 @@ class MenuController extends Controller
 
     public function index()
     {   
-        $menus = Menu::all();
+        $menus = Menu::orderBy('setting','ASC')->get();
         return view('admin.menu.index', compact('menus'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-                'menu' => 'required|unique:menus|max:20',
+                'name' => 'required|unique:menus|max:20',
             ]);
-        if($request->parent_id == 10 || $request->parent_id == 20){
-            $setting = $request->parent_id;
-            $parent_id = 0;
+        if ($request->contact == 5) {
+            $setting = 5;
         }else{
             $setting = 0;
-            $parent_id = $request->parent_id;
         }
-        $menuForum = Menu::where('setting',10)->first();
-        $menuProd  = Menu::where('setting',20)->first();
-        if ($menuForum && $request->parent_id == 10) {
-            return back()->with('warning', 'Parent forum already exists.');
-        }elseif ($menuProd && $request->parent_id == 20) {
-            return back()->with('warning', 'Parent product already exists.');
+        $uncat = Menu::where('slug','uncategorised')->first();
+        if ($uncat === null) {
+            Menu::create([
+                'user_id' => Auth::user()->id,
+                'name' => 'UNCATEGORISED',
+                'slug' => 'uncategorised',
+                'setting' => 1,
+            ]);
         }
         Menu::create([
                 'user_id' => Auth::user()->id,
-                'menu' => strtoupper($request->menu),
-                'slug' => str_slug($request->menu),
-                'parent_id' => $parent_id,
+                'name' => strtoupper($request->name),
+                'slug' => str_slug($request->name),
+                'parent_id' => $request->parent_id,
                 'setting' => $setting,
             ]);
         return back();
@@ -56,7 +57,8 @@ class MenuController extends Controller
         $cekMenu = Menu::where('slug',str_slug($request->menuEdit))->first();
         if ($cekMenu === null) {
             $menu->update([
-                'menu' => strtoupper($request->menuEdit),
+                'user_id' => Auth::user()->id,
+                'name' => strtoupper($request->menuEdit),
                 'slug' => str_slug($request->menuEdit),
             ]);
         }else{
@@ -67,19 +69,15 @@ class MenuController extends Controller
     
     public function updateSetting(Request $request, $id)
     {   
-        if($request->parent_edit == 10 || $request->parent_edit == 20){
-            $setting = $request->parent_edit;
-            $parent_edit = 0;
-        }elseif($request->contact == 5){
+        if($request->contact == 5){
             $setting = 5;
-            $parent_edit = $request->parent_edit;
         }else{
             $setting = 0;
-            $parent_edit = $request->parent_edit;
         }
         $menu = Menu::whereId($id)->first();
         $menu->update([
-            'parent_id' => $parent_edit,
+            'user_id' => Auth::user()->id,
+            'parent_id' => $request->parent_edit,
             'setting' => $setting,
         ]);
         return back();
@@ -95,9 +93,13 @@ class MenuController extends Controller
 
     public function destroy($id)
     {
-        $menu = Menu::find($id);
+        $uncat = Menu::where('slug','uncategorised')->first();
+        $menu  = Menu::find($id);
+        $menu->posts()->update([
+                'menu_id' => $uncat->id,
+            ]);
         $menu->delete();
-        return back();
+        return redirect('/dashboard/menus');
     }
 
 }

@@ -14,7 +14,7 @@ class LogoController extends Controller
     public function __construct(){
         $this->middleware('admin');
     }
-    
+    //Logo setting 1 = Home Logo/Main 2 = Post Logo 3 = Thread Logo 4 = Product Logo
     public function index()
     {   
         $logos = Logo::all();

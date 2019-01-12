@@ -17,51 +17,88 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('menu_id') ? ' has-error' : '' }}">
-                    <label for="menu_id" class="control-label">Menu</label>
-                    <select name="menu_id" class="form-control" required autofocus>
-                        @foreach($categories as $category)
-                            @if($category->setting == 33)
-                                @continue
-                            @elseif($category->parent()->count())
-                                @continue
-                            @endif
-                            <option value="{{$category->id}}">{{$category->menu}}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('menu_id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('menu_id') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                    <label for="price" class="control-label">Harga</label>
-                    <input type="text" name="price" class="form-control" value="{{ old('price') }}" required autofocus>
-                    @if ($errors->has('price'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('price') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('discount') ? ' has-error' : '' }}">
-                    <label for="discount" class="control-label">Diskon</label>
-                    <input type="text" name="discount" class="form-control" value="{{ old('discount') }}" autofocus>
-                    @if ($errors->has('discount'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('discount') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
-                    <label for="img" class="control-label">Gambar</label>
-                    <input type="file" name="img[]" class="form-control" multiple="multiple" required autofocus>
-                    @if ($errors->has('img'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('img') }}</strong>
-                        </span>
-                    @endif
-                </div>
+                
+                <table><tr><td>
+                    <div class="form-group{{ $errors->has('storefront_id') ? ' has-error' : '' }}">
+                        <label for="storefront_id" class="control-label">Etalase</label>
+                        <select name="storefront_id" class="form-control" required autofocus>
+                            @foreach($fronts as $front)
+                                <option value="{{$front->id}}">{{$front->name}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('storefront_id'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('storefront_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td><td>
+                    <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
+                        <label for="img" class="control-label">Gambar</label>
+                        <input type="file" name="img[]" class="form-control" multiple="multiple" required autofocus>
+                        @if ($errors->has('img'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('img') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                        <label for="price" class="control-label">Harga</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">Rp</div>
+                            <input type="integer" name="price" class="form-control" value="{{ old('price') }}" required autofocus>
+                        </div>
+                        @if ($errors->has('price'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('price') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td><td>
+                    <div class="form-group{{ $errors->has('discount') ? ' has-error' : '' }}">
+                        <label for="discount" class="control-label">Diskon</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">Rp</div>
+                            <input type="integer" name="discount" class="form-control" value="0" autofocus>
+                        </div>
+                        @if ($errors->has('discount'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('discount') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div class="form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
+                        <label for="weight" class="control-label">Berat</label>
+                        <div class="input-group">
+                            <input type="integer" name="weight" class="form-control" value="1" required autofocus>
+                            <div class="input-group-addon">Kg</div>
+                        </div>
+                        @if ($errors->has('weight'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('weight') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group{{ $errors->has('dimensi') ? ' has-error' : '' }}">
+                        <label for="dimensi" class="control-label">Dimensi</label>
+                        <div class="input-group">
+                            <input type="integer" name="dimensi" class="form-control" value="0" required autofocus>
+                            <div class="input-group-addon">Meter</div>
+                        </div>
+                        @if ($errors->has('dimensi'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('dimensi') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </td></tr></table>
+
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label">Deskripsi</label>
                     <textarea name="description" class="form-control" rows="20">{{ old('description') }}</textarea>

@@ -6,102 +6,43 @@ use Auth;
 use File;
 use Image;
 use Purifier;
-use App\Menu;
+use RajaOngkir;
 use App\Logo;
 use App\Promo;
 use App\Product;
-use App\Gallery;
+use App\Picture;
+use App\Storefront;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin', ['except'=>['show','category']]);
+        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir']]);
     }
 
     public function index()
     {
-        $products = Product::all();
-        $categories = Menu::where('setting',21)->get();
-        return view('admin.products.index', compact('products','categories'));
-    }
-
-    public function categoryStore(Request $request){
-        $this->validate($request, [
-                'category' => 'required|max:20',
-            ]);
-        $category = Menu::where('setting',20)->first();
-        if ($request->parent_id == 0) {
-            $setting = 21;
-            $parent_id = $category->id;
-        }else{
-            $setting = 22;
-            $parent_id = $request->parent_id;
-        }
-        $cekMenu = Menu::where('slug', '=', str_slug($request->category))->first();
-        if ($cekMenu === null) {
-            Menu::create([
-                    'user_id' => Auth::user()->id,
-                    'menu' => $request->category,
-                    'slug' => str_slug($request->category),
-                    'parent_id' => $parent_id,
-                    'setting' => $setting,
-                ]);
-        }else{
-            return back()->with('warningEdit', 'Nama kategori sudah ada, ganti yang lain !');
-        }
-        return back();
-    }
-    
-    public function categoryUpdate(Request $request, $id){
-        $this->validate($request, [
-                'categoryEdit' => 'required',
-            ]);
-        $menuProd = Menu::where('setting',20)->first();
-        $category = Menu::whereId($id)->first();
-        if ($request->parent_edit == 0) {
-            $setting = 21;
-            $parent_id = $menuProd->id;
-        }else{
-            $setting = 22;
-            $parent_id = $request->parent_edit;
-        }
-        $cekMenu = Menu::where('slug', '=', str_slug($request->categoryEdit))->first();
-        if ($cekMenu === null) {
-            $category->update([
-                    'user_id' => Auth::user()->id,
-                    'menu' => $request->categoryEdit,
-                    'slug' => str_slug($request->categoryEdit),
-                    'parent_id' => $parent_id,
-                    'setting' => $setting,
-                ]);
-        }else{
-            return back()->with('warningEdit', 'Nama kategori sudah ada, ganti yang lain !');
-        }
-        return back();
-    }
-
-    public function categoryStatus(Request $request, $id){
-        $category = Menu::whereId($id)->first();
-        $category->update([
-                'status' => $request->status,
-            ]);
-        return back();
+        $products = Product::latest('sticky')->paginate(10);
+        $fronts   = Storefront::orderBy('setting','ASC')->get();
+        $frontTag = Storefront::where('setting',10)->first();
+        $upfronts = Storefront::has('parent','<',1)->where('setting',0)->get();
+        return view('admin.products.index', compact('products','fronts','frontTag','upfronts'));
     }
     
     public function create()
     {   
-        $categories = Menu::where([['setting','>',20],['status',1]])->get();
-        return view('admin.products.create', compact('categories'));
+        $fronts = Storefront::has('parent','<',1)->where('setting',0)->get();
+        return view('admin.products.create', compact('fronts'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
                 'title' => 'required|unique:products|max:200',
-                'menu_id' => 'required',
+                'storefront_id' => 'required',
                 'price' => 'required',
                 'img' => 'required',
+                'weight' => 'required',
                 'description' => 'required',
                 'status' => 'required',
                 'acomment' => 'required',
@@ -114,7 +55,9 @@ class ProductController extends Controller
                 'slug' => $slug,
                 'price' => $request->price,
                 'discount' => $request->discount,
-                'menu_id' => $request->menu_id,
+                'weight' => $request->weight,
+                'dimensi' => $request->dimensi,
+                'storefront_id' => $request->storefront_id,
                 'description' => Purifier::clean($request->description, array('CSS.AllowTricky' => true , 
                     'HTML.SafeIframe' => true , "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%")),
                 'status' => $request->status,
@@ -124,7 +67,7 @@ class ProductController extends Controller
             $key   = 0;
             while ($key < count($files)) {
                 $extends = $files[$key]->getClientOriginalExtension();
-                $imgName = $product->id.'-'.$key.'-'.$slug.'.'.$extends;
+                $imgName = $product->id.'-'.$key.'-'.str_slug($request->title).'-'.$time.'.'.$extends;
                 $path    = $files[$key]->getRealPath();
                 $img     = Image::make($path)->resize(null, 630, function ($constraint) {
                                 $constraint->aspectRatio();
@@ -135,10 +78,10 @@ class ProductController extends Controller
                             });
                 $thumb->save(public_path("products/thumb/". $imgName));
             $key++;
-                $gallery = new Gallery;
-                $gallery->img        = $imgName;
-                $gallery->product_id = $product->id;
-                $gallery->save();
+                $picture = new Picture;
+                $picture->img        = $imgName;
+                $picture->product_id = $product->id;
+                $picture->save();
             }
         return redirect('/dashboard/products');
     }
@@ -163,11 +106,19 @@ class ProductController extends Controller
         return back();
     }
 
+    public function parent(Request $request, $id){
+        $product = Product::whereId($id)->first();
+        $product->update([
+                'storefront_id' => $request->parent_product,
+            ]);
+        return back();
+    }
+
     public function edit($id)
     {
-        $categories = Menu::where([['setting','>',20],['status',1]])->get();
+        $fronts = Storefront::has('parent','<',1)->where('setting',0)->get();
         $product = Product::whereId($id)->first();
-        return view('admin.products.edit',compact('product','categories'));
+        return view('admin.products.edit',compact('product','fronts'));
     }
 
     public function updateImg(Request $request, $id){
@@ -176,10 +127,10 @@ class ProductController extends Controller
         $files   = $request->file('img');
         if (isset($files)) {
             $key   = 0;
-            $batas = $product->galleries->count();
-            while ($key < 5-$batas) {
+            $batas = 5-count($product->pictures);
+            while ($key < $batas) {
                 $extends = $files[$key]->getClientOriginalExtension();
-                $imgName = $product->id.'-'.$key.'-'.$product->slug.'-'.$time.'.'.$extends;
+                $imgName = $product->id.'-'.$key.'-'.str_slug($product->title).'-'.$time.'.'.$extends;
                 $path    = $files[$key]->getRealPath();
                 $img     = Image::make($path)->resize(null, 630, function ($constraint) {
                                 $constraint->aspectRatio();
@@ -190,20 +141,22 @@ class ProductController extends Controller
                             });
                 $thumb->save(public_path("products/thumb/". $imgName));
             $key++;
-                $gallery = new Gallery;
-                $gallery->img        = $imgName;
-                $gallery->product_id = $product->id;
-                $gallery->save();
+                $picture = new Picture;
+                $picture->img        = $imgName;
+                $picture->product_id = $product->id;
+                $picture->save();
             }
         }
-        return back();
+        return redirect("/product/{$product->id}/edit");
     }
     
     public function update(Request $request, $id)
     {
         $this->validate($request, [
                 'title' => 'required|max:200',
-                'menu_id' => 'required',
+                'storefront_id' => 'required',
+                'price' => 'required',
+                'weight' => 'required',
                 'description' => 'required',
                 'status' => 'required',
                 'acomment' => 'required',
@@ -222,8 +175,10 @@ class ProductController extends Controller
                     'user_id' => Auth::user()->id,
                     'title' => $title,
                     'slug' => $slug,
-                    'menu_id' => $request->menu_id,
+                    'storefront_id' => $request->storefront_id,
                     'price' => $request->price,
+                    'weight' => $request->weight,
+                    'dimensi' => $request->dimensi,
                     'discount' => $request->discount,
                     'description' => Purifier::clean($request->description, array('CSS.AllowTricky' => true , 
                         'HTML.SafeIframe' => true , "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%")),
@@ -240,18 +195,17 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if ($product) {
-            for ($i=0; $i < count($product->galleries); $i++) { 
-                $img   = public_path("products/img/".$product->galleries[$i]->img);
-                $thumb = public_path("products/thumb/".$product->galleries[$i]->img);
-                if (file_exists($img)) {
-                    File::delete($img);
-                    File::delete($thumb);
-                }
-                $product->delete();
+            for ($i=0; $i < count($product->pictures); $i++) { 
+                $img   = public_path("products/img/".$product->pictures[$i]->img);
+                $thumb = public_path("products/thumb/".$product->pictures[$i]->img);
+                File::delete($img);
+                File::delete($thumb);
             }
         }else{
             return view('errors.503');
         }
+        $product->comments()->delete();
+        $product->delete();
         return back();
     }
 
@@ -259,30 +213,45 @@ class ProductController extends Controller
     public function show($prodslug)
     {
         $product = Product::where([['slug',$prodslug],['status',1]])->first();
-        $discusions = $product->prodcomments()->paginate(10);
-        if ($product && $product->menu->status==1) {
+        $discusions = $product->comments()->paginate(10);
+        if ($product && $product->Storefront->status==1) {
             return view('products.show', compact('product','discusions'));
         }else{
             return view('errors.503');
         }
     }
 
-    public function category($categorySlug){
-        $productLogo = Logo::where('setting',3)->first();
-        $category    = Menu::whereSlug($categorySlug)->first();
-        $promo       = Promo::where('setting',2)->first();
-        if ($category->status == 1) {
-            if ($category->parent()->count()) {
-                $tagproducts = $category->childProducts()->latest('sticky')->paginate(9);
-            }else{
-                $tagproducts = $category->products()->latest('sticky')->paginate(9);
-            }
-            $categories = Menu::where([['setting',21],['status',1]])->get();
-            return view('products.category', compact('tagproducts','category','categories','productLogo','promo'));
-        }else{
+    public function products($slug){
+        $cek   = Storefront::whereSlug($slug)->first();
+        if ($cek === null) {
             return view('errors.503');
+        }else{
+            $logo        = Logo::where('setting','product')->first();
+            $promo       = Promo::where('setting','product')->first();
+            $fronts      = Storefront::where('setting',0)->get();
+            $newproducts = Product::where('status',1)->latest('sticky')->paginate(10);
+            return view('products.index', compact('newproducts','fronts','logo','promo'));
         }
     }
+
+    public function storefront($slug){
+        $logo   = Logo::where('setting','product')->first();
+        $promo  = Promo::where('setting','product')->first();
+        $subs   = Storefront::where([['slug',$slug],['status',1]])->first();
+        $fronts = Storefront::where('setting',0)->get();
+        if ($subs->parent->count()){
+            $products = $subs->childProducts()->latest('sticky')->paginate(10);
+        }else{
+            $products = $subs->products()->latest('sticky')->paginate(10);
+        }
+        return view('products.category', compact('products','fronts','logo','promo','subs'));
+    }
+
+    public function ongkir(Request $request, $slug){
+        $product = Product::whereSlug($slug)->first();
+        return response($product);
+    }
+    
 // Guest User
 
 }

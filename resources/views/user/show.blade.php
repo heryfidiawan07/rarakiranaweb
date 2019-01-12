@@ -21,9 +21,9 @@
             @include('user.user-name-edit')
             @include('user.user-bio-edit')
             
-            <div class="panel panel-default userbio" style="min-height: 200px;">
-                <div class="panel-heading">Bio :</div>
-                <div class="panel-body">
+            <div class="panel userbio" style="min-height: 200px;">
+                Bio :
+                <div class="panel-body" style="border-top: 1px solid grey;">
                     {!! nl2br($user->bio) !!}
                 </div>
             </div>

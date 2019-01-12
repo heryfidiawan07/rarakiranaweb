@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\Forum;
+use App\Thread;
+use App\Comment;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -37,24 +38,12 @@ class User extends Authenticatable
         }
     }
 
-    public function likes(){
-        return $this->hasMany(Like::class);
+    public function threads(){
+        return $this->hasMany(Thread::class);
     }
 
-    public function forums(){
-        return $this->hasMany(Forum::class);
-    }
-
-    public function artcomments(){
-        return $this->hasMany(Artcomment::class);
-    }
-
-    public function forcomments(){
-        return $this->hasMany(Forcomment::class);
-    }
-
-    public function discusions(){
-        return $this->hasMany(Prodcomment::class);
+    public function comments(){
+        return $this->morphMany('App\Comment','commentable');
     }
 
 }

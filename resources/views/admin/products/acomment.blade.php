@@ -12,7 +12,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Allowe comment this product ?</b><hr>
+            <b>Setting comment this product ?</b><hr>
             <form method="POST" action="/product/acomment/{{$product->id}}">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

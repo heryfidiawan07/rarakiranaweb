@@ -26,3 +26,17 @@
 	max-width: 100%;
 	height: auto;
 }
+.frame-admin-prod {
+	width: 150px; height: 150px;
+}
+.frame-admin-prod img {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+}
+.dashBtn {
+	position: fixed; left: 0; height: 100px; line-height: 85px; padding-right: 5px; left: -10px; z-index: 2; border-radius: 10px;
+}
+.panel-default .panel-body h5 {
+	font-weight: bold;
+}

@@ -5,26 +5,26 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <h4 class="text-center">EDIT PARENT {{$child->menu}}</h4>
+        <h4 class="text-center">EDIT PARENT {{$child->name}}</h4>
         <form method="POST" action="/menu/update/setting/{{$child->id}}">
         {{ csrf_field() }}
             <label>Parent</label>
             <select name="parent_edit" class="form-control">
-                <option value="{{$child->parent_id}}">{{$child->childs->menu}}</option>
+                <option value="{{$child->parent_id}}">{{$child->childs->name}}</option>
                 <option value="0">NO PARENT</option>
                 @if($menus->count())
-                    @foreach($menus->where('parent_id',0) as $menu)
-                        @if($menu->setting != 0)
-                            @continue
-                        @endif
-                        <option value="{{$menu->id}}">{{$menu->menu}}</option>
+                    @foreach($menus->where('parent_id',0) as $menuEdit)
+                        <option value="{{$menuEdit->id}}">{{$menuEdit->name}}</option>
                     @endforeach
                 @endif
             </select>
             <label>Set Contact</label>
             <select name="contact" class="form-control">
-              <option value="0">DEFAULT</option>
-              <option value="5">PARENT CONTACT</option>
+                @if($child->setting == 5)
+                    <option value="5">PARENT CONTACT</option>
+                @endif
+                <option value="0">DEFAULT</option>
+                <option value="5">PARENT CONTACT</option>
             </select>
             <hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

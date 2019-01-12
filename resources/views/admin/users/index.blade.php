@@ -16,7 +16,15 @@
                 <table class="table table-hover">
                     @foreach($users as $user)
                         <tr>
-                            <td><a href="/user/{{$user->slug}}"> {{ucfirst($user->name)}}</a></td>
+                            <td>
+                                <a href="/user/{{$user->slug}}">
+                                    <img src="<?php if ($user->img != null){ echo "/users/".$user->img;}else if($user->graph != null){echo $user->graph;}else{echo $user->avatar();} ?>
+                                    " class="img-responsive" style="height: 30px;">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/user/{{$user->slug}}">{{ucfirst($user->name)}}</a>
+                            </td>
                             <td>
                                 Status :
                                 @if($user->status==1)
@@ -25,6 +33,8 @@
                                     @else
                                         <a type="button" data-toggle="modal" data-target="#status_{{$user->id}}" href="#" class="btn btn-success btn-xs"><span class="caret"></span> Active</a>
                                     @endif
+                                @elseif($user->status==5)
+                                    <a class="btn btn-default btn-xs" disabled><span class="caret"></span> Pengujung</a>
                                 @elseif($user->status==2)
                                     <a type="button" data-toggle="modal" data-target="#status_{{$user->id}}" href="#" class="btn btn-danger btn-xs"><span class="caret"></span> Banned</a>
                                 @else
@@ -33,7 +43,7 @@
                                 @include('admin.users.status')
                             </td>
                             <td>
-                                {{$user->forums->count()}} threads
+                                {{$user->threads->count()}} threads
                             </td>
                             <td>Joined : 
                                 {{ date('d F, Y', strtotime($user->created_at))}} - {{date('g:ia', strtotime($user->created_at))}}
