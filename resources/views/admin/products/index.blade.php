@@ -205,13 +205,11 @@
                 </div>
             </div>
         @else
-            @if($mainStore)
-                <form class="form-inline" method="POST" action="/activate/products">
-                    {{csrf_field()}}
-                    <input type="text" name="productName" class="form-control input-sm" placeholder="Create Menu Product" required>
-                    <input type="submit" value="Activate Product" class="btn btn-success btn-sm">
-                </form>
-            @endif
+            <form class="form-inline" method="POST" action="/activate/products">
+                {{csrf_field()}}
+                <input type="text" name="productName" class="form-control input-sm" placeholder="Create Menu Product" required>
+                <input type="submit" value="Activate Product" class="btn btn-success btn-sm">
+            </form>
         @endif
     </div>
 </div>

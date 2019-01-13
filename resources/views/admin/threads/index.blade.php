@@ -192,13 +192,11 @@
                 </div>
             </div>
         @else
-            @if($mainTag)
-                <form class="form-inline" method="POST" action="/activate/forum">
-                    {{csrf_field()}}
-                    <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
-                    <input type="submit" value="Activate Forum" class="btn btn-success btn-sm">
-                </form>
-            @endif
+            <form class="form-inline" method="POST" action="/activate/forum">
+                {{csrf_field()}}
+                <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
+                <input type="submit" value="Activate Forum" class="btn btn-success btn-sm">
+            </form>
         @endif
 
     </div>

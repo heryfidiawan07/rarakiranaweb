@@ -3,7 +3,7 @@
 /storage/*.key
 /vendor
 /.idea
-/public/articles
+/public/posts
 /public/products
 /public/users
 /public/emoji
