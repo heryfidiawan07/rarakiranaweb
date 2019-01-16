@@ -5,6 +5,12 @@ $(document).ready(function(){
         }
     });
 
+    $("#inputaddress").keyup(function() {
+        var address = $(this).val();
+        $("#address").text(address);
+    })
+      .keyup();
+
     $('#tujuan').on('click',function(){
         $.ajax({
             type: 'POST',

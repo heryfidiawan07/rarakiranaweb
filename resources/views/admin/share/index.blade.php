@@ -12,15 +12,15 @@
             <form method="POST" action="/share/store">
                 {{ csrf_field() }}
                 <div class="col-md-12">
-                    <label for="share" class="control-label">Pilih Sosial Media Share</label>
+                    <label for="adminshare" class="control-label">Pilih Sosial Media Share</label>
                     <div class="form-check share">
-                        <div class="col-xs-6">
+                        <div class="col-sm-6">
                             <p><input type="checkbox" name="share[]" value="1"> <i class="fab fa-facebook"> Facebook</i></p>
                             <p><input type="checkbox" name="share[]" value="2"> <i class="fab fa-twitter"> Twitter</i></p>
                             <p><input type="checkbox" name="share[]" value="3"> <i class="fab fa-whatsapp"> Whatsapp</i></p>
                             <p><input type="checkbox" name="share[]" value="4"> <i class="fab fa-pinterest"> Pinterest</i></p>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-sm-6">
                             <p><input type="checkbox" name="share[]" value="5"> <i class="fas fa-envelope"> Mail</i></p>
                             <p><input type="checkbox" name="share[]" value="6"> <i class="fab fa-google"> Google</i></p>
                             <p><input type="checkbox" name="share[]" value="7"> <i class="fab fa-linkedin"> LinkedIn</i></p>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="form-control btn btn-primary">Save</button>
+                    <hr><button type="submit" class="form-control btn btn-primary">Save</button>
                 </div>
             </form>
         </div>

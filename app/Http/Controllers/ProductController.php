@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir']]);
+        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getCity','cart','checkout']]);
     }
 
     public function index()
@@ -247,9 +247,27 @@ class ProductController extends Controller
         return view('products.category', compact('products','fronts','logo','promo','subs'));
     }
 
-    public function ongkir(Request $request, $slug){
+    public function ongkir(Request $request, $slug, $tujuan, $kurir){
         $product = Product::whereSlug($slug)->first();
-        return response($product);
+        $asal    = 55;//55 Adalah bekasi kabupaten
+        $berat   = $product->weight;//$product->weight; // dalam gram
+        $cost    = RajaOngkir::Cost([
+                        'origin'        => $asal, // id kota asal = Bekasi
+                        'destination'   => $tujuan, // id kota tujuan
+                        'weight'        => $product->weight, // berat satuan gram
+                        'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
+                    ])->get();
+        return response($cost);
+    }
+    
+    public function getCity(){
+        $city = RajaOngkir::Kota()->all();
+        return response($city);
+    }
+    
+    public function cart($slug){
+        $product = Product::whereSlug($slug)->first();
+        return view('products.cart',compact('product'));
     }
     
 // Guest User

@@ -145,3 +145,26 @@
 	text-decoration: none;
 }
 /*End Product Discusions*/
+
+/*Live Search*/
+#listcity {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	cursor: pointer;
+	overflow-y: auto;
+	z-index: 1001;
+	list-style: none;
+}
+.listcityitem:hover {
+	font-weight: bold;
+}
+.listcityitem {
+	background-color: lightgrey;
+	border-bottom: 1px solid grey;
+	padding-top: 5px;
+	padding-left: 10px;
+	/*padding-right: 10px;*/
+	width: 200px;
+	display: none;
+}

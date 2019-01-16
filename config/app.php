@@ -183,7 +183,7 @@ return [
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
-        Agungjk\Rajaongkir\RajaOngkirServiceProvider::class,
+        rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
 
     ],
@@ -238,7 +238,7 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'RajaOngkir' => Agungjk\Rajaongkir\RajaOngkirFacade::class,
+        'RajaOngkir' => rizalafani\rajaongkirlaravel\RajaOngkirFacade::class,
 
     ],
 

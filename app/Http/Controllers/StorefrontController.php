@@ -24,8 +24,8 @@ class StorefrontController extends Controller
         }
         Storefront::create([
                 'user_id' => Auth::user()->id,
-                'name'    => strtoupper($request->forumName),
-                'slug'    => str_slug($request->forumName),
+                'name'    => strtoupper($request->productName),
+                'slug'    => str_slug($request->productName),
                 'setting' => 10,
             ]);
         return back();

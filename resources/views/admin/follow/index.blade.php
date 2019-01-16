@@ -15,14 +15,14 @@
                 <input id="url" type="text" class="form-control" name="urlFollow" value="{{ old('urlFollow') }}" placeholder="https://www.facebook.com/url" required autofocus><br>
                 <label for="followClass" class="control-label">Pilih Sosial Media</label>
                 <div class="form-check followClass">
-                    <div class="col-xs-6">
+                    <div class="col-sm-6">
                         <p><input type="radio" name="followClass" value="fab fa-facebook"> <i class="fab fa-facebook"> Facebook</i></p>
                         <p><input type="radio" name="followClass" value="fab fa-twitter"> <i class="fab fa-twitter"> Twitter</i></p>
                         <p><input type="radio" name="followClass" value="fab fa-whatsapp"> <i class="fab fa-whatsapp"> Whatsapp</i></p>
                         <p><input type="radio" name="followClass" value="fab fa-instagram"> <i class="fab fa-instagram"> Instagram</i></p>
                         <p><input type="radio" name="followClass" value="fas fa-envelope"> <i class="fas fa-envelope"> Mail</i></p>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-sm-6">
                         <p><input type="radio" name="followClass" value="fab fa-youtube"> <i class="fab fa-youtube"> Youtube</i></p>
                         <p><input type="radio" name="followClass" value="fab fa-weixin"> <i class="fab fa-weixin"> WeChat</i></p>
                         <p><input type="radio" name="followClass" value="fab fa-line"> <i class="fab fa-line"> Line</i></p>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="form-control btn btn-primary">Save</button>
+                    <hr><button type="submit" class="form-control btn btn-primary">Save</button>
                 </div>
             </form>
         </div>

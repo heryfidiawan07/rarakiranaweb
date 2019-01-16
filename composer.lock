@@ -4,61 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "64f2ea7a29c60ee466dc73152e998a1c",
-    "content-hash": "2b2d40665c7414025313c1e757cccbaa",
+    "hash": "6c72fe87fa7aea0f0ae1b10509b38beb",
+    "content-hash": "ee6604c2a4b562027c5b1ec6af254ed6",
     "packages": [
-        {
-            "name": "agungjk/rajaongkir",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/agungjk/rajaongkir.git",
-                "reference": "9e86c8dda3550369b235505fb3810567ac4b4ebf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/agungjk/rajaongkir/zipball/9e86c8dda3550369b235505fb3810567ac4b4ebf",
-                "reference": "9e86c8dda3550369b235505fb3810567ac4b4ebf",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Agungjk\\Rajaongkir\\RajaOngkirServiceProvider"
-                    ],
-                    "aliases": {
-                        "RajaOngkir": "Agungjk\\Rajaongkir\\RajaOngkirFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Agungjk\\Rajaongkir\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Agung Jati Kusumo",
-                    "email": "agungjk.social@gmail.com"
-                }
-            ],
-            "description": "Raja Ongkir API Wrapper for Laravel 5",
-            "keywords": [
-                "application programming interface",
-                "laravel",
-                "rajaongkir",
-                "wrapper"
-            ],
-            "time": "2018-02-08 07:36:09"
-        },
         {
             "name": "anhskohbo/no-captcha",
             "version": "2.4.0",
@@ -1730,6 +1678,47 @@
                 "uuid"
             ],
             "time": "2018-07-19 23:38:55"
+        },
+        {
+            "name": "rizalafani/rajaongkirlaravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rizalafani/rajaongkirlaravel.git",
+                "reference": "a01c4297b8d04e8c5e32ce008fbce146474426b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rizalafani/rajaongkirlaravel/zipball/a01c4297b8d04e8c5e32ce008fbce146474426b0",
+                "reference": "a01c4297b8d04e8c5e32ce008fbce146474426b0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "rizalafani\\rajaongkirlaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ahmad Rizal Afani",
+                    "email": "ahmadrizalafani@gmail.com"
+                }
+            ],
+            "description": "Raja Ongkir API Laravel 5",
+            "keywords": [
+                "application programming interface",
+                "laravel",
+                "rajaongkir"
+            ],
+            "time": "2016-04-24 22:20:24"
         },
         {
             "name": "spatie/laravel-analytics",
@@ -4407,7 +4396,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "agungjk/rajaongkir": 20
+        "rizalafani/rajaongkirlaravel": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

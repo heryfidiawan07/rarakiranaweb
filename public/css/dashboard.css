@@ -11,7 +11,7 @@
 }
 .logo-img {
 	text-align: center;
-	width: 100%;
+	width: 100px;
 }
 .td-dashboard span {
 	float: left;
@@ -39,4 +39,28 @@
 }
 .panel-default .panel-body h5 {
 	font-weight: bold;
+}
+.followClass p {
+	height: 30px;
+}
+.followClass input {
+	width: 10%;
+	float: left;
+	margin-top: 10px;
+	margin-right: 3%;
+}
+.followClass i {
+	width: 85%;
+}
+.adminshare p {
+	height: 30px;
+}
+.adminshare input {
+	width: 10%;
+	float: left;
+	margin-top: 10px;
+	margin-right: 3%;
+}
+.adminshare i {
+	width: 85%;
 }

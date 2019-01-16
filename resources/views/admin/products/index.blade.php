@@ -8,32 +8,57 @@
         
         @include('admin.dashboard-menu')
         <div class="col-md-12">
-            <table>
-            <tr><td>
-            @if($mainStore)
-                <form class="form-inline" method="POST" action="/product/update/{{$mainStore->id}}">
-                    {{csrf_field()}}
-                    <input type="text" name="frontUpdate" class="form-control input-sm" value="{{$mainStore->name}}" required>
-                    <input type="submit" value="save" class="btn btn-success btn-sm">
-                </form>
-            @endif
-            </td>
-            <td>
-            @if($frontTag)
-                <form class="form-inline" method="POST" action="/product/update/status/{{$frontTag->id}}">
-                    {{csrf_field()}}
-                    <select name="statusFront" class="form-control input-sm">
-                        <option value="1">Active</option>
-                        <option value="0">No Active</option>
-                    </select>
-                    <input type="submit" value="save" class="btn btn-danger btn-sm">
-                </form>
-            @endif
-            </td></tr>
-            </table>
+            <div class="table-responsive">
+                <table><tr><td>
+                    @if($frontTag)
+                        <form class="form-inline" method="POST" action="/product/update/{{$frontTag->id}}">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <input type="text" name="frontUpdate" class="form-control input-sm" value="{{$frontTag->name}}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="save" class="btn btn-success btn-sm">
+                            </div>
+                        </form>
+                    @endif
+                    </td>
+                    @if($frontTag)
+                    <td>
+                        <form class="form-inline" method="POST" action="/product/update/status/{{$frontTag->id}}">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <select name="statusFront" class="form-control input-sm">
+                                    @if($frontTag->status==0)
+                                        <option value="0">No Activate</option>
+                                    @endif
+                                    <option value="1">Activate</option>
+                                    <option value="0">No Activate</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="save" class="btn btn-danger btn-sm">
+                            </div>
+                        </form>
+                    </td>
+                    @else
+                    <td>
+                        <form class="form-inline" method="POST" action="/activate/products">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <input type="text" name="productName" class="form-control input-sm" placeholder="Create Menu Forum" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Activate Product" class="btn btn-success btn-sm">
+                            </div>
+                        </form>
+                    </td>
+                    @endif
+                </tr></table>
+            </div>
+            <hr>
         </div>
-        <div class="col-md-4">
-            @if($fronts->where('setting',10)->where('status',1)->count())
+        @if($fronts->where('setting',10)->where('status',1)->count())
+            <div class="col-md-4">
                 <h4 class="text-center">ADD PRODUCT ETALASE</h4><hr>
                 <form class="form-horizontal" role="form" method="POST" action="/etalase/store">
                     {{ csrf_field() }}
@@ -204,13 +229,8 @@
                     <ul class="pagination pagination-sm">{{$products->links()}}</ul>
                 </div>
             </div>
-        @else
-            <form class="form-inline" method="POST" action="/activate/products">
-                {{csrf_field()}}
-                <input type="text" name="productName" class="form-control input-sm" placeholder="Create Menu Product" required>
-                <input type="submit" value="Activate Product" class="btn btn-success btn-sm">
-            </form>
         @endif
+
     </div>
 </div>
 @endsection

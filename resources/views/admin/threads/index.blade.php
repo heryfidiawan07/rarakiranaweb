@@ -8,32 +8,55 @@
     
         @include('admin.dashboard-menu')
         <div class="col-md-12">
-            <table>
-            <tr><td>
-            @if($mainTag)
-                <form class="form-inline" method="POST" action="/forum/update/{{$mainTag->id}}">
-                    {{csrf_field()}}
-                    <input type="text" name="forumUpdate" class="form-control input-sm" value="{{$mainTag->name}}" required>
-                    <input type="submit" value="save" class="btn btn-success btn-sm">
-                </form>
-            @endif
-            </td>
-            <td>
-            @if($forumTag)
-                <form class="form-inline" method="POST" action="/forum/update/status/{{$forumTag->id}}">
-                    {{csrf_field()}}
-                    <select name="statusForum" class="form-control input-sm">
-                        <option value="1">Active</option>
-                        <option value="0">No Active</option>
-                    </select>
-                    <input type="submit" value="save" class="btn btn-danger btn-sm">
-                </form>
-            @endif
-            </td></tr>
-            </table>
+            <table><tr><td>
+                @if($forumTag)
+                    <form class="form-inline" method="POST" action="/forum/update/{{$forumTag->id}}">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <input type="text" name="forumUpdate" class="form-control input-sm" value="{{$forumTag->name}}" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="save" class="btn btn-success btn-sm">
+                        </div>
+                    </form>
+                @endif
+                </td>
+                @if($forumTag)
+                <td>
+                    <form class="form-inline" method="POST" action="/forum/update/status/{{$forumTag->id}}">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <select name="statusForum" class="form-control input-sm">
+                                @if($forumTag->status==0)
+                                    <option value="0">No Activate</option>
+                                @endif
+                                <option value="1">Activate</option>
+                                <option value="0">No Activate</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="save" class="btn btn-danger btn-sm">
+                        </div>
+                    </form>
+                </td>
+                @else
+                <td>
+                    <form class="form-inline" method="POST" action="/activate/forum">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Activate Forum" class="btn btn-success btn-sm">
+                        </div>
+                    </form>
+                </td>
+                @endif
+            </tr></table>
         </div>
-        <div class="col-md-4">
-            @if($tags->where('setting',10)->where('status',1)->count())
+
+        @if($tags->where('setting',10)->where('status',1)->count())
+            <div class="col-md-4">
                 <h4 class="text-center"><b>ADD TAG</b></h4><hr>
                 <form class="form-horizontal" role="form" method="POST" action="/tag/store">
                     {{ csrf_field() }}
@@ -191,12 +214,6 @@
                     <ul class="pagination pagination-sm">{{$threads->links()}}</ul>
                 </div>
             </div>
-        @else
-            <form class="form-inline" method="POST" action="/activate/forum">
-                {{csrf_field()}}
-                <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
-                <input type="submit" value="Activate Forum" class="btn btn-success btn-sm">
-            </form>
         @endif
 
     </div>

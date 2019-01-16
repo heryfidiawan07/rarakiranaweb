@@ -41,14 +41,24 @@
                     </a>
                 </div>
                 <div class="media">
-                    <form class="form-inline" method="POST" action="/cek/ongkir/product/{{$product->slug}}">
+                    <form class="form-inline" id="form-ongkir" method="POST" action="/cek/ongkir/product/{{$product->slug}}">
                         {{csrf_field()}}
-                        <input type="text" id="input" name="city" class="form-control input-sm getcity" placeholder="Nama Kota">
-                        <input type="submit" value="Cek Ongkir" class="btn btn-success btn-sm" id="cek">
-                        <div class="media" id="city">
-                            <p><span id="cost"></span></p>
+                        <div class="form-group" id="getcity">
+                            <input data-url="/get-city" type="text" id="tujuan" name="tujuan" class="form-control input-sm" placeholder="Nama Kota">
+                            <ul id="listcity"></ul>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <select name="kurir" id="kurir" class="form-control input-sm">
+                                <option value="jne" data-cap="JNE">JNE</option>
+                                <option value="tiki" data-cap="TIKI">TIKI</option>
+                                <option value="pos" data-cap="POS">POS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cek Ongkir" class="btn btn-success btn-sm" id="cek">
+                        </div>
+                    </form>                    
+                    <div class="media" id="cost"></div>
                 </div>
             </div>
         </div>
@@ -96,4 +106,5 @@
 @endsection
 @section('js')
     <script type="text/javascript" src="/js/ongkir.js"></script>
+    <script type="text/javascript" src="/js/searchcity.js"></script>
 @endsection
