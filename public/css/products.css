@@ -19,6 +19,9 @@
 	text-decoration: none;
 	color: grey;
 }
+.product-content {
+	margin-bottom: 10px;
+}
 .product-content a {
 	color: black;
 }
@@ -149,22 +152,21 @@
 /*Live Search*/
 #listcity {
 	position: absolute;
-	left: 0;
 	width: 100%;
 	cursor: pointer;
 	overflow-y: auto;
 	z-index: 1001;
-	list-style: none;
+	max-height: 200px;
+	overflow-y: scroll;
 }
 .listcityitem:hover {
-	font-weight: bold;
+	color: green;
 }
 .listcityitem {
 	background-color: lightgrey;
 	border-bottom: 1px solid grey;
 	padding-top: 5px;
 	padding-left: 10px;
-	/*padding-right: 10px;*/
-	width: 200px;
+	width: auto;
 	display: none;
 }

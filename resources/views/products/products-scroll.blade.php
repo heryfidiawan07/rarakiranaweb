@@ -14,7 +14,7 @@
         <p class="discount"><s><small>Rp {{number_format($product->price,2)}}</small></s></p>
         <h4 class="price">Rp {{number_format($product->price - $product->discount,2)}}</h4>
         <div class="text-center">
-            <a href="#" class="btn btn-default btn-sm">
+            <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
             </a>
         </div>

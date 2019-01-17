@@ -146,7 +146,6 @@ Route::get('/product/cart/{slug}', 'ProductController@cart');
 Route::post('/product/checkout/{slug}', 'ProductController@checkout');
 //Cek Ongkir
 Route::post('/cek/ongkir/product/{slug}/{tujuan}/{kurir}', 'ProductController@ongkir');
-Route::post('/get-city', 'ProductController@getCity');
 
 //Forum / Thread
 Route::get('/page/{slug}', 'ThreadController@threads');

@@ -66,6 +66,11 @@
                             <li><a href="/dashboard"><b>DASHBOARD</b></a></li>
                         @endif
                     @endif
+                    @if(Auth::check())
+                        @if(Auth::user())
+                            <li><a href="/user/{{Auth::user()->slug}}"><b>PROFIL</b></a></li>
+                        @endif
+                    @endif
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <b>{{ Auth::user()->name }}</b> <span class="caret"></span>

@@ -12,8 +12,12 @@
       <div class="card card-body">
         <form method="POST" action="/user/change/name/{{$user->id}}" class="form-inline">
             {{csrf_field()}}
-            <input type="text" name="name" class="form-control input-sm" required>
-            <input type="submit" value="Simpan" class="btn btn-success btn-sm">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control input-sm" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Simpan" class="btn btn-success btn-sm">
+            </div>
         </form>
       </div>
     </div>

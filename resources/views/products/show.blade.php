@@ -36,16 +36,20 @@
                 </h4>
                 <h3 class="price">Rp {{number_format($product->price - $product->discount, 2)}}</h3>
                 <div class="buy-show">
-                    <a href="#" class="btn btn-default btn-sm">
+                    <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
                     </a>
                 </div>
                 <div class="media">
                     <form class="form-inline" id="form-ongkir" method="POST" action="/cek/ongkir/product/{{$product->slug}}">
                         {{csrf_field()}}
-                        <div class="form-group" id="getcity">
-                            <input data-url="/get-city" type="text" id="tujuan" name="tujuan" class="form-control input-sm" placeholder="Nama Kota">
-                            <ul id="listcity"></ul>
+                        <div class="form-group">
+                            <input type="text" id="tujuan" name="tujuan" class="form-control input-sm" placeholder="Nama Kota">
+                            <div id="listcity">
+                                @for($i = 0; $i < count($city); $i++)
+                                    <p class="listcityitem" data-id="{{$city[$i]['city_id']}}" data-name="{{$city[$i]['city_name']}}">{{$city[$i]['city_name']}} - {{$city[$i]['type']}} - {{$city[$i]['province']}}</p>
+                                @endfor
+                            </div>
                         </div>
                         <div class="form-group">
                             <select name="kurir" id="kurir" class="form-control input-sm">
@@ -106,5 +110,4 @@
 @endsection
 @section('js')
     <script type="text/javascript" src="/js/ongkir.js"></script>
-    <script type="text/javascript" src="/js/searchcity.js"></script>
 @endsection

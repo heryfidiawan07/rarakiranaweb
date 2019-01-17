@@ -59,7 +59,7 @@
         </div>
         @if($fronts->where('setting',10)->where('status',1)->count())
             <div class="col-md-4">
-                <h4 class="text-center">ADD PRODUCT ETALASE</h4><hr>
+                <h4 class="text-center">ADD ETALASE</h4><hr>
                 <form class="form-horizontal" role="form" method="POST" action="/etalase/store">
                     {{ csrf_field() }}
 

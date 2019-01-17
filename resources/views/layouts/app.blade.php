@@ -15,6 +15,10 @@
     <meta name="title"         content="@yield('title')" />
     <meta name="description"   content="@yield('description')" />
 
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:image" content="@yield('image')" />
+    <meta property="og:description" content="@yield('description')" />
+
     <meta name="google-signin-client_id" content="524555026329-duc32e6en3f62mhdak03hi5scguviu9f.apps.googleusercontent.com">
     <!-- Icon -->
     <link href="<?php if($mainLogo) echo 'http://rarakirana.com/logo/thumb/'.$mainLogo->img ?>" rel='shortcut icon'>

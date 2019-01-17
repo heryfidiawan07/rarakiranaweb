@@ -212,10 +212,11 @@ class ProductController extends Controller
 // Guest User
     public function show($prodslug)
     {
-        $product = Product::where([['slug',$prodslug],['status',1]])->first();
+        $product    = Product::where([['slug',$prodslug],['status',1]])->first();
         $discusions = $product->comments()->paginate(10);
+        $city       = RajaOngkir::Kota()->all();
         if ($product && $product->Storefront->status==1) {
-            return view('products.show', compact('product','discusions'));
+            return view('products.show', compact('product','discusions','city'));
         }else{
             return view('errors.503');
         }
@@ -260,14 +261,10 @@ class ProductController extends Controller
         return response($cost);
     }
     
-    public function getCity(){
-        $city = RajaOngkir::Kota()->all();
-        return response($city);
-    }
-    
     public function cart($slug){
         $product = Product::whereSlug($slug)->first();
-        return view('products.cart',compact('product'));
+        $city    = RajaOngkir::Kota()->all();
+        return view('products.cart',compact('product','city'));
     }
     
 // Guest User
