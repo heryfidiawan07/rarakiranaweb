@@ -62,7 +62,7 @@
                         <label for="price" class="control-label">Harga</label>
                         <div class="input-group">
                             <div class="input-group-addon">Rp</div>
-                            <input type="integer" name="price" class="form-control" value="{{$product->price}}" required autofocus>
+                            <input type="integer" name="price" class="form-control" value="{{$product->price + $product->discount}}" required autofocus>
                         </div>
                         @if ($errors->has('price'))
                             <span class="help-block">

@@ -161,7 +161,7 @@
             <div class="col-md-12"><hr>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="/product/create" class="btn btn-primary btn-sm pull-left">CREATE PRODUCT</a>
+                        <a href="/product/create" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> ADD PRODUCT</a>
                         <h4 class="text-center"><b>PRODUCT LIST</b></h4>
                     </div>
                     <div class="panel-body">

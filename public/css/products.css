@@ -25,9 +25,18 @@
 .product-content a {
 	color: black;
 }
+.product-content .btn-default {
+	color: black !important;
+}
+.product-content .btn {
+	color: white;
+}
 .product-content a:hover {
 	color: grey;
 	text-decoration: none;
+}
+.product-content .btn:hover {
+	color: white;
 }
 .price {
 	color: red;
@@ -150,23 +159,37 @@
 /*End Product Discusions*/
 
 /*Live Search*/
-#listcity {
+#listcity-frame {
 	position: absolute;
-	width: 100%;
+	width: 95%;
 	cursor: pointer;
-	overflow-y: auto;
-	z-index: 1001;
-	max-height: 200px;
 	overflow-y: scroll;
+	z-index: 1001;
+	max-height: 150px;
+	overflow-y: auto;
+}
+#listcity {
+	
 }
 .listcityitem:hover {
 	color: green;
 }
 .listcityitem {
-	background-color: lightgrey;
+	background-color: rgb(230, 230, 230, 0.8);
 	border-bottom: 1px solid grey;
 	padding-top: 5px;
 	padding-left: 10px;
 	width: auto;
 	display: none;
+}
+/*Shopping*/
+#shopping-cart {
+	border: 1px solid lightgrey;
+	padding: 10px;
+	font-weight: bold;
+	color: black;
+}
+#shopping-cart:hover {
+	text-decoration: none;
+	background-color: lightgrey;
 }

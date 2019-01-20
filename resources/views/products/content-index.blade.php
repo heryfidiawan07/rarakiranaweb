@@ -13,11 +13,22 @@
                 </p>
             </a>
             
-            <p class="discount"><s><small>Rp {{number_format($product->price,2)}}</small></s></p>
-            <h4 class="price">Rp {{number_format($product->price - $product->discount, 2)}}</h4>
+            <p class="discount">
+                <s><small>Rp {{number_format($product->price + $product->discount,2)}}</small></s>
+                @if($product->discount)
+                    <img src="/parts/sale.jpg" width="50">
+                @endif
+                <span>
+                    <small><i>{{number_format(($product->price + $product->discount) / $product->discount)}} %</i></small>
+                </span>
+            </p>
+            <h4 class="price">Rp {{number_format($product->price, 2)}}</h4>
             <div class="text-center">
                 <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm buy">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
+                </a>
+                <a href="/add-to-cart/{{$product->id}}" class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
                 </a>
             </div>
         </div>

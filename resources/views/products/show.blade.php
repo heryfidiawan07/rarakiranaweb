@@ -29,15 +29,18 @@
                      @endif
                 </div>
                 <h4 class="discount">
-                    <s>Rp {{number_format($product->price, 2)}}</s>
+                    <s>Rp {{number_format($product->price + $product->discount, 2)}}</s>
                     <span>
-                        <small><i>{{$product->price/$product->discount}} %</i></small>
+                        <small><i>{{($product->price + $product->discount) / $product->discount}} %</i></small>
                     </span>
                 </h4>
-                <h3 class="price">Rp {{number_format($product->price - $product->discount, 2)}}</h3>
+                <h3 class="price">Rp {{number_format($product->price, 2)}}</h3>
                 <div class="buy-show">
                     <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
+                    </a>
+                    <a href="/add-to-cart/{{$product->id}}" class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
                     </a>
                 </div>
                 <div class="media">
@@ -45,10 +48,14 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <input type="text" id="tujuan" name="tujuan" class="form-control input-sm" placeholder="Nama Kota">
-                            <div id="listcity">
-                                @for($i = 0; $i < count($city); $i++)
-                                    <p class="listcityitem" data-id="{{$city[$i]['city_id']}}" data-name="{{$city[$i]['city_name']}}">{{$city[$i]['city_name']}} - {{$city[$i]['type']}} - {{$city[$i]['province']}}</p>
-                                @endfor
+                            <div id="listcity-frame">
+                                <table id="listcity" class="table table-hover">
+                                    @for($i = 0; $i < count($city); $i++)
+                                        <tr>
+                                            <td class="listcityitem" data-id="{{$city[$i]['city_id']}}" data-name="{{$city[$i]['city_name']}}">{{$city[$i]['city_name']}} - {{$city[$i]['type']}} - {{$city[$i]['province']}}</td>
+                                        </tr>
+                                    @endfor
+                                </table>
                             </div>
                         </div>
                         <div class="form-group">

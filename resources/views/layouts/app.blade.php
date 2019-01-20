@@ -61,6 +61,17 @@
 <body>
     <div id="app">
         @include('layouts.navigation')
+        @if($mainStore)
+            <div class="container">
+                <a href="/product/cart" id="shopping-cart">
+                    <i class="fas fa-shopping-cart"></i>Keranjang
+                    <span class="badge">
+                        {{Session::has('cart') ? Session::get('cart')->totalQty : '0'}}
+                    </span>
+                </a>
+            </div>
+            <br>
+        @endif
         <div id="body">
             @yield('content')
         </div>

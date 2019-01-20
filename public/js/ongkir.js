@@ -21,6 +21,10 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on('click', '#tujuan', function(){
+        $(this).val('');
+    });
+
     $(document).on('click','.listcityitem', function() {
         var text = $(this).text();
         var cityId = $(this).attr('data-id');

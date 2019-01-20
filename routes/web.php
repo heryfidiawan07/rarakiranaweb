@@ -142,10 +142,15 @@ Route::get('/all/{slug}', 'ProductController@products');
 Route::get('/show/product/{prodslug}', 'ProductController@show');
 Route::get('/products/{slug}', 'ProductController@storefront');
 //Product Checkout
-Route::get('/product/cart/{slug}', 'ProductController@cart');
-Route::post('/product/checkout/{slug}', 'ProductController@checkout');
-//Cek Ongkir
+Route::get('/add-to-cart/{id}', "ProductController@addToCart");
+Route::get('/product/cart', 'ProductController@cart');
+Route::get('/product/checkout', 'ProductController@checkout');
+Route::post('/product/payment', 'ProductController@payment');
+
+//Ongkir
 Route::post('/cek/ongkir/product/{slug}/{tujuan}/{kurir}', 'ProductController@ongkir');
+Route::post('/get-services/{city}/{kurir}', 'ProductController@services');
+Route::post('/get-ongkir-services/{city}/{kurir}/{key}', 'ProductController@costService');
 
 //Forum / Thread
 Route::get('/page/{slug}', 'ThreadController@threads');
