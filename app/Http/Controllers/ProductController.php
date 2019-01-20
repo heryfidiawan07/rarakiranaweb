@@ -275,7 +275,7 @@ class ProductController extends Controller
 
         $request->session()->put('cart', $cart);
         //dd($request->session()->get('cart'));
-        return back();
+        return redirect('/');//Under Dev -> Editing wait
     }
     
     
