@@ -132,6 +132,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/user/image/upload/{id}', 'UserController@image');
 	Route::post('/user/change/name/{id}', 'UserController@name');
 	Route::post('/user/update/bio/{id}', 'UserController@bio');
+	//Product Checkout
+	Route::get('/product/checkout', 'ProductController@checkout');
+	Route::post('/product/payment', 'ProductController@payment');
+	//User Payment
+	Route::get('/user/payment', 'UserController@payments');
 });
 //Post
 Route::get('/{slugMenu}', 'PostController@menu');
@@ -144,8 +149,6 @@ Route::get('/products/{slug}', 'ProductController@storefront');
 //Product Checkout
 Route::get('/add-to-cart/{id}', "ProductController@addToCart");
 Route::get('/product/cart', 'ProductController@cart');
-Route::get('/product/checkout', 'ProductController@checkout');
-Route::post('/product/payment', 'ProductController@payment');
 
 //Ongkir
 Route::post('/cek/ongkir/product/{slug}/{tujuan}/{kurir}', 'ProductController@ongkir');

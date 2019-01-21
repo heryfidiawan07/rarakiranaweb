@@ -102,4 +102,11 @@ class UserController extends Controller
         return back();
     }
 
+    public function payments(){
+        $user = Auth::user();
+        $payments = $user->payments()->paginate(5);
+        dd($payments);
+    }
+    
+
 }

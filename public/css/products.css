@@ -193,3 +193,7 @@
 	text-decoration: none;
 	background-color: lightgrey;
 }
+/*Product Checkout*/
+.alert-success a:hover {
+	text-decoration: none;
+}

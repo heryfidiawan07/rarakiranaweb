@@ -46,33 +46,13 @@
                     </div>
                 @endforeach
                 <strong>Sub Total:<span class="price" id="subtotal" data-price="{{$totalPrice}}"> Rp {{number_format($totalPrice, 2)}}</span></strong>
-                <hr>
                 <form id="formcheckout" method="POST" action="/product/payment">
                     {{csrf_field()}}
+                    <hr>
+                    @include('products.address')
+                    <hr>
                     <div class="form-group">
                         <textarea name="note" class="form-control" rows="3" placeholder="Catatan untuk penjual" id="note" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="address" class="form-control" rows="4" placeholder="Alamat rumah" id="address" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="penerima" placeholder="Nama penerima" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="city" name="kabupaten" class="form-control input-sm" placeholder="Kabupaten" required>
-                        <input type="hidden" name="kabHidden" id="kabHidden">
-                        <div id="listcity-frame">
-                            <table id="listcity" class="table table-hover">
-                                @for($i = 0; $i < count($city); $i++)
-                                    <tr>
-                                        <td class="listcityitem" data-id="{{$city[$i]['city_id']}}" data-name="{{$city[$i]['city_name']}}">{{$city[$i]['type']}} - {{$city[$i]['city_name']}} - {{$city[$i]['province']}}</td>
-                                    </tr>
-                                @endfor
-                            </table>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="kecamatan" name="kecamatan" class="form-control input-sm" placeholder="Kecamatan" required>
                     </div>
                     <div class="form-group">
                         <select name="kurir" id="kurir" class="form-control input-sm" required>

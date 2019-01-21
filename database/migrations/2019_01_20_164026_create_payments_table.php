@@ -18,17 +18,10 @@ class CreatePaymentsTable extends Migration
             $table->integer('address_id')->unsigned();
             $table->string('pengirim');
             $table->string('resi');
-            $table->integer('total_price');
-            $table->string('note');
-            $table->string('kurir');
-            $table->string('services');
-            $table->integer('total_weight');
-            $table->integer('user_id')->unsigned();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

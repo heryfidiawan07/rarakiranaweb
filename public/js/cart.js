@@ -88,19 +88,4 @@ $(document).ready(function(){
         });
     });
 
-    $('#checkout').on('click', function(e){
-        //e.preventDefault();
-        //$("#qty").prop('required',true);
-        var slug = $('#slug').attr('data-slug');
-        var qty  = $('#qty').val();
-        var address = $('#address').val();
-        var tujuan = $('#city').attr('value');
-        var kecamatan = $('#kecamatan').val();
-        var kurir  = $('#kurir').val();
-        var serv   = $('#services').val();
-        
-        var urll = '/product/checkout/'+slug+'/'+qty+'/delivery/'+tujuan+'/'+kurir+'/'+serv;
-        console.log(urll);
-    });
-
 });
