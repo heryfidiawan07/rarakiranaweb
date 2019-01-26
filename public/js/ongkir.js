@@ -5,10 +5,10 @@ $(document).ready(function(){
         }
     });
     
-    $('#tujuan').keyup(function(){
+    $('#kabupaten').keyup(function(){
         var filter = $(this).val(), count = 0;
-        $("#listcity .listcityitem").each(function () {
-            var current = $('.listcityitem').attr('data-name');
+        $("#list-kabupaten .list-kabupaten-item").each(function () {
+            var current = $('.list-kabupaten-item').attr('data-name');
             if ($(this).text().search(new RegExp(filter, "i")) < 0) {
                 $(this).fadeOut();
             } else {
@@ -17,35 +17,32 @@ $(document).ready(function(){
             }
         });
         if (this.value.length < 4) {
-            $('.listcityitem').hide();
+            $('.list-kabupaten-item').hide();
         }
     });
 
-    $(document).on('click', '#tujuan', function(){
+    $(document).on('click', '#kabupaten', function(){
         $(this).val('');
     });
 
-    $(document).on('click','.listcityitem', function() {
-        var text = $(this).text();
+    $(document).on('click','.list-kabupaten-item', function() {
+        var text   = $(this).text();
         var cityId = $(this).attr('data-id');
-        //console.log(text+'-'+cityId);
-        $('#tujuan').val(text);
-        $('#tujuan').attr('value',cityId);
-        $('.listcityitem').fadeOut();
+        $('#kabupaten').val(text);
+        $('#kabupaten').attr('value',cityId);
+        $('.list-kabupaten-item').fadeOut();
     });
 
     $('#cek').on('click',function(e){
         e.preventDefault();
-        var tujuan = $('#tujuan').attr('value')
-        var kurir  = $('#kurir').val();
-        var tcr    = $('#kurir option:selected').text()
-        var urll   = $('#form-ongkir').attr('action')+'/'+tujuan+'/'+kurir;
+        var kabupaten = $('#kabupaten').attr('value')
+        var kurir     = $('#kurir').val();
+        var tcr       = $('#kurir option:selected').text()
+        var urll      = $('#form-ongkir').attr('action')+'/'+kabupaten+'/'+kurir;
         $.ajax({
             type: 'POST',
             url : urll,
-            // data:  {data:kurir},
             success : function(data, statusTxt, xhr){
-                //console.log(data);
                 for (var i = data[0]['costs'].length - 1; i >= 0; i--) {
                     $('#cost').append(
                         '<p>'+tcr

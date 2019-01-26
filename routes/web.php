@@ -136,7 +136,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/product/checkout', 'ProductController@checkout');
 	Route::post('/product/payment', 'ProductController@payment');
 	//User Payment
-	Route::get('/user/payment', 'UserController@payments');
+	Route::get('/user/{slug}/payment/{order}', 'UserController@payment');
 });
 //Post
 Route::get('/{slugMenu}', 'PostController@menu');
@@ -152,8 +152,8 @@ Route::get('/product/cart', 'ProductController@cart');
 
 //Ongkir
 Route::post('/cek/ongkir/product/{slug}/{tujuan}/{kurir}', 'ProductController@ongkir');
-Route::post('/get-services/{city}/{kurir}', 'ProductController@services');
-Route::post('/get-ongkir-services/{city}/{kurir}/{key}', 'ProductController@costService');
+Route::post('/get-services/{kabupaten}/{kurir}', 'ProductController@services');
+Route::post('/get-ongkir-services/{kabupaten}/{kurir}/{key}', 'ProductController@costService');
 
 //Forum / Thread
 Route::get('/page/{slug}', 'ThreadController@threads');

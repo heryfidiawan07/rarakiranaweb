@@ -27,12 +27,13 @@
     <link rel="stylesheet" type="text/css" href="/css/img.css">
     <link rel="stylesheet" type="text/css" href="/css/promo.css">
     <link rel="stylesheet" type="text/css" href="/css/thumb.css">
-    <link rel="stylesheet" type="text/css" href="/css/social.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/posts.css">
+    <link rel="stylesheet" type="text/css" href="/css/social.css">
     <link rel="stylesheet" type="text/css" href="/css/threads.css">
     <link rel="stylesheet" type="text/css" href="/css/products.css">
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
     <link rel="stylesheet" type="text/css" href="/css/headerFooter.css">
+    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
     @yield('css')
     <!-- Lib -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">

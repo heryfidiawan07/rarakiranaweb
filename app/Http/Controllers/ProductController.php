@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getCity','cart','checkout', 'payment', 'services', 'costService','addToCart','confirm']]);
+        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getkabupaten','cart','checkout', 'payment', 'services', 'costService','addToCart']]);
     }
 
     public function index()
@@ -220,9 +220,9 @@ class ProductController extends Controller
     {
         $product    = Product::where([['slug',$prodslug],['status',1]])->first();
         $discusions = $product->comments()->paginate(10);
-        $city       = RajaOngkir::Kota()->all();
+        $kabupaten       = RajaOngkir::Kota()->all();
         if ($product && $product->Storefront->status==1) {
-            return view('products.show', compact('product','discusions','city'));
+            return view('products.show', compact('product','discusions','kabupaten'));
         }else{
             return view('errors.503');
         }
@@ -272,10 +272,8 @@ class ProductController extends Controller
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart    = new Cart($oldCart);
         $cart->add($product, $product->id);
-
         $request->session()->put('cart', $cart);
-        //dd($request->session()->get('cart'));
-        return redirect('/');//Under Dev -> Editing wait
+        return redirect()->back();
     }
     
     
@@ -290,27 +288,27 @@ class ProductController extends Controller
 
     public function checkout(){
         if (!Session::has('cart')) {
-            return view('products.cart');
+            return redirect('/product/cart');
         }
-        $oldCart = Session::get('cart');
-        $cart    = new Cart($oldCart);
-        $city    = RajaOngkir::Kota()->all();
-        $address = Address::where('user_id',Auth::user()->id)->first();
-        return view('products.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice , 'city' => $city, 'totalWeight' => $cart->totalWeight, 'address' => $address]);
+        $oldCart   = Session::get('cart');
+        $cart      = new Cart($oldCart);
+        $kabupaten = RajaOngkir::Kota()->all();
+        $address   = Address::where('user_id',Auth::user()->id)->first();
+        return view('products.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice , 'kabupaten' => $kabupaten, 'totalWeight' => $cart->totalWeight, 'address' => $address]);
     }
 
-    public function services(Request $request, $city, $kurir){
+    public function services(Request $request, $kabupaten, $kurir){
         $asal    = 55;//55 Adalah bekasi kabupaten
         $cost    = RajaOngkir::Cost([
                         'origin'        => $asal, // id kota asal = Bekasi
-                        'destination'   => $city, // id kota tujuan
+                        'destination'   => $kabupaten, // id kota tujuan
                         'weight'        => 1000, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
         return response($cost);
     }
     
-    public function costService(Request $request, $city, $kurir, $key){
+    public function costService(Request $request, $kabupaten, $kurir, $key){
         $oldCart = Session::get('cart');
         $cart    = new Cart($oldCart);
         $total   = $cart->totalPrice;
@@ -318,7 +316,7 @@ class ProductController extends Controller
         $asal    = 55;//55 Adalah bekasi kabupaten
         $cost    = RajaOngkir::Cost([
                         'origin'        => $asal, // id kota asal = Bekasi
-                        'destination'   => $city, // id kota tujuan
+                        'destination'   => $kabupaten, // id kota tujuan
                         'weight'        => $weight, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
@@ -345,7 +343,7 @@ class ProductController extends Controller
         $weight  = $cart->totalWeight*1000;
         //Request
         $asal      = 55;
-        $key       = $request->keyServ;
+        $key       = $request->keyService;
         $cost      = RajaOngkir::Cost([
                         'origin'        => $asal, // id kota asal = Bekasi
                         'destination'   => $request->kabHidden, // id kota tujuan
@@ -354,70 +352,49 @@ class ProductController extends Controller
                     ])->get();
         $tagihan      = $cost[0]['costs'][$key]['cost'][0]['value'];
         $totalTagihan = $total+$tagihan;
-        // $input     = array(
-        //                 'note' => $note, 'address' => $address, 'kabupaten' => $kabupaten,'kecamatan' => $kecamatan, 
-        //                 'services' => $services, 'kabHidden' => $kabHidden, 'weight' => $weight, 'key' => $key, 
-        //                 'totalTagihan' => $totalTagihan
-        //             );
-        // print_r($input);
-        
-        //Address [id, name, penerima, user_id, address, kab_id, kabupaten, kec_id, kecamatan]
-        //Payments [id, address_id, pengirim, resi, status]
-        //ORDERS ['payment_id', 'no_order', 'cart', 'total_price', 'note', 'kurir', 'services', 'total_weight',]
         $useradd = Address::where([['user_id',Auth::user()->id],['kab_id','!=',$request->kabHidden]])->first();
+        $user = Auth::user();
         if ($useradd === null) {
             $address = Address::create([
-                'name'      => Auth::user()->name,
+                'name'      => $user->name,
                 'penerima'  => $request->penerima,
                 'address'   => Purifier::clean($request->address),
                 'kab_id'    => $request->kabHidden,
                 'kabupaten' => $request->kabupaten,
                 'kec_id'    => 0,
                 'kecamatan' => $request->kecamatan,
-                'user_id'   => Auth::user()->id,
+                'user_id'   => $user->id,
             ]);
         }else{
             $address = Address::update([
-                'name'      => Auth::user()->name,
+                'name'      => $user->name,
                 'penerima'  => $request->penerima,
                 'address'   => Purifier::clean($request->address),
-                'kab_id'    => $request->kabHidden,
-                'kabupaten' => $request->kabupaten,
-                'kec_id'    => 0,
-                'kecamatan' => $request->kecamatan,
-                'user_id'   => Auth::user()->id,
             ]);
         }
-        $payment = Payment::create([
-                'address_id' => $address->id,
-                'pengirim'   => 'yet',
-                'resi'       => 'yet',
-            ]);
-        Order::create([
-                'payment_id'   => $payment->id,
-                'no_order'     => $payment->id.date("YmdHis"),
-                'cart'         => serialize($cart),
-                'total_price'  => $totalTagihan,
-                'note'         => $request->note,
-                'kurir'        => $request->kurir,
-                'services'     => $request->services,
-                'total_weight' => $weight,
-                'user_id'   => Auth::user()->id,
-            ]);
-        $forget = Session::forget('cart');
-        //$array = array('address' => $address, 'payment' => $payment, 'order' => $order, 'forget' => $forget, 'dev' => 'UNDER DEVELOPMENT');
-        //Mail::to($user->email)->send(new RarakiranaRegister($user));
-        return redirect('/user/payment');
-        //return view('products.payment',compact('payment'));
-        //dd($items[1]);
-        // return view('products.cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice , 'city' => $city]);
-        // $product = Product::whereSlug($slug)->first();
-    }
+        $time = date("YmdHis");
+        //Create Order
+        $order = new Order;
+        $order->no_order = $user->id.$time;
+        $order->cart     = serialize($cart);
+        $order->user_id  = $user->id;
+        $order->save();
+        //Create Payment
+        $payment = new Payment;
+        $payment->address_id   = $address->id;
+        $payment->order_id     = $order->id;
+        $payment->pengirim     = 'yet';
+        $payment->resi         = 'yet';
+        $payment->total_price  = $totalTagihan;
+        $payment->total_weight = $weight;
+        $payment->note         = $request->note;
+        $payment->kurir        = $request->kurir;
+        $payment->services     = $request->services;
+        $payment->save();
 
-    public function confirm($orderId){
-        
+        $forget = Session::forget('cart');
+        return redirect("/user/{$user->slug}/payment/{$order->no_order}");
     }
-    
 // Guest User
 
 }

@@ -20,8 +20,9 @@ class DashboardController extends Controller
     }
 
     public function dashboard(){
-        $online   = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')
-                    ->totalsForAllResults['rt:activeVisitors'];
+        $online   = '';
+        // Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')
+        //             ->totalsForAllResults['rt:activeVisitors'];
         $users    = User::all();
         $posts    = Post::all();
         $threads  = Thread::all();

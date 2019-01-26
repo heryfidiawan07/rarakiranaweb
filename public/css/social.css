@@ -1,6 +1,6 @@
 /*Login adn Register Blade*/
 .social-login .fab {
-	padding: 10px 10px;
+	/*padding: 10px 10px;*/
 }
 /*End Login adn Register Blade*/
 /*Global CSS*/
@@ -12,7 +12,7 @@
 .share input {
   width: 10%;
 }
-.share .fab .fas {
+.share > .fab .fas {
   width: 80%;
   padding: 10px 10px;
 }
@@ -22,13 +22,13 @@
 	width: 10%;
 }
 .followClass .fab .fas {
-	width: 80%;
+	/*width: 80%;*/
+	/*padding: 10px 10px;*/
+}
+td > .fab, .fas {
 	padding: 10px 10px;
 }
-td, .fab, .fas {
-	padding: 10px 10px;
-}
-p .fas,.fab {
+p > .fas,.fab {
 	font-size: 1em;
 }
 /*End Admin Follow*/
@@ -58,7 +58,7 @@ p .fas,.fab {
   background: #e4405f; color: white;
 }
 .fa-envelope {
-  background: lightgrey; color: black;
+  /*background: lightgrey; color: black;*/
 }
 .fa-youtube {
   background: #cd201f; color: white;

@@ -1,26 +1,45 @@
 <div class="thumbnail">
     <div class="form-group">
-        <input type="text" name="penerima" placeholder="Nama penerima" class="form-control input-sm" @if($address) value="{{$address->penerima}}" @endif required>
+        <input type="text" name="penerima" id="penerima" placeholder="Nama penerima" class="form-control input-sm" @if($address) value="{{$address->penerima}}" @endif required>
+        @if ($errors->has('penerima'))
+            <span class="help-block">
+                <strong>{{ $errors->first('penerima') }}</strong>
+            </span>
+        @endif
     </div>
     <div class="form-group">
-        <textarea name="address" class="form-control" rows="4" placeholder="Alamat rumah" id="address" required>
-            @if($address) {{ strip_tags($address->address) }} @endif
-        </textarea>
+        <textarea name="address"id="address" class="form-control" rows="4" placeholder="Alamat rumah" required>@if($address) {!! strip_tags($address->address) !!} @endif</textarea>
+        @if ($errors->has('address'))
+            <span class="help-block">
+                <strong>{{ $errors->first('address') }}</strong>
+            </span>
+        @endif
     </div>
     <div class="form-group">
-        <input type="text" id="city" name="kabupaten" class="form-control input-sm" placeholder="Kabupaten" @if($address) value="{{$address->kabupaten}}" @endif required>
+        <input type="text" name="kabupaten" id="kabupaten" class="form-control input-sm" placeholder="Kabupaten" autocomplete="off" @if($address) value="{{$address->kabupaten}}" @endif required>
         <input type="hidden" name="kabHidden" id="kabHidden" @if($address) value="{{$address->kab_id}}" @endif>
-        <div id="listcity-frame">
-            <table id="listcity" class="table table-hover">
-                @for($i = 0; $i < count($city); $i++)
+        @if ($errors->has('kabupaten'))
+            <span class="help-block">
+                <strong>{{ $errors->first('kabupaten') }}</strong>
+            </span>
+        @endif
+        <div id="list-kabupaten-frame">
+            <table id="list-kabupaten" class="table table-hover">
+                @for($i = 0; $i < count($kabupaten); $i++)
                     <tr>
-                        <td class="listcityitem" data-id="{{$city[$i]['city_id']}}" data-name="{{$city[$i]['city_name']}}">{{$city[$i]['type']}} - {{$city[$i]['city_name']}} - {{$city[$i]['province']}}</td>
+                        <td class="list-kabupaten-item" data-id="{{$kabupaten[$i]['city_id']}}" data-name="{{$kabupaten[$i]['city_name']}}">{{$kabupaten[$i]['type']}} - {{$kabupaten[$i]['city_name']}} - {{$kabupaten[$i]['province']}}</td>
                     </tr>
                 @endfor
             </table>
         </div>
     </div>
     <div class="form-group">
-        <input type="text" id="kecamatan" name="kecamatan" class="form-control input-sm" placeholder="Kecamatan" @if($address) value="{{$address->kecamatan}}" @endif required>
+        <input type="text" name="kecamatan" id="kecamatan" class="form-control input-sm" placeholder="Kecamatan" autocomplete="off" @if($address) value="{{$address->kecamatan}}" @endif readonly required>
+        <input type="hidden" name="kecHidden" id="kecHidden" @if($address) value="{{$address->kec_id}}" @endif>
+        @if ($errors->has('kecamatan'))
+            <span class="help-block">
+                <strong>{{ $errors->first('kecamatan') }}</strong>
+            </span>
+        @endif
     </div>
 </div>

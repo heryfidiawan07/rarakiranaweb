@@ -31,7 +31,7 @@
 }
 /*Footer*/
 .footer {
-	background-color: grey;
+	background-color: #2d3436;/*rgba(0,0,0,0.8); /*grey;*/
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin-top: 20px;

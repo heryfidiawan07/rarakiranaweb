@@ -45,13 +45,13 @@ class User extends Authenticatable
     public function comments(){
         return $this->morphMany('App\Comment','commentable');
     }
-
-    public function payments(){
-        return $this->hasManyThrough('App\Payment', 'App\Address');
-    }
     
     public function orders(){
         return $this->hasMany('App\Order');
+    }
+    
+    public function payments(){
+        return $this->hasManyThrough('App\Payment','App\Address');
     }
     
 }

@@ -47,12 +47,12 @@
                     <form class="form-inline" id="form-ongkir" method="POST" action="/cek/ongkir/product/{{$product->slug}}">
                         {{csrf_field()}}
                         <div class="form-group">
-                            <input type="text" id="tujuan" name="tujuan" class="form-control input-sm" placeholder="Nama Kota">
-                            <div id="listcity-frame">
-                                <table id="listcity" class="table table-hover">
-                                    @for($i = 0; $i < count($city); $i++)
+                            <input type="text" id="kabupaten" name="kabupaten" class="form-control input-sm" placeholder="Nama Kota" autocomplete="off" required>
+                            <div id="list-kabupaten-frame">
+                                <table id="list-kabupaten" class="table table-hover">
+                                    @for($i = 0; $i < count($kabupaten); $i++)
                                         <tr>
-                                            <td class="listcityitem" data-id="{{$city[$i]['city_id']}}" data-name="{{$city[$i]['city_name']}}">{{$city[$i]['city_name']}} - {{$city[$i]['type']}} - {{$city[$i]['province']}}</td>
+                                            <td class="list-kabupaten-item" data-id="{{$kabupaten[$i]['city_id']}}" data-name="{{$kabupaten[$i]['city_name']}}">{{$kabupaten[$i]['city_name']}} - {{$kabupaten[$i]['type']}} - {{$kabupaten[$i]['province']}}</td>
                                         </tr>
                                     @endfor
                                 </table>

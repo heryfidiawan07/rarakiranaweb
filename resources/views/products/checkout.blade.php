@@ -9,7 +9,7 @@
                 @foreach($products as $product)
                     <div class="posts">
                         <div class="col-sm-4">
-                            <a href="/read/post/{{$product['item']['slug']}}">
+                            <a href="/show/product/{{$product['item']['slug']}}">
                                 <div class="frame-new-posts">
                                     <span class="frame-new-posts-helper"></span>
                                     <img src="/products/thumb/{{$product['item']->pictures[0]['img']}}" class="posts-thumb">
@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-sm-8">
                             <h4 class="@if($product['item']['sticky'] == 1) sticky @else posts-title @endif">
-                                <a href="/read/post/{{$product['item']['slug']}}">
+                                <a href="/show/product/{{$product['item']['slug']}}">
                                     {{$product['item']['title']}}
                                 </a>
                             </h4>
@@ -52,33 +52,50 @@
                     @include('products.address')
                     <hr>
                     <div class="form-group">
-                        <textarea name="note" class="form-control" rows="3" placeholder="Catatan untuk penjual" id="note" required></textarea>
+                        <textarea name="note" id="note" class="form-control" rows="3" placeholder="Catatan untuk penjual" required></textarea>
+                        @if ($errors->has('note'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('note') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        <select name="kurir" id="kurir" class="form-control input-sm" required>
-                            <option value="0" data-cap="JNE">KURIR</option>
+                        <select name="kurir" id="kurir" class="form-control input-sm" disabled required>
+                            <option value="0" data-cap="0">KURIR</option>
                             <option value="jne" data-cap="JNE">JNE</option>
                             <option value="tiki" data-cap="TIKI">TIKI</option>
                             <option value="pos" data-cap="POS">POS</option>
                         </select>
+                        @if ($errors->has('kurir'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('kurir') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        <select name="services" id="services" class="form-control input-sm" required>
-                            <option>PILIH</option>
+                        <select name="services" id="services" class="form-control input-sm" disabled required>
+                            <option value="10">PILIH</option>
+                            <input type="hidden" name="keyService" id="keyService" value="10">
                         </select>
-                        <input type="hidden" name="keyServ" id="keyServ">
+                        @if ($errors->has('services'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('services') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading">Ringkasan Belanja</div>
                         <div class="panel-body">
-                            <table>
+                            <table class="table table-hover">
+                                <strong>Ringkasan Belanja</strong>
                                 <tr>
                                     <td>
                                         Total Harga 
-                                        <span>({{Session::has('cart') ? Session::get('cart')->totalQty : '0'}} barang)</span>
+                                        <span>
+                                            <i>({{Session::has('cart') ? Session::get('cart')->totalQty : '0'}} barang)</i>
+                                        </span>
                                     </td>
                                     <td>
-                                        <strong>Rp {{number_format($totalPrice, 2)}}</strong>
+                                        <strong> Rp {{number_format($totalPrice, 2)}}</strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -93,11 +110,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input id="checkout" type="submit" value="Bayar" class="btn btn-success btn-sm">
+                        <input id="checkout" type="submit" value="Bayar" class="btn btn-success btn-sm" disabled>
                     </div>
                 </form>
-            @else
-                <h3 class="text-center">Keranjang anda kosong</h3>
             @endif
         </div>
         <div class="col-md-4"></div>

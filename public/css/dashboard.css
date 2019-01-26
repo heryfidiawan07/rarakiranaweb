@@ -64,3 +64,13 @@
 .adminshare i {
 	width: 85%;
 }
+.panel-dashboard {
+	background-color: rgba(0,0,0,0.7);
+}
+.panel-dashboard {
+	color: white;
+}
+.panel-left {
+	width: 40%;
+	float: left;
+}

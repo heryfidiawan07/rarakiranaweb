@@ -159,7 +159,7 @@
 /*End Product Discusions*/
 
 /*Live Search*/
-#listcity-frame {
+#list-kabupaten-frame {
 	position: absolute;
 	width: 95%;
 	cursor: pointer;
@@ -168,13 +168,13 @@
 	max-height: 150px;
 	overflow-y: auto;
 }
-#listcity {
+#list-kabupaten {
 	
 }
-.listcityitem:hover {
+.list-kabupaten-item:hover {
 	color: green;
 }
-.listcityitem {
+.list-kabupaten-item {
 	background-color: rgb(230, 230, 230, 0.8);
 	border-bottom: 1px solid grey;
 	padding-top: 5px;

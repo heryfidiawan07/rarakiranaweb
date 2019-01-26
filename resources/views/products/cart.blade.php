@@ -45,10 +45,10 @@
                         </div>
                     </div>
                 @endforeach
-                <strong>Total: {{$totalPrice}}</strong>
+                <strong>Total: Rp {{number_format($totalPrice)}}</strong>
                 <a href="/product/checkout" class="btn btn-success btn-sm">Checkout</a>
             @else
-                <h3 class="text-center">Keranjang anda kosong</h3>
+                <h3 class="text-center"><i class="fas fa-shopping-cart"></i>Keranjang anda kosong</h3>
             @endif
         </div>
         <div class="col-md-4"></div>

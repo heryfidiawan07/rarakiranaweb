@@ -8,8 +8,10 @@ use Image;
 use Purifier;
 use App\User;
 use App\Post;
+use App\Order;
 use App\Thread;
 use App\Product;
+use App\Payment;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -102,11 +104,11 @@ class UserController extends Controller
         return back();
     }
 
-    public function payments(){
-        $user = Auth::user();
-        $payments = $user->payments()->paginate(5);
-        dd($payments);
+    public function payment($slug, $order){
+        $user    = User::whereSlug($slug)->first();
+        $order   = Order::where('no_order',$order)->first();
+        $payment = Payment::where('order_id',$order->id)->first();
+        return view('user.payment', compact('user','order','payment'));
     }
     
-
 }
