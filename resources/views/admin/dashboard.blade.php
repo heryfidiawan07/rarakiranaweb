@@ -26,9 +26,8 @@
                         <i class="fas fa-users fa-3x"></i>
                     </div>
                     <div class="panel-right">
-                        <h5>Users: </h5>
-                        <h5>Online: </h5>
-                        <!-- <p>{{$users->count()}} users - <i>Online: {{$online}}</i></p> -->
+                        <h5>{{$users->count()}} Users</h5>
+                        <h5>{{$online}} Online</h5>
                     </div>
                 </div>
             </div>
@@ -42,7 +41,6 @@
                     <div class="panel-right">
                         <h5>250 Today Visitor</h5>
                         <h5>1200 Unique Visitors</h5>
-                        <!-- <p>{{$users->count()}} users - <i>Online: {{$online}}</i></p> -->
                     </div>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 <!-- Button trigger modal -->
 @if($front->parent()->count() < 1)
-    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit_{{$front->id}}" @if($front->setting==1) disabled @endif>Edit</button>
+    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit_{{$front->id}}" @if($front->setting==1) disabled @endif><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 @else
-    <button class="btn btn-primary btn-xs" disabled>Edit</button>
+    <button class="btn btn-primary btn-xs" disabled><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 @endif
 <!-- Modal -->
 <div class="modal fade" id="edit_{{$front->id}}" tabindex="-1" role="dialog" aria-labelledby="edit_{{$front->id}}_label" aria-hidden="true">
@@ -27,7 +27,7 @@
             </select>
             <hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">CLOSE</button>
-            <button type="submit" class="btn btn-warning btn-sm">UPDATE</button>
+            <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
         </form>
       </div>
     </div>

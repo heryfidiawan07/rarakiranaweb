@@ -10,12 +10,11 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Change Etalase Status {{$child->name}} ?</b><hr>
             <form method="POST" action="/product/category/{{$child->id}}/status">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="submit" name="status" value="1" class="btn btn-success btn-sm">Aktiv</button>
-                <button type="submit" name="status" value="0" class="btn btn-danger btn-sm">No Aktiv</button>
+                <button type="submit" name="status" value="1" class="btn btn-success btn-sm">Active</button>
+                <button type="submit" name="status" value="0" class="btn btn-danger btn-sm">No Active</button>
             </form>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#status_{{$post->id}}"><span class="caret"></span> Status
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#status_{{$post->id}}"><span class="caret"></span> Status
 @if($post->status == 1)
   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 @else
@@ -11,7 +11,6 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Change status this post ?</b><hr>
             <form method="POST" action="/post/status/{{$post->id}}">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

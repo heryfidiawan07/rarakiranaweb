@@ -9,7 +9,9 @@
                 {{csrf_field()}}
                 <textarea rows="5" class="form-control" name="bio" required></textarea>
                 <br>
-                <input type="submit" value="Simpan" class="btn btn-success btn-sm">
+                <button class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                </button>
             </form>
             <hr>
           </div>

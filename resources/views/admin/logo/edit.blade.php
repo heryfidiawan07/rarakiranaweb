@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit_{{$logo->id}}">Edit</button>
+<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit_{{$logo->id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 <!-- Modal -->
 <div class="modal fade" id="edit_{{$logo->id}}" tabindex="-1" role="dialog" aria-labelledby="edit_{{$logo->id}}_label" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -23,7 +23,7 @@
             </div>
             <hr>
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">CLOSE</button>
-            <button type="submit" class="btn btn-warning btn-sm">UPDATE</button>
+            <button type="submit" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
         </form>
       </div>
     </div>

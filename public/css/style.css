@@ -7,3 +7,18 @@
 .success {
 	color: green; font-weight: bold;
 }
+.pagination-sm {
+  margin-top: -10px;
+}
+button > .glyphicon {
+	padding: 0px 10px;
+}
+a > .glyphicon {
+	padding: 0px 10px;
+}
+.input-group-addon > .glyphicon {
+	border: unset; background-color: unset;
+}
+.btn-default > .glyphicon {
+	padding: 0px 0px;
+}

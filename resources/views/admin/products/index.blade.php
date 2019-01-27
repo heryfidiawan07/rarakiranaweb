@@ -13,11 +13,11 @@
                     @if($frontTag)
                         <form class="form-inline" method="POST" action="/product/update/{{$frontTag->id}}">
                             {{csrf_field()}}
-                            <div class="form-group">
-                                <input type="text" name="frontUpdate" class="form-control input-sm" value="{{$frontTag->name}}" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="save" class="btn btn-success btn-sm">
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="frontUpdate" class="form-control" value="{{$frontTag->name}}" required>
+                                <div class="input-group-addon">
+                                    <button class="glyphicon glyphicon-send"></button>
+                                </div>
                             </div>
                         </form>
                     @endif
@@ -26,17 +26,17 @@
                     <td>
                         <form class="form-inline" method="POST" action="/product/update/status/{{$frontTag->id}}">
                             {{csrf_field()}}
-                            <div class="form-group">
-                                <select name="statusFront" class="form-control input-sm">
+                            <div class="input-group input-group-sm">
+                                <select name="statusFront" class="form-control">
                                     @if($frontTag->status==0)
                                         <option value="0">No Activate</option>
                                     @endif
                                     <option value="1">Activate</option>
                                     <option value="0">No Activate</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="save" class="btn btn-danger btn-sm">
+                                <div class="input-group-addon">
+                                    <button class="glyphicon glyphicon-send succes"></button>
+                                </div>
                             </div>
                         </form>
                     </td>
@@ -44,11 +44,11 @@
                     <td>
                         <form class="form-inline" method="POST" action="/activate/products">
                             {{csrf_field()}}
-                            <div class="form-group">
-                                <input type="text" name="productName" class="form-control input-sm" placeholder="Create Menu Forum" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Activate Product" class="btn btn-success btn-sm">
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="productName" class="form-control" placeholder="Create Menu Forum" required>
+                                <div class="input-group-addon">
+                                    <button class="glyphicon glyphicon-send"></button>
+                                </div>
                             </div>
                         </form>
                     </td>
@@ -105,7 +105,9 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">SAVE</button>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -173,40 +175,48 @@
                                     <td colspan="8"><p class="@if($product->sticky == 1) sticky @endif">{{$product->title}} @if($product->sticky == 1) - <small style="color: black;">This Product Sticky</small>@endif</p></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs">Edit</a></td>
+                                    <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                                     <td>@include('admin.products.delete')</td>
-                                    <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif>Show</a></td>
+                                    <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                     <td>@include('admin.products.status')</td>
                                     <td>@include('admin.products.acomment')</td>
                                     <td>
                                         <form class="form-inline" method="POST" action="/product/sticky/{{$product->id}}">
                                             {{csrf_field()}}
-                                            <select class="form-control input-sm" name="sticky" required>
-                                                @if($product->sticky == 1)
-                                                    <option value="{{$product->sticky}}">Sticky Post</option>
-                                                @endif
-                                                <option value="0">Default</option>
-                                                <option value="1">Set to sticky</option>
-                                            </select>
-                                            <input type="submit" class="btn btn-warning btn-sm" value="sticky">
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control" name="sticky" required>
+                                                    @if($product->sticky == 1)
+                                                        <option value="{{$product->sticky}}">Sticky Post</option>
+                                                    @endif
+                                                    <option value="0">Default</option>
+                                                    <option value="1">Set to sticky</option>
+                                                </select>
+                                                <div class="input-group-addon">
+                                                    <button class="glyphicon glyphicon-send"></button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </td>
                                     <td>
                                         <form class="form-inline" method="POST" action="/product/parent/{{$product->id}}">
                                             {{csrf_field()}}
-                                            <select class="form-control input-sm" name="parent_product" required>
-                                                <option value="{{$product->storefront->id}}">{{$product->storefront->name}}</option>
-                                                @foreach($upfronts as $front)
-                                                    <option value="{{$front->id}}">{{$front->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            <input type="submit" class="btn btn-success btn-sm" value="save">
+                                            <div class="input-group input-group-sm">
+                                                <select class="form-control input-sm" name="parent_product" required>
+                                                    <option value="{{$product->storefront->id}}">{{$product->storefront->name}}</option>
+                                                    @foreach($upfronts as $front)
+                                                        <option value="{{$front->id}}">{{$front->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="input-group-addon">
+                                                    <button class="glyphicon glyphicon-send"></button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="/products/{{$product->storefront->slug}}" class="btn btn-default btn-xs">
+                                        <a href="/products/{{$product->storefront->slug}}" class="btn btn-default btn-sm">
                                         <span class="glyphicon glyphicon-tag"></span>{{$product->storefront->name}}</a>
                                     </td>
                                     <td><span class="glyphicon glyphicon-comment"> {{$product->comments->count()}}</span></td>

@@ -7,11 +7,11 @@
           <br>
             <form method="POST" action="/user/image/upload/{{$user->id}}" class="form-inline" enctype="multipart/form-data">
                 {{csrf_field()}}
-                <div class="form-group">
-                  <input type="file" name="img" class="form-control input-sm" required>
-                </div>
-                <div class="form-group">
-                  <input type="submit" value="Simpan" class="btn btn-success btn-sm">
+                <div class="input-group input-group-sm">
+                  <input type="file" name="img" class="form-control" required>
+                  <div class="input-group-addon">
+                    <button class="glyphicon glyphicon-send"></button>
+                  </div>
                 </div>
             </form>
           </div>

@@ -41,6 +41,7 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Save">
+                    <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                 </div>
             </form>
 

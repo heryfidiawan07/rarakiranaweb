@@ -12,11 +12,11 @@
                 @if($forumTag)
                     <form class="form-inline" method="POST" action="/forum/update/{{$forumTag->id}}">
                         {{csrf_field()}}
-                        <div class="form-group">
-                            <input type="text" name="forumUpdate" class="form-control input-sm" value="{{$forumTag->name}}" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="save" class="btn btn-success btn-sm">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="forumUpdate" class="form-control" value="{{$forumTag->name}}" required>
+                            <div class="input-group-addon">
+                                <button class="glyphicon glyphicon-send"></button>
+                            </div>
                         </div>
                     </form>
                 @endif
@@ -25,17 +25,17 @@
                 <td>
                     <form class="form-inline" method="POST" action="/forum/update/status/{{$forumTag->id}}">
                         {{csrf_field()}}
-                        <div class="form-group">
-                            <select name="statusForum" class="form-control input-sm">
+                        <div class="input-group input-group-sm">
+                            <select name="statusForum" class="form-control">
                                 @if($forumTag->status==0)
                                     <option value="0">No Activate</option>
                                 @endif
                                 <option value="1">Activate</option>
                                 <option value="0">No Activate</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="save" class="btn btn-danger btn-sm">
+                            <div class="input-group-addon">
+                                <button class="glyphicon glyphicon-send"></button>
+                            </div>
                         </div>
                     </form>
                 </td>
@@ -43,11 +43,11 @@
                 <td>
                     <form class="form-inline" method="POST" action="/activate/forum">
                         {{csrf_field()}}
-                        <div class="form-group">
+                        <div class="input-group input-group-sm">
                             <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Activate Forum" class="btn btn-success btn-sm">
+                            <div class="input-group-addon">
+                                <button class="glyphicon glyphicon-send"></button>
+                            </div>
                         </div>
                     </form>
                 </td>
@@ -103,7 +103,7 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </form>
@@ -159,7 +159,9 @@
             <div class="col-md-12"><hr>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="/thread/create" class="btn btn-primary btn-sm pull-left">Create Threads</a>
+                        <a href="/thread/create" class="btn btn-primary btn-sm pull-left">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> CREATE
+                        </a>
                         <h4 class="text-center"><b>THREADS LIST</b></h4>
                     </div>
                     <div class="panel-body">
@@ -171,26 +173,30 @@
                                     </tr>
                                     <tr>
                                         <td>@include('admin.threads.delete')</td>
-                                        <td><a href="/thread/{{$thread->slug}}" class="btn btn-success btn-xs">Show</a></td>
+                                        <td><a href="/thread/{{$thread->slug}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                         <td><span class="glyphicon glyphicon-comment"> {{$thread->comments->count()}}</span></td>
                                         <td>@include('admin.threads.status')</td>
                                         <td>
                                             <form class="form-inline" method="POST" action="/thread/sticky/{{$thread->id}}">
                                                 {{csrf_field()}}
-                                                <select class="form-control input-sm" name="sticky" required>
-                                                    @if($thread->sticky == 1)
-                                                        <option value="{{$thread->sticky}}">Sticky Post</option>
-                                                    @endif
-                                                    <option value="0">Default</option>
-                                                    <option value="1">Set to sticky</option>
-                                                </select>
-                                                <input type="submit" class="btn btn-warning btn-sm" value="set">
+                                                <div class="input-group input-group-sm">
+                                                    <select class="form-control" name="sticky" required>
+                                                        @if($thread->sticky == 1)
+                                                            <option value="{{$thread->sticky}}">Sticky Post</option>
+                                                        @endif
+                                                        <option value="0">Default</option>
+                                                        <option value="1">Set to sticky</option>
+                                                    </select>
+                                                    <div class="input-group-addon">
+                                                        <button class="glyphicon glyphicon-send"></button>
+                                                    </div>
+                                                </div>
                                             </form>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <a href="/threads/tag/{{$thread->tag->slug}}" class="btn btn-default btn-xs">
+                                            <a href="/threads/tag/{{$thread->tag->slug}}" class="btn btn-default btn-sm">
                                             <span class="glyphicon glyphicon-tag"></span> {{$thread->tag->name}}</a>
                                         </td>
                                         <td>

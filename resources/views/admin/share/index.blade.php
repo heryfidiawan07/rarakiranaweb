@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <hr><button type="submit" class="form-control btn btn-primary">Save</button>
+                    <hr><button type="submit" class="form-control btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                 </div>
             </form>
         </div>
@@ -45,7 +45,7 @@
                     @foreach($shares as $share)
                         <tr>
                             <td><i class="{{$share->class}}"> {{ucfirst($share->name)}}</i></td>
-                            <td><a href="/share/delete/{{$share->id}}" class="btn btn-danger btn-sm">Delete !</a></td>
+                            <td><a href="/share/delete/{{$share->id}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                             <td><small>by {{$share->user->name}}</small></td>
                         </tr>
                     @endforeach

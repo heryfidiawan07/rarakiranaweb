@@ -1,38 +1,25 @@
 /*Login adn Register Blade*/
 .social-login .fab {
-	/*padding: 10px 10px;*/
-}
-/*End Login adn Register Blade*/
-/*Global CSS*/
-.pagination-sm {
-  margin-top: -10px;
-}
-/*End Global CSS*/
-/*Admin Share*/
-.share input {
-  width: 10%;
-}
-.share > .fab .fas {
-  width: 80%;
-  padding: 10px 10px;
-}
-/*End Admin Share*/
-/*Admin Follow*/
-.followClass input {
-	width: 10%;
-}
-.followClass .fab .fas {
-	/*width: 80%;*/
-	/*padding: 10px 10px;*/
-}
-td > .fab, .fas {
 	padding: 10px 10px;
 }
-p > .fas,.fab {
-	font-size: 1em;
+/*End Social Admin*/
+/*Admin Share*/
+.share p > i {
+  width: 80%;
+}
+td > i {
+  width: 80%; /*Admin + Follow*/
+}
+/*Admin Share*/
+/*Admin Follow*/
+.followAdmin p > i {
+  width: 80%;
 }
 /*End Admin Follow*/
 /*Global Social Media*/
+.fas, .fab {
+  padding: 10px 10px;
+}
 .fa-facebook {
   background: #3B5998; color: white;
 }
@@ -58,7 +45,7 @@ p > .fas,.fab {
   background: #e4405f; color: white;
 }
 .fa-envelope {
-  /*background: lightgrey; color: black;*/
+  background: lightgrey; color: black;
 }
 .fa-youtube {
   background: #cd201f; color: white;

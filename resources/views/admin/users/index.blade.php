@@ -14,6 +14,13 @@
             <h4 class="text-center"><b>MEMBER LIST</b></h4>
             <div class="table-responsive">
                 <table class="table table-hover">
+                    <tr>
+                        <th>Profil</th>
+                        <th>Nama</th>
+                        <th>Status</th>
+                        <th>Threads</th>
+                        <th>Joined</th>
+                    </tr>
                     @foreach($users as $user)
                         <tr>
                             <td>
@@ -26,7 +33,6 @@
                                 <a href="/user/{{$user->slug}}">{{ucfirst($user->name)}}</a>
                             </td>
                             <td>
-                                Status :
                                 @if($user->status==1)
                                     @if($user->admin==1)
                                         <a class="btn btn-default btn-xs" disabled><span class="caret"></span> Admin</a>
@@ -43,7 +49,7 @@
                             <td>
                                 {{$user->threads->count()}} threads
                             </td>
-                            <td>Joined : 
+                            <td>
                                 {{ date('d F, Y', strtotime($user->created_at))}} - {{date('g:ia', strtotime($user->created_at))}}
                             </td>
                         </tr>

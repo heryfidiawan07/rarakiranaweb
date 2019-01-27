@@ -40,30 +40,6 @@
 .panel-default .panel-body h5 {
 	font-weight: bold;
 }
-.followClass p {
-	height: 30px;
-}
-.followClass input {
-	width: 10%;
-	float: left;
-	margin-top: 10px;
-	margin-right: 3%;
-}
-.followClass i {
-	width: 85%;
-}
-.adminshare p {
-	height: 30px;
-}
-.adminshare input {
-	width: 10%;
-	float: left;
-	margin-top: 10px;
-	margin-right: 3%;
-}
-.adminshare i {
-	width: 85%;
-}
 .panel-dashboard {
 	background-color: rgba(0,0,0,0.7);
 }
@@ -73,4 +49,8 @@
 .panel-left {
 	width: 40%;
 	float: left;
+}
+.panel-dashboard .panel-left > i {
+	background-color: unset;
+	color: white;
 }

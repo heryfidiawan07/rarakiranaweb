@@ -10,7 +10,9 @@
             @include('admin.dashboard-menu')
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="/post/create" class="btn btn-primary btn-sm pull-left">CEATE POST</a>
+                    <a href="/post/create" class="btn btn-primary btn-sm pull-left">
+                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>CEATE POST
+                    </a>
                     <p class="text-center"><b>POST LIST</b></p>
                 </div>
                 <div class="panel-body">
@@ -22,34 +24,42 @@
                                 <td colspan="7"><p class="@if($post->sticky == 1) sticky @endif">{{$post->title}} @if($post->sticky == 1) - <small style="color: black;">This Post Sticky</small>@endif</p></td>
                             </tr>
                             <tr>
-                                <td><a href="/post/{{$post->id}}/edit" class="btn btn-primary btn-xs">Edit</a></td>
-                                <td><a href="/post/{{$post->id}}/destroy" class="btn btn-danger btn-xs">Delete</a></td>
-                                <td><a href="/read/post/{{$post->slug}}" class="btn btn-success btn-xs">Show</a></td>
+                                <td><a href="/post/{{$post->id}}/edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                                <td>@include('admin.posts.delete')</td>
+                                <td><a href="/read/post/{{$post->slug}}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                 <td>@include('admin.posts.status')</td>
                                 <td>@include('admin.posts.acomment')</td>
                                 <td>
                                     <form class="form-inline" method="POST" action="/post/sticky/{{$post->id}}">
                                         {{csrf_field()}}
-                                        <select class="form-control input-sm" name="sticky" required>
-                                            @if($post->sticky == 1)
-                                                <option value="{{$post->sticky}}">Sticky Post</option>
-                                            @endif
-                                            <option value="0">Default</option>
-                                            <option value="1">Set to sticky</option>
-                                        </select>
-                                        <input type="submit" class="btn btn-warning btn-sm" value="sticky">
+                                        <div class="input-group input-group-sm">
+                                            <select class="form-control" name="sticky" required>
+                                                @if($post->sticky == 1)
+                                                    <option value="{{$post->sticky}}">Sticky Post</option>
+                                                @endif
+                                                <option value="0">Default</option>
+                                                <option value="1">Set to sticky</option>
+                                            </select>
+                                            <div class="input-group-addon">
+                                                <button class="glyphicon glyphicon-send"></button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </td>
                                 <td>
                                     <form class="form-inline" method="POST" action="/post/parent/{{$post->id}}">
                                         {{csrf_field()}}
-                                        <select class="form-control input-sm" name="menu_post" required>
-                                            <option value="{{$post->menu->id}}">{{$post->menu->name}}</option>
-                                            @foreach($menus as $menu)
-                                                <option value="{{$menu->id}}">{{$menu->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <input type="submit" class="btn btn-success btn-sm" value="save">
+                                        <div class="input-group input-group-sm">
+                                            <select class="form-control input-sm" name="menu_post" required>
+                                                <option value="{{$post->menu->id}}">{{$post->menu->name}}</option>
+                                                @foreach($menus as $menu)
+                                                    <option value="{{$menu->id}}">{{$menu->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="input-group-addon">
+                                                <button class="glyphicon glyphicon-send"></button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>

@@ -10,12 +10,11 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <b>Change Status Menu {{$child->name}} ?</b><hr>
             <form method="POST" action="/menu/status/{{$child->id}}">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="submit" name="status" value="1" class="btn btn-success btn-sm">Aktiv</button>
-                <button type="submit" name="status" value="0" class="btn btn-danger btn-sm">No Aktiv</button>
+                <button type="submit" name="status" value="1" class="btn btn-success btn-sm">Active</button>
+                <button type="submit" name="status" value="0" class="btn btn-danger btn-sm">No Active</button>
             </form>
         </div>
       </div>

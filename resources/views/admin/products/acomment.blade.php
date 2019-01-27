@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#acomment_{{$product->id}}">
+<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#acomment_{{$product->id}}">
 </span> <span class="caret"></span> Comment
 @if($product->allowed_comment == 1)
   <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>

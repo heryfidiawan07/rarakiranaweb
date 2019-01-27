@@ -40,7 +40,9 @@
                     </div>
                 @endif
                 <br>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                </button>
             </form>
         </div>
         <div class="col-md-9">

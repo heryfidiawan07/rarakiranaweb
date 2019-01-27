@@ -139,7 +139,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <hr>
-                        <input type="submit" class="btn btn-primary" value="Save">
+                        <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </form>
