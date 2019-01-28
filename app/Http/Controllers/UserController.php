@@ -103,12 +103,19 @@ class UserController extends Controller
         }
         return back();
     }
-
+    
     public function payment($slug, $order){
         $user    = User::whereSlug($slug)->first();
-        $order   = Order::where('no_order',$order)->first();
-        $payment = Payment::where('order_id',$order->id)->first();
-        return view('user.payment', compact('user','order','payment'));
+        if (Auth::user()->id == $user->id) {
+            $order   = Order::where('no_order',$order)->first();
+            $carts   = unserialize($order->cart);
+            $payment = $order->payment()->first();
+            return view('user.payment', 
+                ['user' => $user, 'order' => $order, 'payment' => $payment, 'carts' => $carts->items]
+            );
+        }else{
+            return view('errors.503');
+        }
     }
     
 }

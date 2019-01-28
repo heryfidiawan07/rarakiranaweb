@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
     
     public function payments(){
-        return $this->hasManyThrough('App\Payment','App\Address');
+        return $this->hasManyThrough('App\Payment','App\Order');
     }
     
 }

@@ -1,3 +1,9 @@
+@if(Auth::check())
+    @if(Auth::user()->id == $user->id)
+        @include('user.orders')
+    @endif
+@endif
+
 @if($threads)
     <h5 class="text-center"><b>THREADS</b></h5>
     @foreach($threads as $thread)

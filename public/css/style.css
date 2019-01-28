@@ -19,6 +19,9 @@ a > .glyphicon {
 .input-group-addon > .glyphicon {
 	border: unset; background-color: unset;
 }
-.btn-default > .glyphicon {
+.btn > .glyphicon-tag {
+	padding: 0px 0px;
+}
+.btn > .glyphicon-shopping-cart {
 	padding: 0px 0px;
 }

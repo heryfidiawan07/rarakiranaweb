@@ -4,20 +4,17 @@
         <p><span class="glyphicon glyphicon-chevron-right"></span></p>
     </button>
     
-
     <!-- Modal -->
     <div class="modal left fade" id="dashboardMenu" tabindex="-1" role="dialog" aria-labelledby="dashboardMenuLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content-left">
 
-                <div class="modal-header">
+                <div class="modal-body-left">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="dashboardMenuLabel">DASHBOARD MENU</h4>
-                </div>
 
-                <div class="modal-body-left">
                     <div class="table-responsive">
-                      <table class="table table-hover">
+                      <table class="table">
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
