@@ -5,7 +5,7 @@
 @endif
 
 @if($threads)
-    <h5 class="text-center"><b>THREADS</b></h5>
+    <h4 class="text-center"><b>THREADS</b></h4>
     @foreach($threads as $thread)
         @include('threads.content-index')
     @endforeach
@@ -17,7 +17,7 @@
 @if(Auth::check())
     @if(Auth::user()->id == $user->id)
         @if($thcomments->count())
-          <h5 class="text-center"><b>KOMENTAR PADA THREAD</b></h5>  
+          <h4 class="text-center"><b>KOMENTAR PADA THREAD</b></h4>
           @foreach($thcomments as $comment)
                 <div class="thread-comment-show">
                     <div class="thread-comment-body">
@@ -39,7 +39,7 @@
         @endif
 
         @if($artcomments->count())
-          <h5 class="text-center"><b>KOMENTAR PADA POST</b></h5>  
+          <h4 class="text-center"><b>KOMENTAR PADA POST</b></h4>
           @foreach($artcomments as $comment)
                 <div class="post-comment-show">
                     <div class="post-comment-body">
@@ -61,7 +61,7 @@
         @endif
         
         @if($prodcomments->count())
-          <h5 class="text-center"><b>DISKUSI PADA PRODUK</b></h5>  
+          <h4 class="text-center"><b>DISKUSI PADA PRODUK</b></h4>
           @foreach($prodcomments as $discus)
                 <div class="product-discus-show">
                     <div class="product-discus-body">

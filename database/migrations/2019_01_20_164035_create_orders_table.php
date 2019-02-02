@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('no_order');
             $table->text('cart');
             $table->integer('user_id')->unsigned();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

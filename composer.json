@@ -11,9 +11,10 @@
         "laravel/framework": "5.3.*",
         "laravel/socialite": "^2.0",
         "mews/purifier": "2.*",
+        "rizalafani/rajaongkirlaravel": "dev-master",
         "spatie/laravel-analytics": "^2.3",
         "unisharp/laravel-filemanager": "~1.8",
-        "rizalafani/rajaongkirlaravel" : "dev-master"
+        "zanysoft/laravel-pdf": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

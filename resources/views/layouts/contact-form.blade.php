@@ -8,7 +8,13 @@
   <label>Subject</label>
   <input type="text" name="subject" class="form-control" value="{{old('subject')}}" required>
 	<label>Email</label>
-	<input type="email" name="email" class="form-control" value="{{old('email')}}" required>
+        @if(Auth::check())
+            @if(Auth::user())
+                <input type="email" name="email" class="form-control" value="{{Auth::user()->email}}" readonly>
+            @else
+                <input type="email" name="email" class="form-control" value="{{old('email')}}" required>
+            @endif
+        @endif
 	<label>Isi Pesan</label>
 	<textarea class="form-control" rows="10" name="description" required>{{old('description')}}</textarea>
 	<br>
@@ -18,5 +24,7 @@
           <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
       </span>
   @endif
-  <input type="submit" class="btn btn-success btn-sm" value="kirim">
+  <button class="btn btn-primary btn-sm">
+      <span class="glyphicon glyphicon-send"></span>
+  </button>
 </form>

@@ -8,13 +8,18 @@
             <h1 class="text-center">Payment</h1>
             <div class="table-responsive">
                 <table class="table table-hover">
-                    <h5><b>Detail Pembelian</b></h5>
+                    <h4>
+                        <b>Detail Pembelian - 
+                            <a href="/user/{{$user->slug}}/print/invoice/{{$order->no_order}}">
+                            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Print Invoice</a>
+                        </b>
+                    </h4>
                     @foreach($carts as $item)
                         <tr>
-                            <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="150"></td>
+                            <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="100"></td>
                             <td>
-                                {{$item['item']['title']}}<hr>
-                                Harga: Rp {{number_format($item['item']['price'], 2)}}
+                                {{$item['item']['title']}}
+                                <p>Harga: <b><u>Rp {{number_format($item['item']['price'], 2)}}</u></b></p>
                             </td>
                         </tr>
                     @endforeach
@@ -38,7 +43,7 @@
                     </tr>
                     <tr>
                         <td>Jasa Pengiriman:</td>
-                        <td><b>{{strtoupper($payment->kurir)}} {{$payment->services}}</b></td>
+                        <td>{{strtoupper($payment->kurir)}} {{$payment->services}}</td>
                     </tr>
                     @if($payment->status==1)
                         <tr>
@@ -52,7 +57,7 @@
                     @endif
                     <tr>
                         <td>Catatan:</td>
-                        <td><b>{{$payment->note}}</b></td>
+                        <td>{{$payment->note}}</td>
                     </tr>
                     <tr>
                         <td>Alamat:</td>

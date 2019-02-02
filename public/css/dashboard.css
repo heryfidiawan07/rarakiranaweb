@@ -54,3 +54,6 @@
 	background-color: unset;
 	color: white;
 }
+.close span {
+	color: white;
+}

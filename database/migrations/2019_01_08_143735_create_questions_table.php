@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->string('title');
             $table->string('email');
             $table->text('description');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

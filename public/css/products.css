@@ -197,3 +197,7 @@
 .alert-success a:hover {
 	text-decoration: none;
 }
+/*Cart Qty*/
+#itemQty {
+	width: 40px;
+}

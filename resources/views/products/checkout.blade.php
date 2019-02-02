@@ -23,10 +23,10 @@
                                 </a>
                             </h4>
                             <p class="discount">
-                                <s><i>Rp {{number_format($product['price'] + $product['item']['discount'], 2)}}</i></s>
+                                <s><i>Rp {{number_format($product['item']['price'] + $product['item']['discount'], 2)}}</i></s>
                                 <span>
                                     <small>
-                                        <i>{{number_format(($product['price'] + $product['item']['discount']) / $product['item']['discount'])}} %</i>
+                                        <i>{{number_format(($product['item']['price'] + $product['item']['discount']) / $product['item']['discount'])}} %</i>
                                     </small>
                                 </span>
                                 @if($product['item']['discount'])
@@ -34,11 +34,11 @@
                                 @endif
                             </p>
                             <p>
-                                Rp {{number_format($product['price'], 2)}} <i>x</i> <span class="badge">{{$product['qty']}}</span> = 
-                                <strong>Rp {{number_format($product['price']*$product['qty'])}}</strong>
+                                Rp {{number_format($product['item']['price'], 2)}} <i>x</i> <span class="badge">{{$product['qty']}}</span> = 
+                                <strong>Rp {{number_format($product['price'])}}</strong>
                             </p>
                             <i class="fas fa-weight"></i>{{$product['item']['weight']}} <small><i>KG</i></small>
-                            @if($product['item']['dimensi'] < 1)
+                            @if($product['item']['dimensi'] > 0)
                                  - <span class="glyphicon glyphicon-th-large"></span>
                                  {{$product['item']['dimensi']}} <small><i>Meter</i></small>
                             @endif
@@ -91,7 +91,8 @@
                                     <td>
                                         Total Harga 
                                         <span>
-                                            <i>({{Session::has('cart') ? Session::get('cart')->totalQty : '0'}} barang)</i>
+                                            <i>({{$totalQty}} barang)</i>
+                                            <input type="hidden" name="totalQty" value="{{$totalQty}}">
                                         </span>
                                     </td>
                                     <td>
@@ -101,6 +102,7 @@
                                 <tr>
                                     <td>Total Ongkos Kirim</td>
                                     <td><strong id="ongkir">Rp -</strong></td>
+                                    <input type="hidden" name="ongkir" id="inputOngkir">
                                 </tr>
                                 <tr>
                                     <td>Total Tagihan</td>

@@ -185,6 +185,7 @@ return [
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         rizalafani\rajaongkirlaravel\RajaOngkirServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+        ZanySoft\LaravelPDF\PdfServiceProvider::class,
 
     ],
 
@@ -239,6 +240,7 @@ return [
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'RajaOngkir' => rizalafani\rajaongkirlaravel\RajaOngkirFacade::class,
+        'PDF' => ZanySoft\LaravelPDF\Facades\PDF::class,
 
     ],
 

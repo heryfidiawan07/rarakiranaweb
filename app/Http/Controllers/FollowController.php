@@ -21,9 +21,9 @@ class FollowController extends Controller
     {
         $this->validate($request, [
              'urlFollow' => 'required|max:500',
-             'followClass' => 'required',
+             'follow' => 'required',
         ]);
-        $getName = explode('-', $request->followClass);
+        $getName = explode('-', $request->follow);
         if ($getName[1] == 'weixin') {
              $getName = 'wechat';
         }elseif ($getName[1] == 'envelope') {
@@ -31,12 +31,12 @@ class FollowController extends Controller
         }else{
             $getName = $getName[1];
         }
-        $cekFollow = Follow::where('class','=',$request->followClass)->first();
+        $cekFollow = Follow::where('class','=',$request->follow)->first();
         if ($cekFollow === null) {
             Follow::create([
                     'name' => $getName,
                     'url' => $request->urlFollow,
-                    'class' => $request->followClass,
+                    'class' => $request->follow,
                     'user_id' => Auth::user()->id,
                 ]);
         }else{

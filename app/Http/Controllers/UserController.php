@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Auth;
 use File;
 use Image;
@@ -113,6 +114,23 @@ class UserController extends Controller
             return view('user.payment', 
                 ['user' => $user, 'order' => $order, 'payment' => $payment, 'carts' => $carts->items]
             );
+        }else{
+            return view('errors.503');
+        }
+    }
+    
+    public function invoice(Request $request, $slug, $order){
+        $user    = User::whereSlug($slug)->first();
+        if (Auth::user()->id == $user->id) {
+            $order   = Order::where('no_order',$order)->first();
+            $carts   = unserialize($order->cart);
+            $payment = $order->payment()->first();
+            $inv     = "user.invoice";
+            $pdf     = PDF::Make();
+            $css     = file_get_contents('css/pdf.css');
+            $pdf->writeHtml($css, 1);
+            $pdf->loadView($inv, ['order' => $order, 'payment' => $payment, 'carts' => $carts->items, 'subTotalPrice' => $carts->totalPrice]);
+            return $pdf->Stream();
         }else{
             return view('errors.503');
         }

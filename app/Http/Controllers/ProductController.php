@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getkabupaten','cart','checkout', 'payment', 'services', 'costService','addToCart']]);
+        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getkabupaten','cart','checkout', 'payment', 'services', 'costService','addToCart','buy','newQty','minQty']]);
     }
 
     public function index()
@@ -267,15 +267,41 @@ class ProductController extends Controller
         return response($cost);
     }
 
-    public function addToCart(Request $request, $id){
-        $product = Product::find($id);
+    public function buy(Request $request, $slug){
+        $product = Product::whereSlug($slug)->first();
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart    = new Cart($oldCart);
+        $cart->add($product, $product->id);
+        $request->session()->put('cart', $cart);
+        return redirect('/product/cart');
+    }
+    
+    public function addToCart(Request $request, $slug){
+        $product = Product::whereSlug($slug)->first();
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart    = new Cart($oldCart);
         $cart->add($product, $product->id);
         $request->session()->put('cart', $cart);
         return redirect()->back();
     }
-    
+
+    public function newQty(Request $request, $slug){
+        $product = Product::whereSlug($slug)->first();
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart    = new Cart($oldCart);
+        $cart->add($product, $product->id);
+        $request->session()->put('cart', $cart);
+        return response(array('products' => $cart->items, 'totalPrice' => number_format($cart->totalPrice), 'count' => count($cart->items)));
+    }
+
+    public function minQty(Request $request, $slug){
+        $product = Product::whereSlug($slug)->first();
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart    = new Cart($oldCart);
+        $cart->min($product, $product->id);
+        $request->session()->put('cart', $cart);
+        return response(array('products' => $cart->items, 'totalPrice' => number_format($cart->totalPrice), 'count' => count($cart->items)));
+    }
     
     public function cart(){
         if (!Session::has('cart')) {
@@ -283,6 +309,8 @@ class ProductController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart    = new Cart($oldCart);
+        //Session::forget('cart');
+        //dd($cart->items[1]['item']['title']);
         return view('products.cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
@@ -294,7 +322,7 @@ class ProductController extends Controller
         $cart      = new Cart($oldCart);
         $kabupaten = RajaOngkir::Kota()->all();
         $address   = Address::where('user_id',Auth::user()->id)->first();
-        return view('products.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice , 'kabupaten' => $kabupaten, 'totalWeight' => $cart->totalWeight, 'address' => $address]);
+        return view('products.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice , 'kabupaten' => $kabupaten, 'totalWeight' => $cart->totalWeight, 'address' => $address, 'totalQty' => $cart->totalQty]);
     }
 
     public function services(Request $request, $kabupaten, $kurir){
@@ -320,10 +348,11 @@ class ProductController extends Controller
                         'weight'        => $weight, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
-        $ongkir  = number_format($cost[0]['costs'][$key]['cost'][0]['value'], 2);
-        $tagihan = $cost[0]['costs'][$key]['cost'][0]['value'] + $total;
-        $tagihan = number_format($tagihan, 2);
-        return response(array('ongkir' => $ongkir, 'tagihan' => $tagihan ));
+        $ongkir    = number_format($cost[0]['costs'][$key]['cost'][0]['value'], 2);
+        $intOngkir =$cost[0]['costs'][$key]['cost'][0]['value'];
+        $tagihan   = $cost[0]['costs'][$key]['cost'][0]['value'] + $total;
+        $tagihan   = number_format($tagihan, 2);
+        return response(array('ongkir' => $ongkir, 'tagihan' => $tagihan, 'intOngkir' => $intOngkir ));
     }
     
     public function payment(Request $request){
@@ -336,11 +365,11 @@ class ProductController extends Controller
                 'kurir' => 'required',
                 'services' => 'required',
             ]);
-        $oldCart = Session::get('cart');
-        $cart    = new Cart($oldCart);
-        $items   = $cart->items;
-        $total   = $cart->totalPrice;
-        $weight  = $cart->totalWeight*1000;
+        $oldCart  = Session::get('cart');
+        $cart     = new Cart($oldCart);
+        $items    = $cart->items;
+        $total    = $cart->totalPrice;
+        $weight   = $cart->totalWeight*1000;
         //Request
         $asal      = 55;
         $key       = $request->keyService;
@@ -350,8 +379,8 @@ class ProductController extends Controller
                         'weight'        => $weight, // berat satuan gram
                         'courier'       => strtolower($request->kurir), // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
-        $tagihan      = $cost[0]['costs'][$key]['cost'][0]['value'];
-        $totalTagihan = $total+$tagihan;
+        $ongkir       = $cost[0]['costs'][$key]['cost'][0]['value'];
+        $totalTagihan = $total+$ongkir;
         $useradd = Address::where([['user_id',Auth::user()->id],['kab_id','!=',$request->kabHidden]])->first();
         $user = Auth::user();
         if ($useradd === null) {
@@ -373,6 +402,8 @@ class ProductController extends Controller
             ]);
         }
         $time = date("YmdHis");
+        $M    = date("m");
+        $Y    = date("Y");
         //Create Order
         $order = new Order;
         $order->no_order = $user->id.$time;
@@ -381,15 +412,18 @@ class ProductController extends Controller
         $order->save();
         //Create Payment
         $payment = new Payment;
+        $payment->no_invoice   = 'INV/'.$time.'/'.$order->id.'/'.$M.'/'.$Y;
         $payment->address_id   = $address->id;
         $payment->order_id     = $order->id;
         $payment->pengirim     = 'yet';
         $payment->resi         = 'yet';
         $payment->total_price  = $totalTagihan;
         $payment->total_weight = $weight;
+        $payment->total_qty    = $request->totalQty;
         $payment->note         = $request->note;
         $payment->kurir        = $request->kurir;
         $payment->services     = $request->services;
+        $payment->ongkir       = $request->ongkir;
         $payment->save();
 
         $forget = Session::forget('cart');

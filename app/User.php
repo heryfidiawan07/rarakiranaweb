@@ -38,6 +38,10 @@ class User extends Authenticatable
         }
     }
 
+    public function messages(){
+        return $this->morphMany('App\Message','messageable');
+    }
+
     public function threads(){
         return $this->hasMany(Thread::class);
     }

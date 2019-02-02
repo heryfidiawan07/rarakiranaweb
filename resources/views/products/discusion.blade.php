@@ -10,7 +10,9 @@
                 - <small><i>{{ date('d F, Y', strtotime($discus->created_at))}}</i></small>
                 @if(Auth::check())
                     @if(Auth::user()->id == $discus->user->id)
-                        <a data-toggle="collapse" href="#discus-{{$discus->id}}-user-edit" role="button" aria-expanded="false" aria-controls="discus-{{$discus->id}}-user-edit" class="btn btn-success btn-xs">Edit</a>
+                        <a data-toggle="collapse" href="#discus-{{$discus->id}}-user-edit" role="button" aria-expanded="false" aria-controls="discus-{{$discus->id}}-user-edit" class="btn btn-success btn-xs">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
                         <div class="collapse" id="discus-{{$discus->id}}-user-edit">
                             <div class="card card-body">
                                 <form method="POST" action="/product/discus/{{$discus->id}}/update">
@@ -19,7 +21,9 @@
                                     <textarea rows="5" class="form-control" name="descriptionEdit" required>
                                         {{$discus->description}}
                                     </textarea><br>
-                                    <button class="btn btn-warning btn-xs">Update</button>
+                                    <button class="btn btn-warning btn-xs">
+                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                    </button>
                                 </form>
                             </div>
                         </div>

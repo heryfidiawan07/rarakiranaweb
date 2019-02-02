@@ -17,7 +17,7 @@
             <i>Follow : </i>
             @if($mainFollows)
                 @foreach($mainFollows as $follow)
-                    <a href="/{{$follow->url}}"><i class="{{$follow->class}} img-circle"></i></a>
+                    <a href="{{$follow->url}}"><i class="{{$follow->class}} img-circle"></i></a>
                 @endforeach
             @endif
         </p>

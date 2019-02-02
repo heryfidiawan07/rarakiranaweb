@@ -1,0 +1,17 @@
+#webName {
+	color: purple;
+	text-align: left;
+	font-family: "Tangerine";
+}
+td {
+	font-size: 15px;
+	padding:5px 5px;
+}
+th {
+	font-size: 16px;
+}
+#sub-price td {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: lightgrey;
+}

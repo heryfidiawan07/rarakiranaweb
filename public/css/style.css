@@ -25,3 +25,9 @@ a > .glyphicon {
 .btn > .glyphicon-shopping-cart {
 	padding: 0px 0px;
 }
+.thumb-caret {
+	color: black;
+}
+.thumb-caret:hover {
+	text-decoration: none;
+}

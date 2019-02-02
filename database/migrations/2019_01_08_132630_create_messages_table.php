@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('messageable_type');
             $table->text('description');
             $table->tinyInteger('setting')->default(0);
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

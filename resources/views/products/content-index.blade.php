@@ -27,7 +27,7 @@
                 <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm buy">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
                 </a>
-                <a href="/add-to-cart/{{$product->id}}" class="btn btn-success btn-sm">
+                <a href="/add-to-cart/{{$product->slug}}" class="btn btn-success btn-sm">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
                 </a>
             </div>

@@ -86,6 +86,7 @@ $(document).ready(function(){
             success : function(data){
                 $('#keyService').val(keyService);
                 $('#ongkir').text('Rp '+data.ongkir);
+                $('#inputOngkir').val(data.intOngkir);
                 $('#tagihan').text('Rp '+data.tagihan);
                 if ($('#kabHidden').val() > 0) {
                     if ($('#kurir').val() != 0) {
@@ -114,5 +115,37 @@ $(document).ready(function(){
     //             ' Service: '+$('#services').val()
     //         );
     // });
+    // Cart Qty
+    $('.plus').on('click', function(){
+        var key = $(this).attr('data-key');
+        $.ajax({
+            type: 'POST',
+            url : $(this).attr('data-url'),
+            success : function(data){
+                $('#price_'+key).text('Rp '+data.products[key]['price']);
+                $('#totalPrice').text('Subtotal: Rp '+data.totalPrice);
+            },error: function(data){
+                console.log('error');
+            }
+        });
+        $(this).prev().val(+$(this).prev().val()+1);
+    });
+    $('.min').on('click', function(){
+        if ($(this).next().val() > 1) {
+            var key = $(this).attr('data-key');
+            console.log($(this).attr('data-url'));
+            $.ajax({
+                type: 'POST',
+                url : $(this).attr('data-url'),
+                success : function(data){
+                    $('#price_'+key).text('Rp '+data.products[key]['price']);
+                    $('#totalPrice').text('Subtotal: Rp '+data.totalPrice);
+                },error: function(data){
+                    console.log('error');
+                }
+            });
+            $(this).next().val(+$(this).next().val()-1);
+        }
+    });
 
 });
