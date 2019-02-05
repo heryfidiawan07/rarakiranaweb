@@ -19,7 +19,7 @@
                         <div class="col-sm-8">
                             <h4 class="@if($product['item']['sticky'] == 1) sticky @else posts-title @endif">
                                 <a href="/show/product/{{$product['item']['slug']}}">
-                                    {{$product['item']['title']}}
+                                    {{str_limit($product['item']['title'],50)}}
                                 </a>
                             </h4>
                             <p class="discount">
@@ -32,20 +32,20 @@
                                 @if($product['item']['discount'])
                                     <img src="/parts/sale.jpg" width="50">
                                 @endif
+                                <i class="fas fa-weight"></i>{{$product['item']['weight']}} <small><i>KG</i></small>
+                                @if($product['item']['dimensi'] > 0)
+                                     - <span class="glyphicon glyphicon-th-large"></span>
+                                     {{$product['item']['dimensi']}} <small><i>Meter</i></small>
+                                @endif
                             </p>
                             <p>
-                                Rp {{number_format($product['item']['price'], 2)}} <i>x</i> <span class="badge">{{$product['qty']}}</span> = 
+                                Rp {{number_format($product['item']['price'])}} <i>x</i> <span class="badge">{{$product['qty']}}</span> = 
                                 <strong>Rp {{number_format($product['price'])}}</strong>
                             </p>
-                            <i class="fas fa-weight"></i>{{$product['item']['weight']}} <small><i>KG</i></small>
-                            @if($product['item']['dimensi'] > 0)
-                                 - <span class="glyphicon glyphicon-th-large"></span>
-                                 {{$product['item']['dimensi']}} <small><i>Meter</i></small>
-                            @endif
                         </div>
                     </div>
                 @endforeach
-                <strong>Sub Total:<span class="price" id="subtotal" data-price="{{$totalPrice}}"> Rp {{number_format($totalPrice, 2)}}</span></strong>
+                <strong>Sub Total:<span class="price" id="subtotal" data-price="{{$totalPrice}}"> Rp {{number_format($totalPrice)}}</span></strong>
                 <form id="formcheckout" method="POST" action="/product/payment">
                     {{csrf_field()}}
                     <hr>
@@ -96,7 +96,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <strong> Rp {{number_format($totalPrice, 2)}}</strong>
+                                        <strong> Rp {{number_format($totalPrice)}}</strong>
                                     </td>
                                 </tr>
                                 <tr>

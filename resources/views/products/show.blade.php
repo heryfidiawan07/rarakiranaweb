@@ -3,9 +3,7 @@
 @section('url') {{Request::url()}} @endsection
 @section('image') http://rarakirana.com/products/img/{{$product->pictures[0]->img}} @endsection
 @section('title') {{$product->title}} @endsection
-@section('description') 
-    {{strip_tags(str_limit($product->description, $limit = 145, $end = '...'))}} 
-@endsection
+@section('description') {{strip_tags(str_limit($product->description, $limit = 145, $end = '...'))}} @endsection
 
 @section('content')
 <div class="container">
@@ -29,19 +27,23 @@
                      @endif
                 </div>
                 <h4 class="discount">
-                    <s>Rp {{number_format($product->price + $product->discount, 2)}}</s>
+                    <s>Rp {{number_format($product->price + $product->discount)}}</s>
                     <span>
-                        <small><i>{{($product->price + $product->discount) / $product->discount}} %</i></small>
+                        <small><i>{{number_format(($product->price + $product->discount) / $product->discount)}} %</i></small>
                     </span>
                 </h4>
-                <h3 class="price">Rp {{number_format($product->price, 2)}}</h3>
-                <div class="buy-show">
-                    <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
-                    </a>
-                    <a href="/add-to-cart/{{$product->id}}" class="btn btn-success btn-sm">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                    </a>
+                <h3 class="price">Rp {{number_format($product->price)}}</h3>
+                <div class="buy-show form-inline">
+                    <div class="form-group">
+                        <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <a href="/add-to-cart/{{$product->id}}" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                        </a>
+                    </div>
                 </div>
                 <div class="media">
                     <form class="form-inline" id="form-ongkir" method="POST" action="/cek/ongkir/product/{{$product->slug}}">
@@ -83,10 +85,10 @@
                     </li>
                     <li role="presentation"><a href="#ulasan" aria-controls="ulasan" role="tab" data-toggle="tab">ULASAN</a></li>
                     <li role="presentation"><a href="#pesan" aria-controls="pesan" role="tab" data-toggle="tab">PESAN</a></li>
-                  </ul>
+                </ul>
 
-                  <!-- Tab panes -->
-                  <div class="tab-content">
+                <!-- Tab panes -->
+                <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="deskripsi">
                         {!! $product->description !!}
                     </div>
@@ -106,7 +108,7 @@
                             </div>
                         @endif
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="col-md-7">
                 

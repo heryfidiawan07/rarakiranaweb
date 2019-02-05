@@ -68,6 +68,14 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/product/parent/{id}', 'ProductController@parent');
 		//Picture Destory
 		Route::get('/product/pictures/{id}/destroy', 'PictureController@destroy');
+		//Order
+		Route::get('/dashboard/orders', 'OrderController@index');
+		Route::get('/dashboard/order-details/{order}', 'OrderController@details');
+		//Rekening
+		Route::get('/dashboard/bank-accounts', 'RekeningController@index');
+		Route::post('/bank-accounts/store', 'RekeningController@store');
+		Route::post('/bank-accounts/update/{id}', 'RekeningController@update');
+		Route::get('/bank-accounts/delete/{id}', 'RekeningController@destroy');
 		//Tag Activate Forum
 		Route::post('/activate/forum', 'TagController@activate');
 		Route::post('/forum/update/{id}', 'TagController@forumUpdate');
@@ -138,6 +146,8 @@ Route::group(['middleware' => 'auth'], function () {
 	//User Payment
 	Route::get('/user/{slug}/payment/{order}', 'UserController@payment');
 	Route::get('/user/{slug}/print/invoice/{order}', 'UserController@invoice');
+	//Pemabayaran User
+	Route::post('/user/{slug}/payment/order/{order}', 'PaymentController@userPayment');
 });
 //Post
 Route::get('/{slugMenu}', 'PostController@menu');
@@ -150,9 +160,10 @@ Route::get('/products/{slug}', 'ProductController@storefront');
 //Product Checkout
 Route::get('/product/cart/{slug}', "ProductController@buy");
 Route::get('/add-to-cart/{slug}', "ProductController@addToCart");
-Route::post('/add-new-qty-cart/{slug}', "ProductController@newQty");
-Route::post('/add-min-qty-cart/{slug}', "ProductController@minQty");
+Route::post('/add-new-qty-cart/{slug}/{key}', "ProductController@newQty");
+Route::post('/add-min-qty-cart/{slug}/{key}', "ProductController@minQty");
 Route::get('/product/cart', 'ProductController@cart');
+Route::get('/remove-cart/{slug}', "ProductController@removeCart");
 
 //Ongkir
 Route::post('/cek/ongkir/product/{slug}/{tujuan}/{kurir}', 'ProductController@ongkir');

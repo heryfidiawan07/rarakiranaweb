@@ -3,6 +3,7 @@
 /storage/*.key
 /vendor
 /.idea
+/public/resi
 /public/posts
 /public/products
 /public/users

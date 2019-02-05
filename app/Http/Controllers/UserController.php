@@ -13,6 +13,7 @@ use App\Order;
 use App\Thread;
 use App\Product;
 use App\Payment;
+use App\Rekening;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -39,7 +40,7 @@ class UserController extends Controller
 
     public function image(Request $request, $id){
         $this->validate($request, [
-                'img' => 'required',
+                'img' => 'required|mimes:jpeg,jpg,bmp,png',
             ]);
         $user = User::whereId($id)->first();
         $img     = $request->file('img');
@@ -106,13 +107,14 @@ class UserController extends Controller
     }
     
     public function payment($slug, $order){
-        $user    = User::whereSlug($slug)->first();
+        $user      = User::whereSlug($slug)->first();
+        $rekenings = Rekening::all();
         if (Auth::user()->id == $user->id) {
             $order   = Order::where('no_order',$order)->first();
             $carts   = unserialize($order->cart);
             $payment = $order->payment()->first();
             return view('user.payment', 
-                ['user' => $user, 'order' => $order, 'payment' => $payment, 'carts' => $carts->items]
+                ['user' => $user, 'order' => $order, 'payment' => $payment, 'carts' => $carts->items, 'rekenings' => $rekenings]
             );
         }else{
             return view('errors.503');

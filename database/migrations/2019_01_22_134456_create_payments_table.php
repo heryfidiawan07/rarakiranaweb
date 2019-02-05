@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('order_id')->unsigned();
             $table->string('pengirim');
             $table->string('resi');
+            $table->string('kurir_resi');
             $table->integer('total_price');
             $table->integer('total_weight');
             $table->integer('total_qty');

@@ -13,8 +13,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="dashboardMenuLabel">DASHBOARD MENU</h4>
 
-                    <div class="table-responsive">
-                      <table class="table">
+                    <table class="table">
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
@@ -31,6 +30,18 @@
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                                 <a class="dashboard-menu" href="/dashboard/products"><b> PRODUCT</b></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-dashboard">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                                <a class="dashboard-menu" href="/dashboard/orders"><b> ORDERS</b></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-dashboard">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                                <a class="dashboard-menu" href="/dashboard/bank-accounts"><b> BANK ACCOUNT</b></a>
                             </td>
                         </tr>
                         <tr>
@@ -75,8 +86,8 @@
                                 <a class="dashboard-menu" href="/dashboard/share"><b> SHARE</b></a>
                             </td>
                         </tr>
-                      </table>
-                    </div>
+                    </table>
+                    
                 </div>
 
             </div><!-- modal-content -->

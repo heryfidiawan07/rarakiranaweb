@@ -10,6 +10,9 @@
                 @include('posts.content-index')
             @endforeach
         @endif
+        @if(!empty($kosong))
+            <div class="alert alert-info"> {{ $kosong }}</div>
+        @endif
         </div>
         <div class="col-md-4"></div>
     </div>
@@ -36,4 +39,5 @@
         <div class="col-md-4"></div>
     </div>
 </div>
+
 @endsection

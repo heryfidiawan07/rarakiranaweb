@@ -10,14 +10,27 @@
         @endif
         </p>
         <p>
-        @if(Auth::guest())
-            <a href="/login">LOGIN</a> |
-            <a href="/register">REGISTER</a> |
-        @endif
-        @foreach($mainMenus->where('parent_id',0) as $menu)
-        	<a href="/{{$menu->slug}}">{{$menu->name}}</a> |
-        @endforeach
-				</p>
+            @if(Auth::check())
+                @if(Auth::user())
+                    <a href="/user/{{Auth::user()->slug}}">PROFIL</a> |
+                    <a href="{{ url('/logout') }}">LOGOUT</a> |
+                @endif
+            @endif
+            <a href="/">HOME</a> |
+            @if(Auth::guest())
+                <a href="/login">LOGIN</a> |
+                <a href="/register">REGISTER</a> |
+            @endif
+            @foreach($mainMenus->where('parent_id',0) as $menu)
+            	<a href="/{{$menu->slug}}">{{$menu->name}}</a> |
+            @endforeach
+            @if($mainTag)
+            	<a href="/page/{{$mainTag->slug}}">{{$mainTag->name}}</a> |
+            @endif
+            @if($mainStore)
+            	<a href="/all/{{$mainStore->slug}}">{{$mainStore->name}}</a> |
+            @endif
+		</p>
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">

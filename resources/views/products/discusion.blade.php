@@ -48,7 +48,9 @@
                         {{csrf_field()}}
                         <textarea rows="5" class="form-control" name="description" required>{{old('description')}}</textarea>
                         <br>
-                        <button class="btn btn-success">Kirim</button>
+                        <button class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -58,5 +60,7 @@
 @if(Auth::guest())
     <label class="">Komentar</label>
     <textarea rows="10" class="form-control" name="description" disabled></textarea><br>
-    <button class="btn btn-success" disabled>Kirim</button>
+    <button class="btn btn-primary btn-sm" disabled>
+        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+    </button>
 @endif

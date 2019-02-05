@@ -1,27 +1,23 @@
 @extends('layouts.app')
-
+@section('css')
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
         
-        <div class="col-md-7">
-            <h1 class="text-center">Payment</h1>
+        @include('admin.dashboard-menu')
+        <div class="col-md-8">
             <div class="table-responsive">
-                <table class="table table-hover">
-                    <h4>
-                        <b>Detail Pembelian - 
-                            <a href="/user/{{$user->slug}}/print/invoice/{{$order->no_order}}">
-                            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Print Invoice</a>
-                        </b>
-                    </h4>
+                <table class="table-hover">
                     @foreach($carts as $item)
-                        <tr>
-                            <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="100"></td>
-                            <td>
-                                {{$item['item']['title']}}
-                                <p>Harga: <b><u>Rp {{number_format($item['item']['price'], 2)}}</u></b></p>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="100"></td>
+                        <td>
+                            {{$item['item']['title']}}
+                            <p>Harga: <b><u>Rp {{number_format($item['item']['price'], 2)}}</u></b></p>
+                        </td>
+                    </tr>
                     @endforeach
                     <tr>
                         <td>No Order</td>
@@ -116,6 +112,10 @@
                     </tr>
                 </table>
             </div>
+        </div>
+
+        <div class="col-md-4">
+            
         </div>
 
     </div>

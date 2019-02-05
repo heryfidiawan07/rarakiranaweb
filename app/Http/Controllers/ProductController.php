@@ -285,22 +285,35 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function newQty(Request $request, $slug){
+    public function newQty(Request $request, $slug, $key){
         $product = Product::whereSlug($slug)->first();
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart    = new Cart($oldCart);
         $cart->add($product, $product->id);
         $request->session()->put('cart', $cart);
-        return response(array('products' => $cart->items, 'totalPrice' => number_format($cart->totalPrice), 'count' => count($cart->items)));
+        return response(array('price' => number_format($cart->items[$key]['price']), 'totalPrice' => number_format($cart->totalPrice), 'count' => count($cart->items)));
     }
 
-    public function minQty(Request $request, $slug){
+    public function minQty(Request $request, $slug, $key){
         $product = Product::whereSlug($slug)->first();
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart    = new Cart($oldCart);
         $cart->min($product, $product->id);
         $request->session()->put('cart', $cart);
-        return response(array('products' => $cart->items, 'totalPrice' => number_format($cart->totalPrice), 'count' => count($cart->items)));
+        return response(array('price' => number_format($cart->items[$key]['price']), 'totalPrice' => number_format($cart->totalPrice), 'count' => count($cart->items)));
+    }
+
+    public function removeCart($slug){
+        $product = Product::whereSlug($slug)->first();
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart    = new Cart($oldCart);
+        $cart->removeItem($product->id);
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        }else{
+            Session::forget('cart');
+        }
+        return redirect('/product/cart');
     }
     
     public function cart(){
@@ -348,10 +361,10 @@ class ProductController extends Controller
                         'weight'        => $weight, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
-        $ongkir    = number_format($cost[0]['costs'][$key]['cost'][0]['value'], 2);
+        $ongkir    = number_format($cost[0]['costs'][$key]['cost'][0]['value']);
         $intOngkir =$cost[0]['costs'][$key]['cost'][0]['value'];
         $tagihan   = $cost[0]['costs'][$key]['cost'][0]['value'] + $total;
-        $tagihan   = number_format($tagihan, 2);
+        $tagihan   = number_format($tagihan);
         return response(array('ongkir' => $ongkir, 'tagihan' => $tagihan, 'intOngkir' => $intOngkir ));
     }
     

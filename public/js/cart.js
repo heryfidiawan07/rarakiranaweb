@@ -120,9 +120,9 @@ $(document).ready(function(){
         var key = $(this).attr('data-key');
         $.ajax({
             type: 'POST',
-            url : $(this).attr('data-url'),
+            url : $(this).attr('data-url')+'/'+key,
             success : function(data){
-                $('#price_'+key).text('Rp '+data.products[key]['price']);
+                $('#price_'+key).text('Rp '+data.price);
                 $('#totalPrice').text('Subtotal: Rp '+data.totalPrice);
             },error: function(data){
                 console.log('error');
@@ -133,12 +133,11 @@ $(document).ready(function(){
     $('.min').on('click', function(){
         if ($(this).next().val() > 1) {
             var key = $(this).attr('data-key');
-            console.log($(this).attr('data-url'));
             $.ajax({
                 type: 'POST',
-                url : $(this).attr('data-url'),
+                url : $(this).attr('data-url')+'/'+key,
                 success : function(data){
-                    $('#price_'+key).text('Rp '+data.products[key]['price']);
+                    $('#price_'+key).text('Rp '+data.price);
                     $('#totalPrice').text('Subtotal: Rp '+data.totalPrice);
                 },error: function(data){
                     console.log('error');

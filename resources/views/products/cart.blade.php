@@ -19,7 +19,7 @@
                         <div class="col-sm-8">
                             <h4 class="@if($product['item']['sticky'] == 1) sticky @else posts-title @endif">
                                 <a href="/show/product/{{$product['item']['slug']}}">
-                                    {{$product['item']['title']}}
+                                    {{str_limit($product['item']['title'],50)}}
                                 </a>
                             </h4>
                             <p class="discount">
@@ -33,6 +33,10 @@
                                     <img src="/parts/sale.jpg" width="50">
                                 @endif
                                 <i class="fas fa-weight"></i>{{$product['item']['weight']}} <small><i>KG</i></small>
+                                @if($product['item']['dimensi'] > 1)
+                                     - <span class="glyphicon glyphicon-th-large"></span>
+                                     {{$product['item']['dimensi']}} <small><i>Meter</i></small>
+                                @endif
                             </p>
                             <p>
                                 Rp {{number_format($product['item']['price'])}} <i>x</i>
@@ -41,11 +45,10 @@
                                 <button data-url="/add-new-qty-cart/{{$product['item']['slug']}}" type="button" id="plus" class="plus" data-key="{{$key}}">+</button>
                                 = 
                                 <strong id="price_{{$key}}">Rp {{number_format($product['price'])}}</strong>
+                                <a href="/remove-cart/{{$product['item']['slug']}}" class="btn btn-default btn-sm danger" style="height: 100%;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
                             </p>
-                            @if($product['item']['dimensi'] > 1)
-                                 - <span class="glyphicon glyphicon-th-large"></span>
-                                 {{$product['item']['dimensi']}} <small><i>Meter</i></small>
-                            @endif
                         </div>
                     </div>
                 @endforeach

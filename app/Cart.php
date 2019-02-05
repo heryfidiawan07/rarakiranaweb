@@ -51,4 +51,12 @@ class Cart
 		$this->totalWeight -= $item->weight;
 	}
 	
+	
+	public function removeItem($id){
+		$this->totalQty -= $this->items[$id]['qty'];
+		$this->totalPrice -= $this->items[$id]['price'];
+		$this->totalWeight -= $this->items[$id]['weight'];
+		unset($this->items[$id]);
+	}
+
 }

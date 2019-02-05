@@ -1,4 +1,4 @@
-@if($user->orders)
+@if($user->orders->count())
 	<h4 class="text-center"><b>TRANSAKSI</b></h4>
 	@foreach($user->orders as $order)
 		<p>
