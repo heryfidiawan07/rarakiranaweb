@@ -32,10 +32,13 @@ $(document).ready(function(){
         $('#tagihan').text('Rp -');
     });
 
-    $(document).on('click','.list-kabupaten-item', function() {
+    //$(document).on('click','.list-kabupaten-item', function() {
+    $('.list-kabupaten-item').on('click', function() {
         var kabupatenText = $(this).text();
         var kabupatenId   = $(this).attr('data-id');
+        var postal_code   = $(this).attr('postal-code');
         $('#kabupaten').val(kabupatenText);
+        $('#postal_code').val(postal_code);
         $('#kabupaten').attr('value',kabupatenId);
         $('#kabHidden').attr('value',kabupatenId);
         $('.list-kabupaten-item').fadeOut();

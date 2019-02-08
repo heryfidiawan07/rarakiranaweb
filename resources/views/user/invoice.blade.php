@@ -6,11 +6,11 @@
       <th align="left">Invoice</th>
     </tr>
   	<tr>
-		<td align="left"><?=$payment->no_invoice ?></td>
+		<td align="left"><?=$order->payment->no_invoice ?></td>
  		<td align="left">No Invoice</td>
   	</tr>
   	<tr>
-  		<td align="left"><?=date_format($payment->created_at,"Y/m/d") ?></td>
+  		<td align="left"><?=date_format($order->payment->created_at,"Y/m/d") ?></td>
  		<td align="left">Tanggal</td>
   	</tr>
 </table>
@@ -38,18 +38,18 @@
   	</tr>
     <tr><td colspan="6"><hr></td></tr>
   	<tr>
-		<td align="left">Rp <?=$payment->ongkir ?></td>
+		<td align="left">Rp <?=$order->ongkir ?></td>
 		<td align="center"></td>
-  		<td align="center"><?=$payment->total_weight/1000 ?>kg</td>
-  		<td align="left" colspan="2"><b><?=strtoupper($payment->kurir) ?></b> - <?=$payment->services ?></td>
+  		<td align="center"><?=$order->total_weight/1000 ?>kg</td>
+  		<td align="left" colspan="2"><b><?=strtoupper($order->kurir) ?></b> - <?=$order->services ?></td>
   	</tr>
   	<tr id="sub-price">
-  		<td align="left"><b>Rp <?=number_format($payment->ongkir) ?><b></td>
+  		<td align="left"><b>Rp <?=number_format($order->ongkir) ?><b></td>
   		<td align="left" colspan="5"><b>Subtotal</b></td>
   	</tr>
     <tr><td colspan="6"><hr></td></tr>
   	<tr id="sub-price">
-  		<td align="left"><b>Rp <?=number_format($payment->total_price) ?><b></td>
+  		<td align="left"><b>Rp <?=number_format($order->total_price) ?><b></td>
   		<td align="left" colspan="5"><b>Total Tagihan</b></td>
   	</tr>
 </table>

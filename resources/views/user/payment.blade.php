@@ -9,8 +9,8 @@
             <div class="table-responsive">
                 <table class="table table-hover">
                     <h4>
-                        <b>Detail Pembelian - 
-                            <a href="/user/{{$user->slug}}/print/invoice/{{$order->no_order}}">
+                        <b>Detail Pembelian
+                            - <a href="/user/{{$user->slug}}/print/invoice/{{$order->no_order}}" target="_blank">
                             <span class="glyphicon glyphicon-print" aria-hidden="true"></span>Print Invoice</a>
                         </b>
                     </h4>
@@ -30,17 +30,17 @@
                     <tr>
                         <td>Status Pembelian</td>
                         <td>
-                            @if($payment->status==0)
+                            @if($order->status==0)
                                 <span class="warning">Menunggu pembayaran</span>
-                            @elseif($payment->status==1)
+                            @elseif($order->status==1)
                                 <span class="warning">Menunggu konfirmasi penjual</span>
-                            @elseif($payment->status==2)
-                                <span class="success">Sedang di prosses</span>
-                            @elseif($payment->status==3)
-                                <span class="success">Sedang di dalam pengiriman</span>
-                            @elseif($payment->status==4)
+                            @elseif($order->status==2)
+                                <span class="success">Pesanan Sedang di prosses</span>
+                            @elseif($order->status==3)
+                                <span class="success">Sedang di dalam pengiriman oleh kurir</span>
+                            @elseif($order->status==4)
                                 <span class="success">Barang telah di terima</span>
-                            @elseif($payment->status==5)
+                            @elseif($order->status==5)
                                 <span class="danger">Pesanan anda sudah expired</span>
                             @endif
                             <div class="well">
@@ -54,17 +54,21 @@
                                     @endforeach
                                 </table>
                             </div>
-                            @if($payment->status==0)
+                            @if($order->status < 2)
                                 <form action="/user/{{$user->slug}}/payment/order/{{$order->no_order}}" method="POST" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="form-group">
-                                        <label class="control-label">Unggah bukti pembayaran:</label>
+                                        @if($order->payment->status==0)
+                                            <label class="control-label">Unggah bukti pembayaran:</label>
+                                        @elseif($order->payment->status==1)
+                                            <label class="control-label">Ubah bukti pembayaran:</label>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <input type=text name="pengirim" class="form-control input-sm" value="{{old('name')}}" placeholder="Nama Pengirim" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="file" name="resi" class="form-control input-sm" required>
+                                        <input type="file" name="resi_img" class="form-control input-sm" required>
                                         @if ($errors->has('resi'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('resi') }}</strong>
@@ -78,41 +82,41 @@
                             @endif
                         </td>
                     </tr>
-                    @if($payment->status > 0)
+                    @if($order->payment->status > 0)
                         <tr>
                             <td>
-                                <a href="/resi/{{$payment->resi}}">
-                                    <img src="/resi/{{$payment->resi}}" width="50">
+                                <a href="/resi/{{$order->payment->resi_img}}">
+                                    <img src="/resi/{{$order->payment->resi_img}}" width="50">
                                 </a>
                             </td>
-                            <td>Pengirim: {{$payment->pengirim}}</td>
+                            <td>Pengirim: {{$order->payment->pengirim}} - <a href="/resi/{{$order->payment->resi_img}}">Buka Gambar</a></td>
                         </tr>
                     @endif
                     <tr>
                         <td>Jasa Pengiriman:</td>
-                        <td>{{strtoupper($payment->kurir)}} - {{$payment->services}}</td>
+                        <td>{{strtoupper($order->kurir)}} - {{$order->services}}</td>
                     </tr>
-                    @if($payment->status > 3)
+                    @if($order->status > 2)
                         <tr>
                             <td>No Resi:</td>
-                            <td><b>{{$payment->kurir_resi}}</b></td>
+                            <td><b>{{$order->kurir_resi}}</b></td>
                         </tr>
                     @endif
                     <tr>
                         <td>Catatan:</td>
-                        <td>{{$payment->note}}</td>
+                        <td>{{$order->note}}</td>
                     </tr>
                     <tr>
                         <td>Alamat:</td>
                         <td>
-                            {!! nl2br($payment->address->address) !!}
-                            <p>Kecamatan {{$payment->address->kecamatan}}</p>
-                            <p>{{$payment->address->kabupaten}}</p>
+                            {!! nl2br($order->address->address) !!}
+                            <p>Kecamatan {{$order->address->kecamatan}}</p>
+                            <p>{{$order->address->kabupaten}} - {{$order->address->postal_code}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Total Tagihan:</td>
-                        <td><b>Rp {{number_format($payment->total_price)}}</b></td>
+                        <td><b>Total Tagihan:</b></td>
+                        <td><b>Rp {{number_format($order->total_price)}}</b></td>
                     </tr>
                 </table>
             </div>

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    protected $fillable = ['no_invoice','address_id', 'order_id','pengirim','resi','kurir_resi','total_price','total_weight','total_qty','note','kurir','services','ongkir','status',];
+    protected $fillable = ['no_invoice', 'order_id','pengirim','resi_img','status',];
     //Ongkir ?
-    public function address(){
-    	return $this->belongsTo('App\Address');
+    
+    public function order(){
+    	return $this->belongsTo('App\Order');
     }
     
 }

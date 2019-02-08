@@ -22,6 +22,8 @@ class CreateAddressesTable extends Migration
             $table->string('kabupaten');
             $table->integer('kec_id');
             $table->string('kecamatan');
+            $table->string('postal_code');
+            $table->string('phone');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 

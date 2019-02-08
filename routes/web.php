@@ -68,9 +68,17 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/product/parent/{id}', 'ProductController@parent');
 		//Picture Destory
 		Route::get('/product/pictures/{id}/destroy', 'PictureController@destroy');
+		//Admin Address
+		Route::post('/admin/address/store', 'AddressController@adminAddress');
 		//Order
 		Route::get('/dashboard/orders', 'OrderController@index');
 		Route::get('/dashboard/order-details/{order}', 'OrderController@details');
+		Route::get('/proses/order/{order}', 'OrderController@orderProcesed');
+		Route::get('/cancel/order/{order}', 'OrderController@orderRejected');
+		Route::get('/order/print/invoice/{order}', 'OrderController@invoicePrint');
+		Route::get('/order/print/delivery/{order}', 'OrderController@deliveryPrint');
+		Route::post('/order/input/resi/{order}', 'OrderController@inputResi');
+		Route::get('/done/order/{order}', 'OrderController@done');
 		//Rekening
 		Route::get('/dashboard/bank-accounts', 'RekeningController@index');
 		Route::post('/bank-accounts/store', 'RekeningController@store');
@@ -167,8 +175,8 @@ Route::get('/remove-cart/{slug}', "ProductController@removeCart");
 
 //Ongkir
 Route::post('/cek/ongkir/product/{slug}/{tujuan}/{kurir}', 'ProductController@ongkir');
-Route::post('/get-services/{kabupaten}/{kurir}', 'ProductController@services');
-Route::post('/get-ongkir-services/{kabupaten}/{kurir}/{key}', 'ProductController@costService');
+Route::post('/get-services/{kabId}/{kurir}', 'ProductController@services');
+Route::post('/get-ongkir-services/{kabId}/{kurir}/{key}', 'ProductController@costService');
 
 //Forum / Thread
 Route::get('/page/{slug}', 'ThreadController@threads');

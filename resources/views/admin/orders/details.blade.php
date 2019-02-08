@@ -7,15 +7,27 @@
     <div class="row">
         
         @include('admin.dashboard-menu')
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="table-responsive">
-                <table class="table-hover">
+                <table class="table table-hover">
+                    <tr>
+                        <th>
+                            <a class="success" href="/order/print/invoice/{{$order->no_order}}" target="_blank">
+                                <b><span class="glyphicon glyphicon-print" aria-hidden="true"></span>Print Invoice</b>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="/order/print/delivery/{{$order->no_order}}" target="_blank">
+                                <b><span class="glyphicon glyphicon-print" aria-hidden="true"></span>Print Delivery Order</b>
+                            </a>
+                        </th>
+                    </tr>
                     @foreach($carts as $item)
                     <tr>
                         <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="100"></td>
                         <td>
                             {{$item['item']['title']}}
-                            <p>Harga: <b><u>Rp {{number_format($item['item']['price'], 2)}}</u></b></p>
+                            <p>Harga: <b><u>Rp {{number_format($item['item']['price'])}}</u></b></p>
                         </td>
                     </tr>
                     @endforeach
@@ -23,98 +35,94 @@
                         <td>No Order</td>
                         <td><b>{{$order->no_order}}</b></td>
                     </tr>
-                    <tr>
-                        <td>Status Pembelian</td>
-                        <td>
-                            @if($payment->status==0)
-                                <span class="warning">Menunggu pembayaran</span>
-                            @elseif($payment->status==1)
-                                <span class="warning">Menunggu konfirmasi penjual</span>
-                            @elseif($payment->status==2)
-                                <span class="success">Sedang di prosses</span>
-                            @elseif($payment->status==3)
-                                <span class="success">Sedang di dalam pengiriman</span>
-                            @elseif($payment->status==4)
-                                <span class="success">Barang telah di terima</span>
-                            @elseif($payment->status==5)
-                                <span class="danger">Pesanan anda sudah expired</span>
-                            @endif
-                            <div class="well">
-                                ATM transfer:
-                                <table class="table">
-                                    @foreach($rekenings as $rekening)
-                                        <tr>
-                                            <td>{{$rekening->number}}</td>
-                                            <td>{{$rekening->name}} ({{$rekening->bank}})</td>
-                                        </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                            @if($payment->status==0)
-                                <form action="/user/{{$user->slug}}/payment/order/{{$order->no_order}}" method="POST" enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <div class="form-group">
-                                        <label class="control-label">Unggah bukti pembayaran:</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type=text name="pengirim" class="form-control input-sm" value="{{old('name')}}" placeholder="Nama Pengirim" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="file" name="resi" class="form-control input-sm" required>
-                                        @if ($errors->has('resi'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('resi') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-send"></span></button>
-                                    </div>
-                                </form>
-                            @endif
-                        </td>
-                    </tr>
-                    @if($payment->status > 0)
+                    @if($order->payment->status > 0)
                         <tr>
                             <td>
-                                <a href="/resi/{{$payment->resi}}">
-                                    <img src="/resi/{{$payment->resi}}" width="50">
+                                <a href="/resi/{{$order->payment->resi_img}}" target="_blank">
+                                    <img src="/resi/{{$order->payment->resi_img}}" width="50">
                                 </a>
                             </td>
-                            <td>Pengirim: {{$payment->pengirim}}</td>
+                            <td>Pengirim: {{$order->payment->pengirim}} - <a href="/resi/{{$order->payment->resi_img}}" target="_blank">Buka Gambar</a></td>
                         </tr>
                     @endif
                     <tr>
-                        <td>Jasa Pengiriman:</td>
-                        <td>{{strtoupper($payment->kurir)}} - {{$payment->services}}</td>
+                        <td>Status:</td>
+                        <td>
+                            @if($order->status==0)
+                                <span class="warning">Menunggu pembayaran</span>
+                            @elseif($order->status==1)
+                                <span class="warning">Menunggu konfirmasi admin</span>
+                            @elseif($order->status==2)
+                                <span class="success">Sedang di prosses</span>
+                            @elseif($order->status==3)
+                                <span class="success">Sedang di dalam pengiriman</span>
+                            @elseif($order->status==4)
+                                <span class="success">Barang telah di terima</span>
+                            @elseif($order->status==5)
+                                <span class="danger">Pesanan anda sudah expired</span>
+                            @endif
+                            @if($order->status==1)
+                                <a href="/proses/order/{{$order->no_order}}" class="btn btn-primary btn-xs">Proses Pesanan</a> | 
+                            @endif
+                            @if($order->status > 0 && $order->status < 5)
+                                <a href="/cancel/order/{{$order->no_order}}" class="btn btn-danger btn-xs">Tolak Pasanan</a>
+                            @endif
+                            @if($order->status==3)
+                                <a href="/done/order/{{$order->no_order}}" class="btn btn-success btn-xs">Pesanan Telah di Terima</a>
+                            @endif
+                        </td>
                     </tr>
-                    @if($payment->status > 3)
+                    <tr>
+                        <td>Jasa Pengiriman:</td>
+                        <td>{{strtoupper($order->kurir)}} - {{$order->services}}</td>
+                    </tr>
+                    @if($order->status > 1)
                         <tr>
                             <td>No Resi:</td>
-                            <td><b>{{$payment->kurir_resi}}</b></td>
+                            <td><b>{{$order->kurir_resi}}</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @if($order->payment->kurir_resi != 'yet')
+                                    Update No Resi
+                                @else
+                                    Input No Resi
+                                @endif
+                            </td>
+                            <td>
+                                <form method="POST" action="/order/input/resi/{{$order->no_order}}">
+                                    {{csrf_field()}}
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="kurir_resi" placeholder="input no resi" class="form-control" required>
+                                        <div class="input-group-addon">
+                                            <button class="glyphicon glyphicon-send"></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
                     @endif
                     <tr>
                         <td>Catatan:</td>
-                        <td>{{$payment->note}}</td>
+                        <td>{{$order->note}}</td>
                     </tr>
                     <tr>
                         <td>Alamat:</td>
                         <td>
-                            {!! nl2br($payment->address->address) !!}
-                            <p>Kecamatan {{$payment->address->kecamatan}}</p>
-                            <p>{{$payment->address->kabupaten}}</p>
+                            {!! nl2br($order->address->address) !!}
+                            <p>Kecamatan {{$order->address->kecamatan}}</p>
+                            <p>{{$order->address->kabupaten}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Total Tagihan:</td>
-                        <td><b>Rp {{number_format($payment->total_price)}}</b></td>
+                        <td><b>Rp {{number_format($order->total_price)}}</b></td>
                     </tr>
                 </table>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             
         </div>
 

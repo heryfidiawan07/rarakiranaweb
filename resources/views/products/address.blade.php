@@ -27,7 +27,7 @@
             <table id="list-kabupaten" class="table table-hover">
                 @for($i = 0; $i < count($kabupaten); $i++)
                     <tr>
-                        <td class="list-kabupaten-item" data-id="{{$kabupaten[$i]['city_id']}}" data-name="{{$kabupaten[$i]['city_name']}}">{{$kabupaten[$i]['type']}} - {{$kabupaten[$i]['city_name']}} - {{$kabupaten[$i]['province']}}</td>
+                        <td class="list-kabupaten-item" data-id="{{$kabupaten[$i]['city_id']}}" data-name="{{$kabupaten[$i]['city_name']}}" postal-code="{{$kabupaten[$i]['postal_code']}}">{{$kabupaten[$i]['type']}} - {{$kabupaten[$i]['city_name']}} - {{$kabupaten[$i]['province']}}</td>
                     </tr>
                 @endfor
             </table>
@@ -41,5 +41,11 @@
                 <strong>{{ $errors->first('kecamatan') }}</strong>
             </span>
         @endif
+    </div>
+    <div class="form-group">
+        <input type="text" name="postal_code" id="postal_code" class="form-control input-sm" placeholder="Kode Pos" autocomplete="off" @if($address) value="{{$address->postal_code}}" @endif readonly required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="phone" id="phone" class="form-control input-sm" placeholder="Nomor Telephone" autocomplete="off" @if($address) value="{{$address->phone}}" @endif required>
     </div>
 </div>

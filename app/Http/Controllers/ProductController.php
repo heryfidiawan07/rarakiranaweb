@@ -9,6 +9,7 @@ use Session;
 use Purifier;
 use RajaOngkir;
 
+use App\User;
 use App\Cart;
 use App\Logo;
 use App\Promo;
@@ -23,7 +24,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getkabupaten','cart','checkout', 'payment', 'services', 'costService','addToCart','buy','newQty','minQty']]);
+        $this->middleware('admin', ['except'=>['show','storefront','products','ongkir','getkabupaten','cart','checkout', 'payment', 'services', 'costService','addToCart','buy','newQty','minQty','removeCart']]);
     }
 
     public function index()
@@ -256,10 +257,12 @@ class ProductController extends Controller
 
     public function ongkir(Request $request, $slug, $tujuan, $kurir){
         $product = Product::whereSlug($slug)->first();
-        $asal    = 55;//55 Adalah bekasi kabupaten
         $berat   = $product->weight;//$product->weight; // dalam gram
+        $admin   = User::where('admin',1)->first();
+        $address = Address::where('user_id',$admin->id)->first();
+        $asal    = 55;//55 Adalah bekasi kabupaten
         $cost    = RajaOngkir::Cost([
-                        'origin'        => $asal, // id kota asal = Bekasi
+                        'origin'        => $admin->address->kab_id,
                         'destination'   => $tujuan, // id kota tujuan
                         'weight'        => $product->weight, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
@@ -338,26 +341,32 @@ class ProductController extends Controller
         return view('products.checkout', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice , 'kabupaten' => $kabupaten, 'totalWeight' => $cart->totalWeight, 'address' => $address, 'totalQty' => $cart->totalQty]);
     }
 
-    public function services(Request $request, $kabupaten, $kurir){
+    public function services(Request $request, $kabId, $kurir){
+        $admin   = User::where('admin',1)->first();
+        $address = Address::where('user_id',$admin->id)->first();
+        $admin   = User::where('admin',1)->first();
+        $address = Address::where('user_id',$admin->id)->first();
         $asal    = 55;//55 Adalah bekasi kabupaten
         $cost    = RajaOngkir::Cost([
-                        'origin'        => $asal, // id kota asal = Bekasi
-                        'destination'   => $kabupaten, // id kota tujuan
+                        'origin'        => $admin->address->kab_id,
+                        'destination'   => $kabId, // id kota tujuan
                         'weight'        => 1000, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
         return response($cost);
     }
     
-    public function costService(Request $request, $kabupaten, $kurir, $key){
+    public function costService(Request $request, $kabId, $kurir, $key){
         $oldCart = Session::get('cart');
         $cart    = new Cart($oldCart);
         $total   = $cart->totalPrice;
         $weight  = $cart->totalWeight*1000;
+        $admin   = User::where('admin',1)->first();
+        $address = Address::where('user_id',$admin->id)->first();
         $asal    = 55;//55 Adalah bekasi kabupaten
         $cost    = RajaOngkir::Cost([
-                        'origin'        => $asal, // id kota asal = Bekasi
-                        'destination'   => $kabupaten, // id kota tujuan
+                        'origin'        => $admin->address->kab_id,
+                        'destination'   => $kabId, // id kota tujuan
                         'weight'        => $weight, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
@@ -384,10 +393,12 @@ class ProductController extends Controller
         $total    = $cart->totalPrice;
         $weight   = $cart->totalWeight*1000;
         //Request
-        $asal      = 55;
         $key       = $request->keyService;
-        $cost      = RajaOngkir::Cost([
-                        'origin'        => $asal, // id kota asal = Bekasi
+        $admin   = User::where('admin',1)->first();
+        $address = Address::where('user_id',$admin->id)->first();
+        $asal    = 55;//55 Adalah bekasi kabupaten
+        $cost    = RajaOngkir::Cost([
+                        'origin'        => $admin->address->kab_id,
                         'destination'   => $request->kabHidden, // id kota tujuan
                         'weight'        => $weight, // berat satuan gram
                         'courier'       => strtolower($request->kurir), // kode kurir pengantar ( jne / tiki / pos )
@@ -398,20 +409,29 @@ class ProductController extends Controller
         $user = Auth::user();
         if ($useradd === null) {
             $address = Address::create([
-                'name'      => $user->name,
-                'penerima'  => $request->penerima,
-                'address'   => Purifier::clean($request->address),
-                'kab_id'    => $request->kabHidden,
-                'kabupaten' => $request->kabupaten,
-                'kec_id'    => 0,
-                'kecamatan' => $request->kecamatan,
-                'user_id'   => $user->id,
+                'name'        => $user->name,
+                'penerima'    => $request->penerima,
+                'address'     => Purifier::clean($request->address),
+                'kab_id'      => $request->kabHidden,
+                'kabupaten'   => $request->kabupaten,
+                'kec_id'      => 0,
+                'kecamatan'   => $request->kecamatan,
+                'postal_code' => $request->postal_code,
+                'phone'       => $request->phone,
+                'user_id'     => $user->id,
             ]);
         }else{
             $address = Address::update([
-                'name'      => $user->name,
-                'penerima'  => $request->penerima,
-                'address'   => Purifier::clean($request->address),
+                'name'        => $user->name,
+                'penerima'    => $request->penerima,
+                'address'     => Purifier::clean($request->address),
+                'kab_id'      => $request->kabHidden,
+                'kabupaten'   => $request->kabupaten,
+                'kec_id'      => 0,
+                'kecamatan'   => $request->kecamatan,
+                'postal_code' => $request->postal_code,
+                'phone'       => $request->phone,
+                'user_id'     => $user->id,
             ]);
         }
         $time = date("YmdHis");
@@ -419,24 +439,24 @@ class ProductController extends Controller
         $Y    = date("Y");
         //Create Order
         $order = new Order;
-        $order->no_order = $user->id.$time;
-        $order->cart     = serialize($cart);
-        $order->user_id  = $user->id;
+        $order->no_order     = $user->id.$time;
+        $order->address_id   = $address->id;
+        $order->cart         = serialize($cart);
+        $order->total_price  = $totalTagihan;
+        $order->total_weight = $weight;
+        $order->total_qty    = $request->totalQty;
+        $order->note         = $request->note;
+        $order->kurir        = $request->kurir;
+        $order->services     = $request->services;
+        $order->ongkir       = $request->ongkir;
+        $order->user_id      = $user->id;
         $order->save();
         //Create Payment
         $payment = new Payment;
-        $payment->no_invoice   = 'INV/'.$time.'/'.$order->id.'/'.$M.'/'.$Y;
-        $payment->address_id   = $address->id;
-        $payment->order_id     = $order->id;
-        $payment->pengirim     = 'yet';
-        $payment->resi         = 'yet';
-        $payment->total_price  = $totalTagihan;
-        $payment->total_weight = $weight;
-        $payment->total_qty    = $request->totalQty;
-        $payment->note         = $request->note;
-        $payment->kurir        = $request->kurir;
-        $payment->services     = $request->services;
-        $payment->ongkir       = $request->ongkir;
+        $payment->no_invoice = 'INV/'.$time.'/'.$order->id.'/'.$M.'/'.$Y;
+        $payment->order_id   = $order->id;
+        $payment->pengirim   = 'yet';
+        $payment->resi_img   = 'yet';
         $payment->save();
 
         $forget = Session::forget('cart');
