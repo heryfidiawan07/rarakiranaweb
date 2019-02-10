@@ -16,10 +16,10 @@
                     </h4>
                     @foreach($carts as $item)
                         <tr>
-                            <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="100"></td>
+                            <td><img src="/products/thumb/{{$item['item']['pictures'][0]['img']}}" width="80"></td>
                             <td>
-                                {{$item['item']['title']}}
-                                <p>Harga: <b><u>Rp {{number_format($item['item']['price'], 2)}}</u></b></p>
+                                <a href="/show/product/{{$item['item']['slug']}}" class="a-black">{{$item['item']['title']}}</a>
+                                <p>Harga: <b><u>Rp {{number_format($item['item']['price'])}}</u></b></p>
                             </td>
                         </tr>
                     @endforeach
@@ -114,7 +114,15 @@
                             <p>{{$order->address->kabupaten}} - {{$order->address->postal_code}}</p>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="warning">
+                        <td>Harga Barang</td>
+                        <td>Rp {{number_format($subTotalPrice)}}</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>Ongkor Kirim</td>
+                        <td>Rp {{number_format($order->ongkir)}}</td>
+                    </tr>
+                    <tr class="success">
                         <td><b>Total Tagihan:</b></td>
                         <td><b>Rp {{number_format($order->total_price)}}</b></td>
                     </tr>

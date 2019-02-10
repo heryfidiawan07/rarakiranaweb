@@ -8,7 +8,7 @@
         @endif
     </div>
     <div class="form-group">
-        <textarea name="address"id="address" class="form-control" rows="4" placeholder="Alamat rumah" required>@if($address) {!! strip_tags($address->address) !!} @endif</textarea>
+        <textarea name="address" id="address" class="form-control" rows="4" placeholder="Alamat rumah" required>@if($address) {!! strip_tags($address->address) !!} @endif</textarea>
         @if ($errors->has('address'))
             <span class="help-block">
                 <strong>{{ $errors->first('address') }}</strong>

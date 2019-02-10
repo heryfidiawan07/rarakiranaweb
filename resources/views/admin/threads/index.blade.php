@@ -5,54 +5,56 @@
 @section('content')
 <div class="container">
     <div class="row">
-    
+
         @include('admin.dashboard-menu')
         <div class="col-md-12">
-            <table><tr><td>
-                @if($forumTag)
-                    <form class="form-inline" method="POST" action="/forum/update/{{$forumTag->id}}">
-                        {{csrf_field()}}
-                        <div class="input-group input-group-sm">
-                            <input type="text" name="forumUpdate" class="form-control" value="{{$forumTag->name}}" required>
-                            <div class="input-group-addon">
-                                <button class="glyphicon glyphicon-send"></button>
+            <div class="table-responsive well">
+                <table class="activate-tabel"><tr><td>
+                    @if($forumTag)
+                        <form class="form-inline" method="POST" action="/forum/update/{{$forumTag->id}}">
+                            {{csrf_field()}}
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="forumUpdate" class="form-control" value="{{$forumTag->name}}" required>
+                                <div class="input-group-addon">
+                                    <button class="glyphicon glyphicon-send"></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                @endif
-                </td>
-                @if($forumTag)
-                <td>
-                    <form class="form-inline" method="POST" action="/forum/update/status/{{$forumTag->id}}">
-                        {{csrf_field()}}
-                        <div class="input-group input-group-sm">
-                            <select name="statusForum" class="form-control">
-                                @if($forumTag->status==0)
+                        </form>
+                    @endif
+                    </td>
+                    @if($forumTag)
+                    <td>
+                        <form class="form-inline" method="POST" action="/forum/update/status/{{$forumTag->id}}">
+                            {{csrf_field()}}
+                            <div class="input-group input-group-sm">
+                                <select name="statusForum" class="form-control">
+                                    @if($forumTag->status==0)
+                                        <option value="0">No Activate</option>
+                                    @endif
+                                    <option value="1">Activate</option>
                                     <option value="0">No Activate</option>
-                                @endif
-                                <option value="1">Activate</option>
-                                <option value="0">No Activate</option>
-                            </select>
-                            <div class="input-group-addon">
-                                <button class="glyphicon glyphicon-send"></button>
+                                </select>
+                                <div class="input-group-addon">
+                                    <button class="glyphicon glyphicon-send"></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </td>
-                @else
-                <td>
-                    <form class="form-inline" method="POST" action="/activate/forum">
-                        {{csrf_field()}}
-                        <div class="input-group input-group-sm">
-                            <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
-                            <div class="input-group-addon">
-                                <button class="glyphicon glyphicon-send"></button>
+                        </form>
+                    </td>
+                    @else
+                    <td>
+                        <form class="form-inline" method="POST" action="/activate/forum">
+                            {{csrf_field()}}
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="forumName" class="form-control input-sm" placeholder="Create Menu Forum" required>
+                                <div class="input-group-addon">
+                                    <button class="glyphicon glyphicon-send"></button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </td>
-                @endif
-            </tr></table>
+                        </form>
+                    </td>
+                    @endif
+                </tr></table>
+            </div>
         </div>
 
         @if($tags->where('setting',10)->where('status',1)->count())
@@ -157,12 +159,12 @@
             </div>
 
             <div class="col-md-12"><hr>
+                <h4 class="text-center"><b>THREADS LIST</b></h4>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="/thread/create" class="btn btn-primary btn-sm pull-left">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> CREATE
+                    <div class="panel-heading text-center">
+                        <a href="/thread/create" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>CREATE
                         </a>
-                        <h4 class="text-center"><b>THREADS LIST</b></h4>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

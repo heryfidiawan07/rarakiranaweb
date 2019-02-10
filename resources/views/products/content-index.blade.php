@@ -1,10 +1,10 @@
 <div class="col-sm-4">
     <div class="products">
         @include('products.thumb')
-        <div class="text-center">
-            <h5 class="product-title @if($product->sticky == 1) sticky @endif">
+        <div class="text-center product-title">
+            <h4 class="@if($product->sticky == 1) sticky @endif">
                 <a href="/show/product/{{$product->slug}}">{{$product->title}}</a>
-            </h5>
+            </h4>
         </div>
         <div class="product-content">
             <a href="/products/{{$product->storefront->slug}}">
@@ -27,7 +27,7 @@
                 <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm buy">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
                 </a>
-                <a href="/add-to-cart/{{$product->slug}}" class="btn btn-success btn-sm">
+                <a href="/add-to-cart/{{$product->slug}}" class="btn btn-success btn-sm buy">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
                 </a>
             </div>

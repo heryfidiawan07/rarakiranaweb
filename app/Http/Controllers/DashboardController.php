@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $products  = Product::all();
         //Status = [1 = Telah di bayar/Menunggu di proses penjual | 2 = Sedang di proses penjual | 3 = Sedang dalam pengiriman | 4 = Barang telah di terima 5 = Cancel ]
         $orders    = Order::where('status',1)->get();
-        $sold      = Payment::where('status','>',0)->sum('total_qty');//if == 5 -> Cancel
+        $sold      = Order::where('status','>',0)->sum('total_qty');//if == 5 -> Cancel
         $questions = Question::all();
         $messages  = DB::table('users')->join('messages', 'users.id', '=', 'messages.messageable_id')
                      ->where('messages.messageable_type', 'App\User')->get();

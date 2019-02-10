@@ -11,8 +11,8 @@
 <div class="container">
     <div class="row">
         
-        <div class="col-md-3 col-sm-12">@include('products.tags-category')</div>
-        <div class="col-md-9 col-sm-12">
+        <div class="col-md-3">@include('products.tags-category')</div>
+        <div class="col-md-9">
             @if($promo)
                 @include('promo.index')
                 <hr>

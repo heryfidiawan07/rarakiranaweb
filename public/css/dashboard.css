@@ -1,3 +1,30 @@
+/*Admin Products*/
+.td-admin-img-products {
+	max-width: 150px;
+	min-width: 150px;
+	height: 150px;
+	background-color: lightgrey;
+}
+.td-admin-img-products .frame-product-img {
+	width: 150px;
+	height: 150px;
+	white-space: nowrap;
+	text-align: center;
+	overflow: hidden;
+}
+.frame-product-img .frame-product-img-helper {
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}
+.frame-product-img img {
+	padding-right: 7px;
+	vertical-align: middle;
+	transition: transform 1s;
+	width: 100%;
+	height: auto;
+}
+/*End admin products*/
 .td-logo-tag a {
 	color: black;
 }
@@ -17,23 +44,31 @@
 	float: left;
 	margin-right: 10px;
 }
-.frame-admin-art {
+/*Admin Post*/
+.td-admin-img-posts {
 	width: 150px;
 	height: 150px;
 }
-.frame-admin-art img {
-	width: auto;
-	max-width: 100%;
+.admin-frame-posts {
+	width: 150px;
+	height: 150px;
+	white-space: nowrap;
+	text-align: center;
+	overflow: hidden;
+}
+.admin-frame-posts-helper {
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+}
+.admin-posts-thumb-img {
+	padding-right: 7px;
+	vertical-align: middle;
+	transition: transform 1s;
+	width: 100%;
 	height: auto;
 }
-.frame-admin-prod {
-	width: 150px; height: 150px;
-}
-.frame-admin-prod img {
-	width: auto;
-	max-width: 100%;
-	height: auto;
-}
+/*End admin post*/
 .dashBtn {
 	position: fixed; left: 0; height: 100px; line-height: 85px; padding-right: 5px; left: -10px; z-index: 2; border-radius: 10px;
 }
@@ -56,4 +91,7 @@
 }
 .close span {
 	color: white;
+}
+.activate-tabel td {
+	padding-right: 50px;
 }

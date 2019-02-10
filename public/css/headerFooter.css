@@ -49,6 +49,10 @@
 .footerFollow i {
 	margin-bottom: 5px;
 }
+.footerMenu p {
+	display: inline-block;
+	margin-bottom: 10px;
+}
 /*End Footer*/
 /*Navigation*/
 .icon-bar {

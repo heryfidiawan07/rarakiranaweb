@@ -8,19 +8,24 @@
 
         <div class="col-md-12">
             @include('admin.dashboard-menu')
+            <h4 class="text-center"><b>POST LIST</b></h4>
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="/post/create" class="btn btn-primary btn-sm pull-left">
+                <div class="panel-heading text-center">
+                    <a href="/post/create" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>CEATE POST
                     </a>
-                    <p class="text-center"><b>POST LIST</b></p>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                     @foreach($posts as $post)
                         <table class="table table-bordered">
                             <tr>
-                                <td rowspan="3" class="frame-admin-art"><img src="/posts/thumb/{{$post->img}}"></td>
+                                <td rowspan="3" class="td-admin-img-posts">
+                                    <div class="admin-frame-posts">
+                                        <span class="admin-frame-posts-helper"></span>
+                                        <img src="/posts/thumb/{{$post->img}}" class="admin-posts-thumb-img">
+                                    </div>
+                                </td>
                                 <td colspan="7"><p class="@if($post->sticky == 1) sticky @endif">{{$post->title}} @if($post->sticky == 1) - <small style="color: black;">This Post Sticky</small>@endif</p></td>
                             </tr>
                             <tr>
@@ -64,7 +69,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="/{{$post->menu->slug}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-tag">{{$post->menu->name}}</a></td>
+                                <td><a href="/{{$post->menu->slug}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-tag">{{$post->menu->name}}</a></td>
                                 <td><span class="glyphicon glyphicon-user"></span><small><i> {{$post->user->name}}</i></small></td>
                                 <td><span class="glyphicon glyphicon-comment"> {{$post->comments->count()}}</span></td>
                                 <td colspan="2"><small><i>

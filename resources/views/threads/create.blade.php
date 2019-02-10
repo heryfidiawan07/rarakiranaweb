@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
                 
             <h4 class="text-center"><b>CREATE THREADS</b></h4>
             <form method="POST" action="/thread/store">
@@ -40,8 +40,9 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                    <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+                    <button class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                    </button>
                 </div>
             </form>
 

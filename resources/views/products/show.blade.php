@@ -13,7 +13,7 @@
                 @include('products.img')
             </div>
             <div class="col-md-6">
-                <h2><b>{{$product->title}}</b></h2>
+                <h3><b>{{$product->title}}</b></h3>
                 <div>
                     <i class="fas fa-weight"></i>{{$product->weight}} <i>KG</i>
                     @if($product->dimensi > 0)

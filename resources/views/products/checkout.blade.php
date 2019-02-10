@@ -7,21 +7,23 @@
         <div class="col-md-8">
             @if(Session::has('cart'))
                 @foreach($products as $product)
-                    <div class="posts">
+                    <div class="posts media">
                         <div class="col-sm-4">
                             <a href="/show/product/{{$product['item']['slug']}}">
                                 <div class="frame-new-posts">
                                     <span class="frame-new-posts-helper"></span>
-                                    <img src="/products/thumb/{{$product['item']->pictures[0]['img']}}" class="posts-thumb">
+                                    <img src="/products/thumb/{{$product['item']->pictures[0]['img']}}" class="posts-thumb-img">
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-8">
-                            <h4 class="@if($product['item']['sticky'] == 1) sticky @else posts-title @endif">
-                                <a href="/show/product/{{$product['item']['slug']}}">
-                                    {{str_limit($product['item']['title'],50)}}
-                                </a>
-                            </h4>
+                            <div class="@if($product['item']['sticky'] == 1) sticky @else posts-title @endif">
+                                <h4>
+                                    <a href="/show/product/{{$product['item']['slug']}}">
+                                        {{str_limit($product['item']['title'],50)}}
+                                    </a>
+                                </h4>
+                            </div>
                             <p class="discount">
                                 <s><i>Rp {{number_format($product['item']['price'] + $product['item']['discount'], 2)}}</i></s>
                                 <span>

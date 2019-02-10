@@ -8,8 +8,8 @@
         
         @include('admin.dashboard-menu')
         <div class="col-md-12">
-            <div class="table-responsive">
-                <table><tr><td>
+            <div class="table-responsive well">
+                <table class="activate-tabel"><tr><td>
                     @if($frontTag)
                         <form class="form-inline" method="POST" action="/product/update/{{$frontTag->id}}">
                             {{csrf_field()}}
@@ -161,17 +161,19 @@
             </div>
             
             <div class="col-md-12"><hr>
+                <h4 class="text-center"><b>PRODUCT LIST</b></h4>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="/product/create" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> ADD PRODUCT</a>
-                        <h4 class="text-center"><b>PRODUCT LIST</b></h4>
+                    <div class="panel-heading text-center">
+                        <a href="/product/create" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span>ADD PRODUCT</a>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 @foreach($products as $product)
                                 <tr>
-                                    <td rowspan="3" class="frame-admin-prod">@include('products.thumb')</td>
+                                    <td rowspan="3" class="td-admin-img-products">
+                                        @include('products.thumb')
+                                    </td>
                                     <td colspan="8"><p class="@if($product->sticky == 1) sticky @endif">{{$product->title}} @if($product->sticky == 1) - <small style="color: black;">This Product Sticky</small>@endif</p></td>
                                 </tr>
                                 <tr>

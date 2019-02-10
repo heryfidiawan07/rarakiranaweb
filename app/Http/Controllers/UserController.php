@@ -114,7 +114,10 @@ class UserController extends Controller
             if ($order) {
                 $carts   = unserialize($order->cart);
                 return view('user.payment', 
-                    ['user' => $user, 'order' => $order, 'carts' => $carts->items, 'rekenings' => $rekenings]
+                    [
+                        'user' => $user, 'order' => $order, 'carts' => $carts->items, 'rekenings' => $rekenings, 
+                        'subTotalPrice' => $carts->totalPrice
+                    ]
                 );
             }else{
                 return redirect('/');

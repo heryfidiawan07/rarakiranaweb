@@ -4,33 +4,33 @@
 			<p class="share">
 				<i>Share : </i>
 				@if($mainShares)
-            @foreach($mainShares as $share)
-                <a href="{{$share->url}}{{Request::url()}}"><i class="{{$share->class}} img-circle"></i></a>
-            @endforeach
-        @endif
-        </p>
-        <p>
-            @if(Auth::check())
-                @if(Auth::user())
-                    <a href="/user/{{Auth::user()->slug}}">PROFIL</a> |
-                    <a href="{{ url('/logout') }}">LOGOUT</a> |
+                    @foreach($mainShares as $share)
+                        <a href="{{$share->url}}{{Request::url()}}"><i class="{{$share->class}} img-circle"></i></a>
+                    @endforeach
                 @endif
-            @endif
-            <a href="/">HOME</a> |
-            @if(Auth::guest())
-                <a href="/login">LOGIN</a> |
-                <a href="/register">REGISTER</a> |
-            @endif
-            @foreach($mainMenus->where('parent_id',0) as $menu)
-            	<a href="/{{$menu->slug}}">{{$menu->name}}</a> |
-            @endforeach
-            @if($mainTag)
-            	<a href="/page/{{$mainTag->slug}}">{{$mainTag->name}}</a> |
-            @endif
-            @if($mainStore)
-            	<a href="/all/{{$mainStore->slug}}">{{$mainStore->name}}</a> |
-            @endif
-		</p>
+            </p>
+            <div class="footerMenu">
+                @if(Auth::check())
+                    @if(Auth::user())
+                        <p><a href="/user/{{Auth::user()->slug}}">PROFIL</a> |</p>
+                        <p><a href="{{ url('/logout') }}">LOGOUT</a> |</p>
+                    @endif
+                @endif
+                <p><a href="/">HOME</a> |</p>
+                @if(Auth::guest())
+                    <p><a href="/login">LOGIN</a> |</p>
+                    <p><a href="/register">REGISTER</a> |</p>
+                @endif
+                @foreach($mainMenus->where('parent_id',0) as $menu)
+                	<p><a href="/{{$menu->slug}}">{{$menu->name}}</a> |</p>
+                @endforeach
+                @if($mainTag)
+                	<p><a href="/page/{{$mainTag->slug}}">{{$mainTag->name}}</a> |</p>
+                @endif
+                @if($mainStore)
+                	<p><a href="/all/{{$mainStore->slug}}">{{$mainStore->name}}</a> |</p>
+                @endif
+    		</div>
 		</div>
 		<div class="col-md-6">
 			<div class="pull-right">

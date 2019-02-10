@@ -31,3 +31,65 @@ a > .glyphicon {
 .thumb-caret:hover {
 	text-decoration: none;
 }
+.input-group-sm select {
+	min-width: 100px;
+}
+.input-group-sm input {
+	min-width: 100px;
+}
+
+.list {
+	width: 96%;
+	padding-left: 0px;
+	margin-left: 2%;
+}
+.list li {
+	list-style: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	border-bottom: 0.5px solid grey;
+}
+.list li a {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
+.list .li-role a {
+	display: block;
+}
+.list .li-role {
+	border: 1px solid lightgrey;
+	height: 40px;
+}
+.list li:hover {
+	background-color: lightgrey;
+}
+.list .li-role p {
+	display: inline-block;
+}
+.list .li-role .p-category {
+	width: 90%;
+}
+.a-list {
+	display: block;
+	color: black;
+}
+.a-list:hover {
+	padding-left: 10px;
+}
+.a-sub-list {
+	padding-left: 15px;
+	display: block;
+	color: black;
+}
+.a-sub-list:hover {
+	padding-left: 25px;
+}
+.a-black {
+	color: black;
+}
+.a-black:hover {
+	text-decoration: none;
+	color: grey;
+}

@@ -1,9 +1,7 @@
 @if($thread->comments->count())
     @foreach($comments as $comment)
         <div class="thread-comment-show">
-            <div class="thread-comment-body">
-                <p>{!! nl2br($comment->description) !!}</p>
-            </div>
+            <div class="thread-comment-body">{!! nl2br($comment->description) !!}</p></div>
             <div class="thread-comment-user">
                 by <a href="/user/{{$comment->user->slug}}" class="author">{{$comment->user->name}}</a>
                 - <small><i>{{ date('d F, Y', strtotime($comment->created_at))}}</i></small>
@@ -17,8 +15,8 @@
                                 <form method="POST" action="/thread/comment/{{$comment->id}}/update">
                                     {{csrf_field()}}
                                     <hr>
-                                    <textarea rows="5" class="form-control" name="descriptionEdit" required>
-                                        {{$comment->description}}
+                                    <textarea rows="5" class="form-control descriptionEdit" name="descriptionEdit" required>
+                                        {!! $comment->description !!}
                                     </textarea><br>
                                     <button class="btn btn-warning btn-xs">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>

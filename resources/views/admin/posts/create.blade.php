@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
 
             <h4 class="text-center"><b>TULIS POST</b></h4>
             <form method="POST" action="/post/store" enctype="multipart/form-data">
@@ -49,38 +49,31 @@
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                    <div class="col-md-6">
-                        <label for="status" class="control-label">Status</label>
-                        <select name="status" class="form-control">
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
-                        @if ($errors->has('status'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('status') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                    <label for="status" class="control-label">Status</label>
+                    <select name="status" class="form-control">
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
+                    </select>
+                    @if ($errors->has('status'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('status') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group{{ $errors->has('acomment') ? ' has-error' : '' }}">
-                    <div class="col-md-6">
-                        <label for="acomment" class="control-label">Izinkan komentar</label>
-                        <select name="acomment" class="form-control">
-                            <option value="1">di Izinkan</option>
-                            <option value="0">Tidak di Izinkan</option>
-                        </select>
-                        @if ($errors->has('acomment'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('acomment') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                    <label for="acomment" class="control-label">Izinkan komentar</label>
+                    <select name="acomment" class="form-control">
+                        <option value="1">di Izinkan</option>
+                        <option value="0">Tidak di Izinkan</option>
+                    </select>
+                    @if ($errors->has('acomment'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('acomment') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <div class="col-md-12">
-                        <hr>
-                        <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
-                    </div>
+                    <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                 </div>
             </form>
                 

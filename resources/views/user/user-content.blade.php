@@ -4,7 +4,7 @@
     @endif
 @endif
 
-@if($threads)
+@if($threads->count())
     <h4 class="text-center"><b>THREADS</b></h4>
     @foreach($threads as $thread)
         @include('threads.content-index')
@@ -26,10 +26,6 @@
                             {{strip_tags(str_limit($comment->description, $limit = 60, $end = '...'))}}
                         </p>
                     </div>
-                    <div class="thread-comment-user">
-                        by <a href="/user/{{$comment->user->slug}}" class="author">{{$comment->user->name}}</a>
-                        - <small><i>{{ date('d F, Y', strtotime($comment->created_at))}}</i></small>
-                    </div>
                 </div>
                 <hr>
           @endforeach
@@ -48,10 +44,6 @@
                             {{str_limit($comment->description, $limit = 60, $end = '...')}}
                         </p>
                     </div>
-                    <div class="post-comment-user">
-                        by <a href="/user/{{$comment->user->slug}}" class="author">{{$comment->user->name}}</a>
-                        - <small><i>{{ date('d F, Y', strtotime($comment->created_at))}}</i></small>
-                    </div>
                 </div>
                 <hr>
           @endforeach
@@ -69,10 +61,6 @@
                         <p>
                             {{str_limit($discus->description, $limit = 60, $end = '...')}}
                         </p>
-                    </div>
-                    <div class="product-discus-user">
-                        by <a href="/user/{{$discus->user->slug}}" class="author">{{$discus->user->name}}</a>
-                        - <small><i>{{ date('d F, Y', strtotime($discus->created_at))}}</i></small>
                     </div>
                 </div>
                 <hr>

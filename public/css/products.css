@@ -6,10 +6,10 @@
 	margin-bottom: 10px;
 }
 .product-title {
-	height: 4.5em;
+	height: 3.5em;
 	overflow-y: hidden;
 }
-.product-title a {
+.product-title h4 a {
 	white-space: pre-line;
 	font-weight: bold;
 	color: black;
@@ -46,8 +46,12 @@
 	font-weight: bold;
 }
 .buy-show a {
+	width: 100%;
 	padding-left: 100px;
-	padding-right: 100px;		
+	padding-right: 100px;
+}
+.buy {
+	width: 45%;
 }
 .product-category {
 	border: 1px solid white;
@@ -85,17 +89,7 @@
 	background-color: yellow; padding: 10px 10px; border-radius: 25px;
 	color: black; font-weight: bold;
 }
-/*End Product SHow*/
-
-/*Category*/
-.product-tag-childs a {
-	color: black;
-}
-.product-tag-childs a:hover {
-	color: grey;
-	text-decoration: none;
-}
-/*End Category*/
+/*End Product Show*/
 
 /*Products All Category*/
 .product-tags {
@@ -134,7 +128,17 @@
 	background-color: white;
 	width: 250px;
 }
-/*End Products Scroll
+/*End Products Scroll*/
+
+/*Products category blade*/
+.product-tag-childs a {
+	color: black;
+}
+.product-tag-childs a:hover {
+	color: grey;
+	text-decoration: none;
+}
+/*End Products category blade*/
 
 /*Product Discusions*/
 .product-discus-show {
@@ -184,15 +188,18 @@
 }
 /*Shopping*/
 #shopping-cart {
-	border: 1px solid lightgrey;
 	padding: 10px;
 	font-weight: bold;
-	color: black;
+	color: green;
+}
+#shopping-cart .badge {
+	background-color: green;
 }
 #shopping-cart:hover {
 	text-decoration: none;
-	background-color: lightgrey;
+	color: black;
 }
+
 /*Product Checkout*/
 .alert-success a:hover {
 	text-decoration: none;
