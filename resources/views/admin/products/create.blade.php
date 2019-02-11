@@ -1,11 +1,13 @@
 @extends('layouts.app')
-
+@section('css')
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-10">
 
-            <h4 class="text-center"><b>TULIS PRODUK</b></h4>
+            <h4 class="text-center"><b>TAMBAH PRODUK</b></h4>
             <form method="POST" action="/product/store" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

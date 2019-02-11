@@ -71,8 +71,8 @@ class ProductController extends Controller
                 'allowed_comment' => $request->acomment,
             ]);
             $files = $request->file('img');
-            $key   = 1;
-            while ($key < 6) {
+            $key   = 0;
+            while ($key < 5) {
                 $extends = $files[$key]->getClientOriginalExtension();
                 $imgName = $product->id.'-'.$key.'-'.str_slug($request->title).'-'.$time.'.'.$extends;
                 $path    = $files[$key]->getRealPath();
@@ -127,35 +127,6 @@ class ProductController extends Controller
         $product = Product::whereId($id)->first();
         return view('admin.products.edit',compact('product','fronts'));
     }
-
-    public function updateImg(Request $request, $id){
-        $product = Product::whereId($id)->first();
-        $time    = date("YmdHis");
-        $files   = $request->file('img');
-        if (isset($files)) {
-            $key   = 0;
-            $batas = 5-count($product->pictures);
-            while ($key < $batas) {
-                $extends = $files[$key]->getClientOriginalExtension();
-                $imgName = $product->id.'-'.$key.'-'.str_slug($product->title).'-'.$time.'.'.$extends;
-                $path    = $files[$key]->getRealPath();
-                $img     = Image::make($path)->resize(null, 630, function ($constraint) {
-                                $constraint->aspectRatio();
-                            });
-                $img->save(public_path("products/img/". $imgName));
-                $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
-                                $constraint->aspectRatio();
-                            });
-                $thumb->save(public_path("products/thumb/". $imgName));
-            $key++;
-                $picture = new Picture;
-                $picture->img        = $imgName;
-                $picture->product_id = $product->id;
-                $picture->save();
-            }
-        }
-        return redirect("/product/{$product->id}/edit");
-    }
     
     public function update(Request $request, $id)
     {
@@ -192,6 +163,33 @@ class ProductController extends Controller
                     'status' => $request->status,
                     'allowed_comment' => $request->acomment,
                 ]);
+            $files   = $request->file('img');
+            if (isset($files)) {
+                $key    = 0;
+                $batas  = 5;
+                $jumlah = $product->pictures->count();
+                if ($jumlah) {
+                    $batas -= $jumlah;
+                }
+                while ($key < $batas) {
+                    $extends = $files[$key]->getClientOriginalExtension();
+                    $imgName = $product->id.'-'.$key.'-'.str_slug($product->title).'-'.$time.'.'.$extends;
+                    $path    = $files[$key]->getRealPath();
+                    $img     = Image::make($path)->resize(null, 630, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                });
+                    $img->save(public_path("products/img/". $imgName));
+                    $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                });
+                    $thumb->save(public_path("products/thumb/". $imgName));
+                $key++;
+                    $picture = new Picture;
+                    $picture->img        = $imgName;
+                    $picture->product_id = $product->id;
+                    $picture->save();
+                }
+            }
             return redirect('/dashboard/products');
         }else{
             return view('errors.503');

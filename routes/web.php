@@ -60,7 +60,6 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/product/store', 'ProductController@store');
 		Route::get('/product/{id}/edit', 'ProductController@edit');
 		Route::post('/product/{id}/update', 'ProductController@update');
-		Route::post('/product/img/{id}/update', 'ProductController@updateImg');
 		Route::get('/product/{id}/destroy', 'ProductController@destroy');
 		Route::post('/product/status/{id}', 'ProductController@status');
 		Route::post('/product/acomment/{id}', 'ProductController@acomment');

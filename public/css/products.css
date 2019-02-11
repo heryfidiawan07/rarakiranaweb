@@ -1,3 +1,20 @@
+/*Product Sticky*/
+.product-sticky {
+	color: green;
+	height: 3.5em;
+	overflow-y: hidden;
+}
+.product-sticky h4 a {
+	white-space: pre-line;
+	height: 1.5em;
+	color: green;
+	font-weight: bold;
+}
+.product-sticky a:hover {
+	text-decoration: none;
+	color: lightgreen;
+}
+/*End Product Sticky*/
 /*Products Index Content*/
 .products {
 	border: 1px solid grey;

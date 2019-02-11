@@ -1,4 +1,4 @@
-/*Global Sticky*/
+/*Post Sticky*/
 .sticky {
 	color: green;
 	height: 5em;
@@ -12,7 +12,7 @@
 	text-decoration: none;
 	color: lightgreen;
 }
-/*End Global Sticky*/
+/*End Post Sticky*/
 
 /*posts thumb*/
 .frame-new-posts {
@@ -21,6 +21,8 @@
 	text-align: center;
 	z-index: 2;
 	overflow: hidden;
+	padding: 5px;
+	margin-bottom: 5px;
 	border: 0.5px solid lightgrey;
 }
 .frame-new-posts-content {
@@ -38,8 +40,8 @@
 	padding-right: 7px;
 	vertical-align: middle;
 	transition: transform 1s;
-	width: 100%;
-	height: auto;
+	max-width: 100%;
+	max-height: 100%;
 }
 /*End posts thumb*/
 
@@ -152,6 +154,7 @@
 	height: 3.5em;
 	white-space: nowrap;
 	text-align: center;
+	padding: 2px;
 	z-index: 2;
 	overflow: hidden;
 	border: 0.5px solid lightgrey;
@@ -171,8 +174,8 @@
 	padding-right: 7px;
 	vertical-align: middle;
 	transition: transform 1s;
-	width: 100%;
-	height: auto;
+	max-width: 100%;
+	max-height: 100%;
 }
 .recent-posts-title {
 	height: 3em;

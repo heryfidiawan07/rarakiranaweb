@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $online    = Analytics::getAnalyticsService()->data_realtime
                     ->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')
                     ->totalsForAllResults['rt:activeVisitors'];
-        $today     = Analytics::fetchVisitorsAndPageViews(Period::days(0));
+        $today     = Analytics::fetchVisitorsAndPageViews(Period::days(1));
         //dd($today[0]);
         $users     = User::all();
         $posts     = Post::all();

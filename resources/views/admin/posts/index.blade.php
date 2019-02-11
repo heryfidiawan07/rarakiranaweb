@@ -17,8 +17,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                    @foreach($posts as $post)
                         <table class="table table-bordered">
+                            @foreach($posts as $post)
                             <tr>
                                 <td rowspan="3" class="td-admin-img-posts">
                                     <div class="admin-frame-posts">
@@ -26,7 +26,7 @@
                                         <img src="/posts/thumb/{{$post->img}}" class="admin-posts-thumb-img">
                                     </div>
                                 </td>
-                                <td colspan="7"><p class="@if($post->sticky == 1) sticky @endif">{{$post->title}} @if($post->sticky == 1) - <small style="color: black;">This Post Sticky</small>@endif</p></td>
+                                <td colspan="7"><p class="@if($post->sticky == 1) sticky @else posts-title @endif">{{$post->title}} @if($post->sticky == 1) - <small style="color: black;">This Post Sticky</small>@endif</p></td>
                             </tr>
                             <tr>
                                 <td><a href="/post/{{$post->id}}/edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
@@ -81,8 +81,8 @@
                                     Updated: {{ date('d F, Y', strtotime($post->udated_at))}} - {{date('g:ia', strtotime($post->updated_at))}}
                                 </i></small></td>
                             </tr>
+                            @endforeach
                         </table>
-                    @endforeach
                     </div>
                 </div>
             </div>

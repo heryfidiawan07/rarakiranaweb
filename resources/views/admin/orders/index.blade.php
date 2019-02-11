@@ -48,24 +48,26 @@
             </form>
             <hr>
             <div class="text-center"><h4>ADMIN ADDRESS</h4></div>
-            <table class="table">
-                <tr>
-                    <td>Kabupaten</td>
-                    <td>{{$address->kabupaten}}</td>
-                </tr>
-                <tr>
-                    <td>Kecamatan</td>
-                    <td>{{$address->kecamatan}}</td>
-                </tr>
-                <tr>
-                    <td>Kode Pos</td>
-                    <td>{{$address->postal_code}}</td>
-                </tr>
-                <tr>
-                    <td>Nomor Hp</td>
-                    <td>{{$address->phone}}</td>
-                </tr>
-            </table>
+            @if($address)
+                <table class="table">
+                    <tr>
+                        <td>Kabupaten</td>
+                        <td>{{$address->kabupaten}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kecamatan</td>
+                        <td>{{$address->kecamatan}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kode Pos</td>
+                        <td>{{$address->postal_code}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Hp</td>
+                        <td>{{$address->phone}}</td>
+                    </tr>
+                </table>
+            @endif
         </div>
 
         <div class="col-md-8">

@@ -1,4 +1,4 @@
-<div id="carousel-{{$product->id}}-generic carousel-thumb-generic" class="carousel slide" data-ride="carousel">
+<div id="carousel-{{$product->id}}-generic carousel-thumb-generic" class="carousel slide carousel-thumb-generic" data-ride="carousel">
   <!-- Wrapper for slides -->
   <div class="carousel-inner inner-thumb">
     @foreach($product->pictures as $pict)

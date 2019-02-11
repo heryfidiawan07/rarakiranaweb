@@ -1,7 +1,7 @@
 <div class="products-scroll">
     @include('products.thumb')
-    <div class="text-center product-title">
-        <h4 class="@if($product->sticky == 1) sticky @endif">
+    <div class="text-center @if($product->sticky == 1) product-sticky @else product-title @endif">
+        <h4>
             <a href="/show/product/{{$product->slug}}">{{$product->title}}</a>
         </h4>
     </div>

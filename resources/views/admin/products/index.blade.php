@@ -174,7 +174,7 @@
                                     <td rowspan="3" class="td-admin-img-products">
                                         @include('products.thumb')
                                     </td>
-                                    <td colspan="8"><p class="@if($product->sticky == 1) sticky @endif">{{$product->title}} @if($product->sticky == 1) - <small style="color: black;">This Product Sticky</small>@endif</p></td>
+                                    <td colspan="8"><p class="@if($product->sticky == 1) product-sticky @else product-title @endif">{{$product->title}} @if($product->sticky == 1) - <small style="color: black;">This Product Sticky</small>@endif</p></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
