@@ -140,6 +140,9 @@ Route::group(['middleware' => 'auth'], function () {
 	//Product Discusion
 	Route::post('/product/discus/{slug}/store', 'CommentController@productStore');
 	Route::post('/product/discus/{id}/update', 'CommentController@productUpdate');
+	//Product Message
+	Route::post('/product/message/{slug}/store', 'MessageController@messageProductStore');
+	Route::post('/product/message/{id}/update', 'MessageController@MessageProductUpdate');
 	//thread Commment
 	Route::post('/thread/comment/{slug}/store', 'CommentController@threadStore');
 	Route::post('/thread/comment/{id}/update', 'CommentController@threadUpdate');

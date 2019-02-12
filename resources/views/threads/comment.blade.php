@@ -16,7 +16,7 @@
                                     {{csrf_field()}}
                                     <hr>
                                     <textarea rows="5" class="form-control descriptionEdit" name="descriptionEdit" required>
-                                        {!! $comment->description !!}
+                                        {{strip_tags($comment->description)}}
                                     </textarea><br>
                                     <button class="btn btn-warning btn-xs">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>

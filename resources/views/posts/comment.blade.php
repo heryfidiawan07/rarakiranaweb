@@ -17,8 +17,8 @@
                                 <form method="POST" action="/post/comment/{{$comment->id}}/update">
                                     {{csrf_field()}}
                                     <hr>
-                                    <textarea rows="5" class="form-control" name="descriptionEdit" required>
-                                        {{$comment->description}}
+                                    <textarea rows="5" class="form-control descriptionEdit" name="descriptionEdit" required>
+                                        {{strip_tags($comment->description)}}
                                     </textarea><br>
                                     <button class="btn btn-warning btn-xs">
                                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>

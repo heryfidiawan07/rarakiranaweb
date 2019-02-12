@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Purifier;
 use App\Post;
 use App\Thread;
 use App\Product;
@@ -25,7 +26,7 @@ class CommentController extends Controller
                 'user_id' => Auth::user()->id,
                 'commentable_id' => $post->id,
                 'commentable_type' => 'App\Post',
-                'description' => $request->description,
+                'description' => Purifier::clean($request->description),
             ]);
         return back();
     }
@@ -38,7 +39,7 @@ class CommentController extends Controller
         $comment = Comment::whereId($id)->first();
         if ($comment->user->id == Auth::user()->id) {
             $comment->update([
-                'description' => $request->descriptionEdit,
+                'description' => Purifier::clean($request->descriptionEdit),
             ]);
         }else{
             return view('errors.503');
@@ -56,7 +57,7 @@ class CommentController extends Controller
                 'user_id' => Auth::user()->id,
                 'commentable_id' => $thread->id,
                 'commentable_type' => 'App\Thread',
-                'description' => $request->description,
+                'description' => Purifier::clean($request->description),
             ]);
         return back();
     }
@@ -69,7 +70,7 @@ class CommentController extends Controller
         $comment = Comment::whereId($id)->first();
         if ($comment->user->id == Auth::user()->id) {
             $comment->update([
-                'description' => $request->descriptionEdit,
+                'description' => Purifier::clean($request->descriptionEdit),
             ]);
         }else{
             return view('errors.503');
@@ -87,7 +88,7 @@ class CommentController extends Controller
                 'user_id' => Auth::user()->id,
                 'commentable_id' => $product->id,
                 'commentable_type' => 'App\Product',
-                'description' => $request->description,
+                'description' => Purifier::clean($request->description),
             ]);
         return back();
     }
@@ -100,7 +101,7 @@ class CommentController extends Controller
         $comment = Comment::whereId($id)->first();
         if ($comment->user->id == Auth::user()->id) {
             $comment->update([
-                'description' => $request->descriptionEdit,
+                'description' => Purifier::clean($request->descriptionEdit),
             ]);
         }else{
             return view('errors.503');

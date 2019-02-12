@@ -83,24 +83,26 @@
                     @foreach($promo->galleries as $pict)
                         <div style="display: inline-block;">
                             <img src="/promo/{{$pict->img}}" width="100">
-                            <p><a href="/promo/picture/delete/{{$pict->id}}"><span class="glyphicon glyphicon-trash"></span></a></p>
+                            <p><a href="/promo/picture/delete/{{$pict->id}}" class="danger"><span class="glyphicon glyphicon-trash"></span></a></p>
                         </div>
                     @endforeach
                     <form class="form-inline" method="POST" action="/promo/update/{{$promo->id}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <label>+ Image</label>
                         <input type="file" name="imgmore[]" class="form-control input-sm" multiple="multiple" required>
-                        <input type="submit" class="btn btn-success btn-sm">
+                        <button class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-send"></span>
+                        </button>
                     </form>
                 </div>
                 <div class="text-center">
-                    @if($promo->setting = 'main')
+                    @if($promo->setting == 'main')
                         <h5 class="thumbnail">Home/Main</h5>
-                    @elseif($promo->setting = 'post')
+                    @elseif($promo->setting == 'post')
                         <h5 class="thumbnail">Post</h5>
-                    @elseif($promo->setting = 'thread')
+                    @elseif($promo->setting == 'thread')
                         <h5 class="thumbnail">Forum</h5>
-                    @elseif($promo->setting = 'product')
+                    @elseif($promo->setting == 'product')
                         <h5 class="thumbnail">Product</h5>
                     @endif
                 </div>

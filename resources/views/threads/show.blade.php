@@ -58,10 +58,5 @@
 </div>
 @endsection
 @section('js')
-    <script type="text/javascript">
-        $('.descriptionEdit').each(function(){
-                $(this).val($(this).val().trim());
-            }
-        );
-    </script>
+    <script type="text/javascript" src="/js/helper.js"></script>
 @endsection

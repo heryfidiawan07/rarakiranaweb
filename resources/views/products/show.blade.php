@@ -8,6 +8,7 @@
 @section('content')
 <div class="container">
     <div class="row">
+
         <div class="col-md-12">
             <div class="col-md-6">
                 @include('products.img')
@@ -75,11 +76,26 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-5 product-content-show">
+        
+        <div class="col-md-6">
+            <div class="product-content-show">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#deskripsi" aria-controls="deskripsi" role="tab" data-toggle="tab">DESKRIPSI</a></li>
-                    <li role="presentation">
+                    <li role="presentation" class="active">
+                        <a href="#decription" aria-controls="description" role="tab" data-toggle="tab">DESKRIPSI</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="description">
+                        {!! $product->description !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="product-content-show">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
                         <a href="#diskusi" aria-controls="diskusi" role="tab" data-toggle="tab">
                         {{$product->comments->count()}} DISKUSI</a>
                     </li>
@@ -89,34 +105,21 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="deskripsi">
-                        {!! $product->description !!}
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="diskusi">
+                    <div role="tabpanel" class="tab-pane active" id="diskusi">
                         @include('products.discusion')
                     </div>
                     <div role="tabpanel" class="tab-pane" id="ulasan">...</div>
                     <div role="tabpanel" class="tab-pane" id="pesan">
-                        @if(Auth::check())
-                            @if(Auth::user())
-
-                            @endif
-                        @else
-                            <div class="text-center">
-                                <br>
-                                <a href="/login" class="btn btn-primary btn-sm">Login</a>
-                            </div>
-                        @endif
+                        @include('products.messages')
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
-                
-            </div>
         </div>
+
     </div>
 </div>
 @endsection
 @section('js')
     <script type="text/javascript" src="/js/ongkir.js"></script>
+    <script type="text/javascript" src="/js/helper.js"></script>
 @endsection

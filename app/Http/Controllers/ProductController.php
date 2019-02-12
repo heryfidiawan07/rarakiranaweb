@@ -216,12 +216,18 @@ class ProductController extends Controller
 
 // Guest User
     public function show($prodslug)
-    {
+    {   
         $product    = Product::where([['slug',$prodslug],['status',1]])->first();
         $discusions = $product->comments()->paginate(10);
-        $kabupaten       = RajaOngkir::Kota()->all();
+        if (Auth::check()){
+            $userId = Auth::user()->id;
+        }else{
+            $userId = false;
+        }
+        $messages   = $product->messages()->paginate(10);
+        $kabupaten  = RajaOngkir::Kota()->all();
         if ($product && $product->Storefront->status==1) {
-            return view('products.show', compact('product','discusions','kabupaten'));
+            return view('products.show', compact('product','discusions','messages','kabupaten'));
         }else{
             return view('errors.503');
         }
