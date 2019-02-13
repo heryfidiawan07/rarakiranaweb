@@ -179,7 +179,7 @@ class ProductController extends Controller
                                     $constraint->aspectRatio();
                                 });
                     $img->save(public_path("products/img/". $imgName));
-                    $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+                    $thumb   = Image::make($path)->resize(null, 300, function ($constraint) {
                                     $constraint->aspectRatio();
                                 });
                     $thumb->save(public_path("products/thumb/". $imgName));
@@ -225,9 +225,10 @@ class ProductController extends Controller
             $userId = false;
         }
         $messages   = $product->messages()->paginate(10);
+        $reviews    = $product->reviews()->paginate(10);
         $kabupaten  = RajaOngkir::Kota()->all();
         if ($product && $product->Storefront->status==1) {
-            return view('products.show', compact('product','discusions','messages','kabupaten'));
+            return view('products.show', compact('product','discusions','messages','kabupaten','reviews'));
         }else{
             return view('errors.503');
         }

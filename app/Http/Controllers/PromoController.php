@@ -43,7 +43,9 @@ class PromoController extends Controller
                 $path    = $files[$key]->getRealPath();
                 $img     = Image::make($path)->resize(900, 300);
                 $img->save(public_path("promo/". $imgName));
-            $key++;
+                
+                $key++;
+                
                 $picture = new Gallery;
                 $picture->img      = $imgName;
                 $picture->promo_id = $promo->id;

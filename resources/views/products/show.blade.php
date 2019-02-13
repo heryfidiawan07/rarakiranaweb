@@ -18,14 +18,14 @@
                 <div>
                     <i class="fas fa-weight"></i>{{$product->weight}} <i>KG</i>
                     @if($product->dimensi > 0)
-                     - Dimensi: {{$product->dimensi}} <i>Meter</i>
+                        - Dimensi: {{$product->dimensi}} <i>Meter</i>
                     @endif
                     <a href="/products/{{$product->storefront->slug}}" class="btn btn-default">
                         <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> {{$product->storefront->name}}
                     </a>
-                     @if($product->discount)
+                    @if($product->discount)
                         <img src="/parts/sale.jpg">
-                     @endif
+                    @endif
                 </div>
                 <h4 class="discount">
                     <s>Rp {{number_format($product->price + $product->discount)}}</s>
@@ -99,7 +99,7 @@
                         <a href="#diskusi" aria-controls="diskusi" role="tab" data-toggle="tab">
                         {{$product->comments->count()}} DISKUSI</a>
                     </li>
-                    <li role="presentation"><a href="#ulasan" aria-controls="ulasan" role="tab" data-toggle="tab">ULASAN</a></li>
+                    <li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">ULASAN</a></li>
                     <li role="presentation"><a href="#pesan" aria-controls="pesan" role="tab" data-toggle="tab">PESAN</a></li>
                 </ul>
 
@@ -108,7 +108,9 @@
                     <div role="tabpanel" class="tab-pane active" id="diskusi">
                         @include('products.discusion')
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="ulasan">...</div>
+                    <div role="tabpanel" class="tab-pane" id="review">
+                    @include('products.reviews')
+                    </div>
                     <div role="tabpanel" class="tab-pane" id="pesan">
                         @include('products.messages')
                     </div>

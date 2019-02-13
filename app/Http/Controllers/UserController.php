@@ -26,15 +26,15 @@ class UserController extends Controller
     {   
         $user    = User::whereSlug($slug)->first();
         $threads = $user->threads()->paginate(5);
-        $artcomments  = Post::join('comments', 'posts.id', '=', 'comments.commentable_id')
-                         ->groupBy('comments.commentable_id')->where('comments.commentable_type','App\Post')
-                         ->where('comments.user_id',$user->id)->take(5)->paginate(5);
-        $prodcomments = Product::join('comments', 'products.id', '=', 'comments.commentable_id')
-                         ->groupBy('comments.commentable_id')->where('comments.commentable_type','App\Product')
-                         ->where('comments.user_id',$user->id)->take(5)->paginate(5);
-        $thcomments   = Thread::join('comments', 'threads.id', '=', 'comments.commentable_id')
-                         ->groupBy('comments.commentable_id')->where('comments.commentable_type','App\Thread')
-                         ->where('comments.user_id',$user->id)->take(5)->paginate(5);
+        $artcomments  = Post::whereHas('comments', function($query) use($user){
+                            $query->where('user_id',$user->id);
+                        })->paginate(5);
+        $prodcomments = Product::whereHas('comments', function($query) use($user){
+                            $query->where('user_id',$user->id);
+                        })->paginate(5);
+        $thcomments   = Thread::whereHas('comments', function($query) use($user){
+                            $query->where('user_id',$user->id);
+                        })->paginate(5);
         return view('user.show',compact('user','threads','artcomments','prodcomments','thcomments'));
     }
 

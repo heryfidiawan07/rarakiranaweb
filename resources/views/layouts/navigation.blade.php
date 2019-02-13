@@ -8,8 +8,8 @@
             {{csrf_field()}}
             <div class="form-group">
                 <div class="input-group">
-                      <input type="text" class="form-control" name="val" placeholder="search" required>
-                      <div class="input-group-addon"><button class="glyphicon glyphicon-search" id="btnSearch"></button></div>
+                    <input type="text" class="form-control" name="val" placeholder="search" required>
+                    <div class="input-group-addon"><button class="glyphicon glyphicon-search" id="btnSearch"></button></div>
                 </div>
             </div>
         </form>

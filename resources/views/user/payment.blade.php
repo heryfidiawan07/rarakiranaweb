@@ -33,7 +33,7 @@
                             @if($order->status==0)
                                 <span class="warning">Menunggu pembayaran</span>
                             @elseif($order->status==1)
-                                <span class="warning">Menunggu konfirmasi penjual</span>
+                                <span class="warning">Menunggu konfirmasi</span>
                             @elseif($order->status==2)
                                 <span class="success">Pesanan Sedang di prosses</span>
                             @elseif($order->status==3)
@@ -54,22 +54,39 @@
                                     @endforeach
                                 </table>
                             </div>
-                            @if($order->status < 2)
-                                <form action="/user/{{$user->slug}}/payment/order/{{$order->no_order}}" method="POST" enctype="multipart/form-data">
+                            @if($order->status < 1)
+                                <form action="/user/{{$user->slug}}/payment/store/{{$order->no_order}}" method="POST" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="form-group">
-                                        @if($order->payment->status==0)
-                                            <label class="control-label">Unggah bukti pembayaran:</label>
-                                        @elseif($order->payment->status==1)
-                                            <label class="control-label">Ubah bukti pembayaran:</label>
-                                        @endif
+                                        <label class="control-label">Unggah bukti pembayaran:</label>
                                     </div>
                                     <div class="form-group">
                                         <input type=text name="pengirim" class="form-control input-sm" value="{{old('name')}}" placeholder="Nama Pengirim" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="file" name="resi_img" class="form-control input-sm" required>
-                                        @if ($errors->has('resi'))
+                                        @if ($errors->has('resi_img'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('resi_img') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-send"></span></button>
+                                    </div>
+                                </form>
+                            @elseif($order->status >= 1)
+                                <form action="/user/{{$user->slug}}/payment/update/{{$order->no_order}}" method="POST" enctype="multipart/form-data">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <label class="control-label">Ubah :</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type=text name="updatePengirim" class="form-control input-sm" value="{{old('name')}}" placeholder="Nama Pengirim" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="file" name="updateImgResi" class="form-control input-sm">
+                                        @if ($errors->has('updateImgResi'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('resi') }}</strong>
                                             </span>

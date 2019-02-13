@@ -69,12 +69,12 @@
 
                 @if($promo->galleries->count() > 1)
                     <a class="left carousel-control carousel-promo-control" href="#carousel-promo-generic" role="button" data-slide="prev">
-                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
                     </a>
                     <a class="right carousel-control carousel-promo-control" href="#carousel-promo-generic" role="button" data-slide="next">
-                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
                     </a>
                 @endif
             </div>
@@ -88,11 +88,11 @@
                     @endforeach
                     <form class="form-inline" method="POST" action="/promo/update/{{$promo->id}}" enctype="multipart/form-data">
                         {{csrf_field()}}
-                        <label>+ Image</label>
-                        <input type="file" name="imgmore[]" class="form-control input-sm" multiple="multiple" required>
-                        <button class="btn btn-success btn-sm">
-                            <span class="glyphicon glyphicon-send"></span>
-                        </button>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-addon">+ Image</div>
+                            <input type="file" name="imgmore[]" class="form-control" multiple="multiple" required>
+                            <div class="input-group-addon"><button class="glyphicon glyphicon-send"></button></div>
+                        </div>
                     </form>
                 </div>
                 <div class="text-center">

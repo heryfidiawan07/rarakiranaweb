@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Storefront;
 use App\Picture;
+use App\Review;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -29,6 +30,10 @@ class Product extends Model
 
     public function pictures(){
         return $this->hasMany(Picture::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
     
 }

@@ -157,7 +157,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/user/{slug}/payment/{order}', 'UserController@payment');
 	Route::get('/user/{slug}/print/invoice/{order}', 'UserController@invoice');
 	//Pemabayaran User
-	Route::post('/user/{slug}/payment/order/{order}', 'PaymentController@userPayment');
+	Route::post('/user/{slug}/payment/store/{order}', 'PaymentController@userPayment');
+	Route::post('/user/{slug}/payment/update/{order}', 'PaymentController@updatePayment');
 });
 //Post
 Route::get('/{slugMenu}', 'PostController@menu');
