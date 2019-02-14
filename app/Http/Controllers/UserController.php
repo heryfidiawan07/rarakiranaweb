@@ -120,7 +120,7 @@ class UserController extends Controller
                     ]
                 );
             }else{
-                return redirect('/');
+                return redirect("/user/{$user->slug}");
             }
         }else{
             return view('errors.503');

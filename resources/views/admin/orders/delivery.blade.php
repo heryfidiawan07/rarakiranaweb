@@ -8,19 +8,16 @@
 <div style="border: 0.5px solid grey;"></div>
 <table width="100%" align="left">
     <tr>
-      <td align="left"><b><?=$order->address->penerima ?><b></td>
+      <td align="left"><b><?=$address->penerima ?><b></td>
     </tr>
     <tr>
-      <td align="left"><b><?=$order->address->address ?><b></td>
+      <td align="left"><b><?=$address->address ?><b></td>
     </tr>
     <tr>
-      <td align="left"><b><?=$order->address->kecamatan ?><b></td>
+      <td align="left"><b><?=$address->kecamatan.', '.$address->kabupaten.', '.$address->postal_code ?><b></td>
     </tr>
     <tr>
-      <td align="left"><b><?=$order->address->kabupaten.', '.$order->address->postal_code ?><b></td>
-    </tr>
-    <tr>
-      <td align="left"><b><?=$order->address->phone ?><b></td>
+      <td align="left"><b><?=$address->phone ?><b></td>
     </tr>
 </table>
 
@@ -42,10 +39,7 @@
       <td align="left"><b><?=$order->address->address ?><b></td>
     </tr>
     <tr>
-      <td align="left"><b><?=$order->address->kecamatan ?><b></td>
-    </tr>
-    <tr>
-      <td align="left"><b><?=$order->address->kabupaten.', '.$order->address->postal_code ?><b></td>
+      <td align="left"><b><?=$order->address->kecamatan.', '.$order->address->kabupaten.', '.$order->address->postal_code ?><b></td>
     </tr>
     <tr>
       <td align="left"><b><?=$order->address->phone ?><b></td>

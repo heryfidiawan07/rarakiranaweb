@@ -450,7 +450,7 @@ class ProductController extends Controller
         $order->total_price  = $totalTagihan;
         $order->total_weight = $weight;
         $order->total_qty    = $request->totalQty;
-        $order->note         = $request->note;
+        $order->note         = Purifier::clean($request->note);
         $order->kurir        = $request->kurir;
         $order->services     = $request->services;
         $order->ongkir       = $request->ongkir;

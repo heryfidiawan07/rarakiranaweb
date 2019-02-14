@@ -19,6 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('order_id')->unsigned();
             $table->string('pengirim');
             $table->string('resi_img');
+            $table->string('keterangan')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
 

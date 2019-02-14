@@ -31,17 +31,24 @@
                         <td>Status Pembelian</td>
                         <td>
                             @if($order->status==0)
-                                <span class="warning">Menunggu pembayaran</span>
+                                <span class="warning">
+                                    Menunggu pembayaran
+                                    <a href="/user/{{$user->slug}}/cancel/order/{{$order->no_order}}" class="btn btn-danger btn-sm">Batalkan Pesanan</a>
+                                    <hr>
+                                </span>
                             @elseif($order->status==1)
                                 <span class="warning">Menunggu konfirmasi</span>
                             @elseif($order->status==2)
-                                <span class="success">Pesanan Sedang di prosses</span>
+                                <span class="success">Pesanan sedang di prosses</span>
                             @elseif($order->status==3)
-                                <span class="success">Sedang di dalam pengiriman oleh kurir</span>
+                                <span class="success">Pesanan dalam pengiriman oleh kurir</span> - 
+                                <a href="/user/{{$user->slug}}/done/order/{{$order->no_order}}" class="btn btn-success btn-sm">Konfirmasi pesnan telah diterima</a>
+                                <hr>
                             @elseif($order->status==4)
-                                <span class="success">Barang telah di terima</span>
+                                <span class="success">Transaksi selesai</span>
                             @elseif($order->status==5)
-                                <span class="danger">Pesanan anda sudah expired</span>
+                                <span class="danger">Pesanan anda di tolak</span>
+                                <div class="alert alert-danger">{{$order->payment->keterangan}}</div>
                             @endif
                             <div class="well">
                                 ATM transfer:
@@ -75,7 +82,7 @@
                                         <button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-send"></span></button>
                                     </div>
                                 </form>
-                            @elseif($order->status >= 1)
+                            @elseif($order->status < 2 || $order->status == 5)
                                 <form action="/user/{{$user->slug}}/payment/update/{{$order->no_order}}" method="POST" enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="form-group">
@@ -121,7 +128,7 @@
                     @endif
                     <tr>
                         <td>Catatan:</td>
-                        <td>{{$order->note}}</td>
+                        <td>{!! nl2br($order->note) !!}</td>
                     </tr>
                     <tr>
                         <td>Alamat:</td>

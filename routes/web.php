@@ -69,15 +69,17 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('/product/pictures/{id}/destroy', 'PictureController@destroy');
 		//Admin Address
 		Route::post('/admin/address/store', 'AddressController@adminAddress');
+		Route::post('/admin/address/{id}/update', 'AddressController@updateAdminAddress');
 		//Order
 		Route::get('/dashboard/orders', 'OrderController@index');
 		Route::get('/dashboard/order-details/{order}', 'OrderController@details');
 		Route::get('/proses/order/{order}', 'OrderController@orderProcesed');
-		Route::get('/cancel/order/{order}', 'OrderController@orderRejected');
+		Route::get('/reject/order/{order}', 'OrderController@orderRejected');
 		Route::get('/order/print/invoice/{order}', 'OrderController@invoicePrint');
 		Route::get('/order/print/delivery/{order}', 'OrderController@deliveryPrint');
 		Route::post('/order/input/resi/{order}', 'OrderController@inputResi');
 		Route::get('/done/order/{order}', 'OrderController@done');
+		Route::get('/delete/order/{order}', 'OrderController@orderDelete');
 		//Rekening
 		Route::get('/dashboard/bank-accounts', 'RekeningController@index');
 		Route::post('/bank-accounts/store', 'RekeningController@store');
@@ -153,6 +155,9 @@ Route::group(['middleware' => 'auth'], function () {
 	//Product Checkout
 	Route::get('/product/checkout', 'ProductController@checkout');
 	Route::post('/product/payment', 'ProductController@payment');
+	//User Order Success
+	Route::get('/user/{slug}/done/order/{order}', 'OrderController@userDone');
+	Route::get('/user/{slug}/cancel/order/{order}', 'OrderController@cancel');
 	//User Payment
 	Route::get('/user/{slug}/payment/{order}', 'UserController@payment');
 	Route::get('/user/{slug}/print/invoice/{order}', 'UserController@invoice');

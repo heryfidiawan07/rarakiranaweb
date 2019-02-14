@@ -55,17 +55,29 @@
                             @elseif($order->status==2)
                                 <span class="success">Sedang di prosses</span>
                             @elseif($order->status==3)
-                                <span class="success">Sedang di dalam pengiriman</span>
+                                <span class="success">Sedang dalam pengiriman</span>
                             @elseif($order->status==4)
                                 <span class="success">Barang telah di terima</span>
                             @elseif($order->status==5)
-                                <span class="danger">Pesanan anda sudah expired</span>
+                                <span class="danger">Anda <i>(admin)</i> menolak pesanan</span>
                             @endif
                             @if($order->status==1)
                                 <a href="/proses/order/{{$order->no_order}}" class="btn btn-primary btn-xs">Proses Pesanan</a> | 
                             @endif
-                            @if($order->status > 0 && $order->status < 5)
-                                <a href="/cancel/order/{{$order->no_order}}" class="btn btn-danger btn-xs">Tolak Pasanan</a>
+                            @if($order->status < 2)
+                                <hr>
+                                <form metod="POST" action="/reject/order/{{$order->no_order}}">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <input type="text" name="keterangan" class="form-control input-sm" placeholder="Keterangan" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-warning btn-sm" value="Tolak Pesanan">
+                                    </div>
+                                </form>
+                            @endif
+                            @if($order->status == 5)
+                                <a href="/delete/order/{{$order->no_order}}" class="btn btn-danger btn-xs">Hapus !</a>
                             @endif
                             @if($order->status==3)
                                 <a href="/done/order/{{$order->no_order}}" class="btn btn-success btn-xs">Pesanan Telah di Terima</a>
@@ -81,30 +93,32 @@
                             <td>No Resi:</td>
                             <td><b>{{$order->kurir_resi}}</b></td>
                         </tr>
-                        <tr>
-                            <td>
-                                @if($order->payment->kurir_resi != 'yet')
-                                    Update No Resi
-                                @else
-                                    Input No Resi
-                                @endif
-                            </td>
-                            <td>
-                                <form method="POST" action="/order/input/resi/{{$order->no_order}}">
-                                    {{csrf_field()}}
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" name="kurir_resi" placeholder="input no resi" class="form-control" required>
-                                        <div class="input-group-addon">
-                                            <button class="glyphicon glyphicon-send"></button>
+                        @if($order->status < 4)
+                            <tr>
+                                <td>
+                                    @if($order->payment->kurir_resi === 'yet')
+                                        Input No Resi
+                                    @else
+                                        Update No Resi
+                                    @endif
+                                </td>
+                                <td>
+                                    <form method="POST" action="/order/input/resi/{{$order->no_order}}">
+                                        {{csrf_field()}}
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" name="kurir_resi" placeholder="input no resi" class="form-control" required>
+                                            <div class="input-group-addon">
+                                                <button class="glyphicon glyphicon-send"></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
                     @endif
                     <tr>
                         <td>Catatan:</td>
-                        <td>{{$order->note}}</td>
+                        <td>{!! nl2br($order->note) !!}</td>
                     </tr>
                     <tr>
                         <td>Alamat:</td>

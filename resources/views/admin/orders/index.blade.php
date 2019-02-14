@@ -9,8 +9,28 @@
         @include('admin.dashboard-menu')
         <div class="col-md-4">
             <div class="text-center"><h4>SET UP ADMIN ADDRESS</h4></div>
-            <form method="POST" action="/admin/address/store">
+            @if(!$address)
+                <form method="POST" action="/admin/address/store">
+            @else
+                <form method="POST" action="/admin/address/{{$address->id}}/update">
+            @endif
                 {{csrf_field()}}
+                <div class="form-group">
+                    <input type="text" name="penerima" class="form-control input-sm" placeholder="Pengirim" autocomplete="off" @if($address) value="{{$address->penerima}}" @endif required>
+                    @if ($errors->has('penerima'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('penerima') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <textarea name="address" id="address" class="form-control" rows="4" placeholder="Alamat" required>@if($address) {{ strip_tags($address->address) }} @endif</textarea>
+                    @if ($errors->has('address'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('address') }}</strong>
+                        </span>
+                    @endif
+                </div>
                 <div class="form-group">
                     <input type="text" name="kabupaten" id="kabupaten" class="form-control input-sm" placeholder="Kabupaten" autocomplete="off" @if($address) value="{{$address->kabupaten}}" @endif required>
                     <input type="hidden" name="kabHidden" id="kabHidden" @if($address) value="{{$address->kab_id}}" @endif>
@@ -51,6 +71,14 @@
             @if($address)
                 <table class="table">
                     <tr>
+                        <td>Pengirim</td>
+                        <td>{{$address->penerima}}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>{!! nl2br($address->address) !!}</td>
+                    </tr>
+                    <tr>
                         <td>Kabupaten</td>
                         <td>{{$address->kabupaten}}</td>
                     </tr>
@@ -76,21 +104,21 @@
                 <div class="col-md-12">
                     <div class="table-responsive">
                         <table class="table">
-                          <tr>
-                              <th>No Order</th>
-                              <th>Details</th>
-                              <th>Status</th>
-                              <th>Order Date</th>
-                              <th>Payement Date</th>
-                          </tr>
-                          <tr>
-                              <td>{{$order->no_order}}</td>
-                              <td><a href="/dashboard/order-details/{{$order->no_order}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-list-alt"></span></a></td>
-                              <td>
+                            <tr>
+                                <th>No Order</th>
+                                <th>Details</th>
+                                <th>Status</th>
+                                <th>Order Date</th>
+                                <th>Payement Date</th>
+                            </tr>
+                            <tr>
+                                <td>{{$order->no_order}}</td>
+                                <td><a href="/dashboard/order-details/{{$order->no_order}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-list-alt"></span></a></td>
+                                <td>
                                     @if($order->status==0)
                                         <span class="warning">Menunggu pembayaran</span>
                                     @elseif($order->status==1)
-                                        <span class="warning">Menunggu konfirmasi penjual</span>
+                                        <span class="warning">Menunggu konfirmasi</span>
                                     @elseif($order->status==2)
                                         <span class="success">Pesanan Sedang di prosses</span>
                                     @elseif($order->status==3)
@@ -98,16 +126,19 @@
                                     @elseif($order->status==4)
                                         <span class="success">Barang telah di terima</span>
                                     @elseif($order->status==5)
-                                        <span class="danger">Pesanan anda sudah expired</span>
+                                        <span class="danger">Admin menolak pesanan</span>
                                     @endif
-                              </td>
-                              <td>{{ date('d F, Y', strtotime($order->created_at))}}</td>
-                              <td>{{ date('d F, Y', strtotime($order->updated_at))}}</td>
-                          </tr>
+                                </td>
+                                <td>{{ date('d F, Y', strtotime($order->created_at))}}</td>
+                                <td>{{ date('d F, Y', strtotime($order->updated_at))}}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
             @endforeach
+            <div class="text-center">
+                <ul class="pagination pagination-sm">{{$orders->links()}}</ul>
+            </div>
         </div>
 
     </div>
