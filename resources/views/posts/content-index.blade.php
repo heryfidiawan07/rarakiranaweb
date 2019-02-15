@@ -13,7 +13,10 @@
                 <h4><a href="/read/post/{{$post->slug}}">{{$post->title}}</a></h4>
             </div>
             <div class="posts-author">
-                by <a href="/user/{{$post->user->slug}}">{{$post->user->name}}</a>
+                <a href="/user/{{$post->user->slug}}">
+                    <img src="<?php if ($post->user->img != null){ echo "/users/".$post->user->img;}else if($post->user->graph != null){echo $post->user->graph;}else{echo $post->user->avatar();} ?>" class="img-circle" width="30">
+                    {{$post->user->name}}
+                </a>
                 - <a href="/{{$post->menu->slug}}" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
                     {{$post->menu->name}}

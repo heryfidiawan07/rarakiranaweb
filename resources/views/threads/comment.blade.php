@@ -3,7 +3,10 @@
         <div class="thread-comment-show">
             <div class="thread-comment-body">{!! nl2br($comment->description) !!}</p></div>
             <div class="thread-comment-user">
-                by <a href="/user/{{$comment->user->slug}}" class="author">{{$comment->user->name}}</a>
+                <a href="/user/{{$comment->user->slug}}" class="author">
+                    <img src="<?php if ($comment->user->img != null){ echo "/users/".$comment->user->img;}else if($comment->user->graph != null){echo $comment->user->graph;}else{echo $comment->user->avatar();} ?>" class="img-circle" width="30">
+                    {{$comment->user->name}}
+                </a>
                 - <small><i>{{ date('d F, Y', strtotime($comment->created_at))}}</i></small>
                 @if(Auth::check())
                     @if(Auth::user()->id == $comment->user->id)

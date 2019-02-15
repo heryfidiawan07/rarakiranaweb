@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Auth;
 use File;
 use Image;
@@ -186,9 +185,7 @@ class PostController extends Controller
     {   
         $post        = Post::where([['slug',$slug],['status',1]])->first();
         $comments    = $post->comments()->paginate(10);
-        $postrecents = DB::table('posts')->join('comments', 'posts.id', '=', 'comments.commentable_id')
-                         ->where('comments.commentable_type', 'App\Post')->groupBy('comments.commentable_id')
-                         ->orderBy('comments.created_at','DESC')->paginate(5);
+        $postrecents = Post::has('comments')->latest()->paginate(5);
         return view('posts.show', compact('post','comments','postrecents'));
     }
 
@@ -202,9 +199,7 @@ class PostController extends Controller
         }else{
             $posts = $menu->posts()->latest('sticky')->paginate(10);
         }
-        $postrecents = DB::table('posts')->join('comments', 'posts.id', '=', 'comments.commentable_id')
-                         ->where('comments.commentable_type', 'App\Post')->groupBy('comments.commentable_id')
-                         ->orderBy('comments.created_at','DESC')->paginate(5);
+        $postrecents = Post::has('comments')->latest()->paginate(5);
         return view('posts.menu', compact('menu','posts','postrecents','promo','logo'));
     }
     

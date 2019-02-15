@@ -20,8 +20,36 @@
                             <td>
                                 <a href="/show/product/{{$item['item']['slug']}}" class="a-black">{{$item['item']['title']}}</a>
                                 <p>Harga: <b><u>Rp {{number_format($item['item']['price'])}}</u></b></p>
+                                @if($order->status==4)
+                                @foreach($products->where('id',$item['item']['id']) as $product)
+                                @if($product->review)
+                                    <div class="alert alert-info">
+                                        <p><b>Ulasan:</b></p>
+                                        {!! nl2br($product->review->description) !!}
+                                    </div>
+                                @endif
+                                @endforeach
+                                @endif
                             </td>
                         </tr>
+                        @if($order->status==4)
+                        @foreach($products->where('id',$item['item']['id']) as $product)
+                        @if(!$product->review)
+                        <tr>
+                            <td>Beri Ulasan</td>
+                            <td>
+                                <form method="POST" action="/send-review/product/{{$item['item']['slug']}}">
+                                    {{csrf_field()}}
+                                    <textarea rows="2" class="form-control" name="review" required></textarea>
+                                    <button class="btn btn-warning btn-sm">
+                                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                        @endif
                     @endforeach
                     <tr>
                         <td>No Order</td>

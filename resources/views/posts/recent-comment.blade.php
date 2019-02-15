@@ -11,7 +11,8 @@
         <div class="frame-recent-posts-content">
             <div class="recent-posts-title">
                 <a href="/read/post/{{$post->slug}}">
-                	{!! str_limit($post->title, $limit = 100, $end = '...') !!}
+                    {!! str_limit($post->title, $limit = 50, $end = '...') !!}
+                    <small>, <span class="glyphicon glyphicon-comment"></span> {{$post->comments->count()}}</small>
                 </a>
             </div>
         </div>

@@ -1,94 +1,125 @@
 .warning {
-	color: orange; font-weight: bold;
+	color: orange;
+	font-weight: bold;
 }
+
 .danger {
-	color: red; font-weight: bold;
+	color: red;
+	font-weight: bold;
 }
+
 .success {
-	color: green; font-weight: bold;
+	color: green;
+	font-weight: bold;
 }
+
 .pagination-sm {
-  margin-top: -10px;
+	margin-top: -10px;
 }
-button > .glyphicon {
+
+button>.glyphicon {
 	padding: 0px 10px;
 }
-a > .glyphicon {
+
+a.glyphicon {
 	padding: 0px 10px;
 }
-.input-group-addon > .glyphicon {
-	border: unset; background-color: unset;
+
+.input-group-addon>.glyphicon {
+	border: unset;
+	background-color: unset;
 }
-.btn > .glyphicon-tag {
+
+.btn>.glyphicon-tag {
 	padding: 0px 0px;
 }
-.btn > .glyphicon-shopping-cart {
+
+.btn>.glyphicon-shopping-cart {
 	padding: 0px 0px;
 }
+
 .thumb-caret {
 	color: black;
 }
+
 .thumb-caret:hover {
 	text-decoration: none;
 }
+
 .input-group-sm select {
 	min-width: 100px;
 }
+
 .input-group-sm input {
 	min-width: 100px;
 }
 
 .list {
-	width: 96%;
 	padding-left: 0px;
-	margin-left: 2%;
 }
+
+.li-role:hover {
+	background-color: azure;
+}
+
 .list li {
 	list-style: none;
 	padding-top: 10px;
-	padding-bottom: 10px;
 	padding-left: 5px;
-	border-bottom: 0.5px solid grey;
 }
+
+.card-body li {
+	border-bottom: 0.5px solid grey;
+	padding-bottom: 10px;
+}
+
 .list li a {
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
 }
+
 .list .li-role a {
 	display: block;
 }
-.list .li-role {
-	border: 1px solid lightgrey;
-	height: 40px;
+
+.list .li-role {}
+
+.card-body li:hover {
+	background-color: azure;
 }
-.list li:hover {
-	background-color: lightgrey;
-}
+
 .list .li-role p {
 	display: inline-block;
 }
+
 .list .li-role .p-category {
 	width: 90%;
 }
+
 .a-list {
 	display: block;
 	color: black;
 }
+
 .a-list:hover {
 	padding-left: 10px;
 }
+
 .a-sub-list {
 	padding-left: 15px;
 	display: block;
 	color: black;
 }
+
 .a-sub-list:hover {
 	padding-left: 25px;
 }
+
 .a-black {
 	color: black;
 }
+
 .a-black:hover {
 	text-decoration: none;
 	color: grey;

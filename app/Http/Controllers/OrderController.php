@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use PDF;
 use File;
 use Auth;
+use Purifier;
 use RajaOngkir;
 use App\User;
 use App\Order;
 use App\Address;
 use App\Rekening;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller

@@ -110,13 +110,14 @@ class UserController extends Controller
         $user      = User::whereSlug($slug)->first();
         $rekenings = Rekening::all();
         if (Auth::user()->id == $user->id) {
-            $order   = Order::where('no_order',$order)->first();
+            $order    = Order::where('no_order',$order)->first();
+            $products = Product::all();
             if ($order) {
                 $carts   = unserialize($order->cart);
                 return view('user.payment', 
                     [
                         'user' => $user, 'order' => $order, 'carts' => $carts->items, 'rekenings' => $rekenings, 
-                        'subTotalPrice' => $carts->totalPrice
+                        'subTotalPrice' => $carts->totalPrice, 'products' => $products
                     ]
                 );
             }else{

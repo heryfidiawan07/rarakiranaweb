@@ -8,7 +8,10 @@
                         <p>{!! nl2br($message->description) !!}</p>
                     </div>
                     <div class="product-discus-user">
-                        by <a href="/user/{{$message->user->slug}}" class="author">{{$message->user->name}}</a>
+                        <a href="/user/{{$message->user->slug}}" class="author">
+                            <img src="<?php if ($message->user->img != null){ echo "/users/".$message->user->img;}else if($message->user->graph != null){echo $message->user->graph;}else{echo $message->user->avatar();} ?>" class="img-circle" width="30">
+                            {{$message->user->name}}
+                        </a>
                         - <small><i>{{ date('d F, Y', strtotime($message->created_at))}}</i></small>
                         <a data-toggle="collapse" href="#message-{{$message->id}}-user-edit" role="button" aria-expanded="false" aria-controls="discus-{{$message->id}}-user-edit" class="btn btn-success btn-xs">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>

@@ -22,7 +22,10 @@
                 </div>
                 <hr>
                 <div class="tag-thread-show">
-                    by <a href="/user/{{$thread->user->slug}}">{{$thread->user->name}}</a>
+                    <a href="/user/{{$thread->user->slug}}">
+                        <img src="<?php if ($thread->user->img != null){ echo "/users/".$thread->user->img;}else if($thread->user->graph != null){echo $thread->user->graph;}else{echo $thread->user->avatar();} ?>" class="img-circle" width="30">
+                        {{$thread->user->name}}
+                    </a>
                     - <small><i>{{ date('d F, Y', strtotime($thread->created_at))}}</i></small>,
                     <a href="/threads/{{$thread->tag->slug}}" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>

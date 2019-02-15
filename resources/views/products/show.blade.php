@@ -96,10 +96,11 @@
             <div class="product-content-show">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#diskusi" aria-controls="diskusi" role="tab" data-toggle="tab">
-                        {{$product->comments->count()}} DISKUSI</a>
+                        <a href="#diskusi" aria-controls="diskusi" role="tab" data-toggle="tab">{{$product->comments->count()}} DISKUSI</a>
                     </li>
-                    <li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">ULASAN</a></li>
+                    <li role="presentation">
+                        <a href="#review" aria-controls="review" role="tab" data-toggle="tab">{{$product->reviews->count()}} ULASAN</a>
+                    </li>
                     <li role="presentation"><a href="#pesan" aria-controls="pesan" role="tab" data-toggle="tab">PESAN</a></li>
                 </ul>
 

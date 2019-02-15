@@ -23,12 +23,15 @@
                 </div>
                 <hr>
                 <div class="tag-art-show">
+                    <a href="/user/{{$post->user->slug}}">
+                        <img src="<?php if ($post->user->img != null){ echo "/users/".$post->user->img;}else if($post->user->graph != null){echo $post->user->graph;}else{echo $post->user->avatar();} ?>" class="img-circle" width="30">
+                        {{$post->user->name}}
+                    </a>
+                    - <small><i>{{ date('d F, Y', strtotime($post->created_at))}}</i></small>
                     <a href="/{{$post->menu->slug}}" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
                         {{$post->menu->name}}
                     </a>
-                    by <a href="/user/{{$post->user->slug}}"> {{$post->user->name}} </a>
-                    - <small><i>{{ date('d F, Y', strtotime($post->created_at))}}</i></small>
                 </div>
                 <hr>
                 @if($post->menu->setting ==5)

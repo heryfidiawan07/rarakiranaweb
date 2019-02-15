@@ -1,19 +1,22 @@
 /*Product Sticky*/
 .product-sticky {
 	color: green;
-	height: 3.5em;
+	height: 3.8em;
 	overflow-y: hidden;
 }
+
 .product-sticky h4 a {
 	white-space: pre-line;
 	height: 1.5em;
 	color: green;
 	font-weight: bold;
 }
+
 .product-sticky a:hover {
 	text-decoration: none;
 	color: lightgreen;
 }
+
 /*End Product Sticky*/
 /*Products Index Content*/
 .products {
@@ -22,90 +25,114 @@
 	background-color: white;
 	margin-bottom: 10px;
 }
+
 .product-title {
 	height: 3.5em;
 	overflow-y: hidden;
 }
+
 .product-title h4 a {
 	white-space: pre-line;
 	font-weight: bold;
 	color: black;
 	height: 1.5em;
 }
+
 .product-title a:hover {
 	text-decoration: none;
 	color: grey;
 }
+
 .product-content {
 	margin-bottom: 10px;
 }
+
 .product-content a {
 	color: black;
 }
+
 .product-content .btn-default {
 	color: black !important;
 }
+
 .product-content .btn {
 	color: white;
 }
+
 .product-content a:hover {
 	color: grey;
 	text-decoration: none;
 }
+
 .product-content .btn:hover {
 	color: white;
 }
+
 .price {
 	color: red;
 	font-weight: bold;
 }
+
 .discount {
 	font-weight: bold;
 }
+
 .buy-show a {
 	width: 100%;
 	padding-left: 100px;
 	padding-right: 100px;
 }
+
 .buy {
 	width: 45%;
 }
+
 .product-category {
 	border: 1px solid white;
 	padding: 5px 5px;
 	margin: 0 auto;
 }
+
 .product-category:hover {
 	border: 1px solid grey;
 	padding: 5px 5px;
 	border-color: green;
 }
-.show-product-category {
 
-}
+.show-product-category {}
+
 /*End Products Index Content*/
 
 /*Product Show*/
 .product-content-show {
 	margin-top: 30px;
 }
+
 .product-content-show li a {
 	color: black;
 }
+
 .product-content-show li a:hover {
 	color: grey;
 }
+
 .deskripsi img {
 	max-width: 100%;
 	height: auto;
 }
+
 .deskripsi iframe {
 	max-width: 100%;
 }
+
 .discount span small {
-	background-color: yellow; padding: 10px 10px; border-radius: 25px;
-	color: black; font-weight: bold;
+	background-color: yellow;
+	padding: 10px 10px;
+	border-radius: 25px;
+	color: black;
+	font-weight: bold;
 }
+
 /*End Product Show*/
 
 /*Products All Category*/
@@ -113,21 +140,25 @@
 	color: black;
 	display: block;
 }
+
 .product-tags:hover {
 	color: grey;
 	text-decoration: none;
 	margin-left: 10px;
 }
+
 .product-sub-tags {
 	color: black;
 	display: block;
 	margin-left: 20px;
 }
+
 .product-sub-tags:hover {
 	color: grey;
 	text-decoration: none;
 	margin-left: 30px;
 }
+
 /*End Products All Category*/
 
 /*Products Scroll*/
@@ -138,6 +169,7 @@
 	white-space: nowrap;
 	margin-bottom: 20px;
 }
+
 .products-scroll {
 	display: inline-block;
 	border: 1px solid grey;
@@ -145,16 +177,19 @@
 	background-color: white;
 	width: 250px;
 }
+
 /*End Products Scroll*/
 
 /*Products category blade*/
 .product-tag-childs a {
 	color: black;
 }
+
 .product-tag-childs a:hover {
 	color: grey;
 	text-decoration: none;
 }
+
 /*End Products category blade*/
 
 /*Product Discusions*/
@@ -162,21 +197,26 @@
 	border-left: 5px solid grey;
 	padding-left: 10px;
 }
+
 .product-discus-user .author {
 	color: black;
 }
+
 .product-discus-user .author:hover {
 	color: grey;
 	text-decoration: none;
 }
+
 .product-discus-body .title {
 	color: black;
 	font-weight: bold;
 }
+
 .product-discus-body .title:hover {
 	color: grey;
 	text-decoration: none;
 }
+
 /*End Product Discusions*/
 
 /*Live Search*/
@@ -189,12 +229,13 @@
 	max-height: 150px;
 	overflow-y: auto;
 }
-#list-kabupaten {
-	
-}
+
+#list-kabupaten {}
+
 .list-kabupaten-item:hover {
 	color: green;
 }
+
 .list-kabupaten-item {
 	background-color: rgb(230, 230, 230, 0.8);
 	border-bottom: 1px solid grey;
@@ -203,15 +244,18 @@
 	width: auto;
 	display: none;
 }
+
 /*Shopping*/
 #shopping-cart {
 	padding: 10px;
 	font-weight: bold;
 	color: green;
 }
+
 #shopping-cart .badge {
 	background-color: green;
 }
+
 #shopping-cart:hover {
 	text-decoration: none;
 	color: black;
@@ -221,6 +265,7 @@
 .alert-success a:hover {
 	text-decoration: none;
 }
+
 /*Cart Qty*/
 #itemQty {
 	width: 40px;

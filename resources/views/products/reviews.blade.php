@@ -6,7 +6,10 @@
                 <p>{!! nl2br($review->description) !!}</p>
             </div>
             <div class="product-discus-user">
-                by <a href="/user/{{$review->user->slug}}" class="author">{{$review->user->name}}</a>
+                <a href="/user/{{$review->user->slug}}" class="author">
+                    <img src="<?php if ($review->user->img != null){ echo "/users/".$review->user->img;}else if($review->user->graph != null){echo $review->user->graph;}else{echo $review->user->avatar();} ?>" class="img-circle" width="30">
+                    {{$review->user->name}}
+                </a>
                 - <small><i>{{ date('d F, Y', strtotime($review->created_at))}}</i></small>
             </div>
         </div>

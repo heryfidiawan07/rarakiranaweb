@@ -61,7 +61,7 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-dashboard">
                 <div class="panel-body">
-                   <div class="panel-left">
+                    <div class="panel-left">
                         <i class="fas fa-user-friends fa-3x"></i>
                     </div>
                     <div class="panel-right">
@@ -74,7 +74,7 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-dashboard">
                 <div class="panel-body">
-                   <div class="panel-left">
+                    <div class="panel-left">
                         <i class="fas fa-cart-plus fa-3x"></i>
                     </div>
                     <div class="panel-right">
@@ -87,7 +87,7 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-dashboard">
                 <div class="panel-body">
-                   <div class="panel-left">
+                    <div class="panel-left">
                         <i class="fas fa-envelope fa-3x"></i>
                     </div>
                     <div class="panel-right">
@@ -100,7 +100,7 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-dashboard">
                 <div class="panel-body">
-                   <div class="panel-left">
+                    <div class="panel-left">
                         <i class="fas fa-envelope fa-3x"></i>
                     </div>
                     <div class="panel-right">

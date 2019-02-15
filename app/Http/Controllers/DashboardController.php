@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function __construct(){
-      $this->middleware('admin');
+        $this->middleware('admin');
     }
 
     public function dashboard(){
@@ -38,13 +38,13 @@ class DashboardController extends Controller
         $sold      = Order::where('status','>',0)->sum('total_qty');//if == 5 -> Cancel
         $questions = Question::all();
         $messages  = DB::table('users')->join('messages', 'users.id', '=', 'messages.messageable_id')
-                     ->where('messages.messageable_type', 'App\User')->get();
+                    ->where('messages.messageable_type', 'App\User')->get();
         $countPostComment    = DB::table('posts')->join('comments', 'posts.id', '=', 'comments.commentable_id')
-                               ->where('comments.commentable_type', 'App\Post')->get();
+                                ->where('comments.commentable_type', 'App\Post')->get();
         $countThreadComment  = DB::table('threads')->join('comments', 'threads.id', '=', 'comments.commentable_id')
-                               ->where('comments.commentable_type', 'App\Thread')->get();
+                                ->where('comments.commentable_type', 'App\Thread')->get();
         $countProductComment = DB::table('products')->join('comments', 'products.id', '=', 'comments.commentable_id')
-                               ->where('comments.commentable_type', 'App\Product')->get();
+                                ->where('comments.commentable_type', 'App\Product')->get();
     	return view('admin.dashboard',compact('online','today','users','posts','products','threads','orders','sold','questions','messages','countPostComment','countThreadComment','countProductComment'));
     }
 

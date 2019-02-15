@@ -6,7 +6,10 @@
                 <p>{!! nl2br($discus->description) !!}</p>
             </div>
             <div class="product-discus-user">
-                by <a href="/user/{{$discus->user->slug}}" class="author">{{$discus->user->name}}</a>
+                <a href="/user/{{$discus->user->slug}}" class="author">
+                <img src="<?php if ($discus->user->img != null){ echo "/users/".$discus->user->img;}else if($discus->user->graph != null){echo $discus->user->graph;}else{echo $discus->user->avatar();} ?>" class="img-circle" width="30">
+                    {{$discus->user->name}}
+                </a>
                 - <small><i>{{ date('d F, Y', strtotime($discus->created_at))}}</i></small>
                 @if(Auth::check())
                     @if(Auth::user()->id == $discus->user->id)

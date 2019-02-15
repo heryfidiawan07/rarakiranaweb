@@ -158,6 +158,8 @@ Route::group(['middleware' => 'auth'], function () {
 	//User Order Success
 	Route::get('/user/{slug}/done/order/{order}', 'OrderController@userDone');
 	Route::get('/user/{slug}/cancel/order/{order}', 'OrderController@cancel');
+	//User Order Review
+	Route::post('/send-review/product/{slug}', 'ReviewController@review');
 	//User Payment
 	Route::get('/user/{slug}/payment/{order}', 'UserController@payment');
 	Route::get('/user/{slug}/print/invoice/{order}', 'UserController@invoice');

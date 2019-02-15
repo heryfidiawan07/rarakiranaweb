@@ -21,15 +21,8 @@ class HomeController extends Controller
     	$newproducts = Product::where('status',1)->latest('sticky')->paginate(5);
     	$newthreads  = Thread::where('status',1)->latest('sticky')->paginate(4);
 
-        $postrecents   = DB::table('posts')->join('comments', 'posts.id', '=', 'comments.commentable_id')
-                         ->where('comments.commentable_type', 'App\Post')->groupBy('comments.commentable_id')
-                         ->orderBy('comments.created_at','DESC')->paginate(5);
-        $threadrecents = DB::table('threads')
-                        ->join('comments', 'threads.id', '=', 'comments.commentable_id')
-                        ->where('comments.commentable_type', 'App\Thread')->groupBy('comments.commentable_id')
-                        ->join('users', 'users.id', '=', 'threads.user_id')
-                        ->select('users.name', 'comments.created_at', 'threads.*')
-                        ->paginate(5);
+        $postrecents   = Post::has('comments')->latest()->paginate(5);
+        $threadrecents = Thread::has('comments')->latest()->paginate(5);
 
         return view('home',compact('newposts','postrecents','newproducts','newthreads','threadrecents','logo','promo'));
     }

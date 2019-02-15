@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Auth;
 use Purifier;
 use App\Tag;
@@ -112,12 +111,7 @@ class ThreadController extends Controller
         $logo          = Logo::where('setting','thread')->first();
         $thread        = Thread::whereSlug($slug)->first();
         $comments      = $thread->comments()->paginate(10);
-        $threadrecents = DB::table('threads')
-                        ->join('comments', 'threads.id', '=', 'comments.commentable_id')
-                        ->where('comments.commentable_type', 'App\Thread')->groupBy('comments.commentable_id')
-                        ->join('users', 'users.id', '=', 'threads.user_id')
-                        ->select('users.name', 'comments.created_at', 'threads.*')
-                        ->paginate(5);
+        $threadrecents = Thread::has('comments')->latest()->paginate(5);
         if ($thread->status == 1 && $thread->tag->status == 1) {
             $tags = Tag::where('setting',0)->get();
             return view('threads.show',compact('thread','tags','comments','threadrecents','logo'));

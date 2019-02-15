@@ -3,7 +3,10 @@
         <a href="/thread/{{$thread->slug}}">{{$thread->title}}</a>
     </h4>
     <p class="threads-author">
-        by <a href="/user/{{$thread->user->slug}}" class="author">{{$thread->user->name}}</a>
+        <a href="/user/{{$thread->user->slug}}" class="author">
+            <img src="<?php if ($thread->user->img != null){ echo "/users/".$thread->user->img;}else if($thread->user->graph != null){echo $thread->user->graph;}else{echo $thread->user->avatar();} ?>" class="img-circle" width="30">
+            {{$thread->user->name}}
+        </a>
         - <a href="/threads/{{$thread->tag->slug}}" class="btn btn-default btn-xs">
             <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
             {{$thread->tag->name}}
