@@ -12,7 +12,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
                     <a href="/post/create" class="btn btn-primary btn-sm">
-                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>CEATE POST
+                        <span class="glyphicon glyphicon-book" aria-hidden="true"></span> CEATE POST
                     </a>
                 </div>
                 <div class="panel-body">
@@ -29,9 +29,9 @@
                                 <td colspan="7"><p class="@if($post->sticky == 1) sticky @else posts-title @endif">{{$post->title}} @if($post->sticky == 1) - <small style="color: black;">This Post Sticky</small>@endif</p></td>
                             </tr>
                             <tr>
-                                <td><a href="/post/{{$post->id}}/edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                                <td><a href="/post/{{$post->id}}/edit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                                 <td>@include('admin.posts.delete')</td>
-                                <td><a href="/read/post/{{$post->slug}}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
+                                <td><a href="/read/post/{{$post->slug}}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                 <td>@include('admin.posts.status')</td>
                                 <td>@include('admin.posts.acomment')</td>
                                 <td>

@@ -15,13 +15,9 @@
                 @include('promo.index')
             @endif
             <h4 class="post-tags">
-                @if($menu->parent->count())
-                    @foreach($menu->parent->where('status',1) as $sub)
-                        | <a href="/{{$sub->slug}}">{{$sub->name}}</a>
-                    @endforeach
-                @else
-                    | <a href="/{{$menu->slug}}">{{$menu->name}}</a>
-                @endif
+                @foreach($menus->where('status',1) as $sub)
+                    | <a href="/{{$sub->slug}}">{{$sub->name}}</a>
+                @endforeach
             </h4>
             <hr>
             @foreach($posts->where('status',1)->where('menu.status',1) as $post)
@@ -32,7 +28,7 @@
                 <ul class="pagination pagination-sm">{{$posts->links()}}</ul>
             </div>
 
-            @if($menu->setting ==5)
+            @if($fmenu->setting ==5)
                 @include('layouts.contact-form')
             @endif
 

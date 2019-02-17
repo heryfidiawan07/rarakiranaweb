@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete_{{$post->id}}">
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_{{$post->id}}">
   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 </button>
 <!-- Modal -->

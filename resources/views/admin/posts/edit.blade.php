@@ -55,7 +55,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <div class="col-md-6">
                         <label for="status" class="control-label">Status</label>
                         <select name="status" class="form-control">
@@ -65,28 +65,18 @@
                             <option value="1">Aktif</option>
                             <option value="0">Tidak Aktif</option>
                         </select>
-                        @if ($errors->has('status'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('status') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('acomment') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <div class="col-md-6">
                         <label for="acomment" class="control-label">Izinkan komentar</label>
                         <select name="acomment" class="form-control">
                             @if($post->allowed_comment == 0)
-                                <option value="0">Tidak di Izinkan</option>
+                                <option value="0">Tidak</option>
                             @endif
-                            <option value="1">di Izinkan</option>
-                            <option value="0">Tidak di Izinkan</option>
+                            <option value="1">Ya</option>
+                            <option value="0">Tidak</option>
                         </select>
-                        @if ($errors->has('acomment'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('acomment') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
                 <div class="form-group">

@@ -10,25 +10,25 @@
                 @endif
             </p>
             <div class="footerMenu">
-                @if(Auth::check())
-                    @if(Auth::user())
-                        <p><a href="/user/{{Auth::user()->slug}}">PROFIL</a> |</p>
-                        <p><a href="{{ url('/logout') }}">LOGOUT</a> |</p>
-                    @endif
-                @endif
-                <p><a href="/">HOME</a> |</p>
+                <p>| <a href="/">HOME</a></p>
                 @if(Auth::guest())
-                    <p><a href="/login">LOGIN</a> |</p>
-                    <p><a href="/register">REGISTER</a> |</p>
+                    <p>| <a href="/login">LOGIN</a></p>
+                    <p>| <a href="/register">REGISTER</a></p>
                 @endif
                 @foreach($mainMenus->where('parent_id',0) as $menu)
-                	<p><a href="/{{$menu->slug}}">{{$menu->name}}</a> |</p>
+                	<p>| <a href="/{{$menu->slug}}">{{$menu->name}}</a></p>
                 @endforeach
                 @if($mainTag)
-                	<p><a href="/page/{{$mainTag->slug}}">{{$mainTag->name}}</a> |</p>
+                	<p>| <a href="/page/{{$mainTag->slug}}">{{$mainTag->name}}</a></p>
                 @endif
                 @if($mainStore)
-                	<p><a href="/all/{{$mainStore->slug}}">{{$mainStore->name}}</a> |</p>
+                	<p>| <a href="/all/{{$mainStore->slug}}">{{$mainStore->name}}</a></p>
+                @endif
+                @if(Auth::check())
+                    @if(Auth::user())
+                        <p>| <a href="/user/{{Auth::user()->slug}}">PROFIL</a></p>
+                        <p>| <a href="{{ url('/logout') }}">LOGOUT</a></p>
+                    @endif
                 @endif
     		</div>
 		</div>

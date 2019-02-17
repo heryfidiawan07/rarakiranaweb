@@ -42,7 +42,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'title' => 'required|unique:posts|max:200',
+                'title' => 'required|unique:posts|max:100',
                 'menu_id' => 'required',
                 'img' => 'required',
                 'description' => 'required',
@@ -107,7 +107,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-                'title' => 'required|max:200',
+                'title' => 'required|max:100',
                 'menu_id' => 'required',
                 'description' => 'required',
                 'status' => 'required',
@@ -191,17 +191,19 @@ class PostController extends Controller
 
     public function menu($slugMenu){
         //Promo/Logo setting 1 = Home Logo/Main, 2 = Post Logo, 3 = Thread Logo, 4 = Product Logo
-        $menu  = Menu::where('slug',$slugMenu)->first();
+        $fmenu = Menu::where('slug',$slugMenu)->first();
         $promo = Promo::where('setting','post')->first();
         $logo  = Logo::where('setting','post')->first();
-        if($menu){
-            if($menu->parent->count()){
-                $posts = $menu->childPosts()->latest('sticky')->paginate(10);
+        if($fmenu){
+            if($fmenu->parent->count()){
+                $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
+                $menus = $fmenu->parent()->get();
             }else{
-                $posts = $menu->posts()->latest('sticky')->paginate(10);
+                $posts = $fmenu->posts()->latest('sticky')->paginate(10);
+                $menus = Menu::where('parent_id',$fmenu->parent_id)->get();
             }
             $postrecents = Post::has('comments')->latest()->paginate(5);
-            return view('posts.menu', compact('menu','posts','postrecents','promo','logo'));
+            return view('posts.menu', compact('fmenu','menus','posts','postrecents','promo','logo'));
         }else{
             return view('errors.503');
         }
