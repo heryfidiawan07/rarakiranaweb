@@ -45,14 +45,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'title' => 'required|unique:products|max:100',
+                'title' => 'required|unique:products|max:50',
                 'storefront_id' => 'required',
                 'price' => 'required',
                 'img' => 'required',
                 'weight' => 'required',
+                'dimensi' => 'required',
                 'description' => 'required',
                 'status' => 'required',
                 'acomment' => 'required',
+                'setting' => 'required',
             ]);
         $time = date("YmdHis");
         $slug = str_slug($request->title).'-'.$time;
@@ -69,28 +71,32 @@ class ProductController extends Controller
                     'HTML.SafeIframe' => true , "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%")),
                 'status' => $request->status,
                 'allowed_comment' => $request->acomment,
+                'setting' => $request->setting,
             ]);
-            $files = $request->file('img');
-            $key   = 0;
-            while ($key < 5) {
-                $extends = $files[$key]->getClientOriginalExtension();
-                $imgName = $product->id.'-'.$key.'-'.str_slug($request->title).'-'.$time.'.'.$extends;
-                $path    = $files[$key]->getRealPath();
+        $files = $request->file('img');
+        if(count($files) <= 5) {
+            foreach ($files as $key => $file) {
+                $extends = $file->getClientOriginalExtension();
+                $imgName = $product->id.$key.str_slug($request->title).$time.'.'.$extends;
+                $path    = $file->getRealPath();
                 $img     = Image::make($path)->resize(null, 630, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
-                $img->save(public_path("products/img/". $imgName));
                 $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
                 $thumb->save(public_path("products/thumb/". $imgName));
-            $key++;
+                $img->save(public_path("products/img/". $imgName));
+
                 $picture = new Picture;
                 $picture->img        = $imgName;
                 $picture->product_id = $product->id;
                 $picture->save();
             }
-        return redirect('/dashboard/products');
+            return redirect('/dashboard/products');
+        }else{
+            return back()->with('warning', 'File gambar tidak boleh lebih dari 5 !');
+        }
     }
 
     public function status(Request $request, $id){
@@ -131,13 +137,15 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-                'title' => 'required|max:100',
+                'title' => 'required|max:50',
                 'storefront_id' => 'required',
                 'price' => 'required',
                 'weight' => 'required',
+                'dimensi' => 'required',
                 'description' => 'required',
                 'status' => 'required',
                 'acomment' => 'required',
+                'setting' => 'required',
             ]);
         $product = Product::whereId($id)->first();
         if ($product) {
@@ -162,32 +170,32 @@ class ProductController extends Controller
                         'HTML.SafeIframe' => true , "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%")),
                     'status' => $request->status,
                     'allowed_comment' => $request->acomment,
+                    'setting' => $request->setting,
                 ]);
             $files   = $request->file('img');
             if (isset($files)) {
-                $key    = 0;
-                $batas  = 5;
-                $jumlah = $product->pictures->count();
-                if ($jumlah) {
-                    $batas -= $jumlah;
-                }
-                while ($key < $batas) {
-                    $extends = $files[$key]->getClientOriginalExtension();
-                    $imgName = $product->id.'-'.$key.'-'.str_slug($product->title).'-'.$time.'.'.$extends;
-                    $path    = $files[$key]->getRealPath();
-                    $img     = Image::make($path)->resize(null, 630, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                });
-                    $img->save(public_path("products/img/". $imgName));
-                    $thumb   = Image::make($path)->resize(null, 300, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                });
-                    $thumb->save(public_path("products/thumb/". $imgName));
-                $key++;
-                    $picture = new Picture;
-                    $picture->img        = $imgName;
-                    $picture->product_id = $product->id;
-                    $picture->save();
+                $jumlah = count($files) + $product->pictures->count();
+                if ($jumlah > 5) {
+                    return back()->with('warning', 'File gambar tidak boleh lebih dari 5 !');
+                }else {
+                    foreach ($files as $key => $file) {
+                        $extends = $file->getClientOriginalExtension();
+                        $imgName = $product->id.$key.str_slug($product->title).$time.'.'.$extends;
+                        $path    = $file->getRealPath();
+                        $img     = Image::make($path)->resize(null, 630, function ($constraint) {
+                                        $constraint->aspectRatio();
+                                    });
+                        $img->save(public_path("products/img/". $imgName));
+                        $thumb   = Image::make($path)->resize(null, 300, function ($constraint) {
+                                        $constraint->aspectRatio();
+                                    });
+                        $thumb->save(public_path("products/thumb/". $imgName));
+                        
+                        $picture = new Picture;
+                        $picture->img        = $imgName;
+                        $picture->product_id = $product->id;
+                        $picture->save();
+                    }
                 }
             }
             return redirect('/dashboard/products');

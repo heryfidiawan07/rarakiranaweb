@@ -194,13 +194,18 @@ class PostController extends Controller
         $menu  = Menu::where('slug',$slugMenu)->first();
         $promo = Promo::where('setting','post')->first();
         $logo  = Logo::where('setting','post')->first();
-        if($menu->parent->count()){
-            $posts = $menu->childPosts()->latest('sticky')->paginate(10);
+        if($menu){
+            if($menu->parent->count()){
+                $posts = $menu->childPosts()->latest('sticky')->paginate(10);
+            }else{
+                $posts = $menu->posts()->latest('sticky')->paginate(10);
+            }
+            $postrecents = Post::has('comments')->latest()->paginate(5);
+            return view('posts.menu', compact('menu','posts','postrecents','promo','logo'));
         }else{
-            $posts = $menu->posts()->latest('sticky')->paginate(10);
+            return view('errors.503');
         }
-        $postrecents = Post::has('comments')->latest()->paginate(5);
-        return view('posts.menu', compact('menu','posts','postrecents','promo','logo'));
+        
     }
     
 }

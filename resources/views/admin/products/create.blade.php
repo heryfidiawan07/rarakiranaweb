@@ -12,7 +12,7 @@
                 {{csrf_field()}}
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                     <label for="title" class="control-label">Judul</label>
-                    <input type="text" name="title" class="form-control" value="{{ old('title') }}" required autofocus>
+                    <input type="text" name="title" id="product-title" class="form-control" value="{{ old('title') }}" required autofocus>
                     @if ($errors->has('title'))
                         <span class="help-block">
                             <strong>{{ $errors->first('title') }}</strong>
@@ -37,12 +37,17 @@
                     </div>
                 </td><td>
                     <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
-                        <label for="img" class="control-label">Gambar</label>
-                        <input type="file" name="img[]" class="form-control" multiple="multiple" required autofocus>
+                        <label for="img" class="control-label">Gambar<span id="imgValidate" class="danger"></span> </label>
+                        <input type="file" name="img[]" id="input-img" class="form-control" multiple="multiple" required autofocus>
                         @if ($errors->has('img'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('img') }}</strong>
                             </span>
+                        @endif
+                        @if(session('warning'))
+                            <div class="alert alert-warning">
+                                {{session('warning')}}
+                            </div>
                         @endif
                     </div>
                 </td></tr>
@@ -64,7 +69,7 @@
                         <label for="discount" class="control-label">Diskon/Potongan</label>
                         <div class="input-group">
                             <div class="input-group-addon">Rp</div>
-                            <input type="integer" name="discount" class="form-control" value="0" autofocus>
+                            <input type="integer" name="discount" class="form-control" value="{{ old('discount') }}" autofocus>
                         </div>
                         @if ($errors->has('discount'))
                             <span class="help-block">
@@ -105,39 +110,36 @@
 
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label">Deskripsi</label>
-                    <textarea name="description" class="form-control" rows="20">{{ old('description') }}</textarea>
+                    <textarea name="description" class="form-control" rows="10">{{ old('description') }}</textarea>
                     @if ($errors->has('description'))
                         <span class="help-block">
                             <strong>{{ $errors->first('description') }}</strong>
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <label for="status" class="control-label">Status</label>
                     <select class="form-control" name="status">
                         <option value="1">Aktif</option>
                         <option value="0">Tidak Aktif</option>
                     </select>
-                    @if ($errors->has('status'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('status') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('acomment') ? ' has-error' : '' }}">
-                    <label for="acomment" class="control-label">Izinkan Komentar</label>
-                    <select class="form-control" name="acomment">
-                        <option value="1">di Izinkan</option>
-                        <option value="0">Tidak di Izinkan</option>
-                    </select>
-                    @if ($errors->has('acomment'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('acomment') }}</strong>
-                        </span>
-                    @endif
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+                    <label for="acomment" class="control-label">Izinkan Komentar</label>
+                    <select class="form-control" name="acomment">
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="setting" class="control-label">Produk Offline</label>
+                    <select class="form-control" name="setting">
+                        <option value="0">Tidak</option>
+                        <option value="1">Ya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button id="create" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                 </div>
             </form>
                 
@@ -146,6 +148,7 @@
 </div>
 @endsection
 @section('js')
-  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-  <script src="/js/mce-post.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script src="/js/mce-post.js"></script>
+    <script src="/js/helper.js"></script>
 @endsection

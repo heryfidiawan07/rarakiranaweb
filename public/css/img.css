@@ -1,21 +1,21 @@
-#carousel-img-generic {
-    height: 60vh;
-    max-height: 60vh;
-}
-.carousel-img-inner {
-    text-align: center;
-}
 .frame-product-img {
     background-color: lightgrey;
-    height: 50vh;
+    background-color: none;
+    white-space: nowrap;
+    text-align: center;
 }
 .frame-product-img-helper {
-
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 .product-img {
-    max-height: 50vh;
+    vertical-align: middle;
+    max-height: 100%;
     max-width: 100%;
+    margin-left: -4px;
 }
+
 .carousel-img-control.left, .carousel-img-control.right {
     background-image: none;
 }

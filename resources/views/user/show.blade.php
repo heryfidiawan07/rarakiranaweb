@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <div class="text-center">
                 <img src="<?php if ($user->img != null){ echo "/users/".$user->img;}else if($user->graph != null){echo $user->graph;}else{echo $user->avatar();} ?>
                 " class="img-responsive" style="height: 150px;">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-7">
             @include('user.user-content')
         </div>
 

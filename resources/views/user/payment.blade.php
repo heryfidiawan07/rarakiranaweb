@@ -59,11 +59,20 @@
                         <td>Status Pembelian</td>
                         <td>
                             @if($order->status==0)
-                                <span class="warning">
-                                    Menunggu pembayaran
-                                    <a href="/user/{{$user->slug}}/cancel/order/{{$order->no_order}}" class="btn btn-danger btn-sm">Batalkan Pesanan</a>
-                                    <hr>
-                                </span>
+                                <span class="warning">Menunggu pembayaran</span>
+                                <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel-order">Batalkan Pesanan <span class="caret"></span></a>
+                                    
+                                <div class="modal fade" id="cancel-order" tabindex="-1" role="dialog" aria-labelledby="cancel-order-label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">CLOSE</button>
+                                                <a href="/user/{{$user->slug}}/cancel/order/{{$order->no_order}}" class="btn btn-danger btn-sm">Batalkan Pesanan</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                             @elseif($order->status==1)
                                 <span class="warning">Menunggu konfirmasi</span>
                             @elseif($order->status==2)
@@ -141,7 +150,7 @@
                                     <img src="/resi/{{$order->payment->resi_img}}" width="50">
                                 </a>
                             </td>
-                            <td>Pengirim: {{$order->payment->pengirim}} - <a href="/resi/{{$order->payment->resi_img}}">Buka Gambar</a></td>
+                            <td>Pengirim: {{$order->payment->pengirim}} - <a href="/resi/{{$order->payment->resi_img}}" target="_blank">Buka Gambar</a></td>
                         </tr>
                     @endif
                     <tr>
@@ -166,11 +175,11 @@
                             <p>{{$order->address->kabupaten}} - {{$order->address->postal_code}}</p>
                         </td>
                     </tr>
-                    <tr class="warning">
+                    <tr class="info">
                         <td>Harga Barang</td>
                         <td>Rp {{number_format($subTotalPrice)}}</td>
                     </tr>
-                    <tr class="warning">
+                    <tr class="info">
                         <td>Ongkor Kirim</td>
                         <td>Rp {{number_format($order->ongkir)}}</td>
                     </tr>

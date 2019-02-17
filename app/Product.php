@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['user_id','storefront_id','title','slug','price','discount','weight','dimensi','description','sticky','status','allowed_comment',];
+    protected $fillable = ['user_id','storefront_id','title','slug','price','discount','weight','dimensi','description','sticky','status','setting','allowed_comment',];
 
     public function user(){
     	return $this->belongsTo(User::class);

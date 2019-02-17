@@ -14,22 +14,28 @@
             </a>
             
             <p class="discount">
-                <s><small>Rp {{number_format($product->price + $product->discount,2)}}</small></s>
-                @if($product->discount)
+                @if($product->discount > 0)
+                    <s><small>Rp {{number_format($product->price + $product->discount,2)}}</small></s>
                     <img src="/parts/sale.jpg" width="50">
+                    <span>
+                        <small><i>{{number_format(($product->price + $product->discount) / $product->discount)}} %</i></small>
+                    </span>
                 @endif
-                <span>
-                    <small><i>{{number_format(($product->price + $product->discount) / $product->discount)}} %</i></small>
-                </span>
             </p>
             <h4 class="price">Rp {{number_format($product->price, 2)}}</h4>
             <div class="text-center">
-                <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm buy">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
-                </a>
-                <a href="/add-to-cart/{{$product->slug}}" class="btn btn-success btn-sm buy">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
-                </a>
+                @if($product->setting == 0)
+                    <a href="/product/cart/{{$product->slug}}" class="btn btn-default btn-sm buy">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Beli
+                    </a>
+                    <a href="/add-to-cart/{{$product->slug}}" class="btn btn-success btn-sm buy">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                    </a>
+                @elseif($product->setting == 1)
+                    <a href="/show/product/{{$product->slug}}" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Kirim Penawaran
+                    </a>
+                @endif
             </div>
         </div>
     </div>

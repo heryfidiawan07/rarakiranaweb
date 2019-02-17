@@ -20,7 +20,7 @@ Route::group(['middleware' => 'admin'], function () {
 		//Dashboard
 		Route::get('/dashboard', 'DashboardController@dashboard');
 		//Inbox
-		Route::get('/dashboard/inbox', 'DashboardController@inbox');
+		Route::get('/dashboard/shipment', 'DashboardController@shipment');
 		//Menu
 		Route::get('/dashboard/menus', 'MenuController@index');
 		Route::post('/menu/store', 'MenuController@store');
@@ -80,6 +80,9 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::post('/order/input/resi/{order}', 'OrderController@inputResi');
 		Route::get('/done/order/{order}', 'OrderController@done');
 		Route::get('/delete/order/{order}', 'OrderController@orderDelete');
+		//Product Offer
+		Route::get('/dashboard/product/offer/{slug}/show', 'OfferController@show');
+		Route::get('/dashboard/product/offer/{slug}/print', 'OfferController@print');
 		//Rekening
 		Route::get('/dashboard/bank-accounts', 'RekeningController@index');
 		Route::post('/bank-accounts/store', 'RekeningController@store');

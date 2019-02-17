@@ -21,7 +21,7 @@
                                 <form method="POST" action="/product/discus/{{$discus->id}}/update">
                                     {{csrf_field()}}
                                     <hr>
-                                    <textarea rows="5" class="form-control descriptionEdit" name="descriptionEdit" required>
+                                    <textarea rows="3" class="form-control descriptionEdit" name="descriptionEdit" required>
                                         {{strip_tags($discus->description)}}
                                     </textarea><br>
                                     <button class="btn btn-warning btn-xs">
@@ -50,7 +50,7 @@
                     <form method="POST" action="/product/discus/{{$product->slug}}/store">
                         {{csrf_field()}}
                         <label class="">Diskusi</label>
-                        <textarea rows="5" class="form-control" name="description" required>{{old('description')}}</textarea>
+                        <textarea rows="3" class="form-control" name="description" required>{{old('description')}}</textarea>
                         <br>
                         <button class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
@@ -63,7 +63,7 @@
 @endif
 @if(Auth::guest())
     <label class="">Diskusi</label>
-    <textarea rows="5" class="form-control" name="" disabled></textarea><br>
+    <textarea rows="3" class="form-control" name="" disabled></textarea><br>
     <button class="btn btn-primary btn-sm" disabled>
         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
     </button>

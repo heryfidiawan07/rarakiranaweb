@@ -143,7 +143,10 @@
                         <tr>
                         @foreach($tag->parent as $child)
                         <tr>
-                            <td> -> {{$child->name}} - <small>{{$child->threads->count()}} threads</small></td>
+                            <td>
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                                {{$child->name}} - <small>{{$child->threads->count()}} threads</small>
+                            </td>
                             <td>@include('admin.threads.tag.edit-child-name')</td>
                             <td>@include('admin.threads.tag.editChild')</td>
                             <td>@include('admin.threads.tag.deleteChild')</td>

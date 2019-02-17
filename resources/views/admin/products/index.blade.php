@@ -145,7 +145,10 @@
                         <tr>
                         @foreach($front->parent as $child)
                         <tr>
-                            <td> -> {{$child->name}} - <small>{{$child->products->count()}} products</small></td>
+                            <td>
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                                {{$child->name}} - <small>{{$child->products->count()}} products</small>
+                            </td>
                             <td>@include('admin.products.front.edit-child-name')</td>
                             <td>@include('admin.products.front.editChild')</td>
                             <td>@include('admin.products.front.deleteChild')</td>
@@ -165,6 +168,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
                         <a href="/product/create" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span>ADD PRODUCT</a>
+                        @if(Auth::user()->address == null)
+                            <a href="/dashboard/orders" class="alert alert-danger alert-sm">Admin address has not been set</a>
+                        @elseif(Auth::user()->rekening == null)
+                            <a href="/dashboard/bank-accounts" class="alert alert-danger alert-sm">Admin account <i>(bank)</i> has not been set</a>
+                        @endif
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -177,9 +185,9 @@
                                     <td colspan="8"><p class="@if($product->sticky == 1) product-sticky @else product-title @endif">{{$product->title}} @if($product->sticky == 1) - <small style="color: black;">This Product Sticky</small>@endif</p></td>
                                 </tr>
                                 <tr>
-                                    <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                                    <td><a href="/product/{{$product->id}}/edit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
                                     <td>@include('admin.products.delete')</td>
-                                    <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-xs" @if($product->status==0) disabled @endif><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
+                                    <td><a href="/show/product/{{$product->slug}}" class="btn btn-success btn-sm" @if($product->status==0) disabled @endif><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                     <td>@include('admin.products.status')</td>
                                     <td>@include('admin.products.acomment')</td>
                                     <td>

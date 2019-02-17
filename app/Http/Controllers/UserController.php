@@ -108,7 +108,8 @@ class UserController extends Controller
     
     public function payment($slug, $order){
         $user      = User::whereSlug($slug)->first();
-        $rekenings = Rekening::all();
+        $admin     = User::where('admin',1)->first();
+        $rekenings = Rekening::where('user_id',$admin->id)->get();
         if (Auth::user()->id == $user->id) {
             $order    = Order::where('no_order',$order)->first();
             $products = Product::all();

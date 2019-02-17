@@ -112,7 +112,9 @@
                     <tr>
                     @foreach($menu->parent as $child)
                     <tr>
-                        <td> -> {{$child->name}}
+                        <td>
+                            <span class="glyphicon glyphicon-arrow-right"></span>
+                            {{$child->name}}
                             @if($child->setting == 5)
                                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                             @endif

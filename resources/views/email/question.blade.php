@@ -94,7 +94,7 @@ $style = [
                     <?php
                       $actionColor = 'button--green';
                     ?>
-                    <a href="http://rarakirana.com/dashboard/inbox"
+                    <a href="http://rarakirana.com/dashboard/shipment"
                       style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
                       class="button"
                       target="_blank">
@@ -119,8 +119,8 @@ $style = [
                       Jika ada masalah dengan klik tombol di atas silahkan klik link di bawah ini, atau copy di browser anda.
                     </p>
                     <p style="{{ $style['paragraph-sub'] }}">
-                      <a style="{{ $style['anchor'] }}" href="http://rarakirana.com/dashboard/inbox" target="_blank">
-                        http://rarakirana.com/dashboard/inbox
+                      <a style="{{ $style['anchor'] }}" href="http://rarakirana.com/dashboard/shipment" target="_blank">
+                        http://rarakirana.com/dashboard/shipment
                       </a>
                     </p>
                   </td>

@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->text('description');
             $table->tinyInteger('sticky')->default(0);
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('setting')->default(0);
             $table->tinyInteger('allowed_comment')->default(1);
             $table->timestamps();
 

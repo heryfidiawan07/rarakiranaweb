@@ -71,7 +71,7 @@
                         <tr>
                             <td class="td-dashboard">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                <a class="dashboard-menu" href="/dashboard/inbox"><b> INBOX</b></a>
+                                <a class="dashboard-menu" href="/dashboard/shipment"><b> SHIPMENT</b></a>
                             </td>
                         </tr>
                         <tr>

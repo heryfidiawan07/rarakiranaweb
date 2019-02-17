@@ -17,7 +17,9 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('email');
+            $table->string('phone');
             $table->text('description');
+            $table->tinyInteger('setting')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

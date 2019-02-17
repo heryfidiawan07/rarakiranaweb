@@ -12,7 +12,7 @@
                 {{csrf_field()}}
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                     <label for="title" class="control-label">Judul</label>
-                    <input type="text" name="title" class="form-control" value="{{$product->title}}" required>
+                    <input type="text" name="title" id="product-title" class="form-control" value="{{$product->title}}" required>
                     @if ($errors->has('title'))
                         <span class="help-block">
                             <strong>{{ $errors->first('title') }}</strong>
@@ -34,7 +34,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <div id="frame-product-img-edit">
+                    <div id="frame-product-img-edit" data-count="{{$product->pictures->count()}}">
                         @foreach($product->pictures as $pict)
                             <div class="frame-product-img-in">
                                 <img src="/products/thumb/{{$pict->img}}" height="100">
@@ -51,8 +51,11 @@
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('img') ? ' has-error' : '' }}">
-                    <label for="img" class="control-label">Gambar <i><u>max 5 image</u></i></label>
-                    <input type="file" name="img[]" class="form-control" multiple="multiple" <?php if($product->pictures->count() < 1 ) echo 'required'; ?> >
+                    <label for="img" class="control-label">
+                        Gambar <i><u>max 5 image</u></i>
+                        <span id="imgEditValidate" class="danger"></span>
+                    </label>
+                    <input type="file" name="img[]" id="input-img-edit" class="form-control" multiple="multiple" <?php if($product->pictures->count() < 1 ) echo 'required'; ?> >
                     @if ($errors->has('img'))
                         <span class="help-block">
                             <strong>{{ $errors->first('img') }}</strong>
@@ -116,45 +119,45 @@
                 </td></tr></table>
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description" class="control-label">Deskripsi</label>
-                    <textarea name="description" class="form-control" rows="20">{{$product->description}}</textarea>
+                    <textarea name="description" class="form-control" rows="10">{{$product->description}}</textarea>
                     @if ($errors->has('description'))
                         <span class="help-block">
                             <strong>{{ $errors->first('description') }}</strong>
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                <div class="form-group">
                     <label for="status" class="control-label">Status</label>
-                    @if($product->status == 0)
-                        <option value="0">Tidak Aktif</option>
-                    @endif
                     <select class="form-control" name="status">
+                        @if($product->status == 0)
+                            <option value="0">Tidak Aktif</option>
+                        @endif
                         <option value="1">Aktif</option>
                         <option value="0">Tidak Aktif</option>
                     </select>
-                    @if ($errors->has('status'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('status') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('acomment') ? ' has-error' : '' }}">
-                    <label for="acomment" class="control-label">Izinkan komentar</label>
-                    @if($product->allowed_comment == 0)
-                        <option value="0">Tidak di Izinkan</option>
-                    @endif
-                    <select class="form-control" name="acomment">
-                        <option value="1">di Izinkan</option>
-                        <option value="0">Tidak di Izinkan</option>
-                    </select>
-                    @if ($errors->has('acomment'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('acomment') }}</strong>
-                        </span>
-                    @endif
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-sm">
+                    <label for="acomment" class="control-label">Izinkan komentar</label>
+                    <select class="form-control" name="acomment">
+                        @if($product->allowed_comment == 0)
+                            <option value="0">Tidak</option>
+                        @endif
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="setting" class="control-label">Produk Offline</label>
+                    <select class="form-control" name="setting">
+                        @if($product->setting == 1)
+                            <option value="1">Ya</option>
+                        @endif
+                        <option value="0">Tidak</option>
+                        <option value="1">Ya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button id="create" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -167,4 +170,5 @@
 @section('js')
   <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
   <script src="/js/litle-mce.js"></script>
+  <script src="/js/helper.js"></script>
 @endsection

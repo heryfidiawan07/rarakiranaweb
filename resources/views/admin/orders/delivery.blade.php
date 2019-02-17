@@ -1,4 +1,4 @@
-<h2 align="center" id="webName">rarakirana.com</h2>
+<h2 align="center" id="webName">{{ config('app.name') }}</h2>
 
 <table width="70%" align="left">
     <tr>

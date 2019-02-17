@@ -62,7 +62,7 @@
                                 <span class="danger">Anda <i>(admin)</i> menolak pesanan</span>
                             @endif
                             @if($order->status==1)
-                                <a href="/proses/order/{{$order->no_order}}" class="btn btn-primary btn-xs">Proses Pesanan</a> | 
+                                <a href="/proses/order/{{$order->no_order}}" class="btn btn-primary btn-sm">Proses Pesanan</a> | 
                             @endif
                             @if($order->status < 2)
                                 <hr>
@@ -77,10 +77,21 @@
                                 </form>
                             @endif
                             @if($order->status == 5)
-                                <a href="/delete/order/{{$order->no_order}}" class="btn btn-danger btn-xs">Hapus !</a>
+                                <a type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-order">Hapus ! <span class="caret"></span></a>
+                                    
+                                <div class="modal fade" id="delete-order" tabindex="-1" role="dialog" aria-labelledby="delete-order-label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">CLOSE</button>
+                                                <a href="/delete/order/{{$order->no_order}}" class="btn btn-danger btn-sm">Hapus !</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                             @if($order->status==3)
-                                <a href="/done/order/{{$order->no_order}}" class="btn btn-success btn-xs">Pesanan Telah di Terima</a>
+                                <a href="/done/order/{{$order->no_order}}" class="btn btn-success btn-sm">Pesanan Telah di Terima</a>
                             @endif
                         </td>
                     </tr>

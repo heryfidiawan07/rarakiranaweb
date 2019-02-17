@@ -61,9 +61,13 @@ class DashboardController extends Controller
         return back();
     }
 
-    public function inbox(){
+    public function shipment(){
         $questions = Question::latest()->paginate(10);
-        return view('admin.question.index',compact('questions'));
+        $products  = DB::table('products')
+                    ->join('questions', 'products.id', '=', 'questions.setting')
+                    ->select('products.title AS title', 'products.slug AS slug', 'questions.id AS qId','questions.title AS subject', 'questions.created_at AS question_create', 'questions.email AS qEmail', 'questions.description AS qDescription')
+                    ->paginate(10);
+        return view('admin.question.index',compact('questions','products'));
     }
     
 }

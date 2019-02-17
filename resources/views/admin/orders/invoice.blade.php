@@ -1,4 +1,4 @@
-<h2 id="webName">RARAKIRANA</h2><hr>
+<h2 id="webName">{{ config('app.name') }}</h2><hr>
 
 <table width="70%" align="left">
     <tr>
