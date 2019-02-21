@@ -15,7 +15,7 @@
                 @include('promo.index')
             @endif
             <h4 class="post-tags">
-                @if($fmenu->childPosts()->count() == 0)
+                @if($fmenu->parent()->count() == 0)
                     | <a href="/{{$fmenu->slug}}">{{$fmenu->name}}</a>
                 @else
                     @foreach($menus->where('status',1) as $sub)

@@ -196,7 +196,7 @@ class PostController extends Controller
         $logo  = Logo::where('setting','post')->first();
         if($fmenu){
             if($fmenu->parent_id == 0){
-                if ($fmenu->childPosts()->count() == 0) {
+                if ($fmenu->parent()->count() == 0) {
                     $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
                     $menus = $fmenu;
                 }else {
