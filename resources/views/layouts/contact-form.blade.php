@@ -14,9 +14,10 @@
         @if(Auth::check())
             @if(Auth::user())
                 <input type="email" name="email" class="form-control" value="{{Auth::user()->email}}" readonly>
-            @else
-                <input type="email" name="email" class="form-control" value="{{old('email')}}" required>
             @endif
+        @endif
+        @if(Auth::guest())
+            <input type="email" name="email" class="form-control" value="{{old('email')}}" required>
         @endif
     </div>
     <div class="form-group">

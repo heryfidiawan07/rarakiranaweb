@@ -10,8 +10,8 @@
             <label>Title</label>
             <input type="text" name="titleEdit" value="{{$logo->title}}" class="form-control" required>
             <label>Description</label>
-            <textarea id="descriptionEdit" cols="5" class="form-control" name="descriptionEdit" required autofocus>
-                {{$logo->description}}
+            <textarea id="descriptionEdit" cols="5" class="form-control descriptionEdit" name="descriptionEdit" required autofocus>
+                {{strip_tags($logo->description)}}
             </textarea>
             <label>Image</label><br>
             <img src="/logo/thumb/{{$logo->img}}" width="100"><br>

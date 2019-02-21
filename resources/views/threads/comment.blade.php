@@ -60,7 +60,7 @@
 @endif
 @if(Auth::guest())
     <label class="">Komentar</label>
-    <textarea rows="10" class="form-control" name="description" disabled></textarea><br>
+    <textarea rows="5" class="form-control" name="description" disabled></textarea><br>
     <button class="btn btn-primary btn-sm" disabled>
         <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
     </button>

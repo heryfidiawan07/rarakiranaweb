@@ -45,7 +45,7 @@
                         <form class="form-inline" method="POST" action="/activate/products">
                             {{csrf_field()}}
                             <div class="input-group input-group-sm">
-                                <input type="text" name="productName" class="form-control" placeholder="Create Menu Forum" required>
+                                <input type="text" name="productName" class="form-control" placeholder="Create Menu Name" required>
                                 <div class="input-group-addon">
                                     <button class="glyphicon glyphicon-send"></button>
                                 </div>

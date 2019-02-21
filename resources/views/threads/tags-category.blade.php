@@ -3,6 +3,9 @@
         <h4><a class="btn btn-primary btn-sm" href="/thread/create">TULIS THREAD</a></h4>
     @endif
 @endif
+@if(Auth::guest())
+    <hr>
+@endif
 <div class="thumbnail">
     <ul class="list">
         <li class="li-role">
