@@ -195,9 +195,14 @@ class PostController extends Controller
         $promo = Promo::where('setting','post')->first();
         $logo  = Logo::where('setting','post')->first();
         if($fmenu){
-            if($fmenu->parent->count()){
-                $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
-                $menus = $fmenu->parent()->get();
+            if($fmenu->parent_id == 0){
+                if ($fmenu->childPosts()->count() == 0) {
+                    $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
+                    $menus = $fmenu;
+                }else {
+                    $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
+                    $menus = $fmenu->parent()->get();
+                }
             }else{
                 $posts = $fmenu->posts()->latest('sticky')->paginate(10);
                 $menus = Menu::where('parent_id',$fmenu->parent_id)->get();

@@ -15,9 +15,13 @@
                 @include('promo.index')
             @endif
             <h4 class="post-tags">
-                @foreach($menus->where('status',1) as $sub)
-                    | <a href="/{{$sub->slug}}">{{$sub->name}}</a>
-                @endforeach
+                @if($fmenu->childPosts()->count() == 0)
+                    | <a href="/{{$fmenu->slug}}">{{$fmenu->name}}</a>
+                @else
+                    @foreach($menus->where('status',1) as $sub)
+                        | <a href="/{{$sub->slug}}">{{$sub->name}}</a>
+                    @endforeach
+                @endif
             </h4>
             <hr>
             @foreach($posts->where('status',1)->where('menu.status',1) as $post)

@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {   /****/
-        $mainMenus   = Menu::where([['status',1],['setting',0]])->get();
+        $mainMenus   = Menu::where([['status',1],['setting','<>',1]])->get();
         $mainTag     = Tag::where([['setting',10],['status',1]])->first();
         $mainStore   = Storefront::where([['setting',10],['status',1]])->first();
         $mainLogo    = Logo::where('setting','main')->first();
