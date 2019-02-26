@@ -45,8 +45,13 @@ class ThreadController extends Controller
 // User Auth
     public function create()
     {   
-        $tags = Tag::has('parent','<',1)->where('setting',0)->get();
-        return view('threads.create', compact('tags'));
+        $cek = Tag::whereSetting(10)->first();
+        if ($cek === null || $cek->status == 0) {
+            return view('errors.503');
+        }else{
+            $tags = Tag::has('parent','<',1)->where('setting',0)->get();
+            return view('threads.create', compact('tags'));
+        }
     }
 
     public function store(Request $request){
@@ -83,25 +88,30 @@ class ThreadController extends Controller
     }
     
     public function update(Request $request, $slug){
-        $this->validate($request, [
-                'title' => 'required|max:100',
-                'tag_id' => 'required',
-                'description' => 'required|max:10000',
-            ]);
-        $thread = Thread::whereSlug($slug)->first();
-        if ($thread->user->id == Auth::user()->id) {
-            $time = date("YmdHis");
-            $slug = str_slug($request->title).'-'.$time;
-            $thread->update([
-                    'title' => $request->title,
-                    'slug' => $slug,
-                    'tag_id' => $request->tag_id,
-                    'description' => Purifier::clean($request->description, array('CSS.AllowTricky' => true , 
-                        'HTML.SafeIframe' => true , "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%")),
-                ]);
-            return redirect("/thread/{$thread->slug}");
-        }else{
+        $cek = Tag::whereSetting(10)->first();
+        if ($cek === null || $cek->status == 0) {
             return view('errors.503');
+        }else{
+            $this->validate($request, [
+                    'title' => 'required|max:100',
+                    'tag_id' => 'required',
+                    'description' => 'required|max:10000',
+                ]);
+            $thread = Thread::whereSlug($slug)->first();
+            if ($thread->user->id == Auth::user()->id) {
+                $time = date("YmdHis");
+                $slug = str_slug($request->title).'-'.$time;
+                $thread->update([
+                        'title' => $request->title,
+                        'slug' => $slug,
+                        'tag_id' => $request->tag_id,
+                        'description' => Purifier::clean($request->description, array('CSS.AllowTricky' => true , 
+                            'HTML.SafeIframe' => true , "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%")),
+                    ]);
+                return redirect("/thread/{$thread->slug}");
+            }else{
+                return view('errors.503');
+            }
         }
     }
 // End User Auth
@@ -122,7 +132,7 @@ class ThreadController extends Controller
 
     public function threads($slug){
         $cek   = Tag::whereSlug($slug)->first();
-        if ($cek === null) {
+        if ($cek === null || $cek->status == 0) {
             return view('errors.503');
         }else{
             $logo       = Logo::where('setting','thread')->first();

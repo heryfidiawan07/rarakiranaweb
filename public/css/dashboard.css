@@ -48,13 +48,22 @@
 }
 /*Admin Post*/
 .td-admin-img-posts {
-	height: 150px;
 	width: 150px;
-	min-height: 150px;
 	min-width: 150px;
+	max-width: 150px;
+	height: 150px;
+	max-height: 150px;
+	background-color: lightgrey;
 }
-.td-admin-img-posts .admin-frame-posts .admin-posts-thumb-img {
+.admin-frame-posts .frame-posts-img-helper {
+	vertical-align: middle;
+	text-align: center;
+}
+.admin-posts-thumb-img {
+	height: auto;
+	width: auto;
 	max-width: 100%;
+	max-height: 100%;
 }
 /*End admin post*/
 .dashBtn {

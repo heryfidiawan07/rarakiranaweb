@@ -85,9 +85,9 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="text-center">
-                <ul class="pagination pagination-sm">{{$posts->links()}}</ul>
+                <div class="panel-footer">
+                    <small>{{$posts->links()}}</small>
+                </div>
             </div>
         </div>
 

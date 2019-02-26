@@ -14,7 +14,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <div class="text-center">
-            <form method="POST" action="/product/front/{{$front->id}}/status">
+            <form method="POST" action="/etalase/{{$front->id}}/status">
               {{ csrf_field() }}
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                 <button type="submit" name="status" value="1" class="btn btn-success btn-sm">Active</button>

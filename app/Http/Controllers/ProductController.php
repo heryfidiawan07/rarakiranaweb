@@ -244,7 +244,7 @@ class ProductController extends Controller
 
     public function products($slug){
         $cek   = Storefront::whereSlug($slug)->first();
-        if ($cek === null) {
+        if ($cek === null || $cek->status == 0) {
             return view('errors.503');
         }else{
             $logo        = Logo::where('setting','product')->first();

@@ -166,17 +166,21 @@
             <div class="col-md-12"><hr>
                 <h4 class="text-center"><b>PRODUCT LIST</b></h4>
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center">
+                    <div class="panel-heading">
                         <a href="/product/create" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span>ADD PRODUCT</a>
-                        @if(Auth::user()->address == null)
-                            <a href="/dashboard/orders" class="alert alert-danger alert-sm">Admin address has not been set</a>
-                        @elseif(Auth::user()->rekening == null)
-                            <a href="/dashboard/bank-accounts" class="alert alert-danger alert-sm">Admin account <i>(bank)</i> has not been set</a>
-                        @endif
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table class="table table-bordered">
+                                <tr>
+                                    <td colspan="9">
+                                        @if(Auth::user()->address == null)
+                                            <a href="/dashboard/orders" class="danger">Admin address has not been set</a>
+                                        @elseif(Auth::user()->rekening == null)
+                                            <a href="/dashboard/bank-accounts" class="danger">Admin account <i>(bank)</i> has not been set</a>
+                                        @endif
+                                    </td>
+                                </tr>
                                 @foreach($products as $product)
                                 <tr>
                                     <td rowspan="3" class="td-admin-img-products">
@@ -244,9 +248,9 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="text-center">
-                    <ul class="pagination pagination-sm">{{$products->links()}}</ul>
+                    <div class="panel-footer">
+                        <small>{{$products->links()}}</small>
+                    </div>
                 </div>
             </div>
         @endif

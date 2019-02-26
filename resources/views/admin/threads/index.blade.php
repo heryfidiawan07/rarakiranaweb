@@ -220,9 +220,9 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="text-center">
-                    <ul class="pagination pagination-sm">{{$threads->links()}}</ul>
+                    <div class="panel-footer">
+                        <small>{{$threads->links()}}</small>
+                    </div>
                 </div>
             </div>
         @endif
