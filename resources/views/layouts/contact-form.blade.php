@@ -30,7 +30,6 @@
     </div>
     <div class="form-group">
         <div class="g-recaptcha" data-sitekey="6LcHNV4UAAAAAC_pZPPJHAevKgPTiQr5CdnRrzcO" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
-        <br>
         <?php $url = Request::url(); $cekUrl = explode('/', $url);
             if ($cekUrl[3] == 'show' && $cekUrl[4] == 'product') { ?>
                 <input type="hidden" name="product_id" value="<?=$product->id?>">
