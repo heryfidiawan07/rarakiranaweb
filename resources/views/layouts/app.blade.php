@@ -20,6 +20,7 @@
     <meta property="og:description" content="@yield('description')" />
 
     <meta name="google-signin-client_id" content="524555026329-duc32e6en3f62mhdak03hi5scguviu9f.apps.googleusercontent.com">
+    <meta name="google-site-verification" content="rK6CP-v6mdxCyRsKxtxqVLId-j6lyrtkFSZ5xPRB3jI" />
     <!-- Icon -->
     <link href="<?php if($mainLogo) echo 'http://rarakirana.com/logo/thumb/'.$mainLogo->img ?>" rel='shortcut icon'>
     <!-- Styles -->
