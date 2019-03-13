@@ -20,14 +20,14 @@ class PostController extends Controller
 
     public function index()
     {   
-        $posts = Post::latest('sticky')->paginate(10);
-        $menus = Menu::has('parent','<',1)->where([['status',1],['setting','!=',1]])->get();
+        $posts = Post::orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
+        $menus = Menu::has('parent',0)->where([['status',1],['setting','!=',1]])->get();
         return view('admin.posts.index', compact('posts','menus'));
     }
 
     public function create()
     {   
-        $menus = Menu::has('parent','<',1)->where([['status',1],['setting','!=',1]])->get();
+        $menus = Menu::has('parent',0)->where([['status',1],['setting','!=',1]])->get();
         return view('admin.posts.create', compact('menus'));
     }
 
@@ -99,7 +99,7 @@ class PostController extends Controller
     
     public function edit($id)
     {   
-        $menus = Menu::has('parent','<',1)->where([['status',1],['setting','!=',1]])->get();
+        $menus = Menu::has('parent',0)->where([['status',1],['setting','!=',1]])->get();
         $post  = Post::whereId($id)->first();
         return view('admin.posts.edit',compact('post','menus'));
     }
@@ -185,7 +185,7 @@ class PostController extends Controller
     {   
         $post        = Post::where([['slug',$slug],['status',1]])->first();
         $comments    = $post->comments()->paginate(10);
-        $postrecents = Post::has('comments')->latest()->paginate(5);
+        $postrecents = Post::has('comments','>',0)->latest()->paginate(5);
         return view('posts.show', compact('post','comments','postrecents'));
     }
 
@@ -197,17 +197,17 @@ class PostController extends Controller
         if($fmenu){
             if($fmenu->parent_id == 0){
                 if ($fmenu->parent()->count() == 0) {
-                    $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
+                    $posts = $fmenu->childPosts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
                     $menus = $fmenu;
                 }else {
-                    $posts = $fmenu->childPosts()->latest('sticky')->paginate(10);
+                    $posts = $fmenu->childPosts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
                     $menus = $fmenu->parent()->get();
                 }
             }else{
-                $posts = $fmenu->posts()->latest('sticky')->paginate(10);
+                $posts = $fmenu->posts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
                 $menus = Menu::where('parent_id',$fmenu->parent_id)->get();
             }
-            $postrecents = Post::has('comments')->latest()->paginate(5);
+            $postrecents = Post::has('comments','>',0)->latest()->paginate(5);
             return view('posts.menu', compact('fmenu','menus','posts','postrecents','promo','logo'));
         }else{
             return view('errors.503');

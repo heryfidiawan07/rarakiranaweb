@@ -29,16 +29,16 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::latest('sticky')->paginate(10);
+        $products = Product::orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
         $fronts   = Storefront::orderBy('setting','ASC')->get();
         $frontTag = Storefront::where('setting',10)->first();
-        $upfronts = Storefront::has('parent','<',1)->where('setting',0)->get();
+        $upfronts = Storefront::has('parent',0)->where('setting',0)->get();
         return view('admin.products.index', compact('products','fronts','frontTag','upfronts'));
     }
     
     public function create()
     {   
-        $fronts = Storefront::has('parent','<',1)->where('setting',0)->get();
+        $fronts = Storefront::has('parent',0)->where('setting',0)->get();
         return view('admin.products.create', compact('fronts'));
     }
 
@@ -129,7 +129,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $fronts = Storefront::has('parent','<',1)->where('setting',0)->get();
+        $fronts = Storefront::has('parent',0)->where('setting',0)->get();
         $product = Product::whereId($id)->first();
         return view('admin.products.edit',compact('product','fronts'));
     }
@@ -250,7 +250,7 @@ class ProductController extends Controller
             $logo        = Logo::where('setting','product')->first();
             $promo       = Promo::where('setting','product')->first();
             $fronts      = Storefront::where('setting',0)->get();
-            $newproducts = Product::where('status',1)->latest('sticky')->paginate(10);
+            $newproducts = Product::where('status',1)->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(9);
             return view('products.index', compact('newproducts','fronts','logo','promo'));
         }
     }
@@ -261,9 +261,9 @@ class ProductController extends Controller
         $subs   = Storefront::where([['slug',$slug],['status',1]])->first();
         $fronts = Storefront::where('setting',0)->get();
         if ($subs->parent->count()){
-            $products = $subs->childProducts()->latest('sticky')->paginate(10);
+            $products = $subs->childProducts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(9);
         }else{
-            $products = $subs->products()->latest('sticky')->paginate(10);
+            $products = $subs->products()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(9);
         }
         return view('products.category', compact('products','fronts','logo','promo','subs'));
     }

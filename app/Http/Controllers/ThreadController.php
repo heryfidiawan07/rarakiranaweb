@@ -49,7 +49,7 @@ class ThreadController extends Controller
         if ($cek === null || $cek->status == 0) {
             return view('errors.503');
         }else{
-            $tags = Tag::has('parent','<',1)->where('setting',0)->get();
+            $tags = Tag::has('parent',0)->where('setting',0)->get();
             return view('threads.create', compact('tags'));
         }
     }
@@ -79,7 +79,7 @@ class ThreadController extends Controller
 
     public function edit($slug){
         $thread = Thread::whereSlug($slug)->first();
-        $tags   = Tag::has('parent','<',1)->where('setting',0)->get();
+        $tags   = Tag::has('parent',0)->where('setting',0)->get();
         if ($thread->user->id == Auth::user()->id) {
             return view('threads.edit', compact('thread','tags'));
         }else{
@@ -121,7 +121,7 @@ class ThreadController extends Controller
         $logo          = Logo::where('setting','thread')->first();
         $thread        = Thread::whereSlug($slug)->first();
         $comments      = $thread->comments()->paginate(10);
-        $threadrecents = Thread::has('comments')->latest()->paginate(5);
+        $threadrecents = Thread::has('comments','>',0)->latest()->paginate(5);
         if ($thread->status == 1 && $thread->tag->status == 1) {
             $tags = Tag::where('setting',0)->get();
             return view('threads.show',compact('thread','tags','comments','threadrecents','logo'));

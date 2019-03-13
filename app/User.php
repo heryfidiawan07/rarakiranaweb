@@ -46,8 +46,16 @@ class User extends Authenticatable
         return $this->hasMany(Thread::class);
     }
 
-    public function comments(){
-        return $this->morphMany('App\Comment','commentable');
+    public function postcomments(){
+        return $this->hasMany('App\Comment')->where('commentable_type','App\Post');
+    }
+
+    public function prodcomments(){
+        return $this->hasMany('App\Comment')->where('commentable_type','App\Product');
+    }
+
+    public function threadcomments(){
+        return $this->hasMany('App\Comment')->where('commentable_type','App\Thread');
     }
     
     public function orders(){
