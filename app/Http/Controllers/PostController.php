@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function index()
     {   
-        $posts = Post::orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
+        $posts = Post::orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
         $menus = Menu::has('parent',0)->where([['status',1],['setting','!=',1]])->get();
         return view('admin.posts.index', compact('posts','menus'));
     }
@@ -197,14 +197,14 @@ class PostController extends Controller
         if($fmenu){
             if($fmenu->parent_id == 0){
                 if ($fmenu->parent()->count() == 0) {
-                    $posts = $fmenu->childPosts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
+                    $posts = $fmenu->posts()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
                     $menus = $fmenu;
                 }else {
-                    $posts = $fmenu->childPosts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
+                    $posts = $fmenu->childPosts()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
                     $menus = $fmenu->parent()->get();
                 }
             }else{
-                $posts = $fmenu->posts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
+                $posts = $fmenu->posts()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
                 $menus = Menu::where('parent_id',$fmenu->parent_id)->get();
             }
             $postrecents = Post::has('comments','>',0)->latest()->paginate(5);

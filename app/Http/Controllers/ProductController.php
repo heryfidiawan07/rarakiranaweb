@@ -29,7 +29,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::orderBy('sticky','DESC')->orderBy('updated_at')->paginate(10);
+        $products = Product::orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
         $fronts   = Storefront::orderBy('setting','ASC')->get();
         $frontTag = Storefront::where('setting',10)->first();
         $upfronts = Storefront::has('parent',0)->where('setting',0)->get();
@@ -250,7 +250,7 @@ class ProductController extends Controller
             $logo        = Logo::where('setting','product')->first();
             $promo       = Promo::where('setting','product')->first();
             $fronts      = Storefront::where('setting',0)->get();
-            $newproducts = Product::where('status',1)->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(9);
+            $newproducts = Product::where('status',1)->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(9);
             return view('products.index', compact('newproducts','fronts','logo','promo'));
         }
     }
@@ -261,9 +261,9 @@ class ProductController extends Controller
         $subs   = Storefront::where([['slug',$slug],['status',1]])->first();
         $fronts = Storefront::where('setting',0)->get();
         if ($subs->parent->count()){
-            $products = $subs->childProducts()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(9);
+            $products = $subs->childProducts()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(9);
         }else{
-            $products = $subs->products()->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(9);
+            $products = $subs->products()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(9);
         }
         return view('products.category', compact('products','fronts','logo','promo','subs'));
     }

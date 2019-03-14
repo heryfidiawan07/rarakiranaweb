@@ -167,7 +167,7 @@
                 <h4 class="text-center"><b>PRODUCT LIST</b></h4>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="/product/create" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span>ADD PRODUCT</a>
+                        <a href="/product/create" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> ADD PRODUCT</a>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

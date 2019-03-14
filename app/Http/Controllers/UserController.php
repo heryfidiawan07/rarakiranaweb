@@ -27,18 +27,9 @@ class UserController extends Controller
 	{   
 		$user    = User::whereSlug($slug)->first();
 		$threads = $user->threads()->paginate(5);
-		// $artcomments  = Post::whereHas('comments', function($query) use($user){
-		// 					$query->where('user_id',$user->id);
-		// 				})->paginate(5);
-		// $prodcomments = Product::whereHas('comments', function($query) use($user){
-		// 					$query->where('user_id',$user->id);
-		// 				})->paginate(5);
-		// $thcomments   = Thread::whereHas('comments', function($query) use($user){
-		// 					$query->where('user_id',$user->id);
-		// 				})->paginate(5);
-		$artcomments = Comment::where('commentable_type','App\Post')->paginate(5);
-		$prodcomments = Comment::where('commentable_type','App\Product')->paginate(5);
-		$thcomments = Comment::where('commentable_type','App\Thread')->paginate(5);
+		$artcomments = $user->postcomments()->paginate(5);
+		$prodcomments = $user->prodcomments()->paginate(5);
+		$thcomments = $user->threadcomments()->paginate(5);
 		return view('user.show',compact('user','threads','artcomments','prodcomments','thcomments'));
 	}
 

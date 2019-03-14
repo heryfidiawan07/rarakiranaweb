@@ -16,9 +16,9 @@ class HomeController extends Controller
     {	//Promo setting 1 = Home Logo/Main 2 = Post Logo 3 = Thread Logo 4 = Product Logo
         $logo        = Logo::where('setting','main')->first();
         $promo       = Promo::where('setting','main')->first();
-    	$newposts    = Post::where('status',1)->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(3);
-    	$newproducts = Product::where('status',1)->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(5);
-    	$newthreads  = Thread::where('status',1)->orderBy('sticky','DESC')->orderBy('updated_at')->paginate(4);
+    	$newposts    = Post::where('status',1)->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(3);
+    	$newproducts = Product::where('status',1)->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(5);
+    	$newthreads  = Thread::where('status',1)->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(4);
 
         $postrecents   = Post::has('comments','>',0)->latest()->paginate(5);
         $threadrecents = Thread::has('comments','>',0)->latest()->paginate(5);

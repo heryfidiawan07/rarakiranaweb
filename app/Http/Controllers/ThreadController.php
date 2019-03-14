@@ -18,7 +18,7 @@ class ThreadController extends Controller
 
     public function index()
     {
-        $threads  = Thread::latest('sticky')->paginate(10);
+        $threads  = Thread::orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
         $tags     = Tag::orderBy('setting','ASC')->get();
         $forumTag = Tag::where('setting',10)->first();
         return view('admin.threads.index', compact('threads','tags','forumTag'));
@@ -138,7 +138,7 @@ class ThreadController extends Controller
             $logo       = Logo::where('setting','thread')->first();
             $promo      = Promo::where('setting','thread')->first();
             $tags       = Tag::where('setting',0)->get();
-            $newthreads = Thread::where('status',1)->latest('sticky')->paginate(10);
+            $newthreads = Thread::where('status',1)->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
             return view('threads.index', compact('newthreads','tags','logo','promo'));
         }
     }
@@ -149,9 +149,9 @@ class ThreadController extends Controller
         $subs  = Tag::where([['slug',$tagSlug],['status',1]])->first();
         $tags  = Tag::where('setting',0)->get();
         if ($subs->parent->count()){
-            $threads = $subs->childThreads()->latest('sticky')->paginate(10);
+            $threads = $subs->childThreads()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
         }else{
-            $threads = $subs->threads()->latest('sticky')->paginate(10);
+            $threads = $subs->threads()->orderBy('sticky','DESC')->orderBy('created_at','DESC')->paginate(10);
         }
         return view('threads.tags', compact('threads','tags','logo','promo','subs'));
     }

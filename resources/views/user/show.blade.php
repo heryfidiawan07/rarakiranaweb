@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-sm-7">
-            {{-- @include('user.user-content') --}}
+            @include('user.user-content')
         </div>
 
     </div>
