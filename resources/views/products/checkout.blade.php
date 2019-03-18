@@ -25,13 +25,13 @@
                                 </h4>
                             </div>
                             <p class="discount">
-                                <s><i>Rp {{number_format($product['item']['price'] + $product['item']['discount'], 2)}}</i></s>
-                                <span>
-                                    <small>
-                                        <i>{{number_format(($product['item']['price'] + $product['item']['discount']) / $product['item']['discount'])}} %</i>
-                                    </small>
-                                </span>
                                 @if($product['item']['discount'])
+                                    <s><i>Rp {{number_format($product['item']['price'] + $product['item']['discount'], 2)}}</i></s>
+                                    <span>
+                                        <small>
+                                            <i>{{number_format(($product['item']['price'] + $product['item']['discount']) / $product['item']['discount'])}} %</i>
+                                        </small>
+                                    </span>
                                     <img src="/parts/sale.jpg" width="50">
                                 @endif
                                 <i class="fas fa-weight"></i>{{$product['item']['weight']}} <small><i>KG</i></small>

@@ -270,14 +270,17 @@ class ProductController extends Controller
 
     public function ongkir(Request $request, $slug, $tujuan, $kurir){
         $product = Product::whereSlug($slug)->first();
-        $berat   = $product->weight;//$product->weight; // dalam gram
         $admin   = User::where('admin',1)->first();
         $address = Address::where('user_id',$admin->id)->first();
         $asal    = 55;//55 Adalah bekasi kabupaten
+        $weight  = $product->weight*1000;
+        if ($weight < 1000) {
+            $weight = 1000;
+        }
         $cost    = RajaOngkir::Cost([
                         'origin'        => $admin->address->kab_id,
                         'destination'   => $tujuan, // id kota tujuan
-                        'weight'        => $product->weight, // berat satuan gram
+                        'weight'        => $weight, // berat satuan gram
                         'courier'       => $kurir, // kode kurir pengantar ( jne / tiki / pos )
                     ])->get();
         return response($cost);
@@ -374,6 +377,9 @@ class ProductController extends Controller
         $cart    = new Cart($oldCart);
         $total   = $cart->totalPrice;
         $weight  = $cart->totalWeight*1000;
+        if ($weight < 1000) {
+            $weight = 1000;
+        }
         $admin   = User::where('admin',1)->first();
         $address = Address::where('user_id',$admin->id)->first();
         $asal    = 55;//55 Adalah bekasi kabupaten
@@ -405,6 +411,9 @@ class ProductController extends Controller
         $items    = $cart->items;
         $total    = $cart->totalPrice;
         $weight   = $cart->totalWeight*1000;
+        if ($weight < 1000) {
+            $weight = 1000;
+        }
         //Request
         $key       = $request->keyService;
         $admin   = User::where('admin',1)->first();
